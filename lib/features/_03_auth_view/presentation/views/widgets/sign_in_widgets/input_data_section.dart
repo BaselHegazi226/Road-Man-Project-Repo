@@ -18,7 +18,10 @@ class InputDataSection extends StatelessWidget {
           TextFormFieldsSection(),
           RememberMeForgetPasswordSection(),
           ButtonSection(),
-          OtherRegisterSection(),
+          Padding(
+            padding: EdgeInsets.only(top: 4),
+            child: OtherRegisterSection(),
+          ),
         ],
       ),
     );
