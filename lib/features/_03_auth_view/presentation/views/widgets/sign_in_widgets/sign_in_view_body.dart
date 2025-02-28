@@ -12,7 +12,7 @@ class SignInViewBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        AuthImageSection(image: Assets.kLoginImage),
+        AuthImageSection(image: kLoginImage),
         SignInComponentsSection(),
       ],
     );
