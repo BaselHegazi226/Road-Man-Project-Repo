@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/forget_password_view.dart';
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
@@ -14,6 +15,10 @@ abstract class AppRouter {
       GoRoute(
         path: SignUpView.id,
         builder: (context, state) => const SignUpView(),
+      ),
+      GoRoute(
+        path: ForgetPasswordView.id,
+        builder: (context, state) => const ForgetPasswordView(),
       ),
     ],
   );
