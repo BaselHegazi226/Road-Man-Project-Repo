@@ -18,7 +18,7 @@ class SignInInputDataSection extends StatelessWidget {
         spacing: 16,
         children: [
           TextFormFieldsSection(),
-          RememberMeForgetPasswordSection(),
+          RememberMeForgetPasswordSection(forgetPasswordPressed: () {}),
           ButtonSection(),
           Padding(
             padding: EdgeInsets.only(top: 4),
