@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
 
 class CustomTitle extends StatelessWidget {
   const CustomTitle({
     super.key,
     required this.title,
-    this.textColor = Colors.white,
-    this.size = 24,
+    this.textColor = kSecondlyLightWhiteColor,
+    this.size = 20,
   });
   final String title;
   final Color textColor;
