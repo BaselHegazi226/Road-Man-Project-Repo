@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:road_man_project/core/helper/Assets.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_text_form_field.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/common_widgets/custom_image.dart';
 
 class ForgetPasswordViewBody extends StatelessWidget {
   const ForgetPasswordViewBody({super.key});
@@ -16,14 +16,7 @@ class ForgetPasswordViewBody extends StatelessWidget {
       child: Column(
         spacing: 24,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 48, bottom: 58),
-            child: SvgPicture.asset(
-              kForgetPasswordImage,
-              height: 350,
-              width: 350,
-            ),
-          ),
+          CustomImage(image: kForgetPasswordImage),
           Text(
             maxLines: 3,
             'Don’t worry! We’ll help you regain access to your account. Enter your registered email or phone number to reset your password',
