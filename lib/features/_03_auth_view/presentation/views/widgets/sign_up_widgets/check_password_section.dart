@@ -25,67 +25,61 @@ class CheckPasswordSection extends StatelessWidget {
   final IconData enableIconData = Icons.check_box_rounded;
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TwoCheckPasswordItem(
-              iconData1:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsUpperCase,
-                  ).value1,
-              iconData2:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsLowerCase,
-                  ).value1,
-              color1:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsUpperCase,
-                  ).value2,
-              color2:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsLowerCase,
-                  ).value2,
-              text1: 'Upper case',
-              text2: 'Lower case',
-            ),
-            TwoCheckPasswordItem(
-              iconData1:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsNumber,
-                  ).value1,
-              iconData2:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsSpecialChar,
-                  ).value1,
-              color1:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsNumber,
-                  ).value2,
-              color2:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsSpecialChar,
-                  ).value2,
-              text1: 'At least number',
-              text2: 'Special character',
-            ),
-            CheckPasswordItem(
-              iconData:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsPassLength,
-                  ).value1,
-              color:
-                  ConstFunctions.iconDataAndColorFun(
-                    condition: containsPassLength,
-                  ).value2,
-              text: 'At least 8 characters',
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TwoCheckPasswordItem(
+          iconData1:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsUpperCase,
+              ).value1,
+          iconData2:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsLowerCase,
+              ).value1,
+          color1:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsUpperCase,
+              ).value2,
+          color2:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsLowerCase,
+              ).value2,
+          text1: 'Upper case',
+          text2: 'Lower case',
         ),
-      ),
+        TwoCheckPasswordItem(
+          iconData1:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsNumber,
+              ).value1,
+          iconData2:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsSpecialChar,
+              ).value1,
+          color1:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsNumber,
+              ).value2,
+          color2:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsSpecialChar,
+              ).value2,
+          text1: 'At least number',
+          text2: 'Special character',
+        ),
+        CheckPasswordItem(
+          iconData:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsPassLength,
+              ).value1,
+          color:
+              ConstFunctions.iconDataAndColorFun(
+                condition: containsPassLength,
+              ).value2,
+          text: 'At least 8 characters',
+        ),
+      ],
     );
   }
 }
