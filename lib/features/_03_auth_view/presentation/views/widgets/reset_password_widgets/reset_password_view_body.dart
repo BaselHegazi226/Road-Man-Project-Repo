@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/Assets.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/reset_password_widgets/reset_pass_fields_section.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
-import '../../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../../core/utilities/custom_title.dart';
 import '../common_widgets/custom_image.dart';
 
@@ -16,9 +16,9 @@ class ResetPasswordViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        spacing: 24,
+        spacing: 32,
         children: [
-          CustomImage(image: kResetPasswordImage),
+          CustomImage(imageBottomPadding: 21, image: kResetPasswordImage),
           Text(
             maxLines: 3,
             'Create a new password for your account. Make sure to choose a strong and secure password',
@@ -30,25 +30,11 @@ class ResetPasswordViewBody extends StatelessWidget {
               height: 1.5,
             ),
           ),
-          CustomTextFormField(
-            hintText: 'New Password',
-            prefixIcon: Icons.lock_outline,
-            suffixIcon: CupertinoIcons.eye_slash,
-            textEditingController: TextEditingController(),
-          ),
-          CustomTextFormField(
-            hintText: 'Confirm Password',
-            prefixIcon: Icons.lock_outline,
-            suffixIcon: CupertinoIcons.eye_slash,
-            textEditingController: TextEditingController(),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: CustomTextButton(
-              onPressed: () {},
-              backgroundColor: kAppPrimaryBlueColor,
-              child: CustomTitle(title: 'Update Password'),
-            ),
+          ResetPassFieldsSection(),
+          CustomTextButton(
+            onPressed: () {},
+            backgroundColor: kAppPrimaryBlueColor,
+            child: CustomTitle(title: 'Update Password'),
           ),
         ],
       ),
