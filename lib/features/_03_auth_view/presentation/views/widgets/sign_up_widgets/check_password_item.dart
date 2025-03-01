@@ -14,6 +14,7 @@ class CheckPasswordItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      spacing: 8,
       children: [
         Icon(iconData, color: color),
         Text(
@@ -22,7 +23,7 @@ class CheckPasswordItem extends StatelessWidget {
           style: TextStyle(
             color: color,
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ],
