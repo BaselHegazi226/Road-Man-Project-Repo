@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../common_widgets/auth_component_section.dart';
 import '../common_widgets/auth_sub_title.dart';
 import '../common_widgets/social_auth_card_section.dart';
-import 'input_data_section.dart';
+import 'sign_in_input_data_section.dart';
 
 class SignInComponentSectionBody extends StatelessWidget {
   const SignInComponentSectionBody({super.key});
@@ -22,7 +22,7 @@ class SignInComponentSectionBody extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             child: const AuthSubTitle(subTitle: 'Or use your email account'),
           ),
-          InputDataSection(),
+          SignInInputDataSection(),
         ],
       ),
     );
