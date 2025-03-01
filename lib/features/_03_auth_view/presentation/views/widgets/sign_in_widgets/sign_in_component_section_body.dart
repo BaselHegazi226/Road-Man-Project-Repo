@@ -11,7 +11,7 @@ class SignInComponentSectionBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthComponentSection(
-      title: 'Create your account',
+      title: 'Login to your account',
       child: Column(
         children: [
           Padding(
