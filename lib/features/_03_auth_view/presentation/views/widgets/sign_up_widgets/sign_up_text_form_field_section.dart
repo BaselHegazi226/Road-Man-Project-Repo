@@ -13,6 +13,12 @@ class SignUPTextFormFieldSection extends StatefulWidget {
 
 class _SignUPTextFormFieldSectionState
     extends State<SignUPTextFormFieldSection> {
+  bool obscurePassword = true;
+  bool containsUpperCase = false;
+  bool containsLowerCase = false;
+  bool containsSpecialChar = false;
+  bool containsNumbers = false;
+  bool containsPassLength = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,5 +48,13 @@ class _SignUPTextFormFieldSectionState
         ),
       ],
     );
+  }
+
+  void regExpForCheckPasswordVarsFun(String value) {
+    containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
+    containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
+    containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
+    containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
+    containsPassLength = RegExp(r'.{8,}').hasMatch(value);
   }
 }
