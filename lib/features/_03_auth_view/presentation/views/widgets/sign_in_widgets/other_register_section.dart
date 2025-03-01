@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:road_man_project/features/_03_auth_view/presentation/views/sign_up_view.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
 class OtherRegisterSection extends StatelessWidget {
-  const OtherRegisterSection({super.key});
-
+  const OtherRegisterSection({
+    super.key,
+    required this.onTap,
+    required this.blackText,
+    required this.blueText,
+  });
+  final void Function()? onTap;
+  final String blackText, blueText;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        GoRouter.of(context).push(SignUpView.id);
-      },
+      onTap: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 2,
         children: [
           Text(
-            'Don’t have an account? ',
+            blackText,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16,
@@ -28,7 +30,7 @@ class OtherRegisterSection extends StatelessWidget {
             ),
           ),
           Text(
-            'Sign up',
+            blueText,
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 16,
