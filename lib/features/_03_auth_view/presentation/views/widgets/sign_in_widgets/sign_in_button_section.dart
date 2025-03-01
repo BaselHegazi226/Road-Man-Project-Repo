@@ -16,7 +16,7 @@ class ButtonSection extends StatelessWidget {
           padding: EdgeInsets.only(top: 16),
           child: CustomTextButton(
             onPressed: () {},
-            backgroundColor: kAppPrimaryColor,
+            backgroundColor: kAppPrimaryBlueColor,
             child: CustomTitle(
               title: 'Sign in',
               textColor: kSecondlyLightWhiteColor,
@@ -27,10 +27,10 @@ class ButtonSection extends StatelessWidget {
         CustomTextButton(
           onPressed: () {},
           backgroundColor: kSecondlyLightWhiteColor,
-          borderColor: kAppPrimaryColor,
+          borderColor: kAppPrimaryBlueColor,
           child: CustomTitle(
             title: 'Continue as a Guest',
-            textColor: kAppPrimaryColor,
+            textColor: kAppPrimaryBlueColor,
             size: 20,
           ),
         ),

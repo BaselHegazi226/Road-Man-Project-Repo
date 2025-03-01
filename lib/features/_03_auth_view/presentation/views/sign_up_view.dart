@@ -9,6 +9,9 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kAppPrimaryColor, body: SignUpViewBody());
+    return Scaffold(
+      backgroundColor: kAppPrimaryBlueColor,
+      body: SignUpViewBody(),
+    );
   }
 }

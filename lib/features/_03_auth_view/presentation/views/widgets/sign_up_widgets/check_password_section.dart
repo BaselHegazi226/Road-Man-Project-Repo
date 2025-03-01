@@ -20,7 +20,7 @@ class CheckPasswordSection extends StatelessWidget {
   final bool containsNumber;
   final bool containsPassLength;
   final Color defaultColor = Colors.grey;
-  final Color focusColor = kAppPrimaryColor;
+  final Color focusColor = kAppPrimaryBlueColor;
   final IconData disableIconData = Icons.check_box_outline_blank_outlined;
   final IconData enableIconData = Icons.check_box_rounded;
   @override

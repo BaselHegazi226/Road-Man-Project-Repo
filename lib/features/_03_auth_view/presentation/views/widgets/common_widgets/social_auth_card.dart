@@ -42,7 +42,7 @@ class SocialAuthCard extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
         child: IconButton(
           onPressed: onPressed,
-          icon: Icon(iconData, color: kAppPrimaryColor, size: iconSize),
+          icon: Icon(iconData, color: kAppPrimaryBlueColor, size: iconSize),
           padding: EdgeInsets.zero,
         ),
       ),

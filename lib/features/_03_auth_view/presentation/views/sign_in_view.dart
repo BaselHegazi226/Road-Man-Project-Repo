@@ -8,6 +8,9 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kAppPrimaryColor, body: SignInViewBody());
+    return Scaffold(
+      backgroundColor: kAppPrimaryBlueColor,
+      body: SignInViewBody(),
+    );
   }
 }

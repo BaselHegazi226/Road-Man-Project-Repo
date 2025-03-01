@@ -21,7 +21,7 @@ class RememberMeForgetPasswordSection extends StatelessWidget {
             maxLines: 1,
             'Forget your password ?',
             style: TextStyle(
-              color: kAppPrimaryColor,
+              color: kAppPrimaryBlueColor,
               fontSize: 14,
               fontWeight: FontWeight.w700,
               letterSpacing: .266,

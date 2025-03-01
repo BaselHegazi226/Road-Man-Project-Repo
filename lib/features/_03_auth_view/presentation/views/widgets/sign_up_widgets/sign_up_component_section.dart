@@ -36,7 +36,7 @@ class SignUpComponentSection extends StatelessWidget {
             SizedBox(height: 24),
             CustomTextButton(
               onPressed: () {},
-              backgroundColor: kAppPrimaryColor,
+              backgroundColor: kAppPrimaryBlueColor,
               child: CustomTitle(title: 'Sign up'),
             ),
             SizedBox(height: 20),

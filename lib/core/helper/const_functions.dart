@@ -12,7 +12,7 @@ class ConstFunctions {
     Color color;
     if (condition) {
       iconData = kEnableIconData;
-      color = kAppPrimaryColor;
+      color = kAppPrimaryBlueColor;
     } else {
       iconData = kDisableIconData;
       color = kDisableColor;

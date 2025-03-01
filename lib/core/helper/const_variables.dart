@@ -4,7 +4,8 @@ const IconData kDisableIconData = Icons.check_box_outline_blank_rounded;
 const IconData kEnableIconData = Icons.check_box_rounded;
 
 Color kDisableColor = Colors.grey;
-const Color kAppPrimaryColor = Color(0xff2352A1);
+const Color kAppPrimaryBlueColor = Color(0xff2352A1);
+const Color kAppPrimaryWhiteColor = Color(0xffF3F6F5);
 const Color kSecondlyDarkWhiteColor = Color(0xffE6E8EE);
 const Color kSecondlyLightWhiteColor = Color(0xffF5F5F5);
 const Color kTextPrimaryColor = Color(0xff131314);
