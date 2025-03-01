@@ -1,9 +1,25 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
 import 'const_variables.dart';
 
 class ConstFunctions {
+  static Tuple2<IconData, Color> iconDataAndColorFun({
+    required bool condition,
+  }) {
+    IconData iconData;
+    Color color;
+    if (condition) {
+      iconData = kEnableIconData;
+      color = kAppPrimaryColor;
+    } else {
+      iconData = kDisableIconData;
+      color = kDisableColor;
+    }
+    return Tuple2(iconData, color);
+  }
+
   static DialogType dialogType({required final String type}) {
     switch (type) {
       case 'success':
