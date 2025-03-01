@@ -8,11 +8,22 @@ class SignUpPasswordSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
-      hintText: 'Password',
-      textEditingController: TextEditingController(),
-      prefixIcon: Icons.lock_outline,
-      suffixIcon: CupertinoIcons.eye_slash,
+    return Column(
+      children: [
+        CustomTextFormField(
+          hintText: 'Password',
+          textEditingController: TextEditingController(),
+          prefixIcon: Icons.lock_outline,
+          suffixIcon: CupertinoIcons.eye_slash,
+        ),
+
+        CustomTextFormField(
+          hintText: 'Confirm password',
+          textEditingController: TextEditingController(),
+          prefixIcon: Icons.lock_outline,
+          suffixIcon: CupertinoIcons.eye_slash,
+        ),
+      ],
     );
   }
 }
