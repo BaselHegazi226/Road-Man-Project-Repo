@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/helper/const_variables.dart';
 
 class SocialAuthCard extends StatelessWidget {
-  const SocialAuthCard({super.key, required this.iconData, this.iconSize = 28});
+  const SocialAuthCard({
+    super.key,
+    required this.iconData,
+    this.iconSize = 28,
+    required this.onPressed,
+  });
   final IconData iconData;
   final double iconSize;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.sizeOf(context).width;
-    double screenHeight = MediaQuery.sizeOf(context).height;
+    // double screenWidth = MediaQuery.sizeOf(context).width;
+    // double screenHeight = MediaQuery.sizeOf(context).height;
     return Container(
       width: 60,
       height: 54,
@@ -34,7 +40,11 @@ class SocialAuthCard extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-        child: Icon(iconData, color: kAppPrimaryColor, size: iconSize),
+        child: IconButton(
+          onPressed: onPressed,
+          icon: Icon(iconData, color: kAppPrimaryColor, size: iconSize),
+          padding: EdgeInsets.zero,
+        ),
       ),
     );
   }
