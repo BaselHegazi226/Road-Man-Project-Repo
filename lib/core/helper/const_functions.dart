@@ -51,6 +51,26 @@ class ConstFunctions {
     );
   }
 
+  static AppBar customAppBar({required String text}) {
+    return AppBar(
+      backgroundColor: kAppPrimaryWhiteColor,
+      leading: Icon(
+        Icons.arrow_back_ios_new,
+        color: kAppPrimaryBlueColor,
+        size: 24,
+      ),
+      centerTitle: true,
+      title: Text(
+        text,
+        style: TextStyle(
+          color: kAppPrimaryBlueColor,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   static TextStyle hintTextFormFieldStyle() {
     return TextStyle(
       color: kTextTextFormFieldColor,
