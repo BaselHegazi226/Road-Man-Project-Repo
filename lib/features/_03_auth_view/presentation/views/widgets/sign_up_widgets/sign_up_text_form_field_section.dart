@@ -3,9 +3,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
-class SignUPTextFormFieldSection extends StatelessWidget {
+class SignUPTextFormFieldSection extends StatefulWidget {
   const SignUPTextFormFieldSection({super.key});
 
+  @override
+  State<SignUPTextFormFieldSection> createState() =>
+      _SignUPTextFormFieldSectionState();
+}
+
+class _SignUPTextFormFieldSectionState
+    extends State<SignUPTextFormFieldSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
