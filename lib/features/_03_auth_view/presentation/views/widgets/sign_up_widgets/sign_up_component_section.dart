@@ -17,9 +17,12 @@ class SignUpComponentSection extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(left: 16, right: 16, top: 24),
         child: Column(
-          spacing: 32,
+          spacing: 20,
           children: [
-            SignUPTextFormFieldSection(),
+            Padding(
+              padding: EdgeInsets.only(bottom: 12),
+              child: SignUPTextFormFieldSection(),
+            ),
             CustomTextButton(
               onPressed: () {},
               backgroundColor: kAppPrimaryColor,
