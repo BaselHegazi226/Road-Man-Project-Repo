@@ -16,7 +16,7 @@ class SignInComponentSectionBody extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 24, bottom: 16, left: 16, right: 16),
-            child: const SocialAuthCardSection(),
+            child: SocialAuthCardSection(onPressed1: () {}, onPressed2: () {}),
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
