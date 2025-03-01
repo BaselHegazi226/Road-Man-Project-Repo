@@ -35,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.errorMess,
     this.prefixIconSize = 24,
-    this.suffixIconSize = 20,
+    this.suffixIconSize = 24,
     // required this.onSaved,
   });
 
