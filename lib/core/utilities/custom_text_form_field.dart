@@ -16,16 +16,17 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final Color textColor;
   final Color backgroundColor;
-
+  final double suffixIconSize;
+  final double prefixIconSize;
   // final void Function(String?)? onSaved;
 
   const CustomTextFormField({
     super.key,
     required this.hintText,
     required this.textEditingController,
-    required this.keyboardType,
-    required this.textColor,
-    this.backgroundColor = Colors.grey,
+    this.keyboardType = TextInputType.text,
+    this.textColor = kTextPrimaryColor,
+    this.backgroundColor = kFilledTextFormFieldColor,
     this.obscureText = false,
     this.onChanged,
     this.prefixIcon,
@@ -33,6 +34,8 @@ class CustomTextFormField extends StatelessWidget {
     this.focusNode,
     this.validator,
     this.errorMess,
+    this.prefixIconSize = 24,
+    this.suffixIconSize = 20,
     // required this.onSaved,
   });
 
@@ -59,12 +62,12 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           suffixIcon: Icon(
             suffixIcon,
-            size: 24,
+            size: suffixIconSize,
             color: kIconTextFormFieldColor,
           ),
           prefixIcon: Icon(
             prefixIcon,
-            size: 24,
+            size: prefixIconSize,
             color: kIconTextFormFieldColor,
           ),
           hintText: hintText,
