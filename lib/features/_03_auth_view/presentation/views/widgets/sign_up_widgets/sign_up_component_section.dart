@@ -7,6 +7,9 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/other_register_section.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/sign_up_text_form_field_section.dart';
 
+import '../common_widgets/auth_sub_title.dart';
+import '../common_widgets/social_auth_card_section.dart';
+
 class SignUpComponentSection extends StatelessWidget {
   const SignUpComponentSection({super.key});
 
@@ -15,19 +18,28 @@ class SignUpComponentSection extends StatelessWidget {
     return AuthComponentSection(
       title: 'Create New Account',
       child: Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, top: 24),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          spacing: 20,
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 12),
-              child: SignUPTextFormFieldSection(),
+              padding: EdgeInsets.only(top: 16, bottom: 32),
+              child: SocialAuthCardSection(
+                onPressed1: () {},
+                onPressed2: () {},
+              ),
             ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16),
+              child: const AuthSubTitle(subTitle: 'Or use your email account'),
+            ),
+            SignUPTextFormFieldSection(),
+            SizedBox(height: 24),
             CustomTextButton(
               onPressed: () {},
               backgroundColor: kAppPrimaryColor,
               child: CustomTitle(title: 'Sign up'),
             ),
+            SizedBox(height: 20),
             OtherRegisterSection(
               onTap: () {
                 GoRouter.of(context).pop();
