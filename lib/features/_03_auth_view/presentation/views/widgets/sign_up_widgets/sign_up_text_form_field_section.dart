@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/sign_up_password_section.dart';
 
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
@@ -34,18 +34,7 @@ class _SignUPTextFormFieldSectionState
           textEditingController: TextEditingController(),
           prefixIcon: Icons.email_outlined,
         ),
-        CustomTextFormField(
-          hintText: 'Password',
-          textEditingController: TextEditingController(),
-          prefixIcon: Icons.lock_outline,
-          suffixIcon: FontAwesomeIcons.eyeSlash,
-        ),
-        CustomTextFormField(
-          hintText: 'Confirm password',
-          textEditingController: TextEditingController(),
-          prefixIcon: Icons.lock_outline,
-          suffixIcon: FontAwesomeIcons.eyeSlash,
-        ),
+        SignUpPasswordSection(),
       ],
     );
   }
