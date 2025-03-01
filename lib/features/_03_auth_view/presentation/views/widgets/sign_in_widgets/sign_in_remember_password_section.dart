@@ -4,23 +4,29 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import '../../../../../../core/helper/const_variables.dart';
 
 class RememberMeForgetPasswordSection extends StatelessWidget {
-  const RememberMeForgetPasswordSection({super.key});
-
+  const RememberMeForgetPasswordSection({
+    super.key,
+    required this.forgetPasswordPressed,
+  });
+  final void Function()? forgetPasswordPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         RememberMeSection(),
-        Text(
-          maxLines: 1,
-          'Forget your password ?',
-          style: TextStyle(
-            color: kAppPrimaryColor,
-            fontSize: 14,
-            fontWeight: FontWeight.w700,
-            letterSpacing: .266,
-            height: 1.5,
+        TextButton(
+          onPressed: forgetPasswordPressed,
+          child: Text(
+            maxLines: 1,
+            'Forget your password ?',
+            style: TextStyle(
+              color: kAppPrimaryColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              letterSpacing: .266,
+              height: 1.5,
+            ),
           ),
         ),
       ],
