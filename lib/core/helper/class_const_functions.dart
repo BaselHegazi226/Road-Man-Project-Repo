@@ -15,7 +15,7 @@ class ConstFunctions {
       color = kAppPrimaryBlueColor;
     } else {
       iconData = kDisableIconData;
-      color = kDisableColor;
+      color = kCheckPasswordItemColor;
     }
     return Tuple2(iconData, color);
   }
@@ -51,13 +51,20 @@ class ConstFunctions {
     );
   }
 
-  static AppBar customAppBar({required String text}) {
+  static AppBar customAppBar({
+    required String text,
+    required Function()? onPressed,
+  }) {
     return AppBar(
       backgroundColor: kAppPrimaryWhiteColor,
-      leading: Icon(
-        Icons.arrow_back_ios_new,
-        color: kAppPrimaryBlueColor,
-        size: 24,
+      leading: IconButton(
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+        icon: Icon(
+          Icons.arrow_back_ios_new,
+          color: kAppPrimaryBlueColor,
+          size: 24,
+        ),
       ),
       centerTitle: true,
       title: Text(
@@ -75,7 +82,6 @@ class ConstFunctions {
     return TextStyle(
       color: kTextTextFormFieldColor,
       fontWeight: FontWeight.w400,
-
       fontSize: 14,
       letterSpacing: -.266,
       height: 1.5,
@@ -87,7 +93,7 @@ class ConstFunctions {
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: Colors.transparent, width: 1.5),
+      borderSide: BorderSide(color: Colors.transparent, width: 1),
     );
   }
 }
