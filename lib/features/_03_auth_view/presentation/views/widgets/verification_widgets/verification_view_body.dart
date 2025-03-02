@@ -4,8 +4,6 @@ import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_text_form_field_otp.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
 
-import '../../../../../../core/helper/pin_themes.dart';
-
 class VerificationViewBody extends StatelessWidget {
   const VerificationViewBody({super.key});
 
@@ -31,20 +29,6 @@ class VerificationViewBody extends StatelessWidget {
             ),
           ),
           CustomTextFormFieldOtpPinPut(
-            defaultPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-              context,
-            ),
-            disabledPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-              context,
-            ),
-            focusedPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-              context,
-              borderColor: kAppPrimaryBlueColor,
-            ),
-            errorPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-              context,
-              borderColor: kErrorColor,
-            ),
             validator: (value) {
               return '';
             },
@@ -63,9 +47,9 @@ class VerificationViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 8),
             child: CustomTextButton(
-              child: CustomTitle(title: 'Verify'),
               onPressed: () {},
               backgroundColor: kAppPrimaryBlueColor,
+              child: CustomTitle(title: 'Verify'),
             ),
           ),
         ],
