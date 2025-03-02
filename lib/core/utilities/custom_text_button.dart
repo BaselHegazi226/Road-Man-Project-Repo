@@ -18,6 +18,7 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
+      height: 50,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
