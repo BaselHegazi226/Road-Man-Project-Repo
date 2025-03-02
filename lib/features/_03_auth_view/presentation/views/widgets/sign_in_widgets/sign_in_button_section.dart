@@ -4,24 +4,20 @@ import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
 import '../../../../../../core/utilities/custom_title.dart';
 
-class ButtonSection extends StatelessWidget {
-  const ButtonSection({super.key});
+class SignInButtonSection extends StatelessWidget {
+  const SignInButtonSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       spacing: 24,
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 16),
-          child: CustomTextButton(
-            onPressed: () {},
-            backgroundColor: kAppPrimaryBlueColor,
-            child: CustomTitle(
-              title: 'Sign in',
-              textColor: kSecondlyLightWhiteColor,
-              size: 20,
-            ),
+        CustomTextButton(
+          onPressed: () {},
+          backgroundColor: kAppPrimaryBlueColor,
+          child: CustomTitle(
+            title: 'Sign in',
+            textColor: kSecondlyLightWhiteColor,
           ),
         ),
         CustomTextButton(
@@ -31,7 +27,6 @@ class ButtonSection extends StatelessWidget {
           child: CustomTitle(
             title: 'Continue as a Guest',
             textColor: kAppPrimaryBlueColor,
-            size: 20,
           ),
         ),
       ],
