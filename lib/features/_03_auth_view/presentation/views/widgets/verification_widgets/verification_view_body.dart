@@ -18,7 +18,7 @@ class VerificationViewBody extends StatelessWidget {
             padding: EdgeInsets.only(top: 48, bottom: 8),
             child: Text(
               textAlign: TextAlign.center,
-              'We have sent a verification code to your email or phone number. Enter the code below to complete the process',
+              'We have sent a verification code to your email or phone number.             Enter the code below to complete the process',
               style: TextStyle(
                 color: kTextPrimaryColor,
                 fontWeight: FontWeight.w400,
