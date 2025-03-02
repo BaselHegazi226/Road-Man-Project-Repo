@@ -5,7 +5,7 @@ class CustomTitle extends StatelessWidget {
   const CustomTitle({
     super.key,
     required this.title,
-    this.textColor = kSecondlyLightWhiteColor,
+    this.textColor = kAppPrimaryWhiteColor,
     this.size = 20,
   });
   final String title;
