@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/two_check_password_item.dart';
 
-import '../../../../../../core/helper/const_functions.dart';
+import '../../../../../../core/helper/class_const_functions.dart';
 import 'check_password_item.dart';
 
 class CheckPasswordSection extends StatelessWidget {
@@ -19,10 +18,7 @@ class CheckPasswordSection extends StatelessWidget {
   final bool containsSpecialChar;
   final bool containsNumber;
   final bool containsPassLength;
-  final Color defaultColor = Colors.grey;
-  final Color focusColor = kAppPrimaryBlueColor;
-  final IconData disableIconData = Icons.check_box_outline_blank_outlined;
-  final IconData enableIconData = Icons.check_box_rounded;
+
   @override
   Widget build(BuildContext context) {
     return Column(
