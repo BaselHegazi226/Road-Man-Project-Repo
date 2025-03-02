@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
 
 class HeightWidthPinPutOtp {
   static Tuple2<double, double> backSizeFun(BuildContext context) {
@@ -13,8 +14,8 @@ class HeightWidthPinPutOtp {
 class PinThemesPinPutOtpClass {
   static PinTheme customPinThemeFunc(
     BuildContext context, {
-    Color textColor = Colors.blueGrey,
-    Color borderColor = Colors.transparent,
+    Color textColor = kAppPrimaryBlueColor,
+    Color borderColor = kOtpPinThemeBorderColor,
     double borderRadius = 8,
   }) {
     return PinTheme(
@@ -28,13 +29,8 @@ class PinThemesPinPutOtpClass {
       ),
       decoration: BoxDecoration(
         color: Colors.grey.withAlpha(40),
-        border: Border.all(
-          width: 2,
-          color: borderColor,
-        ),
-        borderRadius: BorderRadius.circular(
-          borderRadius,
-        ),
+        border: Border.all(width: 1, color: borderColor),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
     );
   }
