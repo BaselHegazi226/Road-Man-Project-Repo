@@ -16,13 +16,13 @@ class CheckPasswordItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       spacing: 8,
       children: [
-        Icon(iconData, color: color),
+        Icon(iconData, color: color, size: 16),
         Text(
           maxLines: 1,
           text,
           style: TextStyle(
             color: color,
-            fontSize: 16,
+            fontSize: 12,
             fontWeight: FontWeight.w400,
           ),
         ),
