@@ -30,7 +30,7 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 16,
+      spacing: 8,
       children: [
         CustomTextFormField(
           hintText: 'Password',
