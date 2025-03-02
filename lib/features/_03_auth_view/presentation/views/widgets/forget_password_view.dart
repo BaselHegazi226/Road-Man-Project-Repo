@@ -7,7 +7,7 @@ import '../../../../../core/helper/class_const_functions.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});
-  static String id = '/ForgetPasswordView';
+
 
   @override
   Widget build(BuildContext context) {
