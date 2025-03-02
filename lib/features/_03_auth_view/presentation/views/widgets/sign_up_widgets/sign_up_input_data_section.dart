@@ -16,7 +16,7 @@ class SignUpInputDataSection extends StatelessWidget {
       spacing: 20,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 12),
+          padding: EdgeInsets.only(bottom: 4),
           child: SignUPTextFormFieldSection(),
         ),
         CustomTextButton(
@@ -24,7 +24,6 @@ class SignUpInputDataSection extends StatelessWidget {
           backgroundColor: kAppPrimaryBlueColor,
           child: CustomTitle(title: 'Sign up'),
         ),
-        SizedBox(height: 20),
         OtherRegisterSection(
           onTap: () {
             GoRouter.of(context).pop();
