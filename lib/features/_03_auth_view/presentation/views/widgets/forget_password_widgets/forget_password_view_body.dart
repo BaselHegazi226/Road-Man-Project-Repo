@@ -19,14 +19,16 @@ class ForgetPasswordViewBody extends StatelessWidget {
           CustomImage(image: kForgetPasswordImage),
           Text(
             maxLines: 3,
-            'Don’t worry! We’ll help you regain access to your account. Enter your registered email or phone number to reset your password',
+            'Don’t worry! We’ll help you regain access to your account.                         Enter your registered email or                                                                           phone number to reset your password',
+            textAlign: TextAlign.start,
             style: TextStyle(
               color: kTextPrimaryColor,
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              letterSpacing: 2,
+              letterSpacing: -.288,
               height: 1.5,
             ),
+            strutStyle: StrutStyle(leading: .2, forceStrutHeight: true),
           ),
           CustomTextFormField(
             hintText: 'Email',
@@ -34,7 +36,7 @@ class ForgetPasswordViewBody extends StatelessWidget {
             textEditingController: TextEditingController(),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.only(top: 8),
             child: CustomTextButton(
               onPressed: () {},
               backgroundColor: kAppPrimaryBlueColor,
