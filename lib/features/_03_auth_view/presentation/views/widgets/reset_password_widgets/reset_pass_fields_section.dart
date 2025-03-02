@@ -17,7 +17,6 @@ class ResetPassFieldsSection extends StatelessWidget {
           suffixIcon: CupertinoIcons.eye_slash,
           textEditingController: TextEditingController(),
         ),
-
         CustomTextFormField(
           hintText: 'Confirm Password',
           prefixIcon: Icons.lock_outline,
