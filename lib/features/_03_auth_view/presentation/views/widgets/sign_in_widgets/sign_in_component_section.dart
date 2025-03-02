@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/sign_in_component_section_body.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
+import '../common_widgets/auth_component_section.dart';
+import '../common_widgets/auth_sub_title.dart';
+import '../common_widgets/social_auth_card_section.dart';
+import 'sign_in_input_data_section.dart';
 
-class SignInComponentsSection extends StatelessWidget {
-  const SignInComponentsSection({super.key});
+class SignInComponentSection extends StatelessWidget {
+  const SignInComponentSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: kSecondlyDarkWhiteColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
-          ),
+    return AuthComponentSection(
+      title: 'Login to your account',
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 24, bottom: 12),
+              child: SocialAuthCardSection(
+                onPressed1: () {},
+                onPressed2: () {},
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 24),
+              child: const AuthSubTitle(subTitle: 'Or use your email account'),
+            ),
+            SignInInputDataSection(),
+          ],
         ),
-        child: SignInComponentSectionBody(),
       ),
     );
   }
