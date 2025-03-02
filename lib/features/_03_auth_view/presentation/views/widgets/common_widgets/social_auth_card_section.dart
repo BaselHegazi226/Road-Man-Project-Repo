@@ -19,7 +19,6 @@ class SocialAuthCardSection extends StatelessWidget {
         SocialAuthCard(
           onPressed: onPressed1,
           iconData: FontAwesomeIcons.googlePlusG,
-          iconSize: 32,
         ),
         SocialAuthCard(
           onPressed: onPressed2,
