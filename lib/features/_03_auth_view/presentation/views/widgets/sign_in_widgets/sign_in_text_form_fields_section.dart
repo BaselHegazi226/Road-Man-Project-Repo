@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
@@ -26,6 +27,7 @@ class TextFormFieldsSection extends StatelessWidget {
           keyboardType: TextInputType.text,
           textColor: kTextPrimaryColor,
           prefixIcon: Icons.lock_outline,
+          suffixIcon: CupertinoIcons.eye_slash,
         ),
       ],
     );
