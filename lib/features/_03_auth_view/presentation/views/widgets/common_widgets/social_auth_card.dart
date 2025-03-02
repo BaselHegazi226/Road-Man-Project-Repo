@@ -6,7 +6,7 @@ class SocialAuthCard extends StatelessWidget {
   const SocialAuthCard({
     super.key,
     required this.iconData,
-    this.iconSize = 28,
+    this.iconSize = 24,
     required this.onPressed,
   });
   final IconData iconData;
