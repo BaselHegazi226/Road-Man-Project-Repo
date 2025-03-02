@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+
+import '../helper/pin_themes.dart';
 
 class CustomTextFormFieldOtpPinPut extends StatelessWidget {
   const CustomTextFormFieldOtpPinPut({
     super.key,
     this.pinCount = 4,
     required this.validator,
-    required this.defaultPinTheme,
-    required this.disabledPinTheme,
-    required this.focusedPinTheme,
-    required this.errorPinTheme,
     this.onSubmitted,
     this.onCompleted,
   });
   final int pinCount;
   final String? Function(String?)? validator;
-  final PinTheme? defaultPinTheme;
-  final PinTheme? disabledPinTheme;
-  final PinTheme? focusedPinTheme;
-  final PinTheme? errorPinTheme;
   final void Function(String)? onSubmitted;
   final void Function(String)? onCompleted;
   @override
@@ -27,10 +22,16 @@ class CustomTextFormFieldOtpPinPut extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       length: pinCount,
-      defaultPinTheme: defaultPinTheme,
-      disabledPinTheme: disabledPinTheme,
-      focusedPinTheme: focusedPinTheme,
-      errorPinTheme: errorPinTheme,
+      defaultPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
+      disabledPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
+      focusedPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
+        context,
+        borderColor: kAppPrimaryBlueColor,
+      ),
+      errorPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
+        context,
+        borderColor: kErrorColor,
+      ),
       pinContentAlignment: Alignment.center,
       pinAnimationType: PinAnimationType.rotation,
       validator: validator,
