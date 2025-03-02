@@ -20,13 +20,13 @@ class ResetPasswordViewBody extends StatelessWidget {
         children: [
           CustomImage(imageBottomPadding: 21, image: kResetPasswordImage),
           Text(
-            maxLines: 3,
-            'Create a new password for your account. Make sure to choose a strong and secure password',
+            maxLines: 2,
+            'Create a new password for your account.                                                    Make sure to choose a strong and secure password',
             style: TextStyle(
               color: kTextPrimaryColor,
               fontSize: 12,
               fontWeight: FontWeight.w400,
-              letterSpacing: 2,
+              letterSpacing: -.228,
               height: 1.5,
             ),
           ),
