@@ -15,7 +15,8 @@ class AuthSubTitle extends StatelessWidget {
         fontSize: 16,
         fontWeight: FontWeight.w600,
         fontStyle: FontStyle.normal,
-        letterSpacing: 0.304,
+        height: 1.5,
+        letterSpacing: -0.304,
       ),
     );
   }
