@@ -18,39 +18,47 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
   bool containsSpecialChar = false;
   bool containsNumbers = false;
   bool containsPassLength = false;
+  TextEditingController passwordEditingController = TextEditingController();
 
   void regExpForCheckPasswordVarsFun(String value) {
-    containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
-    containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
-    containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
-    containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
-    containsPassLength = RegExp(r'.{8,}').hasMatch(value);
+    setState(() {
+      containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
+      containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
+      containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
+      containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
+      containsPassLength = RegExp(r'.{8,}').hasMatch(value);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 8,
+      spacing: 16,
       children: [
         CustomTextFormField(
           hintText: 'Password',
-          textEditingController: TextEditingController(),
+          textEditingController: passwordEditingController,
           prefixIcon: Icons.lock_outline,
-          suffixIcon: CupertinoIcons.eye_slash,
+          obscureText: obscurePassword,
+          suffixIcon:
+              obscurePassword ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+          suffixIconOnPressed: () {
+            setState(() {
+              obscurePassword = !obscurePassword;
+            });
+          },
           validator: (value) {
             if (value!.isEmpty) {
               return 'Password is required';
             } else if (!RegExp(
-              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}$',
+              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}\$',
             ).hasMatch(value)) {
               return 'Please enter a valid password! (Aa#12345)';
             }
             return null;
           },
           onChanged: (password) {
-            setState(() {
-              regExpForCheckPasswordVarsFun(password);
-            });
+            regExpForCheckPasswordVarsFun(password);
           },
         ),
         CheckPasswordSection(
