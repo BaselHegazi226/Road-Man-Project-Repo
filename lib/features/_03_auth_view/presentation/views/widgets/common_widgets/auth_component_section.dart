@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/custom_flexible_widget.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import 'auth_title.dart';
@@ -38,7 +39,7 @@ class AuthComponentSection extends StatelessWidget {
                     topRight: Radius.circular(32),
                   ),
                 ),
-                child: child,
+                child: CustomFlexibleWidget(child: child),
               ),
             ),
           ],

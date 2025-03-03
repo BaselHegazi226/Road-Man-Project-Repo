@@ -11,14 +11,16 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? suffixIcon;
   final IconData? prefixIcon;
   final FocusNode? focusNode; // Added FocusNode
-  final String? Function(String?)? validator;
   final String? errorMess;
-  final void Function(String)? onChanged;
   final Color textColor;
   final Color backgroundColor;
   final double suffixIconSize;
   final double prefixIconSize;
-  // final void Function(String?)? onSaved;
+  final void Function()? suffixIconOnPressed;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
+  final void Function(String?)? onSaved;
 
   const CustomTextFormField({
     super.key,
@@ -36,7 +38,9 @@ class CustomTextFormField extends StatelessWidget {
     this.errorMess,
     this.prefixIconSize = 24,
     this.suffixIconSize = 24,
-    // required this.onSaved,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.suffixIconOnPressed,
   });
 
   @override
@@ -48,22 +52,26 @@ class CustomTextFormField extends StatelessWidget {
         onTap: () {
           FocusScope.of(context).requestFocus(focusNode);
         },
-        // onSaved: onSaved,
+        onSaved: onSaved,
+        onChanged: onChanged,
+        validator: validator,
+        onFieldSubmitted: onFieldSubmitted,
         controller: textEditingController,
         obscureText: obscureText,
-        onChanged: onChanged,
         focusNode: focusNode,
         // Assigned FocusNode
-        validator: validator,
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
         textAlignVertical: TextAlignVertical.bottom,
         style: ConstFunctions.textTextFormFieldStyle(),
         decoration: InputDecoration(
-          suffixIcon: Icon(
-            suffixIcon,
-            size: suffixIconSize,
-            color: kIconTextFormFieldColor,
+          suffixIcon: IconButton(
+            icon: Icon(
+              suffixIcon,
+              size: suffixIconSize,
+              color: kIconTextFormFieldColor,
+            ),
+            onPressed: suffixIconOnPressed ?? () {},
           ),
           prefixIcon: Icon(
             prefixIcon,

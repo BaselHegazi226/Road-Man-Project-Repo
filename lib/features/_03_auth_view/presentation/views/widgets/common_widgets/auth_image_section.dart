@@ -6,11 +6,18 @@ class AuthImageSection extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 64),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 42),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [SvgPicture.asset(image, width: 170, height: 184)],
+        children: [
+          SizedBox(
+            width: screenWidth * 0.464,
+            height: (screenWidth * 0.464) * (184 / 170),
+            child: SvgPicture.asset(image, fit: BoxFit.contain),
+          ),
+        ],
       ),
     );
   }
