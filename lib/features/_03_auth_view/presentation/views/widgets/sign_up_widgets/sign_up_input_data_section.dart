@@ -8,30 +8,39 @@ import '../../../../../../core/utilities/custom_title.dart';
 import '../sign_in_widgets/other_register_section.dart';
 
 class SignUpInputDataSection extends StatelessWidget {
-  const SignUpInputDataSection({super.key});
+  SignUpInputDataSection({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 20,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 4),
-          child: SignUPTextFormFieldSection(),
-        ),
-        CustomTextButton(
-          onPressed: () {},
-          backgroundColor: kAppPrimaryBlueColor,
-          child: CustomTitle(title: 'Sign up'),
-        ),
-        OtherRegisterSection(
-          onTap: () {
-            GoRouter.of(context).pop();
-          },
-          blackText: 'Already have an account? ',
-          blueText: 'Login here',
-        ),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        spacing: 20,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 4),
+            child: SignUPTextFormFieldSection(formKey: _formKey),
+          ),
+          CustomTextButton(
+            onPressed: () {
+              if (_formKey.currentState?.validate() ?? false) {
+                _formKey.currentState?.save();
+                // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+              }
+            },
+            backgroundColor: kAppPrimaryBlueColor,
+            child: CustomTitle(title: 'Sign up'),
+          ),
+          OtherRegisterSection(
+            onTap: () {
+              GoRouter.of(context).pop();
+            },
+            blackText: 'Already have an account? ',
+            blueText: 'Login here',
+          ),
+        ],
+      ),
     );
   }
 }
