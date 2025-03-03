@@ -7,12 +7,10 @@ class CustomScaffoldWidget extends StatelessWidget {
   final Widget body;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: kAppPrimaryBlueColor,
-        resizeToAvoidBottomInset: true,
-        body: body,
-      ),
+    return Scaffold(
+      backgroundColor: kAppPrimaryBlueColor,
+      resizeToAvoidBottomInset: true,
+      body: body,
     );
   }
 }
