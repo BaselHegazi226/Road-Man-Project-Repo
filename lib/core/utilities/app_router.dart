@@ -3,21 +3,22 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
+import 'routes.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SignInView()),
       GoRoute(
-        path: SignInView.id,
+        path: Routes.signInView,
         builder: (context, state) => const SignInView(),
       ),
       GoRoute(
-        path: SignUpView.id,
+        path: Routes.signUpView,
         builder: (context, state) => const SignUpView(),
       ),
       GoRoute(
-        path: ForgetPasswordView.id,
+        path: Routes.forgetPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
       ),
     ],
