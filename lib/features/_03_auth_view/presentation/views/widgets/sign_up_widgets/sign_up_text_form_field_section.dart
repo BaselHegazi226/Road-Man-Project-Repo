@@ -3,16 +3,16 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
-class SignUPTextFormFieldSection extends StatefulWidget {
-  const SignUPTextFormFieldSection({super.key, required this.formKey});
+class SignUpTextFormFieldSection extends StatefulWidget {
+  const SignUpTextFormFieldSection({super.key, required this.formKey});
   final GlobalKey<FormState> formKey;
   @override
-  State<SignUPTextFormFieldSection> createState() =>
-      _SignUPTextFormFieldSectionState();
+  State<SignUpTextFormFieldSection> createState() =>
+      _SignUpTextFormFieldSectionState();
 }
 
-class _SignUPTextFormFieldSectionState
-    extends State<SignUPTextFormFieldSection> {
+class _SignUpTextFormFieldSectionState
+    extends State<SignUpTextFormFieldSection> {
   String? name, email, password;
   String? emailErrorMessage, nameErrorMessage, passwordErrorMessage;
 
