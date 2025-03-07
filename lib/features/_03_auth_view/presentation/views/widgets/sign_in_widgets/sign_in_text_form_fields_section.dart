@@ -6,14 +6,16 @@ import 'package:road_man_project/core/utilities/routes.dart';
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
-class TextFormFieldsSection extends StatefulWidget {
-  const TextFormFieldsSection({super.key, required this.formKey});
+class SignInTextFormFieldsSection extends StatefulWidget {
+  const SignInTextFormFieldsSection({super.key, required this.formKey});
   final GlobalKey<FormState> formKey;
   @override
-  State<TextFormFieldsSection> createState() => _TextFormFieldsSectionState();
+  State<SignInTextFormFieldsSection> createState() =>
+      _SignInTextFormFieldsSectionState();
 }
 
-class _TextFormFieldsSectionState extends State<TextFormFieldsSection> {
+class _SignInTextFormFieldsSectionState
+    extends State<SignInTextFormFieldsSection> {
   bool obscurePassword = true;
   bool isEnableButton = true;
 
