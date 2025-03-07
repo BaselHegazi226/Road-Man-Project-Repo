@@ -7,40 +7,43 @@ import '../../../../../../core/utilities/custom_text_button.dart';
 import '../../../../../../core/utilities/custom_title.dart';
 import '../sign_in_widgets/other_register_section.dart';
 
-class SignUpInputDataSection extends StatelessWidget {
-  SignUpInputDataSection({super.key});
+class SignUpInputDataSection extends StatefulWidget {
+  const SignUpInputDataSection({super.key});
+
+  @override
+  State<SignUpInputDataSection> createState() => _SignUpInputDataSectionState();
+}
+
+class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        spacing: 20,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 4),
-            child: SignUPTextFormFieldSection(formKey: _formKey),
-          ),
-          CustomTextButton(
-            onPressed: () {
-              if (_formKey.currentState?.validate() ?? false) {
-                _formKey.currentState?.save();
-                // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
-              }
-            },
-            backgroundColor: kAppPrimaryBlueColor,
-            child: CustomTitle(title: 'Sign up'),
-          ),
-          OtherRegisterSection(
-            onTap: () {
-              GoRouter.of(context).pop();
-            },
-            blackText: 'Already have an account? ',
-            blueText: 'Login here',
-          ),
-        ],
-      ),
+    return Column(
+      spacing: 20,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: SignUpTextFormFieldSection(formKey: _formKey),
+        ),
+        CustomTextButton(
+          onPressed: () {
+            if (_formKey.currentState?.validate() ?? false) {
+              _formKey.currentState?.save();
+              // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+            }
+          },
+          backgroundColor: kAppPrimaryBlueColor,
+          child: const CustomTitle(title: 'Sign up'),
+        ),
+        OtherRegisterSection(
+          onTap: () {
+            GoRouter.of(context).pop();
+          },
+          blackText: 'Already have an account? ',
+          blueText: 'Login here',
+        ),
+      ],
     );
   }
 }
