@@ -21,6 +21,10 @@ abstract class AppRouter {
         path: Routes.forgetPasswordView,
         builder: (context, state) => const ForgetPasswordView(),
       ),
+      GoRoute(
+        path: Routes.homeView,
+        builder: (context, state) => const SignInView(),
+      ),
     ],
   );
 }
