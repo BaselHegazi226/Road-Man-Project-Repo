@@ -97,7 +97,7 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
           },
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Password is required';
+              return 'Please enter a password';
             } else if (!RegExp(
               r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}\$',
             ).hasMatch(value)) {
