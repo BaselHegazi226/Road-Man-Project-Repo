@@ -111,7 +111,7 @@ class _SignUpTextFormFieldSectionState
             validator: (name) {
               String? trimmedValue = name?.trim();
               if (trimmedValue == null || trimmedValue.isEmpty) {
-                return 'Name is required';
+                return 'Please enter a name';
               }
               if (trimmedValue.length < 8) {
                 return 'Enter at least 8 letters';
