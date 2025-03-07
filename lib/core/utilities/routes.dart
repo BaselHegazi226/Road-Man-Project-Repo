@@ -3,5 +3,5 @@ class Routes {
   static String signUpView = '/SignUpView';
   static String signInView = '/SignInView';
   static String questionnaireView = '/QuestionnaireView';
-
+  static String homeView = '/homeView';
 }
