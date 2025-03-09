@@ -20,7 +20,7 @@ class CustomTextFormFieldOtpPinPut extends StatelessWidget {
   Widget build(BuildContext context) {
     return Pinput(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      separatorBuilder: (index) => SizedBox(width: 12),
       length: pinCount,
       defaultPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
       disabledPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
