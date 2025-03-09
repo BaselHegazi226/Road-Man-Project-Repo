@@ -22,7 +22,6 @@ class CheckPasswordSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TwoCheckPasswordItem(
           iconData1:
