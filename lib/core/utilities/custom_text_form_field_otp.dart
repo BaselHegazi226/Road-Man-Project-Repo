@@ -49,7 +49,6 @@ class CustomTextFormFieldOtp extends StatelessWidget {
   final TextInputType keyboardType;
   final FocusNode? focusNode; // Added FocusNode
   final String? Function(String?)? validator;
-  final String? errorMess;
   final void Function(String)? onChanged;
   final Color generalColor;
   final Color backgroundColor;
@@ -57,24 +56,23 @@ class CustomTextFormFieldOtp extends StatelessWidget {
 
   const CustomTextFormFieldOtp({
     super.key,
-    this.hintText = '1',
+    this.hintText = '',
     required this.textEditingController,
     this.keyboardType = TextInputType.number,
-    this.generalColor = kAppPrimaryBlueColor,
+    this.generalColor = kBorderOtpFieldColor,
     this.backgroundColor = kSecondlyDarkWhiteColor,
     this.obscureText = false,
     this.onChanged,
     this.focusNode,
     this.validator,
-    this.errorMess,
     // required this.onSaved,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .14,
-      height: MediaQuery.of(context).size.width * .15,
+      width: MediaQuery.sizeOf(context).width * .16,
+      height: MediaQuery.sizeOf(context).width * .17,
       child: TextFormField(
         onTap: () {
           FocusScope.of(context).requestFocus(focusNode);
@@ -89,9 +87,14 @@ class CustomTextFormFieldOtp extends StatelessWidget {
         obscureText: obscureText,
         onChanged: onChanged,
         focusNode: focusNode, // Assigned FocusNode
-        validator: validator,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '';
+          }
+          return null;
+        },
         textInputAction: TextInputAction.next,
-        cursorColor: kAppPrimaryWhiteColor,
+        cursorColor: kCursorFieldColor,
         textAlign: TextAlign.center,
         cursorHeight: 28,
         cursorOpacityAnimates: true,
@@ -112,54 +115,51 @@ class CustomTextFormFieldOtp extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
           border: outlineInputBorder(
-            borderRadius: 8,
             color:
                 focusNode != null && focusNode!.hasFocus
                     ? generalColor // Change to focus color on error
                     : kBorderOtpFieldColor,
           ),
           enabledBorder: outlineInputBorder(
-            borderRadius: 8,
             color:
                 focusNode != null && focusNode!.hasFocus
                     ? generalColor // Change to focus color on error
                     : kBorderOtpFieldColor,
           ),
           focusedBorder: outlineInputBorder(
-            borderRadius: 8,
             color:
                 focusNode != null && focusNode!.hasFocus
                     ? generalColor // Change to focus color on error
                     : kBorderOtpFieldColor,
           ),
           disabledBorder: outlineInputBorder(
-            borderRadius: 8,
             color:
                 focusNode != null && focusNode!.hasFocus
                     ? generalColor // Change to focus color on error
                     : kBorderOtpFieldColor,
           ),
           errorBorder: outlineInputBorder(
-            borderRadius: 4,
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kBorderOtpFieldColor,
-          ),
-          focusedErrorBorder: outlineInputBorder(
-            borderRadius: 4,
             color:
                 focusNode != null && focusNode!.hasFocus
                     ? generalColor // Change to focus color on error
                     : kErrorColor,
           ),
+          focusedErrorBorder: outlineInputBorder(
+            color:
+                focusNode != null && focusNode!.hasFocus
+                    ? kErrorColor // Change to focus color on error
+                    : generalColor,
+          ),
           errorStyle: const TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 16,
+            fontSize: 12,
+            height: .3,
           ),
-          errorText: errorMess,
           fillColor: backgroundColor,
           filled: true,
+          contentPadding: EdgeInsets.symmetric(vertical: 16),
+          errorText: null,
+          errorMaxLines: 1,
         ),
       ),
     );
