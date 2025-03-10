@@ -15,7 +15,9 @@ const Color kOtpPinThemeBorderColor = Color(0xff131314);
 const Color kFilledTextFormFieldColor = Color(0xffE6E8EE);
 const Color kIconTextFormFieldColor = Color(0xff131314);
 const Color kTextTextFormFieldColor = Color(0xff131314);
+const Color kTextOtpFieldColor = Color(0xff131314);
 const Color kBorderTextFormFieldColor = Color(0xff131314);
+const Color kBorderOtpFieldColor = Color(0xff131314);
 const kErrorColor = Colors.red;
 
 Color kTitleDialogColor = const Color(0xff2352A1);
