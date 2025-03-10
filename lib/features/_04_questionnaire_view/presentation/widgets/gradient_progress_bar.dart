@@ -9,12 +9,12 @@ class GradientProgressBar extends StatelessWidget {
   final double horizontalPadding;
 
   const GradientProgressBar({
-    Key? key,
+    super.key,
     required this.progress,
     this.height = 8.0,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.horizontalPadding = 0.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,9 @@ class GradientProgressBar extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: (MediaQuery.of(context).size.width - 2 * horizontalPadding) * progress.clamp(0.0, 1.0),
+            width:
+                (MediaQuery.sizeOf(context).width - 2 * horizontalPadding) *
+                progress.clamp(0.0, 1.0),
             decoration: BoxDecoration(
               borderRadius: borderRadius,
               gradient: Gradients.blueLinearGradient,
