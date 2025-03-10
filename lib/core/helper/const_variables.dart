@@ -18,6 +18,7 @@ const Color kTextTextFormFieldColor = Color(0xff131314);
 const Color kTextOtpFieldColor = Color(0xff131314);
 const Color kBorderTextFormFieldColor = Color(0xff131314);
 const Color kBorderOtpFieldColor = Color(0xff131314);
+const Color kCursorFieldColor = Color(0xff131308);
 const kErrorColor = Colors.red;
 
 Color kTitleDialogColor = const Color(0xff2352A1);
