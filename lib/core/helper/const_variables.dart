@@ -23,3 +23,5 @@ const kErrorColor = Colors.red;
 
 Color kTitleDialogColor = const Color(0xff2352A1);
 Color kDialogStateColor = const Color(0xff2352A1);
+
+const Color kTabBarIconColor = Color(0xffE6E8EE);
