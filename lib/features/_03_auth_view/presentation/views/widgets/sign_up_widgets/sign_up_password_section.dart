@@ -5,7 +5,14 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
 class SignUpPasswordSection extends StatefulWidget {
-  const SignUpPasswordSection({super.key});
+  const SignUpPasswordSection({
+    super.key,
+    required this.passwordEditingController,
+    required this.passwordFocusNode,
+  });
+
+  final TextEditingController passwordEditingController;
+  final FocusNode passwordFocusNode;
 
   @override
   State<SignUpPasswordSection> createState() => _SignUpPasswordSectionState();
@@ -18,15 +25,55 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
   bool containsSpecialChar = false;
   bool containsNumbers = false;
   bool containsPassLength = false;
-  TextEditingController passwordEditingController = TextEditingController();
+
+  String? password, passwordErrorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    focusFun();
+  }
+
+  @override
+  void dispose() {
+    disposeFun();
+    super.dispose();
+  }
+
+  void clearFun() {
+    widget.passwordEditingController.clear();
+  }
+
+  void focusFun() {
+    widget.passwordFocusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  void disposeFun() {
+    widget.passwordFocusNode.dispose();
+  }
 
   void regExpForCheckPasswordVarsFun(String value) {
+    containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
+    containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
+    containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
+    containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
+    containsPassLength = RegExp(r'.{8,}').hasMatch(value);
+  }
+
+  void onResetFun() {
+    clearFun();
+    defaultPasswordChecksFun();
+  }
+
+  void defaultPasswordChecksFun() {
     setState(() {
-      containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
-      containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
-      containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
-      containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
-      containsPassLength = RegExp(r'.{8,}').hasMatch(value);
+      containsNumbers = false;
+      containsSpecialChar = false;
+      containsPassLength = false;
+      containsUpperCase = false;
+      containsLowerCase = false;
     });
   }
 
@@ -37,7 +84,8 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
       children: [
         CustomTextFormField(
           hintText: 'Password',
-          textEditingController: passwordEditingController,
+          focusNode: widget.passwordFocusNode,
+          textEditingController: widget.passwordEditingController,
           prefixIcon: Icons.lock_outline,
           obscureText: obscurePassword,
           suffixIcon:
@@ -49,7 +97,7 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
           },
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Password is required';
+              return 'Please enter a password';
             } else if (!RegExp(
               r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}\$',
             ).hasMatch(value)) {
@@ -59,6 +107,9 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
           },
           onChanged: (password) {
             regExpForCheckPasswordVarsFun(password);
+          },
+          onSaved: (value) {
+            password = value;
           },
         ),
         CheckPasswordSection(

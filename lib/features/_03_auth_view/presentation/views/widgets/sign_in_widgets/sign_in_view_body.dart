@@ -10,7 +10,6 @@ class SignInViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         AuthImageSection(image: kLoginImage),
         SignInComponentSection(),

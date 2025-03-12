@@ -59,6 +59,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: textEditingController,
         obscureText: obscureText,
         focusNode: focusNode,
+        cursorColor: kCursorFieldColor,
         // Assigned FocusNode
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
@@ -102,7 +103,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
           errorStyle: const TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 16,
+            fontSize: 12,
           ),
           errorText: errorMess,
           fillColor: backgroundColor,

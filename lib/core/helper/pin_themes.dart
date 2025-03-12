@@ -29,7 +29,7 @@ class PinThemesPinPutOtpClass {
       ),
       decoration: BoxDecoration(
         color: Colors.grey.withAlpha(40),
-        border: Border.all(width: 1, color: borderColor),
+        border: Border.all(width: 2, color: borderColor),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
     );

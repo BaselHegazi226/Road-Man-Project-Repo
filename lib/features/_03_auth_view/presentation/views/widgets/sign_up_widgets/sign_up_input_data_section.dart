@@ -7,8 +7,15 @@ import '../../../../../../core/utilities/custom_text_button.dart';
 import '../../../../../../core/utilities/custom_title.dart';
 import '../sign_in_widgets/other_register_section.dart';
 
-class SignUpInputDataSection extends StatelessWidget {
+class SignUpInputDataSection extends StatefulWidget {
   const SignUpInputDataSection({super.key});
+
+  @override
+  State<SignUpInputDataSection> createState() => _SignUpInputDataSectionState();
+}
+
+class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +23,18 @@ class SignUpInputDataSection extends StatelessWidget {
       spacing: 20,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 4),
-          child: SignUPTextFormFieldSection(),
+          padding: const EdgeInsets.only(bottom: 4),
+          child: SignUpTextFormFieldSection(formKey: _formKey),
         ),
         CustomTextButton(
-          onPressed: () {},
+          onPressed: () {
+            if (_formKey.currentState?.validate() ?? false) {
+              _formKey.currentState?.save();
+              // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+            }
+          },
           backgroundColor: kAppPrimaryBlueColor,
-          child: CustomTitle(title: 'Sign up'),
+          child: const CustomTitle(title: 'Sign up'),
         ),
         OtherRegisterSection(
           onTap: () {

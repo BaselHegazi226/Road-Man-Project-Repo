@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/Assets.dart';
-import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/core/utilities/custom_text_button.dart';
-import 'package:road_man_project/core/utilities/custom_text_form_field.dart';
-import 'package:road_man_project/core/utilities/custom_title.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/common_widgets/custom_auth_text.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/common_widgets/custom_image.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/forget_password_widgets/forget_password_input_data_section.dart';
 
 class ForgetPasswordViewBody extends StatelessWidget {
   const ForgetPasswordViewBody({super.key});
@@ -16,33 +14,21 @@ class ForgetPasswordViewBody extends StatelessWidget {
       child: Column(
         spacing: 24,
         children: [
-          CustomImage(image: kForgetPasswordImage),
-          Text(
-            maxLines: 3,
-            'Don’t worry! We’ll help you regain access to your account.                         Enter your registered email or                                                                           phone number to reset your password',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: kTextPrimaryColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              letterSpacing: -.288,
-              height: 1.5,
+          ClipRect(
+            child: Align(
+              alignment: Alignment.topCenter,
+              heightFactor: .88,
+              child: CustomImage(image: kForgetPasswordImage),
             ),
-            strutStyle: StrutStyle(leading: .2, forceStrutHeight: true),
-          ),
-          CustomTextFormField(
-            hintText: 'Email',
-            prefixIcon: Icons.email_outlined,
-            textEditingController: TextEditingController(),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8),
-            child: CustomTextButton(
-              onPressed: () {},
-              backgroundColor: kAppPrimaryBlueColor,
-              child: CustomTitle(title: 'Reset Password'),
+            padding: const EdgeInsets.only(top: 58),
+            child: CustomAuthText(
+              text:
+                  'Don’t worry! We’ll help you regain access to your account.                          Enter your registered email or phone number to reset your password',
             ),
           ),
+          ForgetPasswordInputDataSection(),
         ],
       ),
     );
