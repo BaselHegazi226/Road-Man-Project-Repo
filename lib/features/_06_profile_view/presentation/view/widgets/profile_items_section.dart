@@ -3,8 +3,14 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/wid
 
 import '../../../data/model/profile_item_model.dart';
 
-class ProfileItemsSection extends StatelessWidget {
-  ProfileItemsSection({super.key});
+class ProfileItemsSection extends StatefulWidget {
+  const ProfileItemsSection({super.key});
+
+  @override
+  State<ProfileItemsSection> createState() => _ProfileItemsSectionState();
+}
+
+class _ProfileItemsSectionState extends State<ProfileItemsSection> {
   final List<ProfileItemModel> profileItemModelList = [
     ProfileItemModel(
       prefixIcon: Icons.edit,
@@ -33,6 +39,7 @@ class ProfileItemsSection extends StatelessWidget {
     ),
     ProfileItemModel(prefixIcon: Icons.logout, title: 'Logout', onTap: () {}),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
