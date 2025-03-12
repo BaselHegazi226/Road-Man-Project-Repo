@@ -54,9 +54,10 @@ class ConstFunctions {
   static AppBar customAppBar({
     required String text,
     required Function()? onPressed,
+    Color backgroundColor = kAppPrimaryWhiteColor
   }) {
     return AppBar(
-      backgroundColor: kAppPrimaryWhiteColor,
+      backgroundColor: backgroundColor,
       leading: IconButton(
         padding: EdgeInsets.zero,
         onPressed: onPressed,
