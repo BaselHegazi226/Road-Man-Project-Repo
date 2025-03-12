@@ -4,9 +4,7 @@ import 'package:road_man_project/features/_05_home_view/presentation/view/home_v
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
-import '../../features/_04_questionnaire/presentation/questionnaire_view.dart';
 import 'routes.dart';
-
 
 abstract class AppRouter {
   static final router = GoRouter(
@@ -27,10 +25,6 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.homeView,
         builder: (context, state) => const HomeView(),
-      ),
-      GoRoute(
-        path: Routes.questionnaireView,
-        builder: (context, state) => const QuestionnaireView(),
       ),
     ],
   );
