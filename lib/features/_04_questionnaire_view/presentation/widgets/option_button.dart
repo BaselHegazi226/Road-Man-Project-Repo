@@ -6,20 +6,14 @@ class OptionButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const OptionButton({
-    Key? key,
-    required this.text,
-    required this.onPressed,
-  }) : super(key: key);
+  const OptionButton({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        boxShadow: const [
-          BoxShadows.blackShadow,
-        ],
+        boxShadow: const [BoxShadows.blackShadow],
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -32,10 +26,7 @@ class OptionButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Colors.black
-          ),
+          style: const TextStyle(fontSize: 14, color: Colors.black),
         ),
       ),
     );
