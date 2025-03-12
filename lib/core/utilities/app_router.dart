@@ -6,6 +6,7 @@ import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
 import '../../features/_04_questionnaire/presentation/questionnaire_view.dart';
 import 'routes.dart';
 
+
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
