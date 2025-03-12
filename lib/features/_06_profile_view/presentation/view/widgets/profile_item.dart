@@ -7,27 +7,32 @@ class ProfileItem extends StatelessWidget {
   final ProfileItemModel profileItemModel;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        profileItemModel.prefixIcon,
-        size: 24,
-        color: kProfileIconColor,
-      ),
-      title: Padding(
-        padding: EdgeInsets.only(left: 8),
-        child: Text(
-          profileItemModel.title,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-            color: kTextPrimaryColor,
+    return InkWell(
+      onTap: profileItemModel.onTap,
+      splashColor: kAppPrimaryBlueColor.withAlpha(15),
+      borderRadius: BorderRadius.circular(8),
+      child: ListTile(
+        leading: Icon(
+          profileItemModel.prefixIcon,
+          size: 24,
+          color: kProfileIconColor,
+        ),
+        title: Padding(
+          padding: EdgeInsets.only(left: 8),
+          child: Text(
+            profileItemModel.title,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: kTextPrimaryColor,
+            ),
           ),
         ),
-      ),
-      trailing: Icon(
-        profileItemModel.suffixIcon,
-        size: 24,
-        color: kProfileIconColor,
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          size: 20,
+          color: kProfileIconColor,
+        ),
       ),
     );
   }
