@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/profile_items_section.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/profile_user_info.dart';
 
 class ProfileViewBody extends StatelessWidget {
@@ -8,7 +9,7 @@ class ProfileViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(children: [ProfileUserInfo()]),
+      child: Column(children: [ProfileUserInfo(), ProfileItemsSection()]),
     );
   }
 }
