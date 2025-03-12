@@ -11,6 +11,7 @@ class QuestionnaireView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: ConstFunctions.customAppBar(
+        backgroundColor: Colors.white,
         text: '',
         onPressed: () {
         },
