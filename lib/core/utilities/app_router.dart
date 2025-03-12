@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
+import 'package:road_man_project/features/_05_home_view/presentation/view/home_view.dart';
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
@@ -10,7 +11,7 @@ import 'routes.dart';
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SignInView()),
+      GoRoute(path: '/', builder: (context, state) => const HomeView()),
       GoRoute(
         path: Routes.signInView,
         builder: (context, state) => const SignInView(),
@@ -25,7 +26,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: Routes.homeView,
-        builder: (context, state) => const SignInView(),
+        builder: (context, state) => const HomeView(),
       ),
       GoRoute(
         path: Routes.questionnaireView,
