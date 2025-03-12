@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_04_questionnaire/presentation/widgets/option_button.dart';
 import 'package:road_man_project/features/_04_questionnaire/presentation/widgets/radio_button_question.dart';
-import 'gradient_progress_bar.dart';
+import '../../../_04_questionnaire_view/presentation/widgets/gradient_progress_bar.dart';
 
 // Main questionnaire view widget (StatefulWidget)
 class QuestionnaireViewBody extends StatefulWidget {
