@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/05_faq_widgets/faq_view_body.dart';
 
 import '../../../../core/helper/class_const_functions.dart';
 import '../../../../core/helper/const_variables.dart';
@@ -19,6 +20,7 @@ class FAQView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
+      body: FaqViewBody(),
     );
   }
 }
