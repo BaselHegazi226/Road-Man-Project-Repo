@@ -54,7 +54,9 @@ class ConstFunctions {
   static AppBar customAppBar({
     required String text,
     required Function()? onPressed,
-    Color backgroundColor = kAppPrimaryWhiteColor
+    Color backgroundColor = kAppPrimaryWhiteColor,
+    Color generalColor = kAppPrimaryBlueColor,
+    double iconSize = 20,
   }) {
     return AppBar(
       backgroundColor: backgroundColor,
@@ -63,15 +65,15 @@ class ConstFunctions {
         onPressed: onPressed,
         icon: Icon(
           Icons.arrow_back_ios_new,
-          color: kAppPrimaryBlueColor,
-          size: 24,
+          color: generalColor,
+          size: iconSize,
         ),
       ),
       centerTitle: true,
       title: Text(
         text,
         style: TextStyle(
-          color: kAppPrimaryBlueColor,
+          color: generalColor,
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
