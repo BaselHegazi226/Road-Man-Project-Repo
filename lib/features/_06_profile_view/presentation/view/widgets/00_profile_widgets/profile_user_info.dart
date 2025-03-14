@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/helper/const_variables.dart';
-import '../../../../../generated/assets.dart';
+import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../../generated/assets.dart';
 
 class ProfileUserInfo extends StatelessWidget {
   const ProfileUserInfo({super.key});
