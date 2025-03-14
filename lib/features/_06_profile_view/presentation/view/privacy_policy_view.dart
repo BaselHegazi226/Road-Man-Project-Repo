@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/04_privacy_policy_widgets/privacy_policy_view_body.dart';
 
 import '../../../../core/helper/class_const_functions.dart';
@@ -15,7 +16,9 @@ class PrivacyPolicyView extends StatelessWidget {
         backgroundColor: kAppPrimaryWhiteColor,
         generalColor: kTextPrimaryColor,
         text: 'Privacy Policy',
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).pop();
+        },
       ),
       body: const PrivacyPolicyViewBody(),
     );
