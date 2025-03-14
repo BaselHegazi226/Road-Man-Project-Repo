@@ -28,3 +28,12 @@ Color kDialogStateColor = const Color(0xff2352A1);
 const Color kTabBarIconColor = Color(0xffE6E8EE);
 
 const Color kProfileIconColor = Color(0xff131314);
+
+const Color kSettingsSwitchActiveColor = Color(0xff2352A1);
+const Color kSettingsSwitchInActiveColor = Color(0xffAFB1B7);
+const Color kSettingsSwitchInactiveThumbColor = Color(0xffF4F5F8);
+const Color kSettingsContainerColor = Color(0xffE6E8EE);
+const Color kSettingsTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kSettingsHintTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kSettingsBackgroundFormFieldColor = Color(0xffE6E8EE);
+const Color kSettingsBorderFormFieldColor = Color(0xff131314);
