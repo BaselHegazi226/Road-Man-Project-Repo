@@ -66,6 +66,7 @@ class CustomTextFormField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.bottom,
         style: ConstFunctions.textTextFormFieldStyle(),
         decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
           suffixIcon: IconButton(
             icon: Icon(
               suffixIcon,
