@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_title.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_profile_title.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
@@ -17,7 +17,7 @@ class CustomTitleSubtitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
-        CustomTitle(title: title),
+        CustomProfileTitle(title: title),
         Text(
           subTitle,
           style: TextStyle(
