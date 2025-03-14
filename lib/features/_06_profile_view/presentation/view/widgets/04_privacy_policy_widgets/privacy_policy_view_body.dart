@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/04_privacy_policy_widgets/privacy_policy_items_section.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_profile_blue_text_button.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_title.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_profile_title.dart';
 
 class PrivacyPolicyViewBody extends StatelessWidget {
   const PrivacyPolicyViewBody({super.key});
@@ -14,7 +14,9 @@ class PrivacyPolicyViewBody extends StatelessWidget {
         spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CustomTitle(title: 'Protecting your data is our priority'),
+          const CustomProfileTitle(
+            title: 'Protecting your data is our priority',
+          ),
           const PrivacyPolicyItemsSection(),
           Padding(
             padding: const EdgeInsets.only(top: 48),
