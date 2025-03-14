@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/features/_06_profile_view/data/model/profile_item_model.dart';
+
+import '../../../../data/models/profile/profile_item_model.dart';
 
 class ProfileItem extends StatelessWidget {
   const ProfileItem({super.key, required this.profileItemModel});
