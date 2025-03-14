@@ -8,7 +8,6 @@ class PrivacyPolicyItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ;
     return Column(
       spacing: 24,
       children:
