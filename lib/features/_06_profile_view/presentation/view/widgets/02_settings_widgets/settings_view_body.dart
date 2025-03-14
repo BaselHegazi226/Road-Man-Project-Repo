@@ -24,7 +24,7 @@ class SettingsViewBody extends StatelessWidget {
             const NotificationSection(),
             const CustomizeNotificationSection(),
             Padding(
-              padding: const EdgeInsets.only(top: 48),
+              padding: const EdgeInsets.only(top: 24),
               child: CustomTextButton(
                 onPressed: () {},
                 backgroundColor: kAppPrimaryBlueColor,
