@@ -51,6 +51,14 @@ class ConstFunctions {
     );
   }
 
+  static TextStyle settingsTextTextFormFieldStyle() {
+    return TextStyle(
+      color: kSettingsTextFormFieldColor,
+      fontWeight: FontWeight.w600,
+      fontSize: 16,
+    );
+  }
+
   static AppBar customAppBar({
     required String text,
     required Function()? onPressed,
@@ -88,6 +96,14 @@ class ConstFunctions {
       fontSize: 14,
       letterSpacing: -.266,
       height: 1.5,
+    );
+  }
+
+  static TextStyle hintSettingsTextFormFieldStyle() {
+    return TextStyle(
+      color: kSettingsHintTextFormFieldColor,
+      fontWeight: FontWeight.w600,
+      fontSize: 16,
     );
   }
 
