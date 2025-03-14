@@ -38,7 +38,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       case 0:
         return Icons.home_outlined;
       case 1:
-        return Icons.menu_book_outlined;
+        return Icons.local_library_outlined;
       case 2:
         return Icons.work_history_outlined;
       case 3:
