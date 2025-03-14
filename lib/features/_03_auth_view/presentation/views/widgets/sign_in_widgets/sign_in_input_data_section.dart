@@ -27,7 +27,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
         SignInTextFormFieldsSection(formKey: _formKey),
         RememberMeForgetPasswordSection(
           forgetPasswordPressed: () {
-            GoRouter.of(context).push(Routes.forgetPasswordView);
+            GoRouter.of(context).push(Routes.forgetPasswordViewId);
           },
         ),
         Padding(
@@ -50,7 +50,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
               ),
               CustomTextButton(
                 onPressed: () {
-                  GoRouter.of(context).push(Routes.homeView);
+                  GoRouter.of(context).push(Routes.homeViewId);
                 },
                 backgroundColor: kSecondlyLightWhiteColor,
                 borderColor: kAppPrimaryBlueColor,
@@ -68,7 +68,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
             blackText: 'Don’t have an account? ',
             blueText: 'Sign up',
             onTap: () {
-              GoRouter.of(context).push(Routes.signUpView);
+              GoRouter.of(context).push(Routes.signUpViewId);
             },
           ),
         ),

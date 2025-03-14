@@ -16,39 +16,39 @@ abstract class AppRouter {
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomeView()),
       GoRoute(
-        path: Routes.signInView,
+        path: Routes.signInViewId,
         builder: (context, state) => const SignInView(),
       ),
       GoRoute(
-        path: Routes.signUpView,
+        path: Routes.signUpViewId,
         builder: (context, state) => const SignUpView(),
       ),
       GoRoute(
-        path: Routes.forgetPasswordView,
+        path: Routes.forgetPasswordViewId,
         builder: (context, state) => const ForgetPasswordView(),
       ),
       GoRoute(
-        path: Routes.homeView,
+        path: Routes.homeViewId,
         builder: (context, state) => const HomeView(),
       ),
       GoRoute(
-        path: Routes.editProfileView,
+        path: Routes.editProfileViewId,
         builder: (context, state) => const EditProfileView(),
       ),
       GoRoute(
-        path: Routes.settingsView,
+        path: Routes.settingsViewId,
         builder: (context, state) => const SettingsView(),
       ),
       GoRoute(
-        path: Routes.aboutAppView,
+        path: Routes.aboutAppViewId,
         builder: (context, state) => const AboutAppView(),
       ),
       GoRoute(
-        path: Routes.privacyPolicyView,
+        path: Routes.privacyPolicyViewId,
         builder: (context, state) => const PrivacyPolicyView(),
       ),
       GoRoute(
-        path: Routes.faqView,
+        path: Routes.faqViewId,
         builder: (context, state) => const FAQView(),
       ),
     ],

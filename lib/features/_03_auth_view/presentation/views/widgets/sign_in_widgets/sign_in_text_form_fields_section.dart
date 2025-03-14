@@ -90,7 +90,7 @@ class _SignInTextFormFieldsSectionState
 
   void successStateFun(BuildContext context) {
     // Navigate to the HomeView first
-    GoRouter.of(context).push(Routes.homeView);
+    GoRouter.of(context).push(Routes.homeViewId);
     onResetFun();
   }
 
