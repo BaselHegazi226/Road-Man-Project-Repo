@@ -46,7 +46,13 @@ class ProfileItemsSection extends StatelessWidget {
           GoRouter.of(context).push(Routes.faqViewId);
         },
       ),
-      ProfileItemModel(prefixIcon: Icons.logout, title: 'Logout', onTap: () {}),
+      ProfileItemModel(
+        prefixIcon: Icons.logout,
+        title: 'Logout',
+        onTap: () {
+          GoRouter.of(context).push(Routes.logoutViewId);
+        },
+      ),
     ];
     return Column(
       children:
