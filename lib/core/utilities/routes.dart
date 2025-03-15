@@ -8,4 +8,5 @@ class Routes {
   static String settingsViewId = '/settingsView';
   static String privacyPolicyViewId = '/privacyPolicyView';
   static String faqViewId = '/faqView';
+  static String logoutViewId = '/logoutView';
 }
