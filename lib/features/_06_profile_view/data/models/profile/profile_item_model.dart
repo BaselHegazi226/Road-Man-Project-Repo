@@ -5,11 +5,11 @@ class ProfileItemModel {
   final IconData prefixIcon;
   final String title;
   final Color iconColor, textColor;
-  final Function()? onTap;
+  final String routeName;
   const ProfileItemModel({
-    required this.onTap,
     required this.prefixIcon,
     required this.title,
+    this.routeName = '',
     this.iconColor = kProfileIconColor,
     this.textColor = kTextPrimaryColor,
   });
