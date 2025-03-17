@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_06_profile_view/data/models/profile/edit_profile_container_item_model.dart';
 
+import '../../../../../../core/utilities/routes.dart';
 import '../../../../data/models/profile/faq_item_model.dart';
 import '../../../../data/models/profile/privacy_policy_item_model.dart';
+import '../../../../data/models/profile/profile_item_model.dart';
 
 class ConstList {
   static const List<FaqItemModel> faqItemModelList = [
@@ -65,6 +67,40 @@ class ConstList {
       title: 'Email',
       subTitle: 'ahmedali123@gmail.com',
       iconData: Icons.email_outlined,
+    ),
+  ];
+
+  static final List<ProfileItemModel> profileItemModelList = [
+    ProfileItemModel(
+      prefixIcon: Icons.edit,
+      title: 'Edit Profile',
+      routeName: Routes.editProfileViewId,
+    ),
+    ProfileItemModel(
+      prefixIcon: Icons.settings,
+      title: 'Settings',
+      routeName: Routes.settingsViewId,
+    ),
+    ProfileItemModel(
+      prefixIcon: Icons.info_outline_rounded,
+      title: 'About App',
+      routeName: Routes.aboutAppViewId,
+    ),
+    ProfileItemModel(
+      prefixIcon: Icons.privacy_tip_outlined,
+      title: 'Privacy Policy',
+      routeName: Routes.privacyPolicyViewId,
+    ),
+    ProfileItemModel(
+      prefixIcon: Icons.help_outline_outlined,
+      title: 'FAQ',
+      routeName: Routes.faqViewId,
+    ),
+    ProfileItemModel(
+      prefixIcon: Icons.logout,
+      iconColor: Colors.red,
+      title: 'Logout',
+      textColor: Colors.red,
     ),
   ];
 }
