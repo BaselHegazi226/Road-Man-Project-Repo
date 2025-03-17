@@ -6,7 +6,7 @@ import '../../../../data/models/profile/faq_item_model.dart';
 import '../../../../data/models/profile/privacy_policy_item_model.dart';
 import '../../../../data/models/profile/profile_item_model.dart';
 
-class ConstList {
+class ProfileConstList {
   static const List<FaqItemModel> faqItemModelList = [
     FaqItemModel(
       title: 'How can I modify my learning path?',

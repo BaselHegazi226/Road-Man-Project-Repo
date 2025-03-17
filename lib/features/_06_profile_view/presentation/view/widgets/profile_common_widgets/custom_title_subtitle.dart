@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/custom_profile_title.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
+import 'custom_profile_title.dart';
 
 class CustomTitleSubtitle extends StatelessWidget {
   const CustomTitleSubtitle({

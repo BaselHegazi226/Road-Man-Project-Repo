@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/common_widgets/profile_user_info.dart';
 
+import '../../../../../_06_profile_view/presentation/view/widgets/profile_common_widgets/profile_user_info.dart';
 import 'custom_log_out_icon_title.dart';
 import 'log_out_items_section.dart';
 

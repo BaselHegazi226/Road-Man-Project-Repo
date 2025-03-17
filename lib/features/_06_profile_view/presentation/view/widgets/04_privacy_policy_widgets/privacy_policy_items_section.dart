@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/04_privacy_policy_widgets/privacy_policy_item.dart';
-
-import '../common_widgets/const_list.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/profile_common_widgets/profile_const_list.dart';
 
 class PrivacyPolicyItemsSection extends StatelessWidget {
   const PrivacyPolicyItemsSection({super.key});
@@ -11,7 +10,7 @@ class PrivacyPolicyItemsSection extends StatelessWidget {
     return Column(
       spacing: 24,
       children:
-          ConstList.privacyPolicyItemModelList
+          ProfileConstList.privacyPolicyItemModelList
               .map((item) => PrivacyPolicyItem(privacyPolicyItemModel: item))
               .toList(),
     );
