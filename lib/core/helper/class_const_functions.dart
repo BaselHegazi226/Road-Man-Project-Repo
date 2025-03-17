@@ -76,6 +76,15 @@ class ConstFunctions {
     );
   }
 
+  static TextStyle editProfileTextStyle({double letterSpacing = 1}) {
+    return TextStyle(
+      color: kTextPrimaryColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      letterSpacing: letterSpacing,
+    );
+  }
+
   static AppBar customAppBar({
     required String text,
     required Function()? onPressed,
@@ -139,6 +148,14 @@ class ConstFunctions {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       borderSide: BorderSide(color: Colors.transparent, width: 1),
+    );
+  }
+
+  static UnderlineInputBorder underLineInputBorder({
+    Color underlineColor = Colors.transparent,
+  }) {
+    return UnderlineInputBorder(
+      borderSide: BorderSide(color: underlineColor, width: 1.5),
     );
   }
 }
