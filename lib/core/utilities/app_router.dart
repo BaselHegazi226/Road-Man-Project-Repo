@@ -32,6 +32,10 @@ abstract class AppRouter {
         builder: (context, state) => const HomeView(),
       ),
       GoRoute(
+        path: Routes.profileViewId,
+        builder: (context, state) => const FAQView(),
+      ),
+      GoRoute(
         path: Routes.editProfileViewId,
         builder: (context, state) => const EditProfileView(),
       ),
