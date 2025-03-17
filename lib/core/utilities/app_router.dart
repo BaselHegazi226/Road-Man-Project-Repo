@@ -9,7 +9,6 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/set
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
-import '../../features/_06_profile_view/presentation/view/logout_view.dart';
 import 'routes.dart';
 
 abstract class AppRouter {
@@ -51,10 +50,6 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.faqViewId,
         builder: (context, state) => const FAQView(),
-      ),
-      GoRoute(
-        path: Routes.logoutViewId,
-        builder: (context, state) => const LogoutView(),
       ),
     ],
   );
