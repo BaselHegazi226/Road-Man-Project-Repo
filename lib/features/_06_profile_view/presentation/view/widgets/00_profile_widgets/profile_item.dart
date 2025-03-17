@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
-import '../../../../data/models/profile/profile_item_model.dart';
+import '../../../../data/models/profile/icon_text_item_model.dart';
 
 class ProfileItem extends StatelessWidget {
   const ProfileItem({super.key, required this.profileItemModel});
-  final ProfileItemModel profileItemModel;
+  final IconTextItemModel profileItemModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -16,7 +16,7 @@ class ProfileItem extends StatelessWidget {
         leading: Icon(
           profileItemModel.prefixIcon,
           size: 24,
-          color: kProfileIconColor,
+          color: profileItemModel.iconColor,
         ),
         title: Padding(
           padding: EdgeInsets.only(left: 8),
@@ -25,14 +25,14 @@ class ProfileItem extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16,
-              color: kTextPrimaryColor,
+              color: profileItemModel.textColor,
             ),
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
           size: 20,
-          color: kProfileIconColor,
+          color: profileItemModel.iconColor,
         ),
       ),
     );
