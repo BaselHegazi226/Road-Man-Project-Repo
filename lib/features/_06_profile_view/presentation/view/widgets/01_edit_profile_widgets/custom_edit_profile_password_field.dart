@@ -8,9 +8,12 @@ class CustomEditProfilePasswordField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final FocusNode? focusNode; // Added FocusNode
   final String? errorMess, labelText;
   final double suffixIconSize;
+  final double textLetterSpacing;
+  final Color underlineColor, fullColor, shadowColor;
   final void Function()? suffixIconOnPressed;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -21,9 +24,14 @@ class CustomEditProfilePasswordField extends StatelessWidget {
     super.key,
     required this.textEditingController,
     this.keyboardType = TextInputType.text,
-    this.obscureText = true,
+    this.obscureText = false,
     this.onChanged,
     this.suffixIcon,
+    this.prefixIcon = Icons.key_outlined,
+    this.underlineColor = kEditProfileFieldBorderColor,
+    this.fullColor = kEditProfileContainer3Color,
+    this.shadowColor = Colors.transparent,
+    this.textLetterSpacing = 1,
     this.focusNode,
     this.validator,
     this.errorMess,
@@ -41,11 +49,11 @@ class CustomEditProfilePasswordField extends StatelessWidget {
       padding: EdgeInsets.only(top: 12, bottom: 16, left: 16, right: 16),
       height: 72,
       decoration: BoxDecoration(
-        color: kEditProfileContainer3Color,
+        color: fullColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.transparent,
+            color: shadowColor,
             offset: Offset(0, 4),
             blurRadius: 4,
             spreadRadius: 0,
@@ -61,43 +69,51 @@ class CustomEditProfilePasswordField extends StatelessWidget {
         validator: validator,
         onFieldSubmitted: onFieldSubmitted,
         controller: textEditingController,
-        obscureText: obscureText,
         focusNode: focusNode,
         cursorColor: kCursorFieldColor,
         cursorHeight: 14,
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
         obscuringCharacter: '●',
-        style: ConstFunctions.editProfileTextFormFieldStyle(),
+        textAlignVertical: TextAlignVertical.center,
+        style: ConstFunctions.editProfileTextStyle(
+          letterSpacing: textLetterSpacing,
+        ),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding: EdgeInsets.only(bottom: 8),
-          enabledBorder: UnderlineInputBorder(
+          border: UnderlineInputBorder(
             borderSide: BorderSide(
               color: kEditProfileFieldBorderColor,
               width: 1.5,
             ),
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: kEditProfileFieldBorderColor,
-              width: 1.5,
-            ),
+          enabledBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kErrorColor, width: 1.5),
+          focusedBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: kEditProfileFieldBorderColor,
-              width: 1,
-            ),
+          disabledBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          prefixIcon: const Row(
+          errorBorder: ConstFunctions.underLineInputBorder(
+            underlineColor:
+                focusNode != null && focusNode!.hasFocus
+                    ? kBorderTextFormFieldColor // Change to focus color on error
+                    : kErrorColor,
+          ),
+          focusedErrorBorder: ConstFunctions.underLineInputBorder(
+            underlineColor:
+                focusNode != null && focusNode!.hasFocus
+                    ? kBorderTextFormFieldColor // Change to focus color on error
+                    : kErrorColor,
+          ),
+          prefixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             spacing: 8,
             children: [
-              Icon(Icons.key_outlined, size: 24, color: kEditProfileIconColor),
+              Icon(prefixIcon, size: 24, color: kEditProfileIconColor),
               Padding(
                 padding: EdgeInsets.only(bottom: 6),
                 child: VerticalDivider(
