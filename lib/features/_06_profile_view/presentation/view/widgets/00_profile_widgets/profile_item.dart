@@ -10,11 +10,11 @@ class ProfileItem extends StatelessWidget {
     required this.onTap,
   });
   final ProfileItemModel profileItemModel;
-  final void Function()? onTap;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: profileItemModel.routeName.isNotEmpty ? onTap : null,
       splashColor: kAppPrimaryBlueColor.withAlpha(15),
       borderRadius: BorderRadius.circular(8),
       child: ListTile(
