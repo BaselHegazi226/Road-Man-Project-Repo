@@ -117,11 +117,7 @@ class CustomEditProfilePasswordField extends StatelessWidget {
             onPressed: suffixIconOnPressed ?? () {},
           ),
           labelText: labelText,
-          labelStyle: TextStyle(
-            color: kEditProfileTitleColor,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(),
         ),
       ),
     );
