@@ -5,9 +5,9 @@ class LogoutItemModel {
   final IconData prefixIcon;
   final String title;
   final Color iconColor, textColor;
-  final Function()? onTap;
+  final String routeName;
   const LogoutItemModel({
-    required this.onTap,
+    required this.routeName,
     required this.prefixIcon,
     required this.title,
     this.iconColor = kProfileIconColor,
