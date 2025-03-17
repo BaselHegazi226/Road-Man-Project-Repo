@@ -79,17 +79,26 @@ class CustomEditProfileNameField extends StatelessWidget {
               width: 1.5,
             ),
           ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: underlineColor, width: 1.5),
+          enabledBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: underlineColor, width: 1.5),
+          focusedBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: kErrorColor, width: 1.5),
+          disabledBorder: ConstFunctions.underLineInputBorder(
+            underlineColor: underlineColor,
           ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: underlineColor, width: 1.5),
+          errorBorder: ConstFunctions.underLineInputBorder(
+            underlineColor:
+                focusNode != null && focusNode!.hasFocus
+                    ? kBorderTextFormFieldColor // Change to focus color on error
+                    : kErrorColor,
+          ),
+          focusedErrorBorder: ConstFunctions.underLineInputBorder(
+            underlineColor:
+                focusNode != null && focusNode!.hasFocus
+                    ? kBorderTextFormFieldColor // Change to focus color on error
+                    : kErrorColor,
           ),
           prefixIcon: Row(
             mainAxisSize: MainAxisSize.min,
