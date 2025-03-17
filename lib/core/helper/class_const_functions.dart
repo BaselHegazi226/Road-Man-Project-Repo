@@ -51,11 +51,28 @@ class ConstFunctions {
     );
   }
 
+  static TextStyle editProfileTextFormFieldStyle() {
+    return TextStyle(
+      color: kTextTextFormFieldColor,
+      fontWeight: FontWeight.w600,
+      fontSize: 18,
+      height: 1.5,
+    );
+  }
+
   static TextStyle settingsTextTextFormFieldStyle() {
     return TextStyle(
       color: kSettingsTextFormFieldColor,
       fontWeight: FontWeight.w600,
       fontSize: 16,
+    );
+  }
+
+  static TextStyle editProfilePasswordFieldStyleLabelStyle() {
+    return TextStyle(
+      color: kEditProfileTitleColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
     );
   }
 
@@ -95,6 +112,15 @@ class ConstFunctions {
       fontWeight: FontWeight.w400,
       fontSize: 14,
       letterSpacing: -.266,
+      height: 1.5,
+    );
+  }
+
+  static TextStyle hintEditProfilePasswordFieldStyle() {
+    return TextStyle(
+      color: kTextTextFormFieldColor,
+      fontWeight: FontWeight.w400,
+      fontSize: 14,
       height: 1.5,
     );
   }
