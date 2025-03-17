@@ -8,21 +8,20 @@ class ProfileItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:
-          ConstList.profileItemModelList
-              .map(
-                (item) => ProfileItem(
-                  profileItemModel: item,
-                  onTap:
-                      item.routeName == ''
-                          ? null
-                          : () {
-                            GoRouter.of(context).push(item.routeName);
-                          },
-                ),
-              )
-              .toList(),
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: ConstList.profileItemModelList.length,
+      itemBuilder: (context, index) {
+        final item = ConstList.profileItemModelList[index];
+        return ProfileItem(
+          profileItemModel: item,
+          onTap:
+              item.routeName.isNotEmpty
+                  ? () => GoRouter.of(context).push(item.routeName)
+                  : null,
+        );
+      },
     );
   }
 }
