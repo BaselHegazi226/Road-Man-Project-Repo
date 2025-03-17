@@ -4,12 +4,17 @@ import 'package:road_man_project/core/helper/const_variables.dart';
 import '../../../../data/models/profile/profile_item_model.dart';
 
 class ProfileItem extends StatelessWidget {
-  const ProfileItem({super.key, required this.profileItemModel});
+  const ProfileItem({
+    super.key,
+    required this.profileItemModel,
+    required this.onTap,
+  });
   final ProfileItemModel profileItemModel;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: profileItemModel.onTap,
+      onTap: onTap,
       splashColor: kAppPrimaryBlueColor.withAlpha(15),
       borderRadius: BorderRadius.circular(8),
       child: ListTile(
