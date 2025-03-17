@@ -5,7 +5,6 @@ import '../../../../../../core/helper/const_variables.dart';
 
 class CustomEditProfileNameField extends StatelessWidget {
   final TextEditingController textEditingController;
-  final bool obscureText;
   final TextInputType keyboardType;
   final IconData? prefixIcon;
   final FocusNode? focusNode; // Added FocusNode
@@ -21,7 +20,6 @@ class CustomEditProfileNameField extends StatelessWidget {
     super.key,
     required this.textEditingController,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false,
     this.onChanged,
     this.prefixIcon = Icons.key_outlined,
     this.underlineColor = kEditProfileFieldBorderColor,
@@ -63,7 +61,6 @@ class CustomEditProfileNameField extends StatelessWidget {
         validator: validator,
         onFieldSubmitted: onFieldSubmitted,
         controller: textEditingController,
-        obscureText: obscureText,
         focusNode: focusNode,
         cursorColor: kCursorFieldColor,
         cursorHeight: 14,
