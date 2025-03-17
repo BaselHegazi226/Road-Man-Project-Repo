@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
-class IconTextItemModel {
+class ProfileItemModel {
   final IconData prefixIcon;
   final String title;
   final Color iconColor, textColor;
   final Function()? onTap;
-  const IconTextItemModel({
+  const ProfileItemModel({
     required this.onTap,
     required this.prefixIcon,
     required this.title,
