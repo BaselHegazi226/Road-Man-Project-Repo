@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
-import '../../../../data/models/profile/icon_text_item_model.dart';
+import '../../../../data/models/profile/profile_item_model.dart';
 
 class ProfileItem extends StatelessWidget {
   const ProfileItem({super.key, required this.profileItemModel});
-  final IconTextItemModel profileItemModel;
+  final ProfileItemModel profileItemModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
