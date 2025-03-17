@@ -39,3 +39,12 @@ const Color kSettingsBackgroundFormFieldColor = Color(0xffE6E8EE);
 const Color kSettingsBorderFormFieldColor = Color(0xff131314);
 
 const Color kLogoutLineColor = Color(0xff131314);
+
+const Color kEditProfileIconColor = Color(0xff131314);
+const Color kEditProfileDividerColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kEditProfileContainer1Color = Color(0xffD5DCF3);
+const Color kEditProfileContainer2Color = Color(0xffE6E8EE);
+const Color kEditProfileTitleColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kEditProfileContainer3Color = Color(0xffE6E8EE);
+const Color kEditProfileFieldBorderColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kEditProfilePasswordIconColor = Color.fromRGBO(19, 19, 20, 0.50);
