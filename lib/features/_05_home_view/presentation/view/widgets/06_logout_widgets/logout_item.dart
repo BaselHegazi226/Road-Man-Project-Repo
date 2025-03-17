@@ -4,12 +4,17 @@ import '../../../../../../core/helper/const_variables.dart';
 import '../../../../data/model/logout_item_model.dart';
 
 class LogoutItem extends StatelessWidget {
-  const LogoutItem({super.key, required this.logoutItemModel});
+  const LogoutItem({
+    super.key,
+    required this.logoutItemModel,
+    required this.onTap,
+  });
   final LogoutItemModel logoutItemModel;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: logoutItemModel.onTap,
+      onTap: logoutItemModel.routeName.isNotEmpty ? onTap : null,
       splashColor: kAppPrimaryBlueColor.withAlpha(15),
       borderRadius: BorderRadius.circular(8),
       child: ListTile(
