@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_06_profile_view/data/models/profile/edit_profile_container_item_model.dart';
+
 import '../../../../data/models/profile/faq_item_model.dart';
 import '../../../../data/models/profile/privacy_policy_item_model.dart';
 
@@ -49,6 +52,19 @@ class ConstList {
       title: '️Security and Protection?',
       subTitle:
           'We use encryption technologies to protect your data from any breach.',
+    ),
+  ];
+  static const List<EditProfileContainerItemModel>
+  editProfileContainerItemModelList = [
+    EditProfileContainerItemModel(
+      title: 'Full Name',
+      subTitle: 'Ahmed Ali',
+      iconData: Icons.person_outline_outlined,
+    ),
+    EditProfileContainerItemModel(
+      title: 'Email',
+      subTitle: 'ahmedali123@gmail.com',
+      iconData: Icons.email_outlined,
     ),
   ];
 }
