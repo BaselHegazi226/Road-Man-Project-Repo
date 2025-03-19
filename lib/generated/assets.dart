@@ -10,6 +10,7 @@ class Assets {
   static const String authSignUpImage = 'assets/images/auth/sign_up_image.svg';
   static const String authVerificationImage =
       'assets/images/auth/verification_image.svg';
-  static const String profileUserImage =
+  static const String jobGoogleIcon = 'assets/images/job/google_icon.svg';
+  static const String profileProfileUserImage =
       'assets/images/profile/profile_user_image.png';
 }
