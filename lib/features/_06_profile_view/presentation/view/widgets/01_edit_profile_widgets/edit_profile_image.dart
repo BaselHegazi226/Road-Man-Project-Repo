@@ -11,7 +11,7 @@ class EditProfileImage extends StatelessWidget {
       alignment: Alignment.bottomRight,
       children: [
         Image.asset(
-          Assets.profileUserImage,
+          Assets.profileProfileUserImage,
           fit: BoxFit.cover,
           height: 88,
           width: 88,
