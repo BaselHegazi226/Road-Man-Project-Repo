@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_05_home_view/presentation/view/widgets/home_view_widget/custom_bottom_navigation_bar.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -32,7 +33,7 @@ class _HomeViewBodyState extends State<HomeViewBody>
         children: const [
           Center(child: Text('Home', style: TextStyle(fontSize: 24))),
           Center(child: Text('Learn', style: TextStyle(fontSize: 24))),
-          Center(child: Text('Job', style: TextStyle(fontSize: 24))),
+          JobView(),
           ProfileView(),
         ],
       ),
