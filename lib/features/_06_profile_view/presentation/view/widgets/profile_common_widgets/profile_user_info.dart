@@ -13,7 +13,7 @@ class ProfileUserInfo extends StatelessWidget {
       spacing: 12,
       children: [
         Image.asset(
-          Assets.profileUserImage,
+          Assets.profileProfileUserImage,
           fit: BoxFit.cover,
           height: 64,
           width: 64,
