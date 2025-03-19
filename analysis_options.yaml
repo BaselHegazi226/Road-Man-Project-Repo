@@ -32,8 +32,3 @@ analyzer:
     prefer_const_literals_to_create_immutables: warning
     prefer_const_declarations: warning
 
-  linter:
-    rules:
-      - prefer_const_constructors
-      - prefer_const_literals_to_create_immutables
-      - prefer_const_declarations
