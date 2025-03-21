@@ -13,7 +13,7 @@ class RecentJobCardTitleSection extends StatelessWidget {
         Text(
           'Content Marketing',
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontWeight: FontWeight.w600,
             fontSize: 20,
           ),

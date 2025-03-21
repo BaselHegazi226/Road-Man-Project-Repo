@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:road_man_project/core/utilities/text_styles.dart';
 
 import '../helper/class_const_functions.dart';
 import '../helper/const_variables.dart';
@@ -36,30 +35,20 @@ void customAwesomeDialog({
     desc: description,
     showCloseIcon: true,
     borderSide: BorderSide(color: dialogBorderColor, width: 2),
-    titleTextStyle: Styles.textStyleFun(color: titleColor, size: titleSize),
-    descTextStyle: Styles.textStyleFun(
-      color: descriptionColor,
-      size: descriptionSize,
-    ),
+
     btnOk: CustomTextButton(
       onPressed: onSuccessPressed,
       backgroundColor: dialogStateColor,
       shadowColor: Colors.transparent,
-      child: Text(
-        'Ok',
-        style: Styles.textStyleFun(color: Colors.white, size: 18),
-      ),
+      child: Text('Ok'),
     ),
     btnCancel:
         needCancel
             ? CustomTextButton(
               onPressed: onCancelPressed,
-              backgroundColor: Colors.black.withOpacity(.8),
+              backgroundColor: Colors.black.withAlpha(126),
               shadowColor: Colors.transparent,
-              child: Text(
-                'Cancel',
-                style: Styles.textStyleFun(color: Colors.white, size: 18),
-              ),
+              child: Text('Cancel'),
             )
             : null,
     //btnOkColor: dialogStateColor,
@@ -86,13 +75,13 @@ void failureAwesomeDialog(BuildContext context) {
     animType: AnimType.scale,
     title: 'Success',
     desc: 'Process Failure',
-    descTextStyle: Styles.textStyleFun(color: Colors.grey, size: 22),
+
     showCloseIcon: true,
     btnCancelOnPress: () {
-      print('cancel');
+      //print('cancel');
     },
     btnOkOnPress: () {
-      print('press ok failure');
+      //print('press ok failure');
     },
   ).show();
 }

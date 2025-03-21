@@ -20,7 +20,7 @@ class KeyFeaturesItem extends StatelessWidget {
           maxLines: 1,
           keyFeaturesItemModel.title,
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontWeight: FontWeight.w400,
             fontSize: 14,
           ),

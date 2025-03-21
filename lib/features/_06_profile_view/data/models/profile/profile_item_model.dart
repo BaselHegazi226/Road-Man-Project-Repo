@@ -11,6 +11,6 @@ class ProfileItemModel {
     required this.title,
     this.routeName = '',
     this.iconColor = kProfileIconColor,
-    this.textColor = kTextPrimaryColor,
+    this.textColor = kTextBlackPrimaryColor,
   });
 }

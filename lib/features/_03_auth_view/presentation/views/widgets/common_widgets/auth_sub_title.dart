@@ -11,7 +11,7 @@ class AuthSubTitle extends StatelessWidget {
       textAlign: TextAlign.center,
       subTitle,
       style: TextStyle(
-        color: kTextPrimaryColor,
+        color: kTextBlackPrimaryColor,
         fontSize: 16,
         fontWeight: FontWeight.w600,
         fontStyle: FontStyle.normal,

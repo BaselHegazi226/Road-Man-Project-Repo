@@ -14,7 +14,7 @@ class PrivacyPolicyView extends StatelessWidget {
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: ConstFunctions.customAppBar(
         backgroundColor: kAppPrimaryWhiteColor,
-        generalColor: kTextPrimaryColor,
+        generalColor: kTextBlackPrimaryColor,
         text: 'Privacy Policy',
         onPressed: () {
           GoRouter.of(context).pop();

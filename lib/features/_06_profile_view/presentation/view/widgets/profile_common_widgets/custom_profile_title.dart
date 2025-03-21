@@ -10,7 +10,7 @@ class CustomProfileTitle extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-        color: kTextPrimaryColor,
+        color: kTextBlackPrimaryColor,
         fontWeight: FontWeight.bold,
         fontSize: 16,
       ),

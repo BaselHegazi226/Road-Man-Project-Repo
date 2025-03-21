@@ -26,7 +26,7 @@ class OtherRegisterSection extends StatelessWidget {
               fontSize: 16,
               letterSpacing: -.304,
               height: 1.5,
-              color: kTextPrimaryColor,
+              color: kTextBlackPrimaryColor,
             ),
           ),
           Text(

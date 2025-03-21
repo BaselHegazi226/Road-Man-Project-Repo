@@ -15,7 +15,7 @@ class EditProfileView extends StatelessWidget {
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: ConstFunctions.customAppBar(
         backgroundColor: kAppPrimaryWhiteColor,
-        generalColor: kTextPrimaryColor,
+        generalColor: kTextBlackPrimaryColor,
         text: 'Edit Profile',
         onPressed: () {
           GoRouter.of(context).pop();

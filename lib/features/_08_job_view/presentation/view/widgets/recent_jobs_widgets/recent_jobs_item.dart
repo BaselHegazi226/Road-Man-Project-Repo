@@ -11,7 +11,7 @@ class RecentJobsItem extends StatefulWidget {
 
 class _RecentJobsItemState extends State<RecentJobsItem> {
   Color backgroundColor = Color(0xffE6E8EE);
-  Color textColor = kTextPrimaryColor;
+  Color textColor = kTextBlackPrimaryColor;
   bool isActiveButton = false;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,10 @@ class _RecentJobsItemState extends State<RecentJobsItem> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
-            color: !isActiveButton ? kTextPrimaryColor : kAppPrimaryWhiteColor,
+            color:
+                !isActiveButton
+                    ? kTextBlackPrimaryColor
+                    : kAppPrimaryWhiteColor,
           ),
         ),
       ),

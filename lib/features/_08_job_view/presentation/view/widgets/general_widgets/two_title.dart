@@ -19,7 +19,7 @@ class TwoTitle extends StatelessWidget {
         Text(
           title1,
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontWeight: FontWeight.w500,
             fontSize: 15,
           ),

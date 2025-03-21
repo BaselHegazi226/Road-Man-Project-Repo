@@ -30,7 +30,7 @@ class LogoutItem extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16,
-              color: kTextPrimaryColor,
+              color: kTextBlackPrimaryColor,
             ),
           ),
         ),

@@ -28,7 +28,7 @@ class RecentJobsCardPriceSection extends StatelessWidget {
           child: Text(
             'Full-Time',
             style: TextStyle(
-              color: kTextPrimaryColor,
+              color: kTextBlackPrimaryColor,
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),

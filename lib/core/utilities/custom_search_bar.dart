@@ -29,7 +29,7 @@ class CustomSearchBar extends StatelessWidget {
       ),
       leading: Icon(
         Icons.search_outlined,
-        color: kTextPrimaryColor.withAlpha(126),
+        color: kTextBlackPrimaryColor.withAlpha(126),
         size: 24,
       ),
       elevation: WidgetStatePropertyAll(0),

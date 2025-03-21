@@ -8,7 +8,10 @@ const Color kAppPrimaryBlueColor = Color(0xff2352A1);
 const Color kAppPrimaryWhiteColor = Color(0xffF3F6F5);
 const Color kSecondlyDarkWhiteColor = Color(0xffE6E8EE);
 const Color kSecondlyLightWhiteColor = Color(0xffF5F5F5);
-const Color kTextPrimaryColor = Color(0xff131314);
+const Color kTextBlackPrimaryColor = Color(0xff131314);
+const Color kTextGreyHalfOpacityPrimaryColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kTextGreyPrimaryColor = Color(0xff8A8C90);
+
 const Color kCheckPasswordItemColor = Color(0xff131314);
 const Color kOtpPinThemeBorderColor = Color(0xff131314);
 

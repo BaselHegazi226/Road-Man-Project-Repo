@@ -75,7 +75,7 @@ class _ForgetPasswordInputDataSectionState
             hintText: 'Email',
             textEditingController: emailEditingController,
             keyboardType: TextInputType.text,
-            textColor: kTextPrimaryColor,
+            textColor: kTextBlackPrimaryColor,
             prefixIcon: Icons.email_outlined,
             validator: (email) {
               String? trimmedValue = email?.trim();

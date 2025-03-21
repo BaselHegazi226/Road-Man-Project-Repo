@@ -15,7 +15,7 @@ class KeyFeaturesSection extends StatelessWidget {
         Text(
           'Key Features',
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),

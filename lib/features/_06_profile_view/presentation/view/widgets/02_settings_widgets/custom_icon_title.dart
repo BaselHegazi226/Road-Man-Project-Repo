@@ -6,7 +6,7 @@ class CustomIconTitle extends StatelessWidget {
     super.key,
     required this.iconData,
     required this.title,
-    this.textColor = kTextPrimaryColor,
+    this.textColor = kTextBlackPrimaryColor,
     this.iconColor = kIconSettingsColor,
   });
   final IconData iconData;

@@ -7,7 +7,11 @@ AppBar jobViewAppbar() {
     backgroundColor: Color(0xffF4F5F8),
     leading: IconButton(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      icon: const Icon(Icons.menu_outlined, color: kTextPrimaryColor, size: 24),
+      icon: const Icon(
+        Icons.menu_outlined,
+        color: kTextBlackPrimaryColor,
+        size: 24,
+      ),
       onPressed: () {},
     ),
     actions: [
@@ -15,7 +19,7 @@ AppBar jobViewAppbar() {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         icon: const Icon(
           Icons.notifications_outlined,
-          color: kTextPrimaryColor,
+          color: kTextBlackPrimaryColor,
           size: 24,
         ),
         onPressed: () {},

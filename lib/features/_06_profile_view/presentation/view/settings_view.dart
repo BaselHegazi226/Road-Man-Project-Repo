@@ -14,7 +14,7 @@ class SettingsView extends StatelessWidget {
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: ConstFunctions.customAppBar(
         backgroundColor: kAppPrimaryWhiteColor,
-        generalColor: kTextPrimaryColor,
+        generalColor: kTextBlackPrimaryColor,
         text: 'Settings',
         onPressed: () {
           GoRouter.of(context).pop();

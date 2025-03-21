@@ -16,7 +16,7 @@ class RememberMeSection extends StatelessWidget {
           maxLines: 1,
           'Remember me',
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontSize: 14,
             fontWeight: FontWeight.w400,
             letterSpacing: -.266,

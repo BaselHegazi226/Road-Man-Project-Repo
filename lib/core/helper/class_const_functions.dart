@@ -78,7 +78,7 @@ class ConstFunctions {
 
   static TextStyle editProfileTextStyle({double letterSpacing = 1}) {
     return TextStyle(
-      color: kTextPrimaryColor,
+      color: kTextBlackPrimaryColor,
       fontSize: 16,
       fontWeight: FontWeight.w600,
       letterSpacing: letterSpacing,

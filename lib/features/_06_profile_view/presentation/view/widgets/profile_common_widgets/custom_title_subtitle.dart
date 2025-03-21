@@ -21,7 +21,7 @@ class CustomTitleSubtitle extends StatelessWidget {
         Text(
           subTitle,
           style: TextStyle(
-            color: kTextPrimaryColor,
+            color: kTextBlackPrimaryColor,
             fontWeight: FontWeight.w400,
             fontSize: 14,
           ),

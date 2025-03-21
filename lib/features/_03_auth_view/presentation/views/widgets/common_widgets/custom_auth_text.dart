@@ -17,7 +17,7 @@ class CustomAuthText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: 3,
       style: TextStyle(
-        color: kTextPrimaryColor,
+        color: kTextBlackPrimaryColor,
         fontSize: 12,
         fontWeight: FontWeight.w400,
         letterSpacing: -.228,

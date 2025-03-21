@@ -39,7 +39,10 @@ class _WorkingTimeItemState extends State<WorkingTimeItem> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: isEnableButton ? kAppPrimaryWhiteColor : kTextPrimaryColor,
+              color:
+                  isEnableButton
+                      ? kAppPrimaryWhiteColor
+                      : kTextBlackPrimaryColor,
               fontWeight: FontWeight.w400,
               fontSize: 14,
             ),

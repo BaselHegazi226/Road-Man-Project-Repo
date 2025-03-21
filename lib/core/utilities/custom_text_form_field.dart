@@ -27,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.textEditingController,
     this.keyboardType = TextInputType.text,
-    this.textColor = kTextPrimaryColor,
+    this.textColor = kTextBlackPrimaryColor,
     this.backgroundColor = kFilledTextFormFieldColor,
     this.obscureText = false,
     this.onChanged,

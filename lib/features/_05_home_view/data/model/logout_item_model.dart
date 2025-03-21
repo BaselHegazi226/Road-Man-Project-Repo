@@ -11,6 +11,6 @@ class LogoutItemModel {
     required this.prefixIcon,
     required this.title,
     this.iconColor = kProfileIconColor,
-    this.textColor = kTextPrimaryColor,
+    this.textColor = kTextBlackPrimaryColor,
   });
 }

@@ -11,7 +11,7 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: ConstFunctions.customAppBar(
-        generalColor: kTextPrimaryColor,
+        generalColor: kTextBlackPrimaryColor,
         text: 'Profile',
         onPressed: () {},
       ),

@@ -28,7 +28,7 @@ class ProfileUserInfo extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: kTextPrimaryColor,
+                  color: kTextBlackPrimaryColor,
                 ),
               ),
               Text(
@@ -36,7 +36,7 @@ class ProfileUserInfo extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: kTextPrimaryColor,
+                  color: kTextBlackPrimaryColor,
                 ),
               ),
             ],

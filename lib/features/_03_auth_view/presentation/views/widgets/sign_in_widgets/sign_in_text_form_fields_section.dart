@@ -122,7 +122,7 @@ class _SignInTextFormFieldsSectionState
             hintText: 'Email',
             textEditingController: TextEditingController(),
             keyboardType: TextInputType.text,
-            textColor: kTextPrimaryColor,
+            textColor: kTextBlackPrimaryColor,
             prefixIcon: Icons.email_outlined,
             validator: (email) {
               String? trimmedValue = email?.trim();
@@ -144,7 +144,7 @@ class _SignInTextFormFieldsSectionState
             hintText: 'Password',
             textEditingController: TextEditingController(),
             keyboardType: TextInputType.text,
-            textColor: kTextPrimaryColor,
+            textColor: kTextBlackPrimaryColor,
             prefixIcon: Icons.lock_outline,
             suffixIcon:
                 obscurePassword ? CupertinoIcons.eye_slash : CupertinoIcons.eye,

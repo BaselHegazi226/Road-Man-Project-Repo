@@ -14,7 +14,7 @@ class AboutAppView extends StatelessWidget {
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: ConstFunctions.customAppBar(
         backgroundColor: kAppPrimaryWhiteColor,
-        generalColor: kTextPrimaryColor,
+        generalColor: kTextBlackPrimaryColor,
         text: 'About App',
         onPressed: () {
           GoRouter.of(context).pop();
