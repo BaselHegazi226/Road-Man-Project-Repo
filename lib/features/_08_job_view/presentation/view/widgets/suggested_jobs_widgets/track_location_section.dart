@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/helper/const_variables.dart';
-import '../../../../../generated/assets.dart';
+import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../../generated/assets.dart';
 
 class TrackLocationSection extends StatelessWidget {
   const TrackLocationSection({super.key});

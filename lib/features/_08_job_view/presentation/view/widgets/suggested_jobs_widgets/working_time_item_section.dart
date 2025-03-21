@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/working_time_item.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/working_time_item_arrow.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item_arrow.dart';
 
 class WorkingTimeSection extends StatelessWidget {
   const WorkingTimeSection({super.key});

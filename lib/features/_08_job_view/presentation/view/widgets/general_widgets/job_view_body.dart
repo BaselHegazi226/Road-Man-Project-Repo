@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/job_view_search_bar_section.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_section.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_item_section.dart';
+
+import '../recent_jobs_widgets/recent_jobs_section.dart';
+import '../search_bar_widgets/job_view_search_bar_section.dart';
+import '../suggested_jobs_widgets/suggested_jobs_item_section.dart';
 
 class JobViewBody extends StatelessWidget {
   const JobViewBody({super.key});

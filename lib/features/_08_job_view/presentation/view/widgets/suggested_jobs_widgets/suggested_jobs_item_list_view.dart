@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_item.dart';
 
-import 'suggested_jobs_item.dart';
 
 class SuggestedJobsItemListView extends StatelessWidget {
   const SuggestedJobsItemListView({super.key});

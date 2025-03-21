@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/helper/const_variables.dart';
 
 class RecentJobCardTitleSection extends StatelessWidget {
   const RecentJobCardTitleSection({super.key});

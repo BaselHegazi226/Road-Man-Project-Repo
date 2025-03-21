@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_job_card.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_job_card.dart';
 
 class RecentJobsCardListView extends StatelessWidget {
   const RecentJobsCardListView({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/price_monthly_subscription_section.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/track_location_section.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/working_time_item_section.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/price_monthly_subscription_section.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/track_location_section.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item_section.dart';
 
 class SuggestedJobsItem extends StatelessWidget {
   const SuggestedJobsItem({super.key});

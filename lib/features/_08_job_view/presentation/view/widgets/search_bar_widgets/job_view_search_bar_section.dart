@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/custom_search_bar.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/search_bar_section_icon.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/search_bar_widgets/search_bar_section_icon.dart';
 
 class JobViewSearchBarSection extends StatelessWidget {
   const JobViewSearchBarSection({super.key});

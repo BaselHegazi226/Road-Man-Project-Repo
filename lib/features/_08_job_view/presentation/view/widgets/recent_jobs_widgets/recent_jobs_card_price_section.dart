@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/helper/const_variables.dart';
 
 class RecentJobsCardPriceSection extends StatelessWidget {
   const RecentJobsCardPriceSection({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/helper/const_variables.dart';
 
 class WorkingTimeItemArrow extends StatelessWidget {
   const WorkingTimeItemArrow({super.key});
