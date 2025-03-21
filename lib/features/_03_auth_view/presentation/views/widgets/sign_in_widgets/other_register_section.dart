@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class OtherRegisterSection extends StatelessWidget {
   const OtherRegisterSection({
@@ -21,22 +20,15 @@ class OtherRegisterSection extends StatelessWidget {
         children: [
           Text(
             blackText,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
+            style: AfacadTextStyles.textStyle16W500H150Black.copyWith(
               letterSpacing: -.304,
-              height: 1.5,
-              color: kTextBlackPrimaryColor,
             ),
           ),
           Text(
             blueText,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
+            style: AfacadTextStyles.textStyle16W700Blue.copyWith(
               letterSpacing: -.304,
               height: 1.5,
-              color: kAppPrimaryBlueColor,
             ),
           ),
         ],

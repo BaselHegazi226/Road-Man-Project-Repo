@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../generated/assets.dart';
 
 class TrackLocationSection extends StatelessWidget {
@@ -19,23 +19,15 @@ class TrackLocationSection extends StatelessWidget {
           spacing: 8,
           children: [
             SvgPicture.asset(Assets.jobGoogleIcon, width: 32, height: 32),
-            const Column(
+            Column(
               children: [
                 Text(
                   'Content Marketing',
-                  style: TextStyle(
-                    color: kTextBlackPrimaryColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
+                  style: AfacadTextStyles.textStyle16W500Black,
                 ),
                 Text(
                   'Google | Cairo | Egypt',
-                  style: TextStyle(
-                    color: Color(0xff8A8C90),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                  ),
+                  style: AfacadTextStyles.textStyle14W400Grey,
                 ),
               ],
             ),

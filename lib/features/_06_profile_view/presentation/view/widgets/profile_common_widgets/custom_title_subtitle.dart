@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
 import 'custom_profile_title.dart';
 
 class CustomTitleSubtitle extends StatelessWidget {
@@ -18,14 +18,7 @@ class CustomTitleSubtitle extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         CustomProfileTitle(title: title),
-        Text(
-          subTitle,
-          style: TextStyle(
-            color: kTextBlackPrimaryColor,
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-          ),
-        ),
+        Text(subTitle, style: AfacadTextStyles.textStyle14W400Black),
       ],
     );
   }

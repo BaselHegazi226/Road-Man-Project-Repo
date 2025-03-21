@@ -21,7 +21,7 @@ class EditProfileView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: CustomFlexibleWidget(child: EditProfileViewBody()),
+      body: const CustomFlexibleWidget(child: EditProfileViewBody()),
     );
   }
 }

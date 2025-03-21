@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/verification_widgets/verification_otp_fields.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
@@ -33,11 +34,7 @@ class _VerificationInputDataSectionState
           onPressed: () {},
           child: Text(
             'Send again ?',
-            style: TextStyle(
-              color: kAppPrimaryBlueColor,
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
+            style: AfacadTextStyles.textStyle20W700Blue,
           ),
         ),
         Padding(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class CustomAuthText extends StatelessWidget {
   const CustomAuthText({
@@ -16,12 +15,8 @@ class CustomAuthText extends StatelessWidget {
       text,
       textAlign: textAlign,
       maxLines: 3,
-      style: TextStyle(
-        color: kTextBlackPrimaryColor,
-        fontSize: 12,
-        fontWeight: FontWeight.w400,
+      style: AfacadTextStyles.textStyle12W400Black.copyWith(
         letterSpacing: -.228,
-        height: 1.5,
       ),
       strutStyle: StrutStyle(leading: .3, forceStrutHeight: true),
     );

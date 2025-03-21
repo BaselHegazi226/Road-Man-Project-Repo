@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../generated/assets.dart';
 
 class ProfileUserInfo extends StatelessWidget {
@@ -25,19 +25,11 @@ class ProfileUserInfo extends StatelessWidget {
             children: [
               Text(
                 'Ahmed Ali',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: kTextBlackPrimaryColor,
-                ),
+                style: AfacadTextStyles.textStyle16W500Black.copyWith(),
               ),
               Text(
                 'ahmed123@gmail.com',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: kTextBlackPrimaryColor,
-                ),
+                style: AfacadTextStyles.textStyle12W400Black,
               ),
             ],
           ),

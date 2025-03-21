@@ -23,7 +23,7 @@ class SuggestedJobsItem extends StatelessWidget {
           PriceMonthlySubscriptionSection(),
           Padding(
             padding: EdgeInsets.only(top: 16),
-            child: WorkingTimeSection(),
+            child: WorkingTimeSection(onPressed: () {}),
           ),
         ],
       ),

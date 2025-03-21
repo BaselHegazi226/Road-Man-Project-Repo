@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
@@ -38,13 +39,11 @@ class _WorkingTimeItemState extends State<WorkingTimeItem> {
             widget.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: AfacadTextStyles.textStyle14W400Black.copyWith(
               color:
                   isEnableButton
                       ? kAppPrimaryWhiteColor
                       : kTextBlackPrimaryColor,
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
             ),
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
@@ -29,9 +30,7 @@ class _RecentJobsItemState extends State<RecentJobsItem> {
         },
         child: Text(
           widget.text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
+          style: AfacadTextStyles.textStyle16W600Black.copyWith(
             color:
                 !isActiveButton
                     ? kTextBlackPrimaryColor

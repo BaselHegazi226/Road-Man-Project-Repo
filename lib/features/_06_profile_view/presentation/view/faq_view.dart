@@ -20,7 +20,7 @@ class FAQView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: FaqViewBody(),
+      body: const FaqViewBody(),
     );
   }
 }

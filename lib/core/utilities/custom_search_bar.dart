@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../helper/const_variables.dart';
 
@@ -19,12 +20,8 @@ class CustomSearchBar extends StatelessWidget {
       backgroundColor: WidgetStateProperty.all(Color(0xffE6E8EE)),
       hintText: hintText,
       hintStyle: WidgetStatePropertyAll(
-        TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 15,
-          letterSpacing: -.285,
-          height: 1.5,
-          color: Color.fromRGBO(19, 19, 20, 0.50),
+        AfacadTextStyles.textStyle16W500H150Black.copyWith(
+          color: kTextGreyHalfOpacityPrimaryColor,
         ),
       ),
       leading: Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
@@ -29,22 +30,11 @@ class RecentJobCardLocationSection extends StatelessWidget {
             ),
             Text(
               'LinkedIn | Remote',
-              style: TextStyle(
-                color: Color(0xff8A8C90),
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-              ),
+              style: AfacadTextStyles.textStyle14W400Grey,
             ),
           ],
         ),
-        Text(
-          '30days left',
-          style: TextStyle(
-            color: Color(0xff8A8C90),
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        Text('30days left', style: AfacadTextStyles.textStyle12W400Grey),
       ],
     );
   }

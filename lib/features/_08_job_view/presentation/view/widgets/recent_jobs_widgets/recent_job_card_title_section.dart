@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class RecentJobCardTitleSection extends StatelessWidget {
   const RecentJobCardTitleSection({super.key});
@@ -10,14 +9,7 @@ class RecentJobCardTitleSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          'Content Marketing',
-          style: TextStyle(
-            color: kTextBlackPrimaryColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-          ),
-        ),
+        Text('Content Marketing', style: AfacadTextStyles.textStyle20W600Black),
         Icon(CupertinoIcons.bookmark, size: 24, color: Color(0xff131314)),
       ],
     );

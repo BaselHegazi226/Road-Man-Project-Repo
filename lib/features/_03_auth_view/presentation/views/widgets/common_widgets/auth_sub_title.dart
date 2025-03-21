@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/utilities/base_text_styles.dart';
 
 class AuthSubTitle extends StatelessWidget {
   const AuthSubTitle({super.key, required this.subTitle});
@@ -10,12 +10,7 @@ class AuthSubTitle extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       subTitle,
-      style: TextStyle(
-        color: kTextBlackPrimaryColor,
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        fontStyle: FontStyle.normal,
-        height: 1.5,
+      style: AfacadTextStyles.textStyle16W600H150Black.copyWith(
         letterSpacing: -0.304,
       ),
     );

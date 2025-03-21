@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class RecentJobsCardPriceSection extends StatelessWidget {
   const RecentJobsCardPriceSection({super.key});
@@ -12,11 +11,7 @@ class RecentJobsCardPriceSection extends StatelessWidget {
       children: [
         Text(
           '\$42 - \$48k /month',
-          style: TextStyle(
-            color: Color(0xff8A8C90),
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+          style: AfacadTextStyles.textStyle14W400Grey,
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -27,11 +22,7 @@ class RecentJobsCardPriceSection extends StatelessWidget {
           ),
           child: Text(
             'Full-Time',
-            style: TextStyle(
-              color: kTextBlackPrimaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+            style: AfacadTextStyles.textStyle14W400Black,
           ),
         ),
       ],

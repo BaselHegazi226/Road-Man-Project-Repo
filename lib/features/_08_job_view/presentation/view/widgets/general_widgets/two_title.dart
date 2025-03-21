@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class TwoTitle extends StatelessWidget {
   const TwoTitle({
@@ -16,24 +15,10 @@ class TwoTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title1,
-          style: TextStyle(
-            color: kTextBlackPrimaryColor,
-            fontWeight: FontWeight.w500,
-            fontSize: 15,
-          ),
-        ),
+        Text(title1, style: AfacadTextStyles.textStyle16W500H150Black),
         TextButton(
           onPressed: title2onPressed,
-          child: Text(
-            title2,
-            style: TextStyle(
-              color: kAppPrimaryBlueColor,
-              fontWeight: FontWeight.w500,
-              fontSize: 15,
-            ),
-          ),
+          child: Text(title2, style: AfacadTextStyles.textStyle16W600HBlue),
         ),
       ],
     );

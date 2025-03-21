@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class AuthTitle extends StatelessWidget {
   const AuthTitle({super.key, required this.title});
@@ -10,11 +9,7 @@ class AuthTitle extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       title,
-      style: TextStyle(
-        color: kTextBlackPrimaryColor,
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
-      ),
+      style: AfacadTextStyles.textStyle24W700Black,
     );
   }
 }

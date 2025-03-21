@@ -20,7 +20,7 @@ class AboutAppView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: AboutAppViewBody(),
+      body: const AboutAppViewBody(),
     );
   }
 }

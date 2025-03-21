@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
 import 'key_feature_items_section.dart';
 
 class KeyFeaturesSection extends StatelessWidget {
@@ -12,14 +12,7 @@ class KeyFeaturesSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
       children: [
-        Text(
-          'Key Features',
-          style: TextStyle(
-            color: kTextBlackPrimaryColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
+        Text('Key Features', style: AfacadTextStyles.textStyle16W700Black),
         KeyFeatureItemsSection(),
       ],
     );

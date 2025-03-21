@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class CustomIconTitle extends StatelessWidget {
   const CustomIconTitle({
@@ -22,10 +23,8 @@ class CustomIconTitle extends StatelessWidget {
         Icon(iconData, size: 24, color: iconColor),
         Text(
           title,
-          style: TextStyle(
+          style: AfacadTextStyles.textStyle16W600Black.copyWith(
             color: textColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
           ),
         ),
       ],

@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import 'const_variables.dart';
 
@@ -42,45 +43,31 @@ class ConstFunctions {
   }
 
   static TextStyle textTextFormFieldStyle() {
-    return TextStyle(
+    return AfacadTextStyles.textStyle14W400H150Black.copyWith(
       color: kTextTextFormFieldColor,
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
       letterSpacing: .266,
-      height: 1.5,
     );
   }
 
   static TextStyle editProfileTextFormFieldStyle() {
-    return TextStyle(
-      color: kTextTextFormFieldColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 18,
-      height: 1.5,
-    );
+    return AfacadTextStyles.textStyle18W600H150Black;
   }
 
   static TextStyle settingsTextTextFormFieldStyle() {
-    return TextStyle(
+    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
       color: kSettingsTextFormFieldColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 16,
     );
   }
 
   static TextStyle editProfilePasswordFieldStyleLabelStyle() {
-    return TextStyle(
+    return AfacadTextStyles.textStyle20W600Black.copyWith(
       color: kEditProfileTitleColor,
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
     );
   }
 
   static TextStyle editProfileTextStyle({double letterSpacing = 1}) {
-    return TextStyle(
-      color: kTextBlackPrimaryColor,
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
+    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
+      height: 1,
       letterSpacing: letterSpacing,
     );
   }
@@ -116,29 +103,22 @@ class ConstFunctions {
   }
 
   static TextStyle hintTextFormFieldStyle() {
-    return TextStyle(
+    return AfacadTextStyles.textStyle14W400H150Black.copyWith(
       color: kTextTextFormFieldColor,
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
       letterSpacing: -.266,
-      height: 1.5,
     );
   }
 
   static TextStyle hintEditProfilePasswordFieldStyle() {
-    return TextStyle(
-      color: kTextTextFormFieldColor,
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
-      height: 1.5,
+    return AfacadTextStyles.textStyle14W400Black.copyWith(
+      color: kEditProfileHintTextColor,
     );
   }
 
   static TextStyle hintSettingsTextFormFieldStyle() {
-    return TextStyle(
+    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
       color: kSettingsHintTextFormFieldColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 16,
+      height: 1,
     );
   }
 

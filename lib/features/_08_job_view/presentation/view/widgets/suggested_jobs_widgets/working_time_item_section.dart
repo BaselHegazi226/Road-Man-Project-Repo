@@ -3,8 +3,8 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/widgets
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item_arrow.dart';
 
 class WorkingTimeSection extends StatelessWidget {
-  const WorkingTimeSection({super.key});
-
+  const WorkingTimeSection({super.key, required this.onPressed});
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,7 +18,7 @@ class WorkingTimeSection extends StatelessWidget {
             WorkingTimeItem(title: 'Advanced Level'),
           ],
         ),
-        WorkingTimeItemArrow(),
+        WorkingTimeItemArrow(onPressed: onPressed),
       ],
     );
   }
