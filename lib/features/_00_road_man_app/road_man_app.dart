@@ -10,7 +10,6 @@ class RoadManApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'afacad', focusColor: Color(0xff131314)),
       routerConfig: AppRouter.router,
     );
   }
