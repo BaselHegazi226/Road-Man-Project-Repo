@@ -87,6 +87,14 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  static TextStyle get textStyle14W400Grey {
+    return AfacadTextStyles(
+      color: kTextGreyPrimaryColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ).textStyle;
+  }
+
   static TextStyle get textStyle14W400Blue {
     return AfacadTextStyles(
       color: kAppPrimaryBlueColor,
@@ -165,6 +173,14 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  static TextStyle get textStyle16W500Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+    ).textStyle;
+  }
+
   static TextStyle get textStyle16W500H150Black {
     return AfacadTextStyles(
       color: kTextBlackPrimaryColor,
@@ -200,11 +216,36 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  static TextStyle get textStyle16W600Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle16W600HBlue {
+    return AfacadTextStyles(
+      color: kAppPrimaryBlueColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
   static TextStyle get textStyle16W600Grey {
     return AfacadTextStyles(
       color: kTextGreyHalfOpacityPrimaryColor,
       fontSize: 16,
       fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle16W700H150Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      height: 1.5,
     ).textStyle;
   }
 
@@ -230,6 +271,15 @@ class AfacadTextStyles extends BaseTextStyles {
       color: kAppPrimaryBlueColor,
       fontSize: 18,
       fontWeight: FontWeight.w400,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle18W600H150Black {
+    return AfacadTextStyles(
+      color: kAppPrimaryBlueColor,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      height: 1.5,
     ).textStyle;
   }
 
