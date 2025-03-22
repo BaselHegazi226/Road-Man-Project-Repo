@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../_05_home_view/presentation/view/widgets/custom_dashboard_widgets/open_dashboard.dart';
+import 'job_view_dashboard_view_body.dart';
 
-AppBar jobViewAppbar() {
+AppBar jobViewAppbar(BuildContext context) {
   return AppBar(
-    backgroundColor: Color(0xffF4F5F8),
+    backgroundColor: kAppPrimaryWhiteColor,
+    elevation: 0,
     leading: IconButton(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.zero,
       icon: const Icon(
         Icons.menu_outlined,
-        color: kTextBlackPrimaryColor,
-        size: 24,
+        color: kEditProfileIconColor,
+        size: 28,
       ),
-      onPressed: () {},
+      onPressed: () => openDrawer(context, const JobViewDashboardViewBody()),
     ),
     actions: [
       IconButton(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.zero,
         icon: const Icon(
           Icons.notifications_outlined,
           color: kTextBlackPrimaryColor,
-          size: 24,
+          size: 28,
         ),
         onPressed: () {},
       ),
