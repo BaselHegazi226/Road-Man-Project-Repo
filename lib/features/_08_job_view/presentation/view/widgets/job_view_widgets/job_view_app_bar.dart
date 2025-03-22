@@ -15,7 +15,7 @@ AppBar jobViewAppbar(BuildContext context) {
         color: kEditProfileIconColor,
         size: 28,
       ),
-      onPressed: () => openDrawer(context, const JobViewDashboardViewBody()),
+      onPressed: () => openDashboard(context, const JobViewDashboardViewBody()),
     ),
     actions: [
       IconButton(
