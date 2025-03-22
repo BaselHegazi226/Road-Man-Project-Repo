@@ -4,8 +4,13 @@ import '../../../../../../core/helper/const_variables.dart';
 import 'custom_tab_bar_item.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key, required this.tabController});
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.tabController,
+    required this.backgroundColor,
+  });
   final TabController tabController;
+  final Color backgroundColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +32,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: _getIcon(index),
             text: _getText(index),
             isSelected: tabController.index == index,
+            backgroundColor: backgroundColor,
           );
         }),
       ),
