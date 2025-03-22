@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/price_monthly_subscription_section.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/track_location_section.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item_section.dart';
@@ -9,7 +11,9 @@ class SuggestedJobsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        GoRouter.of(context).push(Routes.jobDetailsViewId);
+      },
       child: Container(
         height: 182,
         width: MediaQuery.sizeOf(context).width * .85,
@@ -25,7 +29,11 @@ class SuggestedJobsItem extends StatelessWidget {
             PriceMonthlySubscriptionSection(),
             Padding(
               padding: EdgeInsets.only(top: 16),
-              child: WorkingTimeSection(onPressed: () {}),
+              child: WorkingTimeSection(
+                onPressed: () {
+                  GoRouter.of(context).push(Routes.jobDetailsViewId);
+                },
+              ),
             ),
           ],
         ),
