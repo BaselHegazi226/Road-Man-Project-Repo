@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_item_list_view.dart';
 
-import '../general_widgets/two_title.dart';
+import '../job_view_widgets/two_title.dart';
 
 class SuggestedJobsItemSection extends StatelessWidget {
   const SuggestedJobsItemSection({super.key});
