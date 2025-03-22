@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/helper/const_variables.dart';
 import 'custom_dashboard.dart';
 
-void openDrawer(BuildContext context, Widget body) {
+void openDashboard(BuildContext context, Widget body) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
