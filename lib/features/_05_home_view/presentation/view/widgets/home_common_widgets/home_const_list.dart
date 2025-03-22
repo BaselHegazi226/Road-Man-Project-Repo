@@ -1,37 +1,42 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utilities/routes.dart';
-import '../../../../data/model/logout_item_model.dart';
+import '../../../../data/model/dashboard_item_model.dart';
 
 class HomeConstList {
-  static final List<LogoutItemModel> logOutItemsSectionList = [
-    LogoutItemModel(
+  static final List<DashboardItemModel> logOutItemsSectionList = [
+    DashboardItemModel(
       routeName: Routes.profileViewId,
       prefixIcon: Icons.person_outline_outlined,
       title: 'Profile',
     ),
-    LogoutItemModel(
+    DashboardItemModel(
       routeName: Routes.settingsViewId,
       prefixIcon: Icons.local_library_outlined,
       title: 'Learning preferences',
     ),
-    LogoutItemModel(routeName: '', prefixIcon: Icons.bookmark, title: 'Saved'),
-    LogoutItemModel(
+    DashboardItemModel(
+      routeName: '',
+      prefixIcon: CupertinoIcons.bookmark_solid,
+      title: 'Saved',
+    ),
+    DashboardItemModel(
       routeName: Routes.settingsViewId,
       prefixIcon: Icons.settings,
       title: 'Settings',
     ),
-    LogoutItemModel(
+    DashboardItemModel(
       routeName: Routes.aboutAppViewId,
       prefixIcon: Icons.info_outlined,
       title: 'About app',
     ),
-    LogoutItemModel(
+    DashboardItemModel(
       routeName: Routes.privacyPolicyViewId,
       prefixIcon: Icons.privacy_tip_outlined,
       title: 'Privacy policy',
     ),
-    LogoutItemModel(
+    DashboardItemModel(
       routeName: Routes.faqViewId,
       prefixIcon: Icons.help_outline_outlined,
       title: 'FAQ',
