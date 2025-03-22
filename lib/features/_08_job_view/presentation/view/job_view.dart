@@ -11,8 +11,15 @@ class JobView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       resizeToAvoidBottomInset: true,
-      appBar: jobViewAppbar(),
-      body: const JobViewBody(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: jobViewAppbar(context),
+          ),
+          const Expanded(child: JobViewBody()),
+        ],
+      ),
     );
   }
 }
