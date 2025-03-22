@@ -13,7 +13,7 @@ class JobDetailsView extends StatelessWidget {
       appBar: jobDetailsAppbar(context),
       body: Padding(
         padding: EdgeInsets.only(top: 64),
-        child: JobDetailsViewBody(),
+        child: const JobDetailsViewBody(),
       ),
     );
   }
