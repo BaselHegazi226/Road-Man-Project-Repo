@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
-class CustomLogOutIconTitle extends StatelessWidget {
-  const CustomLogOutIconTitle({
+class CustomDrawerIconTitle extends StatelessWidget {
+  const CustomDrawerIconTitle({
     super.key,
     required this.iconData,
     required this.title,
