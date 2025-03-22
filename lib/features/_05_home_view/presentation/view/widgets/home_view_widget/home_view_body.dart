@@ -16,19 +16,29 @@ class _HomeViewBodyState extends State<HomeViewBody>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
 
+  // ربط التبويبات بالألوان الخاصة بها
+  final Map<int, Color> screenColor = {
+    0: kAppPrimaryWhiteColor, // Home
+    1: kAppPrimaryWhiteColor, // Learn
+    2: Color(0xffE6E8EE), // Job
+    3: kAppPrimaryWhiteColor, // Profile
+  };
+
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 4, vsync: this);
     tabController.addListener(() {
-      setState(() {});
+      setState(() {}); // إعادة بناء الواجهة عند تغيير التبويب
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kAppPrimaryWhiteColor,
+      backgroundColor:
+          screenColor[tabController.index] ??
+          kAppPrimaryWhiteColor, // تغيير لون الخلفية
       body: TabBarView(
         controller: tabController,
         children: const [
@@ -40,6 +50,9 @@ class _HomeViewBodyState extends State<HomeViewBody>
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         tabController: tabController,
+        backgroundColor:
+            screenColor[tabController.index] ??
+            kAppPrimaryWhiteColor, // تمرير اللون للبوتوم بار
       ),
     );
   }
