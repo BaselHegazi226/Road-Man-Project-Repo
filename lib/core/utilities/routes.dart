@@ -10,4 +10,5 @@ class Routes {
   static String privacyPolicyViewId = '/privacyPolicyView';
   static String faqViewId = '/faqView';
   static String jobViewId = '/jobView';
+  static String jobDetailsViewId = '/jobDetailsView';
 }

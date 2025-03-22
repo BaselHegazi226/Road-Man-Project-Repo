@@ -6,6 +6,7 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/edi
 import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/job_details_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
@@ -59,6 +60,10 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.jobViewId,
         builder: (context, state) => const JobView(),
+      ),
+      GoRoute(
+        path: Routes.jobDetailsViewId,
+        builder: (context, state) => const JobDetailsView(),
       ),
     ],
   );
