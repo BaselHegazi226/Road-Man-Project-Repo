@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../home_common_widgets/home_const_list.dart';
-import 'logout_item.dart';
+import '../../../../../_05_home_view/presentation/view/widgets/home_common_widgets/home_const_list.dart';
+import 'job_view_dashboard_item.dart';
 
-class LogOutItemsSection extends StatelessWidget {
-  const LogOutItemsSection({super.key});
+class JobViewDrawerItemsSection extends StatelessWidget {
+  const JobViewDrawerItemsSection({super.key});
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -14,8 +14,8 @@ class LogOutItemsSection extends StatelessWidget {
       itemCount: HomeConstList.logOutItemsSectionList.length,
       itemBuilder: (context, index) {
         final item = HomeConstList.logOutItemsSectionList[index];
-        return LogoutItem(
-          logoutItemModel: item,
+        return JobViewDashboardItem(
+          customDrawerItemModel: item,
           onTap:
               item.routeName.isNotEmpty
                   ? () => GoRouter.of(context).push(item.routeName)
