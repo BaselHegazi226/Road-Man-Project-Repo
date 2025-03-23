@@ -11,4 +11,5 @@ class Routes {
   static String faqViewId = '/faqView';
   static String jobViewId = '/jobView';
   static String jobDetailsViewId = '/jobDetailsView';
+  static String favouriteViewId = '/favouriteView';
 }
