@@ -297,7 +297,15 @@ class AfacadTextStyles extends BaseTextStyles {
     return AfacadTextStyles(
       color: kSecondlyLightWhiteColor,
       fontSize: 20,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w500,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle20W500Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
     ).textStyle;
   }
 
