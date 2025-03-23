@@ -5,7 +5,15 @@ import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import '../../../../../../core/helper/const_variables.dart';
 
 class RecentJobCardLocationSection extends StatelessWidget {
-  const RecentJobCardLocationSection({super.key});
+  final String company;
+  final String location;
+  final String timeLeft;
+  const RecentJobCardLocationSection({
+    super.key,
+    required this.company,
+    required this.location,
+    required this.timeLeft,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +21,7 @@ class RecentJobCardLocationSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          spacing: 8,
+          spacing: 16,
           children: [
             Container(
               width: 32,
@@ -22,19 +30,19 @@ class RecentJobCardLocationSection extends StatelessWidget {
                 color: kAppPrimaryBlueColor,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
+              child: const Icon(
                 FontAwesomeIcons.linkedinIn,
                 color: kAppPrimaryWhiteColor,
                 size: 24,
               ),
             ),
             Text(
-              'LinkedIn | Remote',
+              '$company | $location',
               style: AfacadTextStyles.textStyle14W400Grey,
             ),
           ],
         ),
-        Text('30days left', style: AfacadTextStyles.textStyle12W400Grey),
+        Text(timeLeft, style: AfacadTextStyles.textStyle12W400Grey),
       ],
     );
   }

@@ -1,16 +1,40 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-class RecentJobCardTitleSection extends StatelessWidget {
-  const RecentJobCardTitleSection({super.key});
+class RecentJobCardTitleSection extends StatefulWidget {
+  final String title;
+  const RecentJobCardTitleSection({super.key, required this.title});
 
+  @override
+  State<RecentJobCardTitleSection> createState() =>
+      _RecentJobCardTitleSectionState();
+}
+
+class _RecentJobCardTitleSectionState extends State<RecentJobCardTitleSection> {
+  IconData unActiveSavedIcon = CupertinoIcons.bookmark;
+  IconData activeSavedIcon = CupertinoIcons.bookmark_fill;
+  bool iconSavedIsActive = false;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Content Marketing', style: AfacadTextStyles.textStyle20W600Black),
-        Icon(CupertinoIcons.bookmark, size: 24, color: Color(0xff131314)),
+        Text(widget.title, style: AfacadTextStyles.textStyle20W600Black),
+        IconButton(
+          padding: EdgeInsets.zero,
+          visualDensity: VisualDensity.compact,
+          onPressed: () {
+            setState(() {
+              iconSavedIsActive = !iconSavedIsActive;
+            });
+          },
+          icon: Icon(
+            iconSavedIsActive ? activeSavedIcon : unActiveSavedIcon,
+            size: 24,
+            color: Color(0xff131314),
+          ),
+        ),
       ],
     );
   }

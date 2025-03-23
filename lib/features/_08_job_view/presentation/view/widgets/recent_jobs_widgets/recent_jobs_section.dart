@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/common_widgets/job_view_const_list.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_jobs_card_list_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_jobs_item_list_view.dart';
 
@@ -12,7 +13,7 @@ class RecentJobsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        spacing: 16,
+        spacing: 8,
         children: [
           TwoTitle(
             title1: 'Recent Jobs',
@@ -20,7 +21,10 @@ class RecentJobsSection extends StatelessWidget {
             title2onPressed: () {},
           ),
           RecentJobsItemListView(),
-          RecentJobsCardListView(),
+          RecentJobsCardListView(
+            recentJobsCardItemModelList:
+                JobViewConstList.recentJobsItemModelList,
+          ),
         ],
       ),
     );
