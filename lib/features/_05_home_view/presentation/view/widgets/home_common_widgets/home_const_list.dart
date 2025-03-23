@@ -5,7 +5,7 @@ import '../../../../../../core/utilities/routes.dart';
 import '../../../../data/model/dashboard_item_model.dart';
 
 class HomeConstList {
-  static final List<DashboardItemModel> logOutItemsSectionList = [
+  static final List<DashboardItemModel> dashboardItemModelList = [
     DashboardItemModel(
       routeName: Routes.profileViewId,
       prefixIcon: Icons.person_outline_outlined,
@@ -17,9 +17,9 @@ class HomeConstList {
       title: 'Learning preferences',
     ),
     DashboardItemModel(
-      routeName: '',
-      prefixIcon: CupertinoIcons.bookmark_solid,
-      title: 'Saved',
+      routeName: Routes.favouriteViewId,
+      prefixIcon: CupertinoIcons.heart_fill,
+      title: 'Favourite',
     ),
     DashboardItemModel(
       routeName: Routes.settingsViewId,
