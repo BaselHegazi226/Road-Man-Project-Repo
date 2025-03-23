@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/common_widgets/job_view_const_list.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_item_list_view.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_card_list_view.dart';
 
 import '../job_view_widgets/two_title.dart';
 
-class SuggestedJobsItemSection extends StatelessWidget {
-  const SuggestedJobsItemSection({super.key});
+class SuggestedJobsCardSection extends StatelessWidget {
+  const SuggestedJobsCardSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SuggestedJobsItemSection extends StatelessWidget {
           title2: 'View all',
           title2onPressed: () {},
         ),
-        SuggestedJobsItemListView(
+        SuggestedJobsCardListView(
           suggestedJobsItemModelList:
               JobViewConstList.suggestedJobsItemModelList,
         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_item_model.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_item.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_card.dart';
 
-class SuggestedJobsItemListView extends StatelessWidget {
-  const SuggestedJobsItemListView({
+class SuggestedJobsCardListView extends StatelessWidget {
+  const SuggestedJobsCardListView({
     super.key,
     required this.suggestedJobsItemModelList,
   });
-  final List<SuggestedJobsItemModel> suggestedJobsItemModelList;
+  final List<SuggestedJobsCardModel> suggestedJobsItemModelList;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,7 +20,7 @@ class SuggestedJobsItemListView extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: SuggestedJobsItem(
+              child: SuggestedJobsCard(
                 suggestedJobsItemModel: suggestedJobsItemModelList[index],
               ),
             );

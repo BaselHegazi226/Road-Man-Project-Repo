@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_item_model.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
 
-class TrackLocationSection extends StatefulWidget {
-  const TrackLocationSection({
+class SuggestedJobsTrackLocationSection extends StatefulWidget {
+  const SuggestedJobsTrackLocationSection({
     super.key,
     required this.image,
     required this.title,
@@ -14,13 +14,15 @@ class TrackLocationSection extends StatefulWidget {
   });
   final String image;
   final String title, subTitle;
-  final SuggestedJobsItemModel suggestedJobsItemModel;
+  final SuggestedJobsCardModel suggestedJobsItemModel;
 
   @override
-  State<TrackLocationSection> createState() => _TrackLocationSectionState();
+  State<SuggestedJobsTrackLocationSection> createState() =>
+      _SuggestedJobsTrackLocationSectionState();
 }
 
-class _TrackLocationSectionState extends State<TrackLocationSection> {
+class _SuggestedJobsTrackLocationSectionState
+    extends State<SuggestedJobsTrackLocationSection> {
   IconData unActiveSavedIcon = CupertinoIcons.bookmark;
   IconData activeSavedIcon = CupertinoIcons.bookmark_fill;
   bool iconSavedIsActive = false;

@@ -1,9 +1,9 @@
-class SuggestedJobsItemModel {
+class SuggestedJobsCardModel {
   final String trackLocationImage;
   final String trackLocationTitle, trackLocationSubtitle;
   final String price, subscriptionType;
   final String workingTimeSectionTitle1, workingTimeSectionTitle2;
-  const SuggestedJobsItemModel({
+  const SuggestedJobsCardModel({
     required this.trackLocationImage,
     required this.trackLocationTitle,
     required this.trackLocationSubtitle,

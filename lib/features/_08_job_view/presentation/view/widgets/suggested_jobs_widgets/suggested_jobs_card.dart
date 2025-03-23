@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_item_model.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/price_monthly_subscription_section.dart';
-import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/track_location_section.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_price_subscription_section.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/suggested_jobs_track_location_section.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/suggested_jobs_widgets/working_time_item_section.dart';
 
-class SuggestedJobsItem extends StatelessWidget {
-  const SuggestedJobsItem({super.key, required this.suggestedJobsItemModel});
-  final SuggestedJobsItemModel suggestedJobsItemModel;
+class SuggestedJobsCard extends StatelessWidget {
+  const SuggestedJobsCard({super.key, required this.suggestedJobsItemModel});
+  final SuggestedJobsCardModel suggestedJobsItemModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -26,13 +26,13 @@ class SuggestedJobsItem extends StatelessWidget {
         child: Column(
           spacing: 16,
           children: [
-            TrackLocationSection(
+            SuggestedJobsTrackLocationSection(
               title: suggestedJobsItemModel.trackLocationTitle,
               subTitle: suggestedJobsItemModel.trackLocationSubtitle,
               image: suggestedJobsItemModel.trackLocationImage,
               suggestedJobsItemModel: suggestedJobsItemModel,
             ),
-            PriceMonthlySubscriptionSection(
+            SuggestedJobsPriceSubscriptionSection(
               price: suggestedJobsItemModel.price,
               subscriptionType: suggestedJobsItemModel.subscriptionType,
             ),

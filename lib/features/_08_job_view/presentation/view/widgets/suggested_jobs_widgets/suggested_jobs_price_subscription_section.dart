@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-class PriceMonthlySubscriptionSection extends StatelessWidget {
-  const PriceMonthlySubscriptionSection({
+class SuggestedJobsPriceSubscriptionSection extends StatelessWidget {
+  const SuggestedJobsPriceSubscriptionSection({
     super.key,
     required this.price,
     required this.subscriptionType,
