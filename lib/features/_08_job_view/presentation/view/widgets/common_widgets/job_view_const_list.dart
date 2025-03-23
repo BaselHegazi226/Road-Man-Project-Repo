@@ -1,11 +1,11 @@
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_item_model.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
 
 import '../../../../../../generated/assets.dart';
 import '../../../../data/model/recent_jobs_card_item_model.dart';
 
 class JobViewConstList {
-  static const List<SuggestedJobsItemModel> suggestedJobsItemModelList = [
-    SuggestedJobsItemModel(
+  static const List<SuggestedJobsCardModel> suggestedJobsItemModelList = [
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Content Marketing',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -14,7 +14,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Part_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Flutter Developer',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -23,7 +23,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Full_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Content Marketing',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -32,7 +32,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Part_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Flutter Developer',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -41,7 +41,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Full_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Content Marketing',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -50,7 +50,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Part_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Flutter Developer',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -59,7 +59,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Full_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Content Marketing',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -68,7 +68,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Part_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Flutter Developer',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -77,7 +77,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Full_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Content Marketing',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
@@ -86,7 +86,7 @@ class JobViewConstList {
       workingTimeSectionTitle1: 'Part_Time',
       workingTimeSectionTitle2: 'Advanced Level',
     ),
-    SuggestedJobsItemModel(
+    SuggestedJobsCardModel(
       trackLocationImage: Assets.jobGoogleIcon,
       trackLocationTitle: 'Flutter Developer',
       trackLocationSubtitle: 'Google | Cairo | Egypt',
