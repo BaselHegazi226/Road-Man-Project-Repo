@@ -23,9 +23,9 @@ class SuggestedJobsTrackLocationSection extends StatefulWidget {
 
 class _SuggestedJobsTrackLocationSectionState
     extends State<SuggestedJobsTrackLocationSection> {
-  IconData unActiveSavedIcon = CupertinoIcons.bookmark;
-  IconData activeSavedIcon = CupertinoIcons.bookmark_fill;
-  bool iconSavedIsActive = false;
+  IconData unActiveFavouriteIcon = CupertinoIcons.heart;
+  IconData activeFavouriteIcon = CupertinoIcons.heart_fill;
+  bool iconFavouriteIsActive = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -65,13 +65,15 @@ class _SuggestedJobsTrackLocationSectionState
               visualDensity: VisualDensity.compact,
               onPressed: () {
                 setState(() {
-                  iconSavedIsActive = !iconSavedIsActive;
+                  iconFavouriteIsActive = !iconFavouriteIsActive;
                 });
               },
               icon: Icon(
-                iconSavedIsActive ? activeSavedIcon : unActiveSavedIcon,
+                iconFavouriteIsActive
+                    ? activeFavouriteIcon
+                    : unActiveFavouriteIcon,
                 size: 24,
-                color: Color(0xff131314),
+                color: iconFavouriteIsActive ? Colors.red : Color(0xff131314),
               ),
             ),
           ],
