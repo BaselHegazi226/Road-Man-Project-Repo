@@ -36,9 +36,13 @@ class RecentJobCardLocationSection extends StatelessWidget {
                 size: 24,
               ),
             ),
-            Text(
-              '$company | $location',
-              style: AfacadTextStyles.textStyle14W400Grey,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 2,
+              children: [
+                Text(company, style: AfacadTextStyles.textStyle14W400Grey),
+                Text(location, style: AfacadTextStyles.textStyle14W400Grey),
+              ],
             ),
           ],
         ),
