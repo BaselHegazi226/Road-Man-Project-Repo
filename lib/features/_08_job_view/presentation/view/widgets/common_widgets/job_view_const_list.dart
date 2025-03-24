@@ -1,182 +1,53 @@
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/job_view_card_model.dart';
 
 import '../../../../../../generated/assets.dart';
-import '../../../../data/model/recent_jobs_card_item_model.dart';
 
 class JobViewConstList {
-  static const List<SuggestedJobsCardModel> suggestedJobsItemModelList = [
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Content Marketing',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$42- \$48k',
+  static const List<JobViewCardModel> suggestedJobsItemModelList = [
+    JobViewCardModel(
+      jobLevel: 'Advanced Level',
+      title: 'Content Marketing',
+      salary: '\$42- \$48k',
       subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Part_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
+      jobType: 'Part_Time',
+      company: 'Google',
+      location: 'Cairo | Egypt',
+      logo: Assets.jobGoogleIcon,
     ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Flutter Developer',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$1000- \$1500k',
+    JobViewCardModel(
+      jobLevel: 'Advanced Level',
+      title: 'Flutter Developer',
+      salary: '\$1000- \$1500k',
       subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Full_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Content Marketing',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$42- \$48k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Part_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Flutter Developer',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$1000- \$1500k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Full_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Content Marketing',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$42- \$48k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Part_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Flutter Developer',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$1000- \$1500k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Full_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Content Marketing',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$42- \$48k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Part_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Flutter Developer',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$1000- \$1500k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Full_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Content Marketing',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$42- \$48k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Part_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
-    ),
-    SuggestedJobsCardModel(
-      trackLocationImage: Assets.jobGoogleIcon,
-      trackLocationTitle: 'Flutter Developer',
-      trackLocationSubtitle: 'Google | Cairo | Egypt',
-      price: '\$1000- \$1500k',
-      subscriptionType: ' /monthly',
-      workingTimeSectionTitle1: 'Full_Time',
-      workingTimeSectionTitle2: 'Advanced Level',
+      jobType: 'Full_Time',
+      company: 'Google',
+      location: 'Cairo | Egypt',
+      logo: Assets.jobGoogleIcon,
     ),
   ];
   // Dummy Data
-  static const List<RecentJobsCardItemModel> recentJobsItemModelList = [
-    RecentJobsCardItemModel(
+  static const List<JobViewCardModel> recentJobsCardItemModelList = [
+    JobViewCardModel(
+      timeLeft: '15 days left',
       title: 'Content Marketing',
-      salary: '\$42 - \$48k /month',
+      salary: '\$42 - \$48k',
+      subscriptionType: ' /monthly',
       jobType: 'Full-Time',
       company: 'LinkedIn',
       location: 'Remote',
-      timeLeft: '30 days left',
+      logo: Assets.jobGoogleIcon,
     ),
-    RecentJobsCardItemModel(
+    JobViewCardModel(
+      timeLeft: '30 days left',
       title: 'UI/UX Designer',
-      salary: '\$50 - \$60k /year',
+      salary: '\$50 - \$60k ',
+      subscriptionType: ' /year',
       jobType: 'Part-Time',
       company: 'Google',
       location: 'San Francisco',
-      timeLeft: '15 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'Content Marketing',
-      salary: '\$42 - \$48k /month',
-      jobType: 'Full-Time',
-      company: 'LinkedIn',
-      location: 'Remote',
-      timeLeft: '30 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'UI/UX Designer',
-      salary: '\$50 - \$60k /year',
-      jobType: 'Part-Time',
-      company: 'Google',
-      location: 'San Francisco',
-      timeLeft: '15 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'Content Marketing',
-      salary: '\$42 - \$48k /month',
-      jobType: 'Full-Time',
-      company: 'LinkedIn',
-      location: 'Remote',
-      timeLeft: '30 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'UI/UX Designer',
-      salary: '\$50 - \$60k /year',
-      jobType: 'Part-Time',
-      company: 'Google',
-      location: 'San Francisco',
-      timeLeft: '15 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'Content Marketing',
-      salary: '\$42 - \$48k /month',
-      jobType: 'Full-Time',
-      company: 'LinkedIn',
-      location: 'Remote',
-      timeLeft: '30 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'UI/UX Designer',
-      salary: '\$50 - \$60k /year',
-      jobType: 'Part-Time',
-      company: 'Google',
-      location: 'San Francisco',
-      timeLeft: '15 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'Content Marketing',
-      salary: '\$42 - \$48k /month',
-      jobType: 'Full-Time',
-      company: 'LinkedIn',
-      location: 'Remote',
-      timeLeft: '30 days left',
-    ),
-    RecentJobsCardItemModel(
-      title: 'UI/UX Designer',
-      salary: '\$50 - \$60k /year',
-      jobType: 'Part-Time',
-      company: 'Google',
-      location: 'San Francisco',
-      timeLeft: '15 days left',
+      logo: Assets.jobGoogleIcon,
     ),
   ];
+
+  static List<JobViewCardModel> favouriteCardList = [];
 }
