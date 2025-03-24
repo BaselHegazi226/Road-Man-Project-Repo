@@ -23,7 +23,7 @@ class RecentJobsSection extends StatelessWidget {
           RecentJobsItemListView(),
           RecentJobsCardListView(
             recentJobsCardItemModelList:
-                JobViewConstList.recentJobsItemModelList,
+                JobViewConstList.recentJobsCardItemModelList,
           ),
         ],
       ),
