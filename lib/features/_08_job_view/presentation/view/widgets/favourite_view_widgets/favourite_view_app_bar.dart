@@ -9,10 +9,7 @@ import '../../../../../../generated/assets.dart';
 AppBar favouriteViewAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: kAppPrimaryWhiteColor,
-    title: Text(
-      'Favourite items',
-      style: AfacadTextStyles.textStyle20W500Black,
-    ),
+    title: Text('Favourite', style: AfacadTextStyles.textStyle20W500Black),
     centerTitle: true,
     leading: IconButton(
       onPressed: () {
