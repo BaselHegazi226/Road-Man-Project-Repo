@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
+import 'package:road_man_project/features/_08_job_view/data/model/job_view_card_model.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_job_card_location_section.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_job_card_title_section.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/recent_jobs_widgets/recent_jobs_card_price_section.dart';
 
-import '../../../../data/model/recent_jobs_card_item_model.dart';
-
 class RecentJobsCard extends StatelessWidget {
-  final RecentJobsCardItemModel recentJobsCardItemModel;
-  const RecentJobsCard({super.key, required this.recentJobsCardItemModel});
+  final JobViewCardModel recentJobsCardModel;
+  const RecentJobsCard({super.key, required this.recentJobsCardModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +24,25 @@ class RecentJobsCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
-          spacing: 8,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            RecentJobCardTitleSection(title: recentJobsCardItemModel.title),
-            RecentJobsCardPriceSection(
-              salary: recentJobsCardItemModel.salary,
-              jobType: recentJobsCardItemModel.jobType,
+            Column(
+              spacing: 8,
+              children: [
+                RecentJobCardTitleSection(
+                  title: recentJobsCardModel.title,
+                  recentJobsCardModel: recentJobsCardModel,
+                ),
+                RecentJobsCardPriceSection(
+                  salary: recentJobsCardModel.salary,
+                  jobType: recentJobsCardModel.jobType,
+                ),
+              ],
             ),
             RecentJobCardLocationSection(
-              company: recentJobsCardItemModel.company,
-              location: recentJobsCardItemModel.location,
-              timeLeft: recentJobsCardItemModel.timeLeft,
+              company: recentJobsCardModel.company,
+              location: recentJobsCardModel.location,
+              timeLeft: recentJobsCardModel.timeLeft!,
             ),
           ],
         ),
