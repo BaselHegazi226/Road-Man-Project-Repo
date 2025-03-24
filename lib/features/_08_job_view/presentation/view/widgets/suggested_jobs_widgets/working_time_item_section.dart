@@ -6,11 +6,11 @@ class WorkingTimeSection extends StatelessWidget {
   const WorkingTimeSection({
     super.key,
     required this.onPressed,
-    required this.title1,
-    required this.title2,
+    required this.jobType,
+    required this.jobLevel,
   });
   final VoidCallback? onPressed;
-  final String title1, title2;
+  final String jobType, jobLevel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,8 +20,8 @@ class WorkingTimeSection extends StatelessWidget {
         Row(
           spacing: 16,
           children: [
-            WorkingTimeItem(title: title1),
-            WorkingTimeItem(title: title2),
+            WorkingTimeItem(title: jobType),
+            WorkingTimeItem(title: jobLevel),
           ],
         ),
         WorkingTimeItemArrow(onPressed: onPressed),
