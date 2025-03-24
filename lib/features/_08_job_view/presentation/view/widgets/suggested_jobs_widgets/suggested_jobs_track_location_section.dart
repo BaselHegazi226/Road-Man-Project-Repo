@@ -2,19 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
-import 'package:road_man_project/features/_08_job_view/data/model/suggested_jobs_card_model.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/widgets/common_widgets/job_view_const_list.dart';
+
+import '../../../../data/model/job_view_card_model.dart';
 
 class SuggestedJobsTrackLocationSection extends StatefulWidget {
   const SuggestedJobsTrackLocationSection({
     super.key,
     required this.image,
     required this.title,
-    required this.subTitle,
+    required this.company,
     required this.suggestedJobsItemModel,
+    required this.location,
   });
   final String image;
-  final String title, subTitle;
-  final SuggestedJobsCardModel suggestedJobsItemModel;
+  final String title, company, location;
+  final JobViewCardModel suggestedJobsItemModel;
 
   @override
   State<SuggestedJobsTrackLocationSection> createState() =>
@@ -37,22 +40,26 @@ class _SuggestedJobsTrackLocationSectionState
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 8,
           children: [
-            SvgPicture.asset(
-              widget.suggestedJobsItemModel.trackLocationImage,
-              width: 32,
-              height: 32,
-            ),
+            SvgPicture.asset(widget.image, width: 32, height: 32),
             Column(
               spacing: 4,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.suggestedJobsItemModel.trackLocationTitle,
+                  widget.title,
                   style: AfacadTextStyles.textStyle16W500Black,
                 ),
-                Text(
-                  widget.suggestedJobsItemModel.trackLocationSubtitle,
-                  style: AfacadTextStyles.textStyle14W400Grey,
+                Row(
+                  children: [
+                    Text(
+                      widget.company,
+                      style: AfacadTextStyles.textStyle14W400Grey,
+                    ),
+                    Text(
+                      widget.location,
+                      style: AfacadTextStyles.textStyle14W400Grey,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -66,6 +73,15 @@ class _SuggestedJobsTrackLocationSectionState
               onPressed: () {
                 setState(() {
                   iconFavouriteIsActive = !iconFavouriteIsActive;
+                  if (iconFavouriteIsActive) {
+                    JobViewConstList.favouriteCardList.add(
+                      widget.suggestedJobsItemModel,
+                    );
+                  } else {
+                    JobViewConstList.favouriteCardList.remove(
+                      widget.suggestedJobsItemModel,
+                    );
+                  }
                 });
               },
               icon: Icon(
