@@ -9,16 +9,20 @@ class WorkingTimeSection extends StatelessWidget {
     required this.jobType,
     required this.jobLevel,
   });
+
   final VoidCallback? onPressed;
   final String jobType, jobLevel;
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
-      spacing: 16,
+      spacing: screenWidth * 0.04, // نسبة من عرض الشاشة
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          spacing: 16,
+          spacing: screenWidth * 0.04, // نسبة من عرض الشاشة
           children: [
             WorkingTimeItem(title: jobType),
             WorkingTimeItem(title: jobLevel),
