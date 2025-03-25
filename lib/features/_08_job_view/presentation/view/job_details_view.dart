@@ -12,11 +12,14 @@ class JobDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final jobViewCardModel =
         GoRouterState.of(context).extra as JobViewCardModel;
+
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: kAppPrimaryBlueColor,
       appBar: jobDetailsAppbar(context),
       body: Padding(
-        padding: const EdgeInsets.only(top: 64),
+        padding: EdgeInsets.only(top: screenHeight * 0.07), // بدلًا من `64`
         child: JobDetailsViewBody(jobDetailsCardModel: jobViewCardModel),
       ),
     );
