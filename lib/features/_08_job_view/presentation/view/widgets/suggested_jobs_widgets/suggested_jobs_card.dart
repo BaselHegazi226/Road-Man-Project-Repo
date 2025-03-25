@@ -13,7 +13,9 @@ class SuggestedJobsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push(Routes.jobDetailsViewId);
+        GoRouter.of(
+          context,
+        ).push(Routes.jobDetailsViewId, extra: suggestedJobsItemModel);
       },
       child: Container(
         height: 182,
@@ -35,7 +37,7 @@ class SuggestedJobsCard extends StatelessWidget {
             ),
             SuggestedJobsPriceSubscriptionSection(
               price: suggestedJobsItemModel.salary,
-              subscriptionType: suggestedJobsItemModel.subscriptionType,
+              subscriptionType: suggestedJobsItemModel.salaryType,
             ),
             Padding(
               padding: EdgeInsets.only(top: 16),
