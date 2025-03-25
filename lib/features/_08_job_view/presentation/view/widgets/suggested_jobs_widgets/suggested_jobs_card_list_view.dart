@@ -7,25 +7,30 @@ class SuggestedJobsCardListView extends StatelessWidget {
     super.key,
     required this.suggestedJobsItemModelList,
   });
+
   final List<JobViewCardModel> suggestedJobsItemModelList;
+
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
-      height: 182,
-      child: Expanded(
-        child: ListView.builder(
-          itemCount: suggestedJobsItemModelList.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: SuggestedJobsCard(
-                suggestedJobsItemModel: suggestedJobsItemModelList[index],
-              ),
-            );
-          },
-        ),
+      height: screenHeight * 0.2, // ارتفاع متناسق مع الشاشة
+      child: ListView.builder(
+        itemCount: suggestedJobsItemModelList.length,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(
+              right: screenWidth * 0.04,
+            ), // تباعد ديناميكي
+            child: SuggestedJobsCard(
+              suggestedJobsItemModel: suggestedJobsItemModelList[index],
+            ),
+          );
+        },
       ),
     );
   }
