@@ -8,20 +8,26 @@ class JobDetailsGoogleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(screenWidth * 0.03), // نسبة 3% من العرض
       decoration: BoxDecoration(
-        color: Color(0xffF4F5F8),
+        color: const Color(0xffF4F5F8),
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withAlpha(40),
-            blurRadius: 8, // درجة تشتت الظل
-            offset: Offset(0, 4), // اتجاه الظل
+            blurRadius: screenWidth * 0.02, // نسبة 2% من العرض
+            offset: const Offset(0, 4), // ثابت لتحسين الظل
           ),
         ],
       ),
-      child: SvgPicture.asset(Assets.jobGoogleIcon, height: 42, width: 42),
+      child: SvgPicture.asset(
+        Assets.jobGoogleIcon,
+        height: screenWidth * 0.1, // نسبة 10% من العرض
+        width: screenWidth * 0.1,
+      ),
     );
   }
 }
