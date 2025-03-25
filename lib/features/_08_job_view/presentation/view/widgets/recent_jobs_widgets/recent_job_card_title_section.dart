@@ -6,54 +6,60 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/widgets
 
 import '../../../../data/model/job_view_card_model.dart';
 
-class RecentJobCardTitleSection extends StatefulWidget {
+class RecentJobCardTitleSection extends StatelessWidget {
   final String title;
   final JobViewCardModel recentJobsCardModel;
-  const RecentJobCardTitleSection({
+  final ValueNotifier<bool> iconFavouriteIsActive = ValueNotifier(false);
+
+  RecentJobCardTitleSection({
     super.key,
     required this.title,
     required this.recentJobsCardModel,
   });
 
   @override
-  State<RecentJobCardTitleSection> createState() =>
-      _RecentJobCardTitleSectionState();
-}
-
-class _RecentJobCardTitleSectionState extends State<RecentJobCardTitleSection> {
-  IconData unActiveFavouriteIcon = CupertinoIcons.heart;
-  IconData activeFavouriteIcon = CupertinoIcons.heart_fill;
-  bool iconFavouriteIsActive = false;
-  @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.title, style: AfacadTextStyles.textStyle20W600Black),
-        IconButton(
+        Expanded(
+          child: Text(
+            title,
+            style: AfacadTextStyles.textStyle20W600Black,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        buildValueListenableBuilderIcon(screenWidth),
+      ],
+    );
+  }
+
+  ValueListenableBuilder<bool> buildValueListenableBuilderIcon(
+    double screenWidth,
+  ) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: iconFavouriteIsActive,
+      builder: (context, isActive, child) {
+        return IconButton(
           padding: EdgeInsets.zero,
           visualDensity: VisualDensity.compact,
           onPressed: () {
-            setState(() {
-              iconFavouriteIsActive = !iconFavouriteIsActive;
-              if (iconFavouriteIsActive) {
-                JobViewConstList.favouriteCardList.add(
-                  widget.recentJobsCardModel,
-                );
-              } else {
-                JobViewConstList.favouriteCardList.remove(
-                  widget.recentJobsCardModel,
-                );
-              }
-            });
+            iconFavouriteIsActive.value = !isActive;
+            if (iconFavouriteIsActive.value) {
+              JobViewConstList.favouriteCardList.add(recentJobsCardModel);
+            } else {
+              JobViewConstList.favouriteCardList.remove(recentJobsCardModel);
+            }
           },
           icon: Icon(
-            iconFavouriteIsActive ? activeFavouriteIcon : unActiveFavouriteIcon,
-            size: 24,
+            isActive ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+            size: screenWidth * 0.06, // 6% من عرض الشاشة
             color: kEditProfileIconColor,
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
