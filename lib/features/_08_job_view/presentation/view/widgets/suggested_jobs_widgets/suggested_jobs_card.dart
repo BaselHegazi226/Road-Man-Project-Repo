@@ -56,7 +56,10 @@ class SuggestedJobsCard extends StatelessWidget {
                 jobType: suggestedJobsItemModel.jobType,
                 jobLevel: suggestedJobsItemModel.jobLevel!,
                 onPressed: () {
-                  GoRouter.of(context).push(Routes.jobDetailsViewId);
+                  GoRouter.of(context).push(
+                    Routes.jobDetailsViewId,
+                    extra: suggestedJobsItemModel,
+                  );
                 },
               ),
             ),
