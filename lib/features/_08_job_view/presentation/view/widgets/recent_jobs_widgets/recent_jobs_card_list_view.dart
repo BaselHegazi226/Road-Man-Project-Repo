@@ -11,14 +11,18 @@ class RecentJobsCardListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Expanded(
       child: ListView.builder(
         itemCount: recentJobsCardItemModelList.length,
+        padding: EdgeInsets.zero,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(top: 16),
+            padding: EdgeInsets.only(
+              top: screenHeight * 0.02,
+            ), // مسافة متجاوبة بين العناصر
             child: RecentJobsCard(
               recentJobsCardModel: recentJobsCardItemModelList[index],
             ),
