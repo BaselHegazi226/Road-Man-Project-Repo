@@ -10,14 +10,20 @@ class CustomSearchBar extends StatelessWidget {
     required this.searchFocusNode,
     required this.hintText,
   });
+
   final TextEditingController searchBarEditingController;
   final FocusNode searchFocusNode;
   final String hintText;
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SearchBar(
-      padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 8)),
-      backgroundColor: WidgetStateProperty.all(Color(0xffE6E8EE)),
+      padding: WidgetStatePropertyAll(
+        EdgeInsets.symmetric(horizontal: screenWidth * 0.02), // نسبة من العرض
+      ),
+      backgroundColor: WidgetStateProperty.all(const Color(0xffE6E8EE)),
       hintText: hintText,
       hintStyle: WidgetStatePropertyAll(
         AfacadTextStyles.textStyle16W500H150Black.copyWith(
@@ -27,7 +33,7 @@ class CustomSearchBar extends StatelessWidget {
       leading: Icon(
         Icons.search_outlined,
         color: kTextBlackPrimaryColor.withAlpha(126),
-        size: 24,
+        size: screenWidth * 0.06, // الأيقونة تتكيف مع حجم الشاشة
       ),
       elevation: WidgetStatePropertyAll(0),
       controller: searchBarEditingController,
