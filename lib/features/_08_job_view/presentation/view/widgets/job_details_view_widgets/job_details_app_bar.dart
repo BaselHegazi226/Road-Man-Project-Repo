@@ -8,27 +8,43 @@ import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/base_text_styles.dart';
 
 AppBar jobDetailsAppbar(BuildContext context) {
+  final double screenWidth = MediaQuery.of(context).size.width;
+
   return AppBar(
     backgroundColor: kAppPrimaryBlueColor,
     leading: IconButton(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.04,
+      ), // نسبة 4% من العرض
       onPressed: () {
         GoRouter.of(context).pop();
       },
-      icon: Icon(CupertinoIcons.back, color: kSecondlyLightWhiteColor),
+      icon: Icon(
+        CupertinoIcons.back,
+        color: kSecondlyLightWhiteColor,
+        size: screenWidth * 0.06,
+      ),
     ),
     actions: [
       IconButton(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.04,
+        ), // نسبة 4% من العرض
         onPressed: () {
           openDashboard(context, const JobViewDashboardViewBody());
         },
-        icon: Icon(Icons.menu_outlined, color: kSecondlyLightWhiteColor),
+        icon: Icon(
+          Icons.menu_outlined,
+          color: kSecondlyLightWhiteColor,
+          size: screenWidth * 0.06,
+        ),
       ),
     ],
     title: Text(
       'Job Details',
-      style: AfacadTextStyles.textStyle20W500LightWhite,
+      style: AfacadTextStyles.textStyle20W500LightWhite.copyWith(
+        fontSize: screenWidth * 0.05,
+      ), // جعل النص ديناميكي
     ),
     centerTitle: true,
   );
