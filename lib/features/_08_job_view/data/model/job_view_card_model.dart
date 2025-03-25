@@ -1,6 +1,6 @@
 class JobViewCardModel {
   final String title;
-  final String salary, subscriptionType;
+  final String salary, salaryType;
   final String jobType;
   final String company, location;
   final String logo;
@@ -11,7 +11,7 @@ class JobViewCardModel {
     this.jobLevel,
     required this.title,
     required this.salary,
-    required this.subscriptionType,
+    required this.salaryType,
     required this.jobType,
     required this.company,
     required this.location,
