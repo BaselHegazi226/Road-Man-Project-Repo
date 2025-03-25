@@ -15,12 +15,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.sizeOf(context).height * .08,
+      width: MediaQuery.sizeOf(context).width,
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
         color: kAppPrimaryBlueColor,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(8),
-          topRight: Radius.circular(8),
+          topLeft: Radius.circular(MediaQuery.sizeOf(context).width * 0.02),
+          topRight: Radius.circular(MediaQuery.sizeOf(context).width * 0.02),
         ),
       ),
       child: TabBar(
