@@ -9,8 +9,13 @@ class SuggestedJobsCardSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double spacingValue =
+        screenHeight * 0.009; // تحديد التباعد بناءً على حجم الشاشة
+
     return Column(
-      spacing: 8,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: spacingValue, // استخدام spacing بحجم متناسق
       children: [
         TwoTitle(
           title1: 'Suggested jobs',
