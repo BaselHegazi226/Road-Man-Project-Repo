@@ -8,6 +8,7 @@ class RecentJobCardLocationSection extends StatelessWidget {
   final String company;
   final String location;
   final String timeLeft;
+
   const RecentJobCardLocationSection({
     super.key,
     required this.company,
@@ -17,28 +18,32 @@ class RecentJobCardLocationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          spacing: 16,
+          spacing: screenWidth * 0.04,
           children: [
             Container(
-              width: 32,
-              height: 32,
+              width: screenWidth * 0.08, // 8% من عرض الشاشة
+              height: screenWidth * 0.08,
               decoration: BoxDecoration(
                 color: kAppPrimaryBlueColor,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(screenWidth * 0.02),
               ),
-              child: const Icon(
+              child: Icon(
                 FontAwesomeIcons.linkedinIn,
                 color: kAppPrimaryWhiteColor,
-                size: 24,
+                size: screenWidth * 0.05, // 5% من عرض الشاشة
               ),
             ),
+            // بدل spacing: 16
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 2,
+              spacing: screenHeight * 0.002,
               children: [
                 Text(company, style: AfacadTextStyles.textStyle14W400Grey),
                 Text(location, style: AfacadTextStyles.textStyle14W400Grey),
