@@ -3,48 +3,32 @@ import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
-class WorkingTimeItem extends StatefulWidget {
+class WorkingTimeItem extends StatelessWidget {
   const WorkingTimeItem({super.key, required this.title});
+
   final String title;
 
   @override
-  State<WorkingTimeItem> createState() => _WorkingTimeItemState();
-}
-
-class _WorkingTimeItemState extends State<WorkingTimeItem> {
-  bool isEnableButton = false;
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          isEnableButton = !isEnableButton; // Toggle state
-        });
-      },
-      child: Container(
-        height: 32,
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        decoration: BoxDecoration(
-          color: isEnableButton ? kAppPrimaryBlueColor : Colors.transparent,
-          border: Border.all(color: const Color(0xff131314), width: 1.5),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Text(
-            widget.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AfacadTextStyles.textStyle14W400Black.copyWith(
-              color:
-                  isEnableButton
-                      ? kAppPrimaryWhiteColor
-                      : kTextBlackPrimaryColor,
-            ),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      height: screenWidth * 0.08, // نسبة من عرض الشاشة لجعلها مرنة
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.02,
+      ), // تناسب العرض
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: kTextBlackPrimaryColor, width: 1.5),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: AfacadTextStyles.textStyle14W400Black.copyWith(
+            color: kTextBlackPrimaryColor,
           ),
         ),
       ),
