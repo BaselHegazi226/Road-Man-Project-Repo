@@ -10,29 +10,26 @@ class JobDetailsComponentSection extends StatelessWidget {
     super.key,
     required this.jobDetailsCardModel,
   });
+
   final JobViewCardModel jobDetailsCardModel;
+
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
-      spacing: 16,
+      spacing: screenHeight * 0.02,
       children: [
         JobDetailsTitleLocationSection(
           title: jobDetailsCardModel.title,
           company: '${jobDetailsCardModel.company}|',
           location: jobDetailsCardModel.location,
         ),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.28,
-          ),
-          child: JobDetailsUserJobDetailsItemsSection(
-            jobViewCardModel: jobDetailsCardModel,
-          ),
+        JobDetailsUserJobDetailsItemsSection(
+          jobViewCardModel: jobDetailsCardModel,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: JobDetailsDescription(),
-        ),
+        SizedBox(height: screenHeight * 0.01),
+        JobDetailsDescription(),
       ],
     );
   }
