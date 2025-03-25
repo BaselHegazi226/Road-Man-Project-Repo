@@ -9,26 +9,37 @@ import 'job_details_goole_icon.dart';
 class JobDetailsViewBody extends StatelessWidget {
   const JobDetailsViewBody({super.key, required this.jobDetailsCardModel});
   final JobViewCardModel jobDetailsCardModel;
+
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
           color: kAppPrimaryWhiteColor,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(48),
-            topRight: Radius.circular(48),
+            topLeft: Radius.circular(
+              screenWidth * 0.12,
+            ), // كان 48، الآن نسبة 12% من العرض
+            topRight: Radius.circular(screenWidth * 0.12),
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.04,
+          ), // كان 16، الآن 4% من العرض
           child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.topCenter,
             children: [
-              Positioned(top: -32, child: JobDetailsGoogleIcon()),
               Positioned(
-                top: 46,
+                top: -screenHeight * 0.035, // كان -32، الآن نسبة من الارتفاع
+                child: JobDetailsGoogleIcon(),
+              ),
+              Positioned(
+                top: screenHeight * 0.05, // كان 46، الآن نسبة من الارتفاع
                 bottom: 0,
                 right: 0,
                 left: 0,
