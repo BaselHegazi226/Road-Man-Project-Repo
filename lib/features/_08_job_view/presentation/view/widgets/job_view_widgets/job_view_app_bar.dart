@@ -5,25 +5,28 @@ import '../../../../../_05_home_view/presentation/view/widgets/custom_dashboard_
 import 'job_view_dashboard_view_body.dart';
 
 AppBar jobViewAppbar(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final iconSize = screenWidth * 0.07; // حجم الأيقونة متناسب مع العرض
+
   return AppBar(
     backgroundColor: kAppPrimaryWhiteColor,
     elevation: 0,
     leading: IconButton(
-      padding: EdgeInsets.zero,
-      icon: const Icon(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+      icon: Icon(
         Icons.menu_outlined,
         color: kEditProfileIconColor,
-        size: 28,
+        size: iconSize, // حجم الأيقونة ديناميكي
       ),
       onPressed: () => openDashboard(context, const JobViewDashboardViewBody()),
     ),
     actions: [
       IconButton(
-        padding: EdgeInsets.zero,
-        icon: const Icon(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+        icon: Icon(
           Icons.notifications_outlined,
           color: kTextBlackPrimaryColor,
-          size: 28,
+          size: iconSize, // حجم الأيقونة ديناميكي
         ),
         onPressed: () {},
       ),
