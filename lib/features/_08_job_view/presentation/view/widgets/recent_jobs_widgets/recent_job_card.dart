@@ -14,7 +14,9 @@ class RecentJobsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push(Routes.jobDetailsViewId);
+        GoRouter.of(
+          context,
+        ).push(Routes.jobDetailsViewId, extra: recentJobsCardModel);
       },
       child: Container(
         height: MediaQuery.sizeOf(context).height * .15,
