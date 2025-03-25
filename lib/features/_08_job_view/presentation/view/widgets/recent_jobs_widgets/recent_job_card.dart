@@ -12,6 +12,9 @@ class RecentJobsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return InkWell(
       onTap: () {
         GoRouter.of(
@@ -19,8 +22,8 @@ class RecentJobsCard extends StatelessWidget {
         ).push(Routes.jobDetailsViewId, extra: recentJobsCardModel);
       },
       child: Container(
-        height: MediaQuery.sizeOf(context).height * .15,
-        padding: const EdgeInsets.all(8),
+        height: screenHeight * 0.16,
+        padding: EdgeInsets.all(screenWidth * 0.02), // Padding متجاوب
         decoration: BoxDecoration(
           color: const Color(0xffE6E8EE),
           borderRadius: BorderRadius.circular(8),
@@ -29,7 +32,7 @@ class RecentJobsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
-              spacing: 8,
+              spacing: screenHeight * 0.008,
               children: [
                 RecentJobCardTitleSection(
                   title: recentJobsCardModel.title,
