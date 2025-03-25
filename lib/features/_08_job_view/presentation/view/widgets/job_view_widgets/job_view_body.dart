@@ -9,11 +9,15 @@ class JobViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.04,
+      ), // نسبة من العرض
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 24,
+        spacing: screenHeight * 0.025, // تباعد ديناميكي بين العناصر
         children: [
           JobViewSearchBarSection(),
           SuggestedJobsCardSection(),
