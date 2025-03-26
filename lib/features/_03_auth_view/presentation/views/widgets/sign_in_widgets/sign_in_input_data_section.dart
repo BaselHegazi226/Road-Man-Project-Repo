@@ -21,8 +21,9 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
-      spacing: 16,
+      spacing: screenHeight * 0.02,
       children: [
         SignInTextFormFieldsSection(formKey: _formKey),
         RememberMeForgetPasswordSection(
@@ -31,9 +32,9 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
           },
         ),
         Padding(
-          padding: EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: screenHeight * 0.02),
           child: Column(
-            spacing: 24,
+            spacing: screenHeight * 0.03,
             children: [
               CustomTextButton(
                 onPressed: () {
@@ -63,7 +64,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 4),
+          padding: EdgeInsets.only(top: screenHeight * 0.005),
           child: OtherRegisterSection(
             blackText: 'Don’t have an account? ',
             blueText: 'Sign up',
