@@ -9,26 +9,27 @@ class ForgetPasswordViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
       child: Column(
-        spacing: 24,
+        spacing: screenHeight * .02,
         children: [
           ClipRect(
             child: Align(
               alignment: Alignment.topCenter,
-              heightFactor: .88,
-              child: CustomImage(image: kForgetPasswordImage),
+              heightFactor: screenHeight * .00085,
+              child: const CustomImage(image: kForgetPasswordImage),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 58),
-            child: CustomAuthText(
-              text:
-                  'Don’t worry! We’ll help you regain access to your account.                          Enter your registered email or phone number to reset your password',
-            ),
+          SizedBox(height: screenHeight * .07),
+          const CustomAuthText(
+            text:
+                'Don’t worry! We’ll help you regain access to your account.                          Enter your registered email or phone number to reset your password',
           ),
-          ForgetPasswordInputDataSection(),
+          const ForgetPasswordInputDataSection(),
         ],
       ),
     );
