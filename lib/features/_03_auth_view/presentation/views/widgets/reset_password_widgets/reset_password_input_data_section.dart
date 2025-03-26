@@ -93,8 +93,9 @@ class _ResetPasswordInputDataSectionState
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
-      spacing: 16,
+      spacing: screenHeight * .02,
       children: [
         CustomTextFormField(
           hintText: 'New Password',
@@ -161,13 +162,13 @@ class _ResetPasswordInputDataSectionState
           },
         ),
         Padding(
-          padding: EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: screenHeight * .02),
           child: CustomTextButton(
             onPressed: () {
               if (!_formKey.currentState!.validate()) {}
             },
             backgroundColor: kAppPrimaryBlueColor,
-            child: CustomTitle(title: 'Update Password'),
+            child: const CustomTitle(title: 'Update Password'),
           ),
         ),
       ],
