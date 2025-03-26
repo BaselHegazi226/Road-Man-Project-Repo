@@ -97,11 +97,12 @@ class _SignUpTextFormFieldSectionState
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Form(
       key: widget.formKey,
       autovalidateMode: autoValidateMode,
       child: Column(
-        spacing: 16,
+        spacing: screenHeight * 0.02,
         children: [
           CustomTextFormField(
             hintText: 'Name',
