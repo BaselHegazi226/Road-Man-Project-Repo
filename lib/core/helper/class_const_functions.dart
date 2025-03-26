@@ -72,36 +72,6 @@ class ConstFunctions {
     );
   }
 
-  static AppBar customAppBar({
-    required String text,
-    required Function()? onPressed,
-    Color backgroundColor = kAppPrimaryWhiteColor,
-    Color generalColor = kAppPrimaryBlueColor,
-    double iconSize = 20,
-  }) {
-    return AppBar(
-      backgroundColor: backgroundColor,
-      leading: IconButton(
-        padding: EdgeInsets.zero,
-        onPressed: onPressed,
-        icon: Icon(
-          Icons.arrow_back_ios_new,
-          color: generalColor,
-          size: iconSize,
-        ),
-      ),
-      centerTitle: true,
-      title: Text(
-        text,
-        style: TextStyle(
-          color: generalColor,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
   static TextStyle hintTextFormFieldStyle() {
     return AfacadTextStyles.textStyle14W400H150Black.copyWith(
       color: kTextTextFormFieldColor,
