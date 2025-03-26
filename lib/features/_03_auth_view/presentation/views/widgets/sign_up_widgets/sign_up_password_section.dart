@@ -79,8 +79,9 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
-      spacing: 16,
+      spacing: screenHeight * 0.02,
       children: [
         CustomTextFormField(
           hintText: 'Password',
