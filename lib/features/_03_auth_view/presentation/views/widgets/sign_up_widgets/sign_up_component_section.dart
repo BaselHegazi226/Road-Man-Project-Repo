@@ -10,21 +10,26 @@ class SignUpComponentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return AuthComponentSection(
       title: 'Create New Account',
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 24, bottom: 12),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.03,
+                bottom: screenHeight * 0.015,
+              ),
               child: SocialAuthCardSection(
                 onPressed1: () {},
                 onPressed2: () {},
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 24),
+              padding: EdgeInsets.only(bottom: screenHeight * 0.03),
               child: const AuthSubTitle(subTitle: 'Or use your email account'),
             ),
             SignUpInputDataSection(),
