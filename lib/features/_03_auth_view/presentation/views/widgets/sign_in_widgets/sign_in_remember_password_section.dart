@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/sign_in_remember_me_section.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/utilities/base_text_styles.dart';
 
 class RememberMeForgetPasswordSection extends StatelessWidget {
   const RememberMeForgetPasswordSection({
@@ -20,12 +20,8 @@ class RememberMeForgetPasswordSection extends StatelessWidget {
           child: Text(
             maxLines: 1,
             'Forget your password ?',
-            style: TextStyle(
-              color: kAppPrimaryBlueColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
+            style: AfacadTextStyles.textStyle14W700H150Blue.copyWith(
               letterSpacing: .266,
-              height: 1.5,
             ),
           ),
         ),
