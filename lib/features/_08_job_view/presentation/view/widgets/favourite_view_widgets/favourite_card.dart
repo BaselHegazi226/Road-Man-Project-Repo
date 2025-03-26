@@ -11,7 +11,7 @@ class FavouriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.sizeOf(context).height * .15,
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
       decoration: BoxDecoration(
         color: const Color(0xffE6E8EE),
         borderRadius: BorderRadius.circular(8),
@@ -20,7 +20,7 @@ class FavouriteCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            spacing: 8,
+            spacing: MediaQuery.sizeOf(context).height * .01,
             children: [
               FavouriteCardTitleSection(title: recentJobsCardItemModel!.title),
               FavouriteCardSalarySection(
