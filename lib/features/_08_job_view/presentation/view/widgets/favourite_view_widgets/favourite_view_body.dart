@@ -6,9 +6,13 @@ class FavouriteViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Expanded(child: FavouriteCardListView()),
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+        child: FavouriteCardListView(),
+      ),
     );
   }
 }
