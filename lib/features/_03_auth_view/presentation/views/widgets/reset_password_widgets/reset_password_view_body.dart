@@ -12,18 +12,23 @@ class ResetPasswordViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return CustomFlexibleWidget(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
         child: Column(
-          spacing: 32,
+          spacing: screenHeight * .04,
           children: [
-            CustomImage(imageBottomPadding: 21, image: kResetPasswordImage),
-            CustomAuthText(
+            CustomImage(
+              imageBottomPadding: screenHeight * .005,
+              image: kResetPasswordImage,
+            ),
+            const CustomAuthText(
               text:
                   'Create a new password for your account.                                                    Make sure to choose a strong and secure password',
             ),
-            ResetPasswordInputDataSection(),
+            const ResetPasswordInputDataSection(),
           ],
         ),
       ),
