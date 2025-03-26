@@ -12,8 +12,9 @@ class SocialAuthCardSection extends StatelessWidget {
   final void Function()? onPressed2;
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Row(
-      spacing: 36,
+      spacing: screenWidth * .09,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialAuthCard(
