@@ -12,11 +12,12 @@ class OtherRegisterSection extends StatelessWidget {
   final String blackText, blueText;
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return GestureDetector(
       onTap: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 2,
+        spacing: screenWidth * 0.005,
         children: [
           Text(
             blackText,
