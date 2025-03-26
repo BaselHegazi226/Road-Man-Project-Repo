@@ -19,11 +19,13 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+
     return Column(
-      spacing: 20,
+      spacing: screenHeight * .025,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 4),
+          padding: EdgeInsets.only(bottom: screenHeight * .005),
           child: SignUpTextFormFieldSection(formKey: _formKey),
         ),
         CustomTextButton(
