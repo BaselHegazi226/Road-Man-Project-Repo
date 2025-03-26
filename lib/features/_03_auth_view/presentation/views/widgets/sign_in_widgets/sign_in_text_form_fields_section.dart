@@ -112,10 +112,11 @@ class _SignInTextFormFieldsSectionState
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Form(
       key: widget.formKey,
       child: Column(
-        spacing: 16,
+        spacing: screenHeight * 0.02,
         children: [
           CustomTextFormField(
             backgroundColor: kFilledTextFormFieldColor,
