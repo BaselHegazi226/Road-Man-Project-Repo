@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/sign_in_remember_me_card.dart';
-
-import '../../../../../../core/helper/const_variables.dart';
 
 class RememberMeSection extends StatelessWidget {
   const RememberMeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Row(
-      spacing: 8,
+      spacing: screenWidth * 0.02,
       children: [
         RememberMeCard(),
         Text(
           maxLines: 1,
           'Remember me',
-          style: TextStyle(
-            color: kTextBlackPrimaryColor,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+          style: AfacadTextStyles.textStyle14W400Black.copyWith(
             letterSpacing: -.266,
             height: 1.5,
           ),
