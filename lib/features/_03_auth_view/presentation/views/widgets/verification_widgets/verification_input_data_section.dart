@@ -20,11 +20,13 @@ class _VerificationInputDataSectionState
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+
     return Column(
-      spacing: 24,
+      spacing: screenHeight * .03,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 12),
+          padding: EdgeInsets.only(bottom: screenHeight * .015),
           child: VerificationOtpFields(
             formKey: _formKey,
             autoValidateMode: autoValidateMode,
@@ -38,17 +40,17 @@ class _VerificationInputDataSectionState
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 8),
+          padding: EdgeInsets.only(top: screenHeight * .005),
           child: CustomTextButton(
             onPressed: () {
               if (!_formKey.currentState!.validate()) {
                 setState(() {
-                  print("don't enter otp");
+                  //                print("don't enter otp");
                 });
               } else {
                 setState(() {
                   autoValidateMode = AutovalidateMode.always;
-                  print('accept');
+                  //                  print('accept');
                 });
               }
             },
