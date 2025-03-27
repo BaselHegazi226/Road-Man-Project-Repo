@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../_05_home_view/presentation/view/widgets/custom_dashboard_widgets/open_dashboard.dart';
@@ -28,7 +30,9 @@ AppBar jobViewAppbar(BuildContext context) {
           color: kTextBlackPrimaryColor,
           size: iconSize, // حجم الأيقونة ديناميكي
         ),
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).push(Routes.notificationJobViewId);
+        },
       ),
     ],
   );
