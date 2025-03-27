@@ -7,6 +7,7 @@ import '../../../../../../core/utilities/base_text_styles.dart';
 import '../../../../../../generated/assets.dart';
 
 AppBar favouriteViewAppBar(BuildContext context) {
+  final double screenWidth = MediaQuery.sizeOf(context).width;
   return AppBar(
     backgroundColor: kAppPrimaryWhiteColor,
     title: Text('Favourite', style: AfacadTextStyles.textStyle20W500Black),
@@ -19,11 +20,11 @@ AppBar favouriteViewAppBar(BuildContext context) {
     ),
     actions: [
       Padding(
-        padding: EdgeInsets.only(right: 16),
+        padding: EdgeInsets.only(right: screenWidth * .04),
         child: Image.asset(
           Assets.profileProfileUserImage,
-          width: 32,
-          height: 32,
+          width: screenWidth * .08,
+          height: screenWidth * .08,
         ),
       ),
     ],
