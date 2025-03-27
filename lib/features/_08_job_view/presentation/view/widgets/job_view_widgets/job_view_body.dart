@@ -19,9 +19,9 @@ class JobViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: screenHeight * 0.025, // تباعد ديناميكي بين العناصر
         children: [
-          JobViewSearchBarSection(),
-          SuggestedJobsCardSection(),
-          RecentJobsSection(),
+          const JobViewSearchBarSection(),
+          const SuggestedJobsCardSection(),
+          const RecentJobsSection(),
         ],
       ),
     );
