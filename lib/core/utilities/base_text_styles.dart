@@ -404,7 +404,7 @@ class InterTextStyles extends BaseTextStyles {
   }) : super(fontFamily: 'inter');
 
   // Text Styles with Font Size 12
-  static TextStyle get textStyle12W500Black {
+  static TextStyle get interTextStyle12W500Black {
     return InterTextStyles(
       color: kTextBlackPrimaryColor,
       fontSize: 12,
@@ -412,7 +412,7 @@ class InterTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
-  static TextStyle get textStyle12W500Blue {
+  static TextStyle get interTextStyle12W500Blue {
     return InterTextStyles(
       color: kAppPrimaryBlueColor,
       fontSize: 12,
@@ -420,7 +420,7 @@ class InterTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
-  static TextStyle get textStyle12W500GreyHalfOpacity {
+  static TextStyle get interTextStyle12W500GreyHalfOpacity {
     return InterTextStyles(
       color: kTextGreyHalfOpacityPrimaryColor,
       fontSize: 12,
@@ -429,7 +429,7 @@ class InterTextStyles extends BaseTextStyles {
   }
 
   // Text Styles with Font Size 13
-  static TextStyle get textStyle13W400Black {
+  static TextStyle get interTextStyle13W400Black {
     return InterTextStyles(
       color: kTextGreyPrimaryColor,
       fontSize: 13,
