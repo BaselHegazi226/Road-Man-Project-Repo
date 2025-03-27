@@ -8,13 +8,14 @@ class JobView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       resizeToAvoidBottomInset: true,
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * .02),
             child: jobViewAppbar(context),
           ),
           const Expanded(child: JobViewBody()),
