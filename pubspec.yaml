@@ -30,6 +30,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   material_design_icons_flutter: ^7.0.7296
   flutter_advanced_switch: ^3.1.0
+  intl: ^0.20.2
 
 
 dev_dependencies:
