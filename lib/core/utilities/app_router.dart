@@ -9,6 +9,7 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/set
 import 'package:road_man_project/features/_08_job_view/presentation/view/favourite_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_details_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
+import 'package:road_man_project/features/_08_job_view/presentation/view/notification_view.dart';
 
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
@@ -69,6 +70,10 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.favouriteViewId,
         builder: (context, state) => const FavouriteView(),
+      ),
+      GoRoute(
+        path: Routes.notificationJobViewId,
+        builder: (context, state) => const NotificationsView(),
       ),
     ],
   );
