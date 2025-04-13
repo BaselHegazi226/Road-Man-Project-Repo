@@ -11,6 +11,7 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/job_det
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/notification_view.dart';
 
+import '../../features/_02_onboarding_view/presentation/view/onboarding_page_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
 import 'routes.dart';
@@ -18,7 +19,10 @@ import 'routes.dart';
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const HomeView()),
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const OnboardingPageView(),
+      ),
       GoRoute(
         path: Routes.signInViewId,
         builder: (context, state) => const SignInView(),

@@ -1,7 +1,8 @@
 class Routes {
-  static String forgetPasswordViewId = '/ForgetPasswordView';
+  static String onBoardingPageViewId = '/onBoardingPageViewId';
   static String signUpViewId = '/SignUpView';
   static String signInViewId = '/SignInView';
+  static String forgetPasswordViewId = '/ForgetPasswordView';
   static String homeViewId = '/homeView';
   static String profileViewId = '/profileView';
   static String aboutAppViewId = '/aboutAppView';
