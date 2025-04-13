@@ -13,4 +13,10 @@ class Assets {
   static const String jobGoogleIcon = 'assets/images/job/google_icon.svg';
   static const String profileProfileUserImage =
       'assets/images/profile/profile_user_image.png';
+  static const String onBoarding1Image =
+      'assets/images/onboarding/onboarding1_image.svg';
+  static const String onBoarding2Image =
+      'assets/images/onboarding/onboarding2_image.svg';
+  static const String onBoarding3Image =
+      'assets/images/onboarding/onboarding3_image.svg';
 }
