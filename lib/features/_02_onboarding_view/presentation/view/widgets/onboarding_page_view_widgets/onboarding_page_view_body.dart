@@ -26,7 +26,7 @@ class _OnboardingPageViewBodyState extends State<OnboardingPageViewBody> {
       _pageController.animateToPage(
         _currentPage + 1,
         duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+        curve: Curves.easeIn,
       );
     } else {
       GoRouter.of(context).push(Routes.signInViewId);

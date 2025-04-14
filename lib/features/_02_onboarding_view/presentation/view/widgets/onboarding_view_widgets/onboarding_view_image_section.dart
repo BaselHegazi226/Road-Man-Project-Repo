@@ -7,18 +7,16 @@ class OnBoardingViewImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
-    return Padding(
-      padding: EdgeInsets.only(
-        top: screenHeight * .055,
-        bottom: screenHeight * .03,
-      ),
-      child: Center(
-        child: Flexible(
-          child: SvgPicture.asset(
-            image,
-            height: screenHeight * .48,
-            fit: BoxFit.cover,
-          ),
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: screenHeight * .055,
+          bottom: screenHeight * .03,
+        ),
+        child: SvgPicture.asset(
+          image,
+          height: screenHeight * .48,
+          fit: BoxFit.cover,
         ),
       ),
     );
