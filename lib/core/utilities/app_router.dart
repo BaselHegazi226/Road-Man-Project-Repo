@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:road_man_project/features/_01_splash_view/presentation/view/splash_view.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
 import 'package:road_man_project/features/_05_home_view/presentation/view/home_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/about_app_view.dart';
@@ -23,10 +22,6 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (context, state) => const OnboardingPageView(),
-      ),
-      GoRoute(
-        path: Routes.splashViewId,
-        builder: (context, state) => const SplashView(),
       ),
       GoRoute(
         path: Routes.onBoardingPageViewId,
