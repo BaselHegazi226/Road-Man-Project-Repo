@@ -11,13 +11,12 @@ class OnboardingIndicator extends StatelessWidget {
     final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: EdgeInsets.symmetric(horizontal: screenWidth * .02),
+      duration: const Duration(milliseconds: 200),
+      margin: EdgeInsets.symmetric(horizontal: screenWidth * .01),
       width: screenWidth * .12,
-      height: screenHeight * .005,
+      height: isActive ? screenHeight * .005 : screenHeight * .0025,
       decoration: BoxDecoration(
-        color: isActive ? kAppPrimaryBlueColor : Colors.grey,
-        borderRadius: BorderRadius.circular(16),
+        color: isActive ? kAppPrimaryBlueColor : onboardingIndicatorColor,
       ),
     );
   }
