@@ -56,3 +56,4 @@ const Color kEditProfilePasswordIconColor = Color.fromRGBO(19, 19, 20, 0.50);
 const Color kEditProfileTextField = Color(0xff131314);
 
 const Color kDashboardColor = Color(0xffE6E8EE);
+const Color onboardingIndicatorColor = Color(0xff757575);
