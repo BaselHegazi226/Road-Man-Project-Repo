@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/shadows.dart';
 
-import '../../../../core/helper/const_variables.dart';
+import '../../../../../core/helper/const_variables.dart';
 
 class RadioButtonQuestion extends StatelessWidget {
   final List<String> questions;
@@ -50,9 +50,7 @@ class RadioButtonQuestion extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Color(0xFFF4F5F8),
-        boxShadow: [
-          BoxShadows.blueShadow
-        ],
+        boxShadow: [BoxShadows.blueShadow],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,54 +60,55 @@ class RadioButtonQuestion extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
               question,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
           ),
           // Custom square radio buttons for options
-          ...options.map((option) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6.0),
-            child: InkWell(
-              onTap: () {
-                onOptionSelected(questionIndex, option);
-              },
-              child: Row(
-                children: [
-                  // Square radio button
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: selectedValue == option ? kAppPrimaryBlueColor : Colors.white,
-                      border: Border.all(
-                        color: selectedValue == option ? kAppPrimaryBlueColor : Colors.grey,
-                        width: 2.0,
+          ...options.map(
+            (option) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: InkWell(
+                onTap: () {
+                  onOptionSelected(questionIndex, option);
+                },
+                child: Row(
+                  children: [
+                    // Square radio button
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color:
+                            selectedValue == option
+                                ? kAppPrimaryBlueColor
+                                : Colors.white,
+                        border: Border.all(
+                          color:
+                              selectedValue == option
+                                  ? kAppPrimaryBlueColor
+                                  : Colors.grey,
+                          width: 2.0,
+                        ),
                       ),
+                      child:
+                          selectedValue == option
+                              ? const Icon(
+                                Icons.check,
+                                size: 18.0,
+                                color: Colors.white,
+                              )
+                              : null,
                     ),
-                    child: selectedValue == option
-                        ? const Icon(
-                      Icons.check,
-                      size: 18.0,
-                      color: Colors.white,
-                    )
-                        : null,
-                  ),
-                  const SizedBox(width: 16),
-                  // Option text
-                  Expanded(
-                    child: Text(
-                      option,
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                    const SizedBox(width: 16),
+                    // Option text
+                    Expanded(
+                      child: Text(option, style: TextStyle(fontSize: 16)),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          )),
+          ),
           const SizedBox(height: 24),
         ],
       ),

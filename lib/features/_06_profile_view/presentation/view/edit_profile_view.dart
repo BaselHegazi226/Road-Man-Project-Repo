@@ -4,7 +4,7 @@ import 'package:road_man_project/core/utilities/custom_flexible_widget.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/01_edit_profile_widgets/edit_profile_view_body.dart';
 
 import '../../../../core/helper/const_variables.dart';
-import '../../../_03_auth_view/presentation/views/widgets/common_widgets/custom_app_bar.dart';
+import '../../../../core/utilities/custom_app_bar.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});

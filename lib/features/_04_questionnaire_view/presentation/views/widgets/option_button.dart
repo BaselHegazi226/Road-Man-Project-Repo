@@ -1,41 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../../../../core/utilities/shadows.dart';
+import '../../../../../core/utilities/shadows.dart';
 
 class OptionButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const OptionButton({
-    Key? key,
-    required this.text,
-    required this.onPressed,
-  }) : super(key: key);
+  const OptionButton({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: const [
-          BoxShadows.blackShadow,
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 16),
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        height: screenHeight * .06,
+        decoration: BoxDecoration(
+          color: kQuestionnaireButtonColor,
+          borderRadius: BorderRadius.circular(screenWidth * .04),
+          boxShadow: const [BoxShadows.blackShadow],
         ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Colors.black
-          ),
+        child: Center(
+          child: Text(text, style: AfacadTextStyles.textStyle14W500Black),
         ),
       ),
     );

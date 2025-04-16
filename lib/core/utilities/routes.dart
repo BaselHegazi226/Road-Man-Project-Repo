@@ -1,6 +1,7 @@
 class Routes {
   static String splashViewId = '/splashViewId';
   static String onBoardingPageViewId = '/onBoardingPageViewId';
+  static String questionnaireViewId = '/questionnaireViewId';
   static String signUpViewId = '/SignUpView';
   static String signInViewId = '/SignInView';
   static String forgetPasswordViewId = '/ForgetPasswordView';

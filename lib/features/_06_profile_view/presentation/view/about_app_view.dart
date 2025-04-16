@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/widgets/03_about_app_widgets/about_app_view_body.dart';
 
 import '../../../../core/helper/const_variables.dart';
-import '../../../_03_auth_view/presentation/views/widgets/common_widgets/custom_app_bar.dart';
+import '../../../../core/utilities/custom_app_bar.dart';
 
 class AboutAppView extends StatelessWidget {
   const AboutAppView({super.key});

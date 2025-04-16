@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_04_questionnaire/presentation/widgets/option_button.dart';
-import 'package:road_man_project/features/_04_questionnaire/presentation/widgets/radio_button_question.dart';
-import '../../../_04_questionnaire_view/presentation/widgets/gradient_progress_bar.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
+import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/radio_button_question.dart';
+
+import 'option_button.dart';
 
 // Main questionnaire view widget (StatefulWidget)
 class QuestionnaireViewBody extends StatefulWidget {
@@ -27,8 +29,14 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
 
   final List<List<String>> _options = [
     ['Learn a new skill', 'Explore a suitable job'],
-    ['I have an educational field and I want to complete it','I don’t have a field and I want to start'],
-    ['I want to start from scratch', 'I want to pursue the field from where I left off'],
+    [
+      'I have an educational field and I want to complete it',
+      'I don’t have a field and I want to start',
+    ],
+    [
+      'I want to start from scratch',
+      'I want to pursue the field from where I left off',
+    ],
   ];
 
   // Store selected options
@@ -40,13 +48,10 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     [
       'What is your field?',
       'What are your learning goals?',
-      'What kind of learning resources do you prefer?'
+      'What kind of learning resources do you prefer?',
     ],
     // Page 6 questions
-    [
-      'At what level did you stop ?',
-      'What challenges are you facing now?'
-    ]
+    ['At what level did you stop ?', 'What challenges are you facing now?'],
   ];
 
   // Radio button options for each question
@@ -55,19 +60,19 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     [
       ['Programming', 'UI UX', 'Digital Marketing'],
       ['For jog', 'Self-development', 'Getting a certification'],
-      ['Visual', 'Textual', 'Interactive']
+      ['Visual', 'Textual', 'Interactive'],
     ],
     // Page 6 options
     [
       ['Beginner', 'Intermediate', 'Advanced'],
-      ['Unclear learning path', 'Insufficient content', 'Lack of time']
-    ]
+      ['Unclear learning path', 'Insufficient content', 'Lack of time'],
+    ],
   ];
 
   // Store radio selections (for 6 questions across 2 pages)
   final List<List<String?>> _radioSelections = [
     [null, null, null], // Page 5 selections
-    [null, null, null]  // Page 6 selections
+    [null, null, null], // Page 6 selections
   ];
 
   // Total number of pages
@@ -84,9 +89,6 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     _pageController.dispose();
     super.dispose();
   }
-
-  // Calculate progress (0.0 to 1.0)
-  double get _progress => (_currentPage + 1) / _totalPages;
 
   // Go to next question
   void _goToNextQuestion() {
@@ -106,19 +108,20 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     // Show completion dialog
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Questionnaire Complete'),
-        content: const Text('Thank you for completing the questionnaire!'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              // Navigate to next screen
-            },
-            child: const Text('Continue'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Questionnaire Complete'),
+            content: const Text('Thank you for completing the questionnaire!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // Navigate to next screen
+                },
+                child: const Text('Continue'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -141,142 +144,139 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 16),
-              const Text(
-                'Lets Start..',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
 
-              // Progress bar
-              GradientProgressBar(
-                progress: _progress,
-                horizontalPadding: 20,
-              ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: screenHeight * .02,
+        children: [
+          Text('Lets Start..', style: AfacadTextStyles.textStyle24W700Black),
 
-              const SizedBox(height: 16),
+          // Progress bar
+          //     GradientProgressBar(progress: _progress, horizontalPadding: 20),
 
-              // Page indicator
-              Text(
-                'Page ${_currentPage + 1} of $_totalPages',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
-              ),
-
-              // PageView for questions
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(), // Disable swiping
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentPage = index;
-                    });
-                  },
-                  itemCount: _totalPages,
-                  itemBuilder: (context, index) {
-                    // First 4 pages use original question format
-                    if (index < _questionTexts.length) {
-                      return _buildQuestionPage(index);
-                    }
-                    // Last 2 pages use radio button format
-                    else {
-                      int radioPageIndex = index - _questionTexts.length;
-                      return _buildRadioButtonPage(radioPageIndex);
-                    }
-                  },
-                ),
-              ),
-
-              // Navigation buttons
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Back button
-                    if (_currentPage > 0)
-                      TextButton(
-                        onPressed: () {
-                          _pageController.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.arrow_back_ios_new, size: 16),
-                            SizedBox(width: 4),
-                            Text('Previous'),
-                          ],
-                        ),
-                      )
-                    else
-                      const SizedBox(width: 80),
-
-                    // Next button - only show on last 2 pages
-                    if (_currentPage >= _totalPages - 2)
-                      TextButton(
-                        onPressed: _goToNextQuestion,
-                        child: const Row(
-                          children: [
-                            Text('Next'),
-                            SizedBox(width: 4),
-                            Icon(Icons.arrow_forward_ios, size: 16),
-                          ],
-                        ),
-                      )
-                    else
-                      const SizedBox(width: 80),
-                  ],
-                ),
-              ),
-            ],
+          // Page indicator
+          Center(
+            child: Text(
+              'Page ${_currentPage + 1} of $_totalPages',
+              textAlign: TextAlign.center,
+              style: AfacadTextStyles.textStyle16W600Grey,
+            ),
           ),
-        ),
+
+          // PageView for questions
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(), // Disable swiping
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPage = index;
+                });
+              },
+              itemCount: _totalPages,
+              itemBuilder: (context, index) {
+                // First 4 pages use original question format
+                if (index < _questionTexts.length) {
+                  return _buildQuestionPage(index);
+                }
+                // Last 2 pages use radio button format
+                else {
+                  int radioPageIndex = index - _questionTexts.length;
+                  return _buildRadioButtonPage(radioPageIndex);
+                }
+              },
+            ),
+          ),
+
+          // Navigation buttons
+          Padding(
+            padding: EdgeInsets.only(bottom: screenHeight * .005),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Back button
+                if (_currentPage > 0)
+                  TextButton(
+                    onPressed: () {
+                      _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                    child: Row(
+                      spacing: screenWidth * .01,
+                      children: [
+                        Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 16,
+                          color: kAppPrimaryBlueColor,
+                        ),
+                        Text(
+                          'Previous',
+                          style: AfacadTextStyles.textStyle16W600HBlue,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                // Next button - only show on last 2 pages
+                if (_currentPage >= _totalPages - 2)
+                  TextButton(
+                    onPressed: _goToNextQuestion,
+                    child: Row(
+                      spacing: screenWidth * .01,
+                      children: [
+                        Text(
+                          'Next',
+                          style: AfacadTextStyles.textStyle16W600HBlue,
+                        ),
+                        const Icon(Icons.arrow_forward_ios, size: 16),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   // Build an individual question page
   Widget _buildQuestionPage(int index) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: 40),
+        SizedBox(height: MediaQuery.sizeOf(context).height * .04),
 
         // Question text
         Center(
           child: Text(
             _questionTexts[index],
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+            style: AfacadTextStyles.textStyle24W700Black.copyWith(height: 1.5),
           ),
         ),
 
-        const SizedBox(height: 24),
+        SizedBox(height: screenHeight * .04),
 
         // Options
-        ..._options[index].map((option) => Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: OptionButton(
-            text: option,
-            onPressed: () => _selectOption(index, option),
+        ..._options[index].map(
+          (option) => Padding(
+            padding: EdgeInsets.only(bottom: screenHeight * .02),
+            child: OptionButton(
+              text: option,
+              onPressed: () => _selectOption(index, option),
+            ),
           ),
-        )),
+        ),
       ],
     );
   }

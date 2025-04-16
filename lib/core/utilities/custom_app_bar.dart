@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/helper/const_variables.dart';
-import '../../../../../../core/utilities/base_text_styles.dart';
+import '../helper/const_variables.dart';
+import 'base_text_styles.dart';
 
 PreferredSizeWidget customAppBar({
   required String text,
@@ -12,6 +12,7 @@ PreferredSizeWidget customAppBar({
 }) {
   return AppBar(
     backgroundColor: backgroundColor,
+    elevation: 0,
     leading: Builder(
       builder: (context) {
         double screenWidth = MediaQuery.of(context).size.width;

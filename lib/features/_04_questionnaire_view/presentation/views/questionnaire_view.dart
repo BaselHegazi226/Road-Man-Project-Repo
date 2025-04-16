@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_04_questionnaire/presentation/widgets/questionnaire_view_body.dart';
-
-import '../../../core/helper/class_const_functions.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/questionnaire_view_body.dart';
 
 class QuestionnaireView extends StatelessWidget {
-  const QuestionnaireView({Key? key}) : super(key: key);
+  const QuestionnaireView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: ConstFunctions.customAppBar(
-        backgroundColor: Colors.white,
-        text: '',
-        onPressed: () {
-        },
-      ),
-      body: QuestionnaireViewBody(),
+      backgroundColor: kAppPrimaryWhiteColor,
+      appBar: AppBar(backgroundColor: kAppPrimaryWhiteColor, elevation: 0),
+      body: const QuestionnaireViewBody(),
     );
   }
 }
