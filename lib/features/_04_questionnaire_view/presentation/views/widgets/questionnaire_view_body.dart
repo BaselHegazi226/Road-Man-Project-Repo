@@ -5,7 +5,6 @@ import 'package:road_man_project/features/_04_questionnaire_view/presentation/vi
 
 import 'option_button.dart';
 
-// Main questionnaire view widget (StatefulWidget)
 class QuestionnaireViewBody extends StatefulWidget {
   const QuestionnaireViewBody({super.key});
 
@@ -14,13 +13,9 @@ class QuestionnaireViewBody extends StatefulWidget {
 }
 
 class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
-  // PageController to manage PageView
   late PageController _pageController;
-
-  // Current page index
   int _currentPage = 0;
 
-  // Question data stored directly in lists
   final List<String> _questionTexts = [
     'What is your purpose for using the application?',
     'How Can I help you today?',
@@ -39,44 +34,34 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     ],
   ];
 
-  // Store selected options
   final List<String?> _selectedOptions = [null, null, null, null];
-
-  // Radio button pages data
   final List<List<String>> _radioPages = [
-    // Page 5 questions
     [
       'What is your field?',
       'What are your learning goals?',
       'What kind of learning resources do you prefer?',
     ],
-    // Page 6 questions
     ['At what level did you stop ?', 'What challenges are you facing now?'],
   ];
 
-  // Radio button options for each question
   final List<List<List<String>>> _radioOptions = [
-    // Page 5 options
     [
       ['Programming', 'UI UX', 'Digital Marketing'],
       ['For jog', 'Self-development', 'Getting a certification'],
       ['Visual', 'Textual', 'Interactive'],
     ],
-    // Page 6 options
     [
       ['Beginner', 'Intermediate', 'Advanced'],
       ['Unclear learning path', 'Insufficient content', 'Lack of time'],
     ],
   ];
 
-  // Store radio selections (for 6 questions across 2 pages)
   final List<List<String?>> _radioSelections = [
-    [null, null, null], // Page 5 selections
-    [null, null, null], // Page 6 selections
+    [null, null, null],
+    [null, null, null],
   ];
 
-  // Total number of pages
-  int get _totalPages => 5; // 4 original + 2 radio pages
+  int get _totalPages => 5;
 
   @override
   void initState() {
@@ -90,7 +75,6 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     super.dispose();
   }
 
-  // Go to next question
   void _goToNextQuestion() {
     if (_currentPage < _totalPages - 1) {
       _pageController.nextPage(
@@ -98,14 +82,11 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
         curve: Curves.easeInOut,
       );
     } else {
-      // Handle questionnaire completion
       _handleQuestionnaireComplete();
     }
   }
 
-  // Handle questionnaire completion
   void _handleQuestionnaireComplete() {
-    // Show completion dialog
     showDialog(
       context: context,
       builder:
@@ -116,7 +97,6 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  // Navigate to next screen
                 },
                 child: const Text('Continue'),
               ),
@@ -125,17 +105,13 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     );
   }
 
-  // Handle option selection
   void _selectOption(int questionIndex, String option) {
     setState(() {
       _selectedOptions[questionIndex] = option;
     });
-
-    // Add a small delay before moving to the next question
     Future.delayed(const Duration(milliseconds: 300), _goToNextQuestion);
   }
 
-  // Handle radio button selection
   void _selectRadioOption(int pageIndex, int questionIndex, String value) {
     setState(() {
       _radioSelections[pageIndex][questionIndex] = value;
@@ -154,142 +130,206 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: screenHeight * .02,
         children: [
-          Text('Lets Start..', style: AfacadTextStyles.textStyle24W700Black),
-
-          // Progress bar
-          //     GradientProgressBar(progress: _progress, horizontalPadding: 20),
-
-          // Page indicator
-          Center(
-            child: Text(
-              'Page ${_currentPage + 1} of $_totalPages',
-              textAlign: TextAlign.center,
-              style: AfacadTextStyles.textStyle16W600Grey,
-            ),
+          QuestionnaireHeader(
+            currentPage: _currentPage,
+            totalPages: _totalPages,
           ),
-
-          // PageView for questions
           Expanded(
             child: PageView.builder(
               controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(), // Disable swiping
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: (index) => setState(() => _currentPage = index),
               itemCount: _totalPages,
               itemBuilder: (context, index) {
-                // First 4 pages use original question format
                 if (index < _questionTexts.length) {
-                  return _buildQuestionPage(index);
-                }
-                // Last 2 pages use radio button format
-                else {
+                  return QuestionPage(
+                    questionText: _questionTexts[index],
+                    options: _options[index],
+                    onOptionSelected: (option) => _selectOption(index, option),
+                  );
+                } else {
                   int radioPageIndex = index - _questionTexts.length;
-                  return _buildRadioButtonPage(radioPageIndex);
+                  return RadioButtonQuestionPage(
+                    questions: _radioPages[radioPageIndex],
+                    options: _radioOptions[radioPageIndex],
+                    selections: _radioSelections[radioPageIndex],
+                    onOptionSelected: (qIndex, value) {
+                      _selectRadioOption(radioPageIndex, qIndex, value);
+                    },
+                  );
                 }
               },
             ),
           ),
-
-          // Navigation buttons
-          Padding(
-            padding: EdgeInsets.only(bottom: screenHeight * .005),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Back button
-                if (_currentPage > 0)
-                  TextButton(
-                    onPressed: () {
-                      _pageController.previousPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
-                    child: Row(
-                      spacing: screenWidth * .01,
-                      children: [
-                        Icon(
-                          Icons.arrow_back_ios_new,
-                          size: 16,
-                          color: kAppPrimaryBlueColor,
-                        ),
-                        Text(
-                          'Previous',
-                          style: AfacadTextStyles.textStyle16W600HBlue,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                // Next button - only show on last 2 pages
-                if (_currentPage >= _totalPages - 2)
-                  TextButton(
-                    onPressed: _goToNextQuestion,
-                    child: Row(
-                      spacing: screenWidth * .01,
-                      children: [
-                        Text(
-                          'Next',
-                          style: AfacadTextStyles.textStyle16W600HBlue,
-                        ),
-                        const Icon(Icons.arrow_forward_ios, size: 16),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
+          NavigationButtons(
+            currentPage: _currentPage,
+            totalPages: _totalPages,
+            onPrevious:
+                () => _pageController.previousPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                ),
+            onNext: _goToNextQuestion,
           ),
         ],
       ),
     );
   }
+}
 
-  // Build an individual question page
-  Widget _buildQuestionPage(int index) {
+// الكلاسات المنفصلة
+class QuestionnaireHeader extends StatelessWidget {
+  final int currentPage;
+  final int totalPages;
+
+  const QuestionnaireHeader({
+    super.key,
+    required this.currentPage,
+    required this.totalPages,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: MediaQuery.sizeOf(context).height * .02,
+      children: [
+        Text('Lets Start..', style: AfacadTextStyles.textStyle24W700Black),
+        Center(
+          child: Text(
+            'Page ${currentPage + 1} of $totalPages',
+            textAlign: TextAlign.center,
+            style: AfacadTextStyles.textStyle16W600Grey,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class QuestionPage extends StatelessWidget {
+  final String questionText;
+  final List<String> options;
+  final Function(String option) onOptionSelected;
+
+  const QuestionPage({
+    super.key,
+    required this.questionText,
+    required this.options,
+    required this.onOptionSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(height: MediaQuery.sizeOf(context).height * .04),
-
-        // Question text
+        SizedBox(height: screenHeight * .04),
         Center(
           child: Text(
-            _questionTexts[index],
+            questionText,
             textAlign: TextAlign.center,
             style: AfacadTextStyles.textStyle24W700Black.copyWith(height: 1.5),
           ),
         ),
-
         SizedBox(height: screenHeight * .04),
-
-        // Options
-        ..._options[index].map(
+        ...options.map(
           (option) => Padding(
             padding: EdgeInsets.only(bottom: screenHeight * .02),
             child: OptionButton(
               text: option,
-              onPressed: () => _selectOption(index, option),
+              onPressed: () => onOptionSelected(option),
             ),
           ),
         ),
       ],
     );
   }
+}
 
-  // Build a page with radio button questions
-  Widget _buildRadioButtonPage(int pageIndex) {
+class RadioButtonQuestionPage extends StatelessWidget {
+  final List<String> questions;
+  final List<List<String>> options;
+  final List<String?> selections;
+  final Function(int questionIndex, String value) onOptionSelected;
+
+  const RadioButtonQuestionPage({
+    super.key,
+    required this.questions,
+    required this.options,
+    required this.selections,
+    required this.onOptionSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return RadioButtonQuestion(
-      questions: _radioPages[pageIndex],
-      options: _radioOptions[pageIndex],
-      selections: _radioSelections[pageIndex],
-      onOptionSelected: (questionIndex, value) {
-        _selectRadioOption(pageIndex, questionIndex, value);
-      },
+      questions: questions,
+      options: options,
+      selections: selections,
+      onOptionSelected: onOptionSelected,
+    );
+  }
+}
+
+class NavigationButtons extends StatelessWidget {
+  final int currentPage;
+  final int totalPages;
+  final VoidCallback onPrevious;
+  final VoidCallback onNext;
+
+  const NavigationButtons({
+    super.key,
+    required this.currentPage,
+    required this.totalPages,
+    required this.onPrevious,
+    required this.onNext,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.sizeOf(context).height * .005,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (currentPage > 0)
+            TextButton(
+              onPressed: onPrevious,
+              child: Row(
+                spacing: screenWidth * .01,
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 16,
+                    color: kAppPrimaryBlueColor,
+                  ),
+                  Text(
+                    'Previous',
+                    style: AfacadTextStyles.textStyle16W600HBlue,
+                  ),
+                ],
+              ),
+            ),
+          if (currentPage >= totalPages - 2)
+            TextButton(
+              onPressed: onNext,
+              child: Row(
+                spacing: screenWidth * .01,
+                children: [
+                  Text('Next', style: AfacadTextStyles.textStyle16W600HBlue),
+                  const Icon(Icons.arrow_forward_ios, size: 16),
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
