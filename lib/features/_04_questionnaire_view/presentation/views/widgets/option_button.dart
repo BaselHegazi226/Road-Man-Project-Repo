@@ -13,19 +13,23 @@ class OptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double questionContainerHeight = screenHeight * .06;
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: screenHeight * .06,
+        height: questionContainerHeight,
+        padding: EdgeInsets.symmetric(vertical: questionContainerHeight / 3),
         decoration: BoxDecoration(
           color: kQuestionnaireButtonColor,
           borderRadius: BorderRadius.circular(screenWidth * .04),
           boxShadow: const [BoxShadows.blackShadow],
         ),
-        child: Center(
-          child: Text(text, style: AfacadTextStyles.textStyle14W500Black),
+        child: Text(
+          textAlign: TextAlign.center,
+          text,
+          style: AfacadTextStyles.textStyle14W500Black,
         ),
       ),
     );
