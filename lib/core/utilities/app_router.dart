@@ -1,12 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/questionnaire_view.dart';
-import 'package:road_man_project/features/_05_home_view/presentation/view/home_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/about_app_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/edit_profile_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/quiz_view.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/lesson_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/favourite_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_details_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
@@ -15,6 +16,7 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/notific
 import '../../features/_02_onboarding_view/presentation/view/onboarding_page_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
+import '../../features/_05_main_view/presentation/view/main_view.dart';
 import 'routes.dart';
 
 abstract class AppRouter {
@@ -46,7 +48,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: Routes.homeViewId,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const MainView(),
       ),
       GoRoute(
         path: Routes.profileViewId,
@@ -87,6 +89,14 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.notificationJobViewId,
         builder: (context, state) => const NotificationsView(),
+      ),
+      GoRoute(
+        path: Routes.lessonViewId,
+        builder: (context, state) => const LessonView(),
+      ),
+      GoRoute(
+        path: Routes.quizViewId,
+        builder: (context, state) => const QuizView(),
       ),
     ],
   );
