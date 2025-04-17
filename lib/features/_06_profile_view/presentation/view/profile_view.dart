@@ -11,11 +11,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
-      appBar: customAppBar(
-        generalColor: kTextBlackPrimaryColor,
-        text: 'Profile',
-        onPressed: () {},
-      ),
+      appBar: customAppBar(text: 'Profile', onPressed: () {}),
       body: const ProfileViewBody(),
     );
   }

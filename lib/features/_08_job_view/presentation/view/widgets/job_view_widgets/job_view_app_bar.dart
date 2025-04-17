@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
-import '../../../../../_05_home_view/presentation/view/widgets/custom_dashboard_widgets/open_dashboard.dart';
+import '../../../../../_05_main_view/presentation/view/widgets/custom_dashboard_widgets/open_dashboard.dart';
 import 'job_view_dashboard_view_body.dart';
 
 AppBar jobViewAppbar(BuildContext context) {

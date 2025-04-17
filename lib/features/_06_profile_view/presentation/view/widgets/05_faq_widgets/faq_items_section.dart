@@ -8,8 +8,9 @@ class FaqItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
-      spacing: 24,
+      spacing: screenHeight * .03,
       children:
           ProfileConstList.faqItemModelList
               .map((item) => FaqItem(faqItemModel: item))

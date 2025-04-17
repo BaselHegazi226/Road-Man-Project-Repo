@@ -8,10 +8,15 @@ class FaqViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * .04,
+        vertical: screenHeight * .04,
+      ),
       child: Column(
-        spacing: 54,
+        spacing: screenHeight * .0675,
         children: [
           const FaqItemsSection(),
           CustomProfileBlueTextButton(text: 'Contact us', onPressed: () {}),

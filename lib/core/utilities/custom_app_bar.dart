@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
 
-import '../helper/const_variables.dart';
 import 'base_text_styles.dart';
 
 PreferredSizeWidget customAppBar({
   required String text,
   required Function()? onPressed,
   Color backgroundColor = kAppPrimaryWhiteColor,
-  Color generalColor = kAppPrimaryBlueColor,
+  Color generalColor = kTextBlackPrimaryColor,
   double? iconSize, // ✅ جعله اختياريًا ليتم حسابه تلقائيًا
 }) {
   return AppBar(
@@ -31,6 +31,9 @@ PreferredSizeWidget customAppBar({
       },
     ),
     centerTitle: true,
-    title: Text(text, style: AfacadTextStyles.textStyle20W600Blue),
+    title: Text(
+      text,
+      style: AfacadTextStyles.textStyle20W600Blue.copyWith(color: generalColor),
+    ),
   );
 }

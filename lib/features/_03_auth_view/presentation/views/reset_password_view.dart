@@ -12,6 +12,7 @@ class ResetPasswordView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
+        generalColor: kAppPrimaryBlueColor,
         text: 'Reset Password',
         onPressed: () {
           GoRouter.of(context).pop();

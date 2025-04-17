@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/question_page.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/questionnarie_header.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/radtion_button_question_page.dart';
 
+import '../../../../../core/utilities/base_text_styles.dart';
+import 'gradient_progress_bar.dart';
 import 'navigation_button.dart';
 
 class QuestionnaireViewBody extends StatefulWidget {
@@ -128,12 +129,15 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: screenHeight * .02,
+        spacing: screenHeight * .02, //16
         children: [
-          QuestionnaireHeader(
-            currentPage: _currentPage,
-            totalPages: _totalPages,
+          Text('Lets Start..', style: AfacadTextStyles.textStyle24W700Black),
+
+          GradientProgressBar(
+            progress:
+                _currentPage == 0 ? 0.0 : _currentPage / (_totalPages - 1),
           ),
+
           Expanded(
             child: PageView.builder(
               controller: _pageController,
@@ -161,6 +165,7 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
               },
             ),
           ),
+
           NavigationButtons(
             currentPage: _currentPage,
             totalPages: _totalPages,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 
-class CustomDrawerIconTitle extends StatelessWidget {
-  const CustomDrawerIconTitle({
+class CustomDashboardIconTitle extends StatelessWidget {
+  const CustomDashboardIconTitle({
     super.key,
     required this.iconData,
     required this.title,

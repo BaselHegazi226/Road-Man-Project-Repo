@@ -9,10 +9,12 @@ class PrivacyPolicyViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
       child: Column(
-        spacing: 16,
+        spacing: screenHeight * .02,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const CustomProfileTitle(
@@ -20,7 +22,7 @@ class PrivacyPolicyViewBody extends StatelessWidget {
           ),
           const PrivacyPolicyItemsSection(),
           Padding(
-            padding: const EdgeInsets.only(top: 48),
+            padding: EdgeInsets.only(top: screenHeight * .06),
             child: CustomProfileBlueTextButton(
               text: 'I agree to the privacy policy',
               onPressed: () {},

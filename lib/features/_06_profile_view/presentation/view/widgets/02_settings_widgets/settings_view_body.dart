@@ -13,18 +13,24 @@ class SettingsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
+      padding: EdgeInsets.only(
+        left: screenWidth * .04,
+        right: screenWidth * .04,
+        top: screenHeight * .04,
+      ),
       child: CustomFlexibleWidget(
         child: Column(
-          spacing: 24,
+          spacing: screenHeight * .03,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const LearningPreferencesSections(),
             const NotificationSection(),
             const CustomizeNotificationSection(),
             Padding(
-              padding: const EdgeInsets.only(top: 24),
+              padding: EdgeInsets.only(top: screenHeight * .03),
               child: CustomTextButton(
                 onPressed: () {},
                 backgroundColor: kAppPrimaryBlueColor,
