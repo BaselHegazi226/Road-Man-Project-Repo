@@ -19,4 +19,6 @@ class Assets {
       'assets/images/onboarding/onboarding2_image.svg';
   static const String onBoarding3Image =
       'assets/images/onboarding/onboarding3_image.svg';
+  static const String learningPathBackgroundImage =
+      'assets/images/learning_path/learning_path_background_image.svg';
 }
