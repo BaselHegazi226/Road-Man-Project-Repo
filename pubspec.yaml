@@ -31,6 +31,8 @@ dependencies:
   material_design_icons_flutter: ^7.0.7296
   flutter_advanced_switch: ^3.1.0
   intl: ^0.20.2
+  curved_navigation_bar: ^1.0.6
+  google_nav_bar: ^5.0.7
 
 
 dev_dependencies:
@@ -61,6 +63,7 @@ flutter:
     - assets/images/profile/
     - assets/images/job/
     - assets/images/onboarding/
+    - assets/images/learning_path/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
