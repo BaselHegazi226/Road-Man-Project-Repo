@@ -16,9 +16,12 @@ class EditProfileViewBody extends StatelessWidget {
         vertical: screenHeight * .04,
       ),
       child: Column(
-        spacing: screenHeight * 02,
+        spacing: screenHeight * .02,
         children: [
-          EditProfileImage(),
+          EditProfileImage(
+            screenWidth: screenWidth,
+            screenHeight: screenHeight,
+          ),
           EditProfileNamesFieldsSection(),
           EditProfilePasswordFieldsSection(),
         ],
