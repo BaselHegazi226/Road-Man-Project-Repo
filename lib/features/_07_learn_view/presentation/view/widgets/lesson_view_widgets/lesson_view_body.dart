@@ -11,6 +11,7 @@ class LessonViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: LessonViewConst.lessonViewCardModelList.length,
         itemBuilder: (context, index) {
           final list = LessonViewConst.lessonViewCardModelList;
