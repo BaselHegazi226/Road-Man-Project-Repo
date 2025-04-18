@@ -8,15 +8,11 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
-      child: Column(
-        spacing: screenHeight * .04,
-        children: [ProfileUserInfo(), ProfileItemsSection()],
-      ),
+      child: Column(children: [ProfileUserInfo(), ProfileItemsSection()]),
     );
   }
 }
