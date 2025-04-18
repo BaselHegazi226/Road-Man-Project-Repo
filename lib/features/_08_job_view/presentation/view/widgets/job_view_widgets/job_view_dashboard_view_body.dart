@@ -10,10 +10,17 @@ class JobViewDashboardViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 64, bottom: 32),
+      padding: EdgeInsets.only(
+        left: screenWidth * .04,
+        right: screenWidth * .04,
+        top: screenHeight * .02,
+        bottom: screenHeight * .04,
+      ),
       child: Column(
-        spacing: 8,
+        spacing: screenHeight * .01,
         children: [
           const ProfileUserInfo(),
           Divider(thickness: .5, color: kLogoutLineColor),
