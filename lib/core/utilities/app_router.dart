@@ -6,8 +6,8 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/edi
 import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/lesson_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/quiz_view.dart';
-import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/lesson_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/favourite_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_details_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
@@ -22,10 +22,7 @@ import 'routes.dart';
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const QuestionnaireView(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const MainView()),
       GoRoute(
         path: Routes.onBoardingPageViewId,
         builder: (context, state) => const OnboardingPageView(),
