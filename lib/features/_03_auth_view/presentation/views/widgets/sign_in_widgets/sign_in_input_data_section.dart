@@ -51,7 +51,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
               ),
               CustomTextButton(
                 onPressed: () {
-                  GoRouter.of(context).push(Routes.homeViewId);
+                  GoRouter.of(context).push(Routes.mainViewId);
                 },
                 backgroundColor: kSecondlyLightWhiteColor,
                 borderColor: kAppPrimaryBlueColor,
