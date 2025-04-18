@@ -8,6 +8,7 @@ PreferredSizeWidget customAppBar({
   required Function()? onPressed,
   Color backgroundColor = kAppPrimaryWhiteColor,
   Color generalColor = kTextBlackPrimaryColor,
+  Color iconColor = kTextBlackPrimaryColor,
   double? iconSize, // ✅ جعله اختياريًا ليتم حسابه تلقائيًا
 }) {
   return AppBar(
@@ -24,7 +25,7 @@ PreferredSizeWidget customAppBar({
           onPressed: onPressed,
           icon: Icon(
             Icons.arrow_back_ios_new,
-            color: generalColor,
+            color: iconColor,
             size: calculatedIconSize,
           ),
         );
