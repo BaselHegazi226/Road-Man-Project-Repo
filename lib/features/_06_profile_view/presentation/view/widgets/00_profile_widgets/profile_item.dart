@@ -13,18 +13,19 @@ class ProfileItem extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
     return InkWell(
       onTap: profileItemModel.routeName.isNotEmpty ? onTap : null,
       splashColor: kAppPrimaryBlueColor.withAlpha(15),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(screenWidth * .02),
       child: ListTile(
         leading: Icon(
           profileItemModel.prefixIcon,
-          size: 24,
+          size: screenWidth * .06,
           color: profileItemModel.iconColor,
         ),
         title: Padding(
-          padding: EdgeInsets.only(left: 8),
+          padding: EdgeInsets.only(left: screenWidth * .02),
           child: Text(
             profileItemModel.title,
             style: TextStyle(
@@ -36,7 +37,7 @@ class ProfileItem extends StatelessWidget {
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          size: 20,
+          size: screenWidth * .05,
           color: profileItemModel.iconColor,
         ),
       ),
