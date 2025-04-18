@@ -14,7 +14,7 @@ class JobViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: MediaQuery.of(context).size.width * 0.04,
-      ), // نسبة من العرض
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: screenHeight * 0.025, // تباعد ديناميكي بين العناصر
