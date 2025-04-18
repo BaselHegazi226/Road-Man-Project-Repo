@@ -18,7 +18,7 @@ class _HomeViewBodyState extends State<MainView> {
     Center(child: Text('Home', style: TextStyle(fontSize: 24))),
     LearningPathView(),
     JobView(),
-    ProfileView(),
+    ProfileView2(),
   ];
 
   void onTabSelected(int index) {
