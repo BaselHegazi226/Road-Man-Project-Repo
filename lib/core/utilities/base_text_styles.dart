@@ -78,6 +78,16 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  // Text Styles with Font Size 13
+  static TextStyle get textStyle13W400H150Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 13,
+      fontWeight: FontWeight.w400,
+      height: 1.5,
+    ).textStyle;
+  }
+
   // Text Styles with Font Size 14
   static TextStyle get textStyle14W400Black {
     return AfacadTextStyles(
@@ -129,6 +139,22 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  static TextStyle get textStyle14W600Black {
+    return AfacadTextStyles(
+      color: kTextBlackPrimaryColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle14W600DeepGrey {
+    return AfacadTextStyles(
+      color: kQuizViewSecondlyColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
   static TextStyle get textStyle14W600H150Black {
     return AfacadTextStyles(
       color: kTextBlackPrimaryColor,
@@ -152,6 +178,15 @@ class AfacadTextStyles extends BaseTextStyles {
       fontSize: 14,
       fontWeight: FontWeight.w700,
       height: 1.5,
+    ).textStyle;
+  }
+
+  // Text Styles with Font Size 15
+  static TextStyle get textStyle15W500Grey {
+    return AfacadTextStyles(
+      color: kTextGreyPrimaryColor,
+      fontSize: 15,
+      fontWeight: FontWeight.w500,
     ).textStyle;
   }
 
@@ -276,7 +311,7 @@ class AfacadTextStyles extends BaseTextStyles {
 
   static TextStyle get textStyle18W600H150Black {
     return AfacadTextStyles(
-      color: kAppPrimaryBlueColor,
+      color: kAppPrimaryBlackColor,
       fontSize: 18,
       fontWeight: FontWeight.w600,
       height: 1.5,
@@ -304,6 +339,14 @@ class AfacadTextStyles extends BaseTextStyles {
   static TextStyle get textStyle20W500Black {
     return AfacadTextStyles(
       color: kTextBlackPrimaryColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle20W500Blue {
+    return AfacadTextStyles(
+      color: kAppPrimaryBlueColor,
       fontSize: 20,
       fontWeight: FontWeight.w500,
     ).textStyle;
@@ -460,6 +503,33 @@ class JostTextStyles extends BaseTextStyles {
     return JostTextStyles(
       color: kAppPrimaryBlueColor,
       fontSize: 15,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+}
+
+// Montserrat TextStyle Class
+class MontserratTextStyles extends BaseTextStyles {
+  MontserratTextStyles({
+    required super.color,
+    required super.fontSize,
+    required super.fontWeight,
+    super.height,
+  }) : super(fontFamily: 'montserrat');
+
+  // Text Styles with Font Size 15
+  static TextStyle get textStyle16W600DeepGrey {
+    return JostTextStyles(
+      color: kQuizViewSecondlyColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle16W600Black {
+    return JostTextStyles(
+      color: kAppPrimaryBlackColor,
+      fontSize: 16,
       fontWeight: FontWeight.w600,
     ).textStyle;
   }
