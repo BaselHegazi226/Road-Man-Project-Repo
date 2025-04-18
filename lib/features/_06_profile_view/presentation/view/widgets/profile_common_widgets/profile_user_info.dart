@@ -8,19 +8,21 @@ class ProfileUserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 12,
-      children: [
-        Image.asset(
-          Assets.profileProfileUserImage,
-          fit: BoxFit.cover,
-          height: 64,
-          width: 64,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: screenHeight * .04),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: screenWidth * .03,
+        children: [
+          Image.asset(
+            Assets.profileProfileUserImage,
+            fit: BoxFit.contain,
+            height: screenWidth * .16,
+            width: screenWidth * .16,
+          ),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -33,8 +35,8 @@ class ProfileUserInfo extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
