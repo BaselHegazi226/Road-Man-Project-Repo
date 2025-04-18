@@ -13,6 +13,7 @@ class QuizViewBody extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
       child: ListView.builder(
         padding: EdgeInsets.symmetric(vertical: screenHeight * .02),
+        physics: const BouncingScrollPhysics(),
         itemCount: QuizViewConst.quizViewCardModelList.length,
         itemBuilder: (context, index) {
           final list = QuizViewConst.quizViewCardModelList;
