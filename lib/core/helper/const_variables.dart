@@ -6,12 +6,17 @@ const IconData kEnableIconData = Icons.check_box_rounded;
 Color kDisableColor = Colors.grey;
 const Color kAppPrimaryBlueColor = Color(0xff2352A1);
 const Color kAppPrimaryWhiteColor = Color(0xffF3F6F5);
+const Color kAppPrimaryBlackColor = Color(0xff131314);
 const Color kSecondlyDarkWhiteColor = Color(0xffE6E8EE);
 const Color kSecondlyLightWhiteColor = Color(0xffF5F5F5);
 const Color kQuestionnaireButtonColor = Color(0xffE6E8EE);
 const Color kTextBlackPrimaryColor = Color(0xff131314);
 const Color kTextGreyHalfOpacityPrimaryColor = Color.fromRGBO(19, 19, 20, 0.50);
 const Color kTextGreyPrimaryColor = Color(0xff8A8C90);
+
+const Color kQuizViewPrimaryColor = Color(0xffD4E0F4);
+const Color kQuizViewWhiteColor = Color(0xffF4F5F8);
+const Color kQuizViewSecondlyColor = Color(0xff4A4A4A);
 
 const Color kCheckPasswordItemColor = Color(0xff131314);
 const Color kOtpPinThemeBorderColor = Color(0xff131314);
