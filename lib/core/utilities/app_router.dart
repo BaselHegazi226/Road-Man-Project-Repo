@@ -5,7 +5,9 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/abo
 import 'package:road_man_project/features/_06_profile_view/presentation/view/edit_profile_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/lesson_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/quiz_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/favourite_view.dart';
@@ -44,12 +46,12 @@ abstract class AppRouter {
         builder: (context, state) => const ForgetPasswordView(),
       ),
       GoRoute(
-        path: Routes.homeViewId,
+        path: Routes.mainViewId,
         builder: (context, state) => const MainView(),
       ),
       GoRoute(
         path: Routes.profileViewId,
-        builder: (context, state) => const FAQView(),
+        builder: (context, state) => const ProfileView1(),
       ),
       GoRoute(
         path: Routes.editProfileViewId,
@@ -86,6 +88,10 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.notificationJobViewId,
         builder: (context, state) => const NotificationsView(),
+      ),
+      GoRoute(
+        path: Routes.learningPathViewId,
+        builder: (context, state) => const LearningPathView(),
       ),
       GoRoute(
         path: Routes.lessonViewId,
