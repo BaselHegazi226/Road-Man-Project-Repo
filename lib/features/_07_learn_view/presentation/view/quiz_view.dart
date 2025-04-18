@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_body.dart';
@@ -15,6 +16,16 @@ class QuizView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kQuizViewPrimaryColor,
         titleSpacing: screenWidth * .04,
+        leading: IconButton(
+          padding: EdgeInsets.only(top: screenHeight * .02),
+          onPressed: () {
+            GoRouter.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            size: screenWidth * 0.05,
+          ),
+        ),
         title: Padding(
           padding: EdgeInsets.only(top: screenHeight * .02),
           child: Text(
