@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
 import 'package:road_man_project/generated/assets.dart';
 
 import 'learning_path_step.dart';
@@ -56,46 +58,62 @@ class LearningPathViewBody extends StatelessWidget {
                       isEvenLevel
                           ? [
                             _buildSpecificStep(
-                              screenWidth,
-                              screenHeight,
-                              Alignment.centerRight,
-                              firstOffset,
-                              FontAwesomeIcons.bookOpen,
-                              const Color(0xff5385DA),
-                              Colors.white54,
-                              const Color(0xff2961BE),
+                              context,
+                              onPressed: () {
+                                GoRouter.of(context).push(Routes.lessonViewId);
+                              },
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              alignment: Alignment.centerRight,
+                              horizontalOffset: firstOffset,
+                              icon: FontAwesomeIcons.bookOpen,
+                              backgroundColor: const Color(0xff5385DA),
+                              iconColor: Colors.white54,
+                              shadowColor: const Color(0xff2961BE),
                             ),
                             _buildSpecificStep(
-                              screenWidth,
-                              screenHeight,
-                              Alignment.centerRight,
-                              secondOffset,
-                              Icons.assignment_turned_in,
-                              const Color(0xffE5E5E5),
-                              const Color(0xffB7B7B7),
-                              const Color(0xffB7B7B7),
+                              context,
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              onPressed: () {
+                                GoRouter.of(context).push(Routes.quizViewId);
+                              },
+                              alignment: Alignment.centerRight,
+                              horizontalOffset: secondOffset,
+                              icon: Icons.assignment_turned_in,
+                              backgroundColor: const Color(0xffE5E5E5),
+                              iconColor: const Color(0xffB7B7B7),
+                              shadowColor: const Color(0xffB7B7B7),
                             ),
                           ]
                           : [
                             _buildSpecificStep(
-                              screenWidth,
-                              screenHeight,
-                              Alignment.centerLeft,
-                              firstOffset,
-                              FontAwesomeIcons.bookOpen,
-                              const Color(0xff5385DA),
-                              Colors.white54,
-                              const Color(0xff2961BE),
+                              context,
+                              onPressed: () {
+                                GoRouter.of(context).push(Routes.lessonViewId);
+                              },
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              alignment: Alignment.centerLeft,
+                              horizontalOffset: firstOffset,
+                              icon: FontAwesomeIcons.bookOpen,
+                              backgroundColor: const Color(0xff5385DA),
+                              iconColor: Colors.white54,
+                              shadowColor: const Color(0xff2961BE),
                             ),
                             _buildSpecificStep(
-                              screenWidth,
-                              screenHeight,
-                              Alignment.centerLeft,
-                              secondOffset,
-                              Icons.assignment_turned_in,
-                              const Color(0xffE5E5E5),
-                              const Color(0xffB7B7B7),
-                              const Color(0xffB7B7B7),
+                              context,
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              onPressed: () {
+                                GoRouter.of(context).push(Routes.quizViewId);
+                              },
+                              alignment: Alignment.centerLeft,
+                              horizontalOffset: secondOffset,
+                              icon: Icons.assignment_turned_in,
+                              backgroundColor: const Color(0xffE5E5E5),
+                              iconColor: const Color(0xffB7B7B7),
+                              shadowColor: const Color(0xffB7B7B7),
                             ),
                           ];
 
@@ -111,15 +129,17 @@ class LearningPathViewBody extends StatelessWidget {
   }
 
   Widget _buildSpecificStep(
-    double screenWidth,
-    double screenHeight, // استخدام screenHeight هنا
-    Alignment alignment,
-    double horizontalOffset,
-    IconData icon,
-    Color backgroundColor,
-    Color iconColor,
-    Color shadowColor,
-  ) {
+    context, {
+    required double screenWidth,
+    required double screenHeight,
+    required VoidCallback onPressed,
+    required Alignment alignment,
+    required double horizontalOffset,
+    required IconData icon,
+    required Color backgroundColor,
+    required Color iconColor,
+    required Color shadowColor,
+  }) {
     return Align(
       alignment: alignment,
       child: Padding(
@@ -130,7 +150,7 @@ class LearningPathViewBody extends StatelessWidget {
           right: alignment == Alignment.centerRight ? horizontalOffset : 0,
         ),
         child: LearningPathStep(
-          onPressed: () {},
+          onPressed: onPressed,
           iconData: icon,
           iconColor: iconColor,
           backgroundColor: backgroundColor,
@@ -140,3 +160,35 @@ class LearningPathViewBody extends StatelessWidget {
     );
   }
 }
+
+/*
+                _buildSpecificStep(
+                              context,
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              onPressed: (){
+                                GoRouter.of(context).push(Routes.lessonViewId)
+                              },
+                              alignment: Alignment.centerRight,
+                              horizontalOffset: firstOffset,
+                              icon: FontAwesomeIcons.bookOpen,
+                              backgroundColor: const Color(0xff5385DA),
+                              iconColor: Colors.white54,
+                              shadowColor: const Color(0xff2961BE),
+                            ),
+                            _buildSpecificStep(
+                              context,
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              onPressed: (){
+                                GoRouter.of(context).push(Routes.quizViewId)
+                              },
+                              alignment: Alignment.centerRight,
+                              horizontalOffset: secondOffset,
+                              icon: Icons.assignment_turned_in,
+                              backgroundColor: const Color(0xffE5E5E5),
+                              iconColor: const Color(0xffB7B7B7),
+                              shadowColor: const Color(0xffB7B7B7),
+                            ),
+
+ */
