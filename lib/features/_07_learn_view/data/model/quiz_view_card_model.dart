@@ -13,6 +13,11 @@ class QuizViewCardModel {
 class QuizViewCardAnswer {
   final int answerId;
   final String answerText;
+  final bool isCorrect;
 
-  const QuizViewCardAnswer({required this.answerId, required this.answerText});
+  const QuizViewCardAnswer({
+    required this.answerId,
+    required this.answerText,
+    required this.isCorrect,
+  });
 }
