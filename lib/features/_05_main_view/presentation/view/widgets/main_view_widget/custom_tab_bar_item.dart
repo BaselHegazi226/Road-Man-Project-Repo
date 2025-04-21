@@ -7,6 +7,7 @@ class CustomTabBarItem extends StatelessWidget {
   final int index;
   final bool isSelected;
   final double screenWidth;
+  final double screenHeight;
   final VoidCallback onTap;
 
   const CustomTabBarItem({
@@ -14,6 +15,7 @@ class CustomTabBarItem extends StatelessWidget {
     required this.index,
     required this.isSelected,
     required this.screenWidth,
+    required this.screenHeight,
     required this.onTap,
   });
 
@@ -30,18 +32,18 @@ class CustomTabBarItem extends StatelessWidget {
           horizontal: isSelected ? screenWidth * 0.04 : 0,
           vertical: screenWidth * 0.015,
         ),
-        margin: const EdgeInsets.only(top: 4),
+        margin: EdgeInsets.only(top: screenHeight * .01),
         decoration:
             isSelected
                 ? BoxDecoration(
-                  color: kAppPrimaryWhiteColor,
+                  color: kAppPrimaryWhiteColor, // ✅ الأبيض عند التحديد
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(screenWidth * .01),
                     bottom: Radius.circular(screenWidth * .8),
                   ),
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.white,
+                      color: kAppPrimaryWhiteColor, // ✅ نفس اللون الأبيض
                       blurRadius: 2,
                       offset: Offset(0, 2),
                     ),
@@ -58,13 +60,17 @@ class CustomTabBarItem extends StatelessWidget {
                 Icon(
                   _getIcon(index),
                   color:
-                      isSelected ? kAppPrimaryBlueColor : kAppPrimaryWhiteColor,
+                      isSelected
+                          ? kAppPrimaryBlueColor // ✅ أزرق عند التحديد
+                          : kAppPrimaryWhiteColor, // ✅ أبيض عندما لا يكون مختارًا
                 ),
                 if (isSelected) ...[
                   SizedBox(width: screenWidth * .02),
                   Text(
                     _getText(index),
-                    style: AfacadTextStyles.textStyle14W700H150Blue,
+                    style:
+                        AfacadTextStyles
+                            .textStyle14W700H150Blue, // ✅ نص باللون الأزرق
                   ),
                 ],
               ],
@@ -72,10 +78,12 @@ class CustomTabBarItem extends StatelessWidget {
             if (isSelected)
               Positioned(
                 top: -whiteLineHeight * 1.6,
+                left: index == 0 ? screenWidth * 0.05 : null,
+                right: index == 3 ? screenWidth * 0.05 : null,
                 child: const Icon(
                   CupertinoIcons.flag_fill,
                   size: 24,
-                  color: kAppPrimaryWhiteColor,
+                  color: kAppPrimaryWhiteColor, // ✅ علم أبيض عند التحديد
                 ),
               ),
           ],
