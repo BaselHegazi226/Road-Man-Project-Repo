@@ -9,7 +9,7 @@ class LearningPreferencesSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 16,
+      spacing: MediaQuery.sizeOf(context).height * .02,
       children: [
         CustomIconTitle(
           iconData: Icons.local_library_outlined,
