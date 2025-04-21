@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:road_man_project/features/_09_home_view/presentation/view/widgets/recommended_jobs_section_widgets/job_description.dart';
+import 'package:road_man_project/features/_09_home_view/presentation/view/widgets/recommended_jobs_section_widgets/job_tag.dart';
+
+import 'apply_button.dart';
 
 class JobCard extends StatelessWidget {
   const JobCard({super.key});
@@ -74,63 +78,21 @@ class JobCard extends StatelessWidget {
 
             // Job title
             const SizedBox(height: 7),
-            Text(
-              'Front end Development',
-              style: TextStyle(
-                color: const Color(0xFF131314),
-                fontSize: 16,
-                fontFamily: 'Afacad',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            JobDescription(description: 'Front end Development'),
 
             // Job tags row
             const SizedBox(height: 9),
             Row(
               children: [
                 // Job type tag
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFE6E8EE),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Text(
-                    'Full-Time',
-                    style: TextStyle(
-                      color: const Color(0xFF131314),
-                      fontSize: 11,
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-
+                JobTag(tag: 'Full-Time'),
                 const SizedBox(width: 5),
-
                 // Level tag
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFE6E8EE),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Text(
-                    'Intermediate level',
-                    style: TextStyle(
-                      color: const Color(0xFF131314),
-                      fontSize: 11,
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+                JobTag(tag: 'Intermediate level'),
               ],
             ),
-
             // Spacer to push bottom content down
             const Spacer(),
-
             // Divider
             Container(
               width: 213,
@@ -154,23 +116,7 @@ class JobCard extends StatelessWidget {
                   ),
                 ),
 
-                // Apply button
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFF2352A1),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Text(
-                    'Apply Now',
-                    style: TextStyle(
-                      color: const Color(0xFFF8F9FB),
-                      fontSize: 14,
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                ApplyButton()
               ],
             ),
           ],
