@@ -4,6 +4,7 @@ import 'package:road_man_project/features/_04_questionnaire_view/presentation/vi
 import 'package:road_man_project/features/_06_profile_view/presentation/view/about_app_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/edit_profile_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
+import 'package:road_man_project/features/_06_profile_view/presentation/view/learning_preferences_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
@@ -92,6 +93,10 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.learningPathViewId,
         builder: (context, state) => const LearningPathView(),
+      ),
+      GoRoute(
+        path: Routes.learningPreferencesViewId,
+        builder: (context, state) => const LearningPreferencesView(),
       ),
       GoRoute(
         path: Routes.lessonViewId,
