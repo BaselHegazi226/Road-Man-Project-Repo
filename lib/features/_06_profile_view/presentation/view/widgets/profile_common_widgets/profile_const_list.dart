@@ -82,6 +82,11 @@ class ProfileConstList {
       routeName: Routes.settingsViewId,
     ),
     ProfileItemModel(
+      prefixIcon: Icons.local_library_outlined,
+      title: 'Learning Preferences',
+      routeName: Routes.learningPreferencesViewId,
+    ),
+    ProfileItemModel(
       prefixIcon: Icons.info_outline_rounded,
       title: 'About App',
       routeName: Routes.aboutAppViewId,
