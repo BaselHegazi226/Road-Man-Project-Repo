@@ -48,7 +48,14 @@ const Color kSettingsSwitchInactiveThumbColor = Color(0xffF4F5F8);
 const Color kSettingsContainerColor = Color(0xffE6E8EE);
 const Color kSettingsTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
 const Color kSettingsHintTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kLearningPreferencesCardTextColor = Color.fromRGBO(
+  19,
+  19,
+  20,
+  0.50,
+);
 const Color kSettingsBackgroundFormFieldColor = Color(0xffE6E8EE);
+const Color kLearningPreferencesCardColor = Color(0xffE6E8EE);
 const Color kSettingsBorderFormFieldColor = Color(0xff131314);
 
 const Color kLogoutLineColor = Color(0xff131314);
