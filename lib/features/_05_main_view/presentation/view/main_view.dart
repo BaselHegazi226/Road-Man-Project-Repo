@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_05_main_view/presentation/view/widgets/main_view_widget/custom_bottom_nav_bar.dart';
 import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
@@ -30,7 +31,7 @@ class _HomeViewBodyState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kAppPrimaryWhiteColor,
       body: views[currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: currentIndex,
