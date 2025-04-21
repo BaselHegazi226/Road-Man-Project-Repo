@@ -36,6 +36,7 @@ dependencies:
   custom_radio_grouped_button: ^2.2.1
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,6 +66,7 @@ flutter:
     - assets/images/job/
     - assets/images/onboarding/
     - assets/images/learning_path/
+    - assets/images/home/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

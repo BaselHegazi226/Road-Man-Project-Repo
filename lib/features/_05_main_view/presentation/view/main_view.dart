@@ -4,6 +4,8 @@ import 'package:road_man_project/features/_06_profile_view/presentation/view/pro
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 
+import '../../../_09_home_view/home_view.dart';
+
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
@@ -15,7 +17,7 @@ class _HomeViewBodyState extends State<MainView> {
   int currentIndex = 0;
 
   final List<Widget> views = const [
-    Center(child: Text('Home', style: TextStyle(fontSize: 24))),
+    HomeView(),
     LearningPathView(),
     JobView(),
     ProfileView2(),

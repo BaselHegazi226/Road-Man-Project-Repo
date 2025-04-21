@@ -21,6 +21,8 @@ const Color kQuizViewSecondlyColor = Color(0xff4A4A4A);
 const Color kCheckPasswordItemColor = Color(0xff131314);
 const Color kOtpPinThemeBorderColor = Color(0xff131314);
 
+
+
 const Color kFilledTextFormFieldColor = Color(0xffE6E8EE);
 
 const Color kIconTextFormFieldColor = Color(0xff131314);
@@ -64,3 +66,5 @@ const Color kEditProfileTextField = Color(0xff131314);
 
 const Color kDashboardColor = Color(0xffE6E8EE);
 const Color onboardingIndicatorColor = Color(0xff757575);
+
+const Color kWelcomeSecColor = Color(0xFFD9D9D9);
