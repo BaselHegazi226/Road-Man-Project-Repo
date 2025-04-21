@@ -34,6 +34,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   google_nav_bar: ^5.0.7
   custom_radio_grouped_button: ^2.2.1
+  flutter_screenutil: ^5.9.3
 
 
 
