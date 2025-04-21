@@ -10,4 +10,10 @@ class Gradients {
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
+
+  static const currentPathGradient = LinearGradient(
+    begin: Alignment(1.00, 0.00),
+    end: Alignment(0.04, 0.93),
+    colors: [Color(0xFFEEF4FF), Color(0xFFD0DEF8), Color(0xFFB2C7EE)],
+  );
 }
