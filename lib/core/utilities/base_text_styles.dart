@@ -181,6 +181,15 @@ class AfacadTextStyles extends BaseTextStyles {
     ).textStyle;
   }
 
+  static TextStyle get textStyle14W700H150White {
+    return AfacadTextStyles(
+      color: kAppPrimaryWhiteColor,
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    ).textStyle;
+  }
+
   // Text Styles with Font Size 15
   static TextStyle get textStyle15W500Grey {
     return AfacadTextStyles(
@@ -380,6 +389,15 @@ class AfacadTextStyles extends BaseTextStyles {
   static TextStyle get textStyle20W700Blue {
     return AfacadTextStyles(
       color: kAppPrimaryBlueColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+      height: 1.5,
+    ).textStyle;
+  }
+
+  static TextStyle get textStyle20W700Black {
+    return AfacadTextStyles(
+      color: kAppPrimaryBlackColor,
       fontSize: 20,
       fontWeight: FontWeight.w700,
       height: 1.5,
