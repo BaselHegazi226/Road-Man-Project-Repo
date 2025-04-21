@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class ApplyButton extends StatelessWidget {
   const ApplyButton({super.key});
@@ -13,10 +15,8 @@ class ApplyButton extends StatelessWidget {
       ),
       child: Text(
         'Apply Now',
-        style: TextStyle(
-          color: const Color(0xFFF8F9FB),
-          fontSize: 14,
-          fontFamily: 'Afacad',
+        style: AfacadTextStyles.textStyle16W600Black.copyWith(
+          color: kAppPrimaryWhiteColor,
           fontWeight: FontWeight.w500,
         ),
       ),
