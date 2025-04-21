@@ -16,9 +16,10 @@ class CustomIconTitle extends StatelessWidget {
   final Color iconColor;
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.sizeOf(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      spacing: 8,
+      spacing: screenSize.width * .02,
       children: [
         Icon(iconData, size: 24, color: iconColor),
         Text(
