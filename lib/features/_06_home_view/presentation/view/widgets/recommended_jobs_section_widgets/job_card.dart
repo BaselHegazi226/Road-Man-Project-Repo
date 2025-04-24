@@ -98,7 +98,7 @@ class JobCard extends StatelessWidget {
                   'Cairo | Egypt',
                   style: AfacadTextStyles.textStyle14W400Grey(context),
                 ),
-                ApplyButton(),
+                ApplyButton(onTap: () {}),
               ],
             ),
           ],
