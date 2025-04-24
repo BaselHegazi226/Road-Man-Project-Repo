@@ -21,4 +21,13 @@ class Assets {
       'assets/images/onboarding/onboarding3_image.svg';
   static const String learningPathBackgroundImage =
       'assets/images/learning_path/learning_path_background_image.svg';
+  static const String googleImage = 'assets/images/home/google.svg';
+  static const String hourglassArrowDownImage =
+      'assets/images/home/hourglass_arrow_down.svg';
+  static const String manWithLapImage = 'assets/images/home/man_with_lap.png';
+  static const String metabolismImage = 'assets/images/home/metabolism.svg';
+  static const String notificationsImage =
+      'assets/images/home/notifications.svg';
+  static const String save = 'assets/images/home/save.svg';
+  static const String summarize = 'assets/images/home/summarize.svg';
 }

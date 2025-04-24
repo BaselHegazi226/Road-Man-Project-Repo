@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class ProgressItem extends StatelessWidget {
   final String title;
@@ -15,36 +16,31 @@ class ProgressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.sizeOf(context);
     return Row(
       children: [
         Row(
           children: [
-            SvgPicture.asset(image, width: 24, height: 24),
-            const SizedBox(width: 8),
+            SvgPicture.asset(
+              image,
+              width: screenSize.width * .06,
+              height: screenSize.width * .06,
+            ),
+            SizedBox(width: screenSize.width * .02),
             Text(
               title,
-              style: const TextStyle(
-                color: Color(0xFF131314),
-                fontSize: 14,
-                fontFamily: 'Afacad',
-                fontWeight: FontWeight.w600,
-                height: 1.50,
-                letterSpacing: -0.27,
-              ),
+              style: AfacadTextStyles.textStyle14W600H150Black(
+                context,
+              ).copyWith(letterSpacing: -0.266),
             ),
           ],
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: screenSize.width * .04),
         Text(
           value,
-          style: const TextStyle(
-            color: Color(0xFF131314),
-            fontSize: 14,
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.w600,
-            height: 1.50,
-            letterSpacing: -0.27,
-          ),
+          style: AfacadTextStyles.textStyle14W600H150Black(
+            context,
+          ).copyWith(letterSpacing: -0.266),
         ),
       ],
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class JobTag extends StatelessWidget {
   final String tag;
@@ -6,19 +8,24 @@ class JobTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: ShapeDecoration(
-        color: const Color(0xFFE6E8EE),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-      child: Text(
-        tag,
-        style: TextStyle(
-          color: const Color(0xFF131314),
-          fontSize: 11,
-          fontFamily: 'Afacad',
-          fontWeight: FontWeight.w400,
+    final Size screenSize = MediaQuery.sizeOf(context);
+
+    return Flexible(
+      child: Container(
+        decoration: BoxDecoration(
+          color: kSecondlyDarkWhiteColor,
+          borderRadius: BorderRadius.circular(screenSize.width * .02),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: screenSize.width * .01,
+            vertical: screenSize.height * .01,
+          ),
+          child: Text(
+            tag,
+            style: AfacadTextStyles.textStyle14W400Black(context),
+            softWrap: true, // يسمح للنص بالتغليف تلقائيًا إلى سطر جديد
+          ),
         ),
       ),
     );

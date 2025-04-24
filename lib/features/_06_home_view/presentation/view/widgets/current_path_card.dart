@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/core/utilities/gradients.dart';
+import 'package:road_man_project/generated/assets.dart';
+
 import '../../../../../core/helper/const_variables.dart';
 
 class CurrentPathCard extends StatelessWidget {
@@ -7,14 +10,18 @@ class CurrentPathCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+
     return Container(
       width: double.infinity,
-      height: 138,
+      height: screenHeight * 0.1725,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         gradient: Gradients.currentPathGradient,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(screenWidth * 0.04),
         ),
       ),
       child: Row(
@@ -23,35 +30,29 @@ class CurrentPathCard extends StatelessWidget {
           // Left column with text and button
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, top: 8.0, bottom: 8.0),
+              padding: EdgeInsets.only(
+                left: screenWidth * 0.02,
+                top: screenHeight * 0.01,
+                bottom: screenHeight * 0.01,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title
                   Text(
                     'Current Path Name',
-                    style: TextStyle(
-                      color: kAppPrimaryBlueColor,
-                      fontSize: 20,
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w700,
-                      height: 1.50,
-                      letterSpacing: -0.38,
-                    ),
+                    style: AfacadTextStyles.textStyle20W700Blue(
+                      context,
+                    ).copyWith(height: 1.5, letterSpacing: -0.38),
                   ),
 
                   // Subtitle
-                  const SizedBox(height: 8),
+                  SizedBox(height: screenHeight * 0.01),
                   Text(
                     'Track goal',
-                    style: TextStyle(
-                      color: kAppPrimaryBlackColor,
-                      fontSize: 16,
-                      fontFamily: 'Afacad',
-                      fontWeight: FontWeight.w500,
-                      height: 1.50,
-                      letterSpacing: 1.28,
-                    ),
+                    style: AfacadTextStyles.textStyle16W500H150Black(
+                      context,
+                    ).copyWith(letterSpacing: 1.28),
                   ),
 
                   // Spacer to push button to bottom
@@ -59,42 +60,44 @@ class CurrentPathCard extends StatelessWidget {
 
                   // View Path Button
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: ShapeDecoration(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.02,
+                      vertical: screenHeight * 0.005,
+                    ),
+                    decoration: BoxDecoration(
                       color: kQuizViewWhiteColor,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(screenWidth * 0.02),
                     ),
                     child: Text(
                       'View path',
-                      style: TextStyle(
+                      style: AfacadTextStyles.textStyle14W500Black(
+                        context,
+                      ).copyWith(
                         color: kAppPrimaryBlueColor,
-                        fontSize: 14,
-                        fontFamily: 'Afacad',
-                        fontWeight: FontWeight.w500,
                         height: 1.50,
                         letterSpacing: -0.27,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: screenHeight * 0.01),
                 ],
               ),
             ),
           ),
 
-          // Right side with decorative elements - keep this with Positioned
+          // Right side with decorative elements
           SizedBox(
-            width: 156,
-            height: 172,
+            width: screenWidth * 0.39, // تقريبًا 156px لو العرض 400
+            height: screenHeight * 0.215, // تقريبًا 172px لو الطول 800
             child: Stack(
               children: [
-                // Circles decoration
+                // Main circle
                 Positioned(
-                  left: 39,
-                  top: 55,
+                  left: screenWidth * 0.0975, // 39px
+                  top: screenHeight * 0.06875, // 55px
                   child: Container(
-                    width: 117,
-                    height: 117,
+                    width: screenWidth * 0.2925, // 117px
+                    height: screenWidth * 0.2925,
                     decoration: ShapeDecoration(
                       gradient: const LinearGradient(
                         begin: Alignment(0.06, 0.47),
@@ -106,19 +109,44 @@ class CurrentPathCard extends StatelessWidget {
                   ),
                 ),
 
-                // Image (placeholder)
+                // Image
                 Positioned(
-                  left: 55,
+                  left: screenWidth * 0.1375, // 55px
                   bottom: 0,
-                  child: Image.asset('assets/images/home/man_with_lap.png'),
+                  child: Image.asset(Assets.manWithLapImage),
                 ),
 
                 // Decoration circles
-                _buildDecorativeCircle(129, 7, 20, const Color(0xFF8493EB)),
-                _buildDecorativeCircle(58, 12, 10, const Color(0xFF4C89FF)),
-                _buildDecorativeCircle(29, 67, 16, const Color(0xFFD1D7FF)),
-                _buildDecorativeCircle(14, 28, 15, const Color(0xFF9FADFF)),
-                _buildDecorativeCircle(0, 93, 8, const Color(0xFF4C89FF)),
+                _buildDecorativeCircle(
+                  screenWidth * 0.3225,
+                  screenHeight * 0.00875,
+                  screenWidth * 0.05,
+                  const Color(0xFF8493EB),
+                ), // 129, 7, 20
+                _buildDecorativeCircle(
+                  screenWidth * 0.145,
+                  screenHeight * 0.015,
+                  screenWidth * 0.025,
+                  const Color(0xFF4C89FF),
+                ), // 58, 12, 10
+                _buildDecorativeCircle(
+                  screenWidth * 0.0725,
+                  screenHeight * 0.08375,
+                  screenWidth * 0.04,
+                  const Color(0xFFD1D7FF),
+                ), // 29, 67, 16
+                _buildDecorativeCircle(
+                  screenWidth * 0.035,
+                  screenHeight * 0.035,
+                  screenWidth * 0.0375,
+                  const Color(0xFF9FADFF),
+                ), // 14, 28, 15
+                _buildDecorativeCircle(
+                  0,
+                  screenHeight * 0.11625,
+                  screenWidth * 0.02,
+                  const Color(0xFF4C89FF),
+                ), // 0, 93, 8
               ],
             ),
           ),
@@ -127,17 +155,19 @@ class CurrentPathCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDecorativeCircle(double left, double top, double size, Color color) {
+  Widget _buildDecorativeCircle(
+    double left,
+    double top,
+    double size,
+    Color color,
+  ) {
     return Positioned(
       left: left,
       top: top,
       child: Container(
         width: size,
         height: size,
-        decoration: ShapeDecoration(
-          color: color,
-          shape: const OvalBorder(),
-        ),
+        decoration: ShapeDecoration(color: color, shape: const OvalBorder()),
       ),
     );
   }

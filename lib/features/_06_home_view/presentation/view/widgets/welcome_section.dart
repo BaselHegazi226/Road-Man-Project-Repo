@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:road_man_project/generated/assets.dart';
 
 import '../../../../../core/helper/const_variables.dart';
+import '../../../../../core/utilities/base_text_styles.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -16,32 +19,24 @@ class WelcomeSection extends StatelessWidget {
           children: [
             Text(
               'Welcome,',
-              style: TextStyle(
-                color: const Color(0xFF2352A1),
-                fontSize: 24,
-                fontFamily: 'Afacad',
-                fontWeight: FontWeight.w700,
+              style: AfacadTextStyles.textStyle24W700Black(context).copyWith(
+                color: kAppPrimaryBlueColor,
                 height: 1.5,
                 letterSpacing: -0.46,
               ),
             ),
             Text(
               "Let's make progress today!",
-              style: TextStyle(
-                color: kAppPrimaryBlackColor,
-                fontSize: 20,
-                fontFamily: 'Afacad',
-                fontWeight: FontWeight.w400,
-                height: 1.5,
-                letterSpacing: -0.38,
-              ),
+              style: AfacadTextStyles.textStyle20W400Black(
+                context,
+              ).copyWith(height: 1.5, letterSpacing: -0.38),
             ),
           ],
         ),
         SvgPicture.asset(
-          'assets/images/home/notifications.svg',
-          width: 24,
-          height: 24,
+          Assets.notificationsImage,
+          width: screenSize.width * .06,
+          height: screenSize.width * .06,
         ),
       ],
     );

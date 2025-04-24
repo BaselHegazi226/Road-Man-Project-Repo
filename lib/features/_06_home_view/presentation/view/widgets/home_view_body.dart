@@ -10,21 +10,19 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: screenSize.width * .04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: screenSize.height * .03,
           children: [
-            const SizedBox(height: 64),
+            SizedBox(height: screenSize.height * .08), // Space for top header
             const WelcomeSection(),
-            const SizedBox(height: 24),
             const CurrentPathCard(),
-            const SizedBox(height: 24),
             const ProgressSection(),
-            const SizedBox(height: 24),
             const RecommendedJobsSection(),
-            const SizedBox(height: 16),
           ],
         ),
       ),

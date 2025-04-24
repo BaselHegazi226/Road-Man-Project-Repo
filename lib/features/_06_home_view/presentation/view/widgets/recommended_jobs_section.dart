@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import 'recommended_jobs_section_widgets/job_card.dart';
 
@@ -7,32 +8,30 @@ class RecommendedJobsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Recommended Jobs',
-          style: TextStyle(
-            color: const Color(0xFF2352A1),
-            fontSize: 20,
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.w700,
-            height: 1.50,
-            letterSpacing: -0.38,
-          ),
+          style: AfacadTextStyles.textStyle20W700Blue(
+            context,
+          ).copyWith(height: 1.50, letterSpacing: -0.38),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: screenSize.height * 0.01), // 1.5% of screen height
         SizedBox(
-          height: 200,
-          child: ListView(
+          height: screenSize.height * 0.25, // 25% of screen height
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            children: const [
-              JobCard(),
-              SizedBox(width: 12),
-              JobCard(),
-              SizedBox(width: 12),
-              JobCard(),
-            ],
+            padding: EdgeInsets.zero,
+            physics: const BouncingScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(right: screenSize.width * .05),
+                child: JobCard(),
+              );
+            },
           ),
         ),
       ],

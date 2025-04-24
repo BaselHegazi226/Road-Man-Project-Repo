@@ -12,9 +12,10 @@ class OnBoardingViewDescriptionSection extends StatelessWidget {
   final String title1, title2, subTitle;
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: MediaQuery.sizeOf(context).height * 0.02,
+      spacing: screenHeight * 0.02,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

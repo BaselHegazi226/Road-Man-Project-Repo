@@ -9,11 +9,8 @@ class LeftSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const ProgressItems(),
-        const Spacer(),
-        const StartLearningButton(),
-      ],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [const ProgressItems(), const StartLearningButton()],
     );
   }
 }

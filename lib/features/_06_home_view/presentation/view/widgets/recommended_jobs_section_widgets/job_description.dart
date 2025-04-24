@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 class JobDescription extends StatelessWidget {
   final String description;
@@ -8,12 +9,7 @@ class JobDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       description,
-      style: TextStyle(
-        color: const Color(0xFF131314),
-        fontSize: 16,
-        fontFamily: 'Afacad',
-        fontWeight: FontWeight.w600,
-      ),
+      style: AfacadTextStyles.textStyle16W600Black(context),
     );
   }
 }

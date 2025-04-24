@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import 'half_circle_clipper.dart';
 
@@ -7,30 +9,32 @@ class ProgressCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
+
     return Stack(
       alignment: Alignment.center,
       children: [
         // Background circle
         Container(
-          width: 102,
-          height: 100,
-          decoration: const ShapeDecoration(
-            color: Color(0xFFE6E8EE),
-            shape: OvalBorder(),
+          width: screenSize.width * 0.248,
+          height: screenSize.height * 0.1094,
+          decoration: BoxDecoration(
+            color: kSecondlyDarkWhiteColor,
+            shape: BoxShape.circle,
           ),
         ),
 
         // Progress circle (partially visible - 50%)
         Container(
-          width: 102,
-          height: 100,
-          decoration: const ShapeDecoration(
+          width: screenSize.width * 0.248,
+          height: screenSize.height * 0.1094,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
             gradient: LinearGradient(
               begin: Alignment(0.50, 1.00),
               end: Alignment(0.50, 0.00),
               colors: [Color(0xFF052C6E), Color(0xFF3D76D5)],
             ),
-            shape: OvalBorder(),
           ),
           child: ClipPath(
             clipper: HalfCircleClipper(),
@@ -41,12 +45,9 @@ class ProgressCircle extends StatelessWidget {
         // Percentage text
         Text(
           '50%',
-          style: TextStyle(
-            color: const Color(0xFF052C6E),
-            fontSize: 20,
-            fontFamily: 'Afacad',
-            fontWeight: FontWeight.w600,
-          ),
+          style: AfacadTextStyles.textStyle20W600Black(
+            context,
+          ).copyWith(color: kSecondlyDarkWhiteColor),
         ),
       ],
     );

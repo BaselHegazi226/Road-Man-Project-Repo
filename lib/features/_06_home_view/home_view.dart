@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       resizeToAvoidBottomInset: true,
-      body: HomeViewBody(),
+      body: const HomeViewBody(),
     );
   }
 }

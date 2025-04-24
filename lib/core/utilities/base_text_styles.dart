@@ -295,12 +295,20 @@ class AfacadTextStyles extends BaseTextStyles {
       ).getTextStyle(context);
 
   //font size 20
+  static TextStyle textStyle20W400Black(BuildContext context) =>
+      const AfacadTextStyles(
+        color: kAppPrimaryBlackColor,
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+      ).getTextStyle(context);
+
   static TextStyle textStyle20W500Blue(BuildContext context) =>
       const AfacadTextStyles(
         color: kAppPrimaryBlueColor,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ).getTextStyle(context);
+
   static TextStyle textStyle20W600Black(BuildContext context) =>
       const AfacadTextStyles(
         color: kTextBlackPrimaryColor,
@@ -364,6 +372,13 @@ class InterTextStyles extends BaseTextStyles {
     fontWeight: FontWeight.w500,
   ).getTextStyle(context);
 
+  static TextStyle textStyle12W400GreyHalfOpacity({
+    required BuildContext context,
+  }) => InterTextStyles(
+    color: kTextGreyHalfOpacityPrimaryColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+  ).getTextStyle(context);
   static TextStyle textStyle12W500GreyHalfOpacity({
     required BuildContext context,
   }) => InterTextStyles(

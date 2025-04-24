@@ -7,15 +7,19 @@ class ApplyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.sizeOf(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: ShapeDecoration(
-        color: const Color(0xFF2352A1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenSize.width * .02,
+        vertical: screenSize.height * .005,
+      ),
+      decoration: BoxDecoration(
+        color: kAppPrimaryBlueColor,
+        borderRadius: BorderRadius.circular(screenSize.width * .02),
       ),
       child: Text(
         'Apply Now',
-        style: AfacadTextStyles.textStyle16W600Black(
+        style: AfacadTextStyles.textStyle14W400Black(
           context,
         ).copyWith(color: kAppPrimaryWhiteColor, fontWeight: FontWeight.w500),
       ),
