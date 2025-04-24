@@ -44,13 +44,22 @@ class SuggestedJobsTrackLocationSection extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AfacadTextStyles.textStyle16W500Black),
+                Text(
+                  title,
+                  style: AfacadTextStyles.textStyle16W500Black(context),
+                ),
                 SizedBox(height: screenWidth * 0.01), // مسافة صغيرة بين النصوص
                 Row(
                   children: [
-                    Text(company, style: AfacadTextStyles.textStyle14W400Grey),
+                    Text(
+                      company,
+                      style: AfacadTextStyles.textStyle14W400Grey(context),
+                    ),
                     SizedBox(width: screenWidth * 0.01), // مسافة صغيرة
-                    Text(location, style: AfacadTextStyles.textStyle14W400Grey),
+                    Text(
+                      location,
+                      style: AfacadTextStyles.textStyle14W400Grey(context),
+                    ),
                   ],
                 ),
               ],

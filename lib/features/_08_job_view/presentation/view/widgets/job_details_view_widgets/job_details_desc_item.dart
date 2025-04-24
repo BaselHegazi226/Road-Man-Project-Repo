@@ -13,14 +13,16 @@ class JobDetailsDescItem extends StatelessWidget {
           TextSpan(
             text:
                 "We're looking for A junior front-end developer works on building the user interface of a mobile application or website. They showcase their skills with the application's visual elements, including graphics, typography, and layouts. They also ensure smooth interaction between the app and user. ",
-            style: AfacadTextStyles.textStyle14W400Black.copyWith(height: 1.2),
+            style: AfacadTextStyles.textStyle14W400Black(
+              context,
+            ).copyWith(height: 1.2),
           ),
           WidgetSpan(
             child: GestureDetector(
               onTap: () {},
               child: Text(
                 'More details',
-                style: AfacadTextStyles.textStyle14W400Blue,
+                style: AfacadTextStyles.textStyle14W400Blue(context),
               ),
             ),
           ),

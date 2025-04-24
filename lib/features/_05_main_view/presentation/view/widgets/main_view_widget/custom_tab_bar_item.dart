@@ -68,9 +68,9 @@ class CustomTabBarItem extends StatelessWidget {
                   SizedBox(width: screenWidth * .02),
                   Text(
                     _getText(index),
-                    style:
-                        AfacadTextStyles
-                            .textStyle14W700H150Blue, // ✅ نص باللون الأزرق
+                    style: AfacadTextStyles.textStyle14W700H150Blue(
+                      context,
+                    ), // ✅ نص باللون الأزرق
                   ),
                 ],
               ],

@@ -20,7 +20,7 @@ class NotificationAccessTimeSection extends StatelessWidget {
           color: kAppPrimaryBlueColor,
           size: screenWidth * 0.06,
         ),
-        Text(hour, style: InterTextStyles.interTextStyle12W500Blue),
+        Text(hour, style: InterTextStyles.textStyle12W500Blue(context)),
       ],
     );
   }

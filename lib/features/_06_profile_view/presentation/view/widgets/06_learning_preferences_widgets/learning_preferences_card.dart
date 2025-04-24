@@ -25,9 +25,9 @@ class LearningPreferencesCard extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           cardText,
-          style: AfacadTextStyles.textStyle14W600DeepGrey.copyWith(
-            color: kLearningPreferencesCardTextColor,
-          ),
+          style: AfacadTextStyles.textStyle14W600DeepGrey(
+            context,
+          ).copyWith(color: kLearningPreferencesCardTextColor),
         ),
       ),
     );

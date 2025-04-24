@@ -20,9 +20,9 @@ class RememberMeForgetPasswordSection extends StatelessWidget {
           child: Text(
             maxLines: 1,
             'Forget your password ?',
-            style: AfacadTextStyles.textStyle14W700H150Blue.copyWith(
-              letterSpacing: .266,
-            ),
+            style: AfacadTextStyles.textStyle14W700H150Blue(
+              context,
+            ).copyWith(letterSpacing: .266),
           ),
         ),
       ],

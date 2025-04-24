@@ -9,7 +9,7 @@ class AuthTitle extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       title,
-      style: AfacadTextStyles.textStyle24W700Black,
+      style: AfacadTextStyles.textStyle24W700Black(context),
     );
   }
 }

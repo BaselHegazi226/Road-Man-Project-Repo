@@ -1,8 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
+import '../utilities/base_text_styles.dart';
 import 'const_variables.dart';
 
 class ConstFunctions {
@@ -42,54 +42,55 @@ class ConstFunctions {
     }
   }
 
-  static TextStyle textTextFormFieldStyle() {
-    return AfacadTextStyles.textStyle14W400H150Black.copyWith(
-      color: kTextTextFormFieldColor,
-      letterSpacing: .266,
-    );
+  static TextStyle textTextFormFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle14W400H150Black(
+      context,
+    ).copyWith(color: kTextTextFormFieldColor, letterSpacing: .266);
   }
 
-  static TextStyle editProfileTextFormFieldStyle() {
-    return AfacadTextStyles.textStyle18W600H150Black;
+  static TextStyle editProfileTextFormFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle18W600H150Black(context);
   }
 
-  static TextStyle settingsTextTextFormFieldStyle() {
-    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
-      color: kSettingsTextFormFieldColor,
-    );
+  static TextStyle settingsTextTextFormFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle16W600H150Black(
+      context,
+    ).copyWith(color: kSettingsTextFormFieldColor);
   }
 
-  static TextStyle editProfilePasswordFieldStyleLabelStyle() {
-    return AfacadTextStyles.textStyle20W600Black.copyWith(
-      color: kEditProfileTitleColor,
-    );
+  static TextStyle editProfilePasswordFieldStyleLabelStyle(
+    BuildContext context,
+  ) {
+    return AfacadTextStyles.textStyle20W600Black(
+      context,
+    ).copyWith(color: kEditProfileTitleColor);
   }
 
-  static TextStyle editProfileTextStyle({double letterSpacing = 1}) {
-    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
-      height: 1,
-      letterSpacing: letterSpacing,
-    );
+  static TextStyle editProfileTextStyle(
+    BuildContext context, {
+    double letterSpacing = 1,
+  }) {
+    return AfacadTextStyles.textStyle16W600H150Black(
+      context,
+    ).copyWith(height: 1, letterSpacing: letterSpacing);
   }
 
-  static TextStyle hintTextFormFieldStyle() {
-    return AfacadTextStyles.textStyle14W400H150Black.copyWith(
-      color: kTextTextFormFieldColor,
-      letterSpacing: -.266,
-    );
+  static TextStyle hintTextFormFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle14W400H150Black(
+      context,
+    ).copyWith(color: kTextTextFormFieldColor, letterSpacing: -.266);
   }
 
-  static TextStyle hintEditProfilePasswordFieldStyle() {
-    return AfacadTextStyles.textStyle14W400Black.copyWith(
-      color: kEditProfileHintTextColor,
-    );
+  static TextStyle hintEditProfilePasswordFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle14W400Black(
+      context,
+    ).copyWith(color: kEditProfileHintTextColor);
   }
 
-  static TextStyle hintSettingsTextFormFieldStyle() {
-    return AfacadTextStyles.textStyle16W600H150Black.copyWith(
-      color: kSettingsHintTextFormFieldColor,
-      height: 1,
-    );
+  static TextStyle hintSettingsTextFormFieldStyle(BuildContext context) {
+    return AfacadTextStyles.textStyle16W600H150Black(
+      context,
+    ).copyWith(color: kSettingsHintTextFormFieldColor, height: 1);
   }
 
   static OutlineInputBorder outlineInputBorder({

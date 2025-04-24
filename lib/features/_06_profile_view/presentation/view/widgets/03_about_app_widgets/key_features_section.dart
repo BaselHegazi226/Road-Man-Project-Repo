@@ -12,7 +12,10 @@ class KeyFeaturesSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
       children: [
-        Text('Key Features', style: AfacadTextStyles.textStyle16W700Black),
+        Text(
+          'Key Features',
+          style: AfacadTextStyles.textStyle16W700Black(context),
+        ),
         KeyFeatureItemsSection(),
       ],
     );

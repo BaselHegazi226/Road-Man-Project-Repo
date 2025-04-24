@@ -15,14 +15,17 @@ class FavouriteCardSalarySection extends StatelessWidget {
     return Row(
       spacing: 8,
       children: [
-        Text(salary, style: AfacadTextStyles.textStyle14W400Grey),
+        Text(salary, style: AfacadTextStyles.textStyle14W400Grey(context)),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: const Color(0xff8A8C90), width: 1.5),
           ),
-          child: Text(jobType, style: AfacadTextStyles.textStyle14W400Black),
+          child: Text(
+            jobType,
+            style: AfacadTextStyles.textStyle14W400Black(context),
+          ),
         ),
       ],
     );

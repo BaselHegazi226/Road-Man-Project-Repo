@@ -14,6 +14,7 @@ class LearningPreferencesView extends StatelessWidget {
       backgroundColor: kAppPrimaryWhiteColor,
       extendBodyBehindAppBar: false,
       appBar: customAppBar(
+        context,
         text: 'Learning Preferences',
         onPressed: () {
           GoRouter.of(context).pop();

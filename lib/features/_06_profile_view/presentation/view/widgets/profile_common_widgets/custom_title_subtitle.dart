@@ -18,7 +18,7 @@ class CustomTitleSubtitle extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         CustomProfileTitle(title: title),
-        Text(subTitle, style: AfacadTextStyles.textStyle14W400Black),
+        Text(subTitle, style: AfacadTextStyles.textStyle14W400Black(context)),
       ],
     );
   }

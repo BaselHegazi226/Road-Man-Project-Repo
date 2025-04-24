@@ -15,10 +15,9 @@ class ApplyButton extends StatelessWidget {
       ),
       child: Text(
         'Apply Now',
-        style: AfacadTextStyles.textStyle16W600Black.copyWith(
-          color: kAppPrimaryWhiteColor,
-          fontWeight: FontWeight.w500,
-        ),
+        style: AfacadTextStyles.textStyle16W600Black(
+          context,
+        ).copyWith(color: kAppPrimaryWhiteColor, fontWeight: FontWeight.w500),
       ),
     );
   }

@@ -26,7 +26,7 @@ class JobViewDashboardItem extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             customDrawerItemModel.title,
-            style: AfacadTextStyles.textStyle16W500H150Black,
+            style: AfacadTextStyles.textStyle16W500H150Black(context),
           ),
         ),
       ),

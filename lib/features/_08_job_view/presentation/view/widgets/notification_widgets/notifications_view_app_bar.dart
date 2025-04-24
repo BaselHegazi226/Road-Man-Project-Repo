@@ -9,7 +9,12 @@ AppBar notificationViewAppbar(BuildContext context) {
   final double screenWidth = MediaQuery.sizeOf(context).width;
   return AppBar(
     backgroundColor: kAppPrimaryWhiteColor,
-    title: Text('Notification', style: AfacadTextStyles.textStyle20W500Black),
+    title: Text(
+      'Notification',
+      style: AfacadTextStyles.textStyle20W500Blue(
+        context,
+      ).copyWith(color: kAppPrimaryBlackColor),
+    ),
     centerTitle: true,
     leading: IconButton(
       onPressed: () {

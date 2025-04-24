@@ -27,7 +27,9 @@ class QuestionPage extends StatelessWidget {
           child: Text(
             questionText,
             textAlign: TextAlign.center,
-            style: AfacadTextStyles.textStyle24W700Black.copyWith(height: 1.5),
+            style: AfacadTextStyles.textStyle24W700Black(
+              context,
+            ).copyWith(height: 1.5),
           ),
         ),
         SizedBox(height: screenHeight * .04),

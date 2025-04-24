@@ -11,7 +11,7 @@ class NotificationMessageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       notificationText,
-      style: InterTextStyles.interTextStyle12W500Black,
+      style: InterTextStyles.textStyle12W500Black(context),
     );
   }
 }

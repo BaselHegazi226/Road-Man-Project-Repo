@@ -64,7 +64,7 @@ class CustomTextFormField extends StatelessWidget {
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
         textAlignVertical: TextAlignVertical.bottom,
-        style: ConstFunctions.textTextFormFieldStyle(),
+        style: ConstFunctions.textTextFormFieldStyle(context),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           suffixIcon: IconButton(
@@ -81,7 +81,7 @@ class CustomTextFormField extends StatelessWidget {
             color: kIconTextFormFieldColor,
           ),
           hintText: hintText,
-          hintStyle: ConstFunctions.hintTextFormFieldStyle(),
+          hintStyle: ConstFunctions.hintTextFormFieldStyle(context),
           border: ConstFunctions.outlineInputBorder(),
           enabledBorder: ConstFunctions.outlineInputBorder(
             color: kBorderTextFormFieldColor,

@@ -36,7 +36,7 @@ class _VerificationInputDataSectionState
           onPressed: () {},
           child: Text(
             'Send again ?',
-            style: AfacadTextStyles.textStyle20W700Blue,
+            style: AfacadTextStyles.textStyle20W700Blue(context),
           ),
         ),
         Padding(

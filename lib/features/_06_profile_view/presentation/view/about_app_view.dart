@@ -13,6 +13,7 @@ class AboutAppView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
+        context,
         backgroundColor: kAppPrimaryWhiteColor,
         generalColor: kTextBlackPrimaryColor,
         text: 'About App',

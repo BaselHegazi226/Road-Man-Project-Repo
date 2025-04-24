@@ -131,7 +131,10 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: screenHeight * .02, //16
         children: [
-          Text('Lets Start..', style: AfacadTextStyles.textStyle24W700Black),
+          Text(
+            'Lets Start..',
+            style: AfacadTextStyles.textStyle24W700Black(context),
+          ),
 
           GradientProgressBar(
             progress:

@@ -27,11 +27,11 @@ class ProfileUserInfo extends StatelessWidget {
             children: [
               Text(
                 'Ahmed Ali',
-                style: AfacadTextStyles.textStyle16W500Black.copyWith(),
+                style: AfacadTextStyles.textStyle16W500Black(context),
               ),
               Text(
                 'ahmed123@gmail.com',
-                style: AfacadTextStyles.textStyle12W400Black,
+                style: AfacadTextStyles.textStyle12W400Black(context),
               ),
             ],
           ),

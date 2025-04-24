@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../../../../../../core/helper/class_const_functions.dart';
 import '../../../../../../core/helper/const_variables.dart';
@@ -31,9 +32,11 @@ class CustomSettingFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height * .05,
+      width: screenWidth,
+      height: screenHeight * .05,
       child: TextFormField(
         onTap: () {
           FocusScope.of(context).requestFocus(focusNode);
@@ -48,11 +51,15 @@ class CustomSettingFormField extends StatelessWidget {
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
         textAlignVertical: TextAlignVertical.bottom,
-        style: ConstFunctions.settingsTextTextFormFieldStyle(),
+        style: ConstFunctions.settingsTextTextFormFieldStyle(context),
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding: EdgeInsets.only(left: 16, top: 16, bottom: 16),
-          hintStyle: ConstFunctions.hintSettingsTextFormFieldStyle(),
+          contentPadding: EdgeInsets.only(
+            left: screenWidth * .04,
+            top: screenHeight * .02,
+            bottom: screenHeight * .02,
+          ),
+          hintStyle: ConstFunctions.hintSettingsTextFormFieldStyle(context),
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           border: ConstFunctions.outlineInputBorder(),
           enabledBorder: ConstFunctions.outlineInputBorder(
@@ -74,10 +81,9 @@ class CustomSettingFormField extends StatelessWidget {
                     ? kSettingsBorderFormFieldColor // Change to focus color on error
                     : kErrorColor,
           ),
-          errorStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-          ),
+          errorStyle: AfacadTextStyles.textStyle12W400Black(
+            context,
+          ).copyWith(color: Colors.red),
           errorText: errorMess,
           fillColor: backgroundColor,
           filled: true,

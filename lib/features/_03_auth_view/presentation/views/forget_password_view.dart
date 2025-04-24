@@ -12,6 +12,7 @@ class ForgetPasswordView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
+        context,
         generalColor: kAppPrimaryBlueColor,
         text: 'Forget Password',
         onPressed: () {

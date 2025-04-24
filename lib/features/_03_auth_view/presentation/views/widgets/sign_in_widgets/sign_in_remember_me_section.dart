@@ -15,10 +15,9 @@ class RememberMeSection extends StatelessWidget {
         Text(
           maxLines: 1,
           'Remember me',
-          style: AfacadTextStyles.textStyle14W400Black.copyWith(
-            letterSpacing: -.266,
-            height: 1.5,
-          ),
+          style: AfacadTextStyles.textStyle14W400Black(
+            context,
+          ).copyWith(letterSpacing: -.266, height: 1.5),
         ),
       ],
     );

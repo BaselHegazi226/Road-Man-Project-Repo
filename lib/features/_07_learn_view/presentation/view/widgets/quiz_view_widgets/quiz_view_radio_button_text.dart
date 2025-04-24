@@ -20,7 +20,7 @@ class QuizViewCardRadioButtonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       answerText,
-      style: AfacadTextStyles.textStyle13W400H150Black.copyWith(
+      style: AfacadTextStyles.textStyle13W400H150Black(context).copyWith(
         letterSpacing: -0.247,
         color: isSelected ? selectedColor : unselectedColor,
       ),

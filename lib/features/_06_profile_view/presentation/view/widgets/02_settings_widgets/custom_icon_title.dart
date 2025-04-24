@@ -24,9 +24,9 @@ class CustomIconTitle extends StatelessWidget {
         Icon(iconData, size: 24, color: iconColor),
         Text(
           title,
-          style: AfacadTextStyles.textStyle16W600Black.copyWith(
-            color: textColor,
-          ),
+          style: AfacadTextStyles.textStyle16W600Black(
+            context,
+          ).copyWith(color: textColor),
         ),
       ],
     );

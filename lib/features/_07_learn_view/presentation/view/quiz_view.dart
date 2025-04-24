@@ -30,7 +30,7 @@ class QuizView extends StatelessWidget {
           padding: EdgeInsets.only(top: screenHeight * .02),
           child: Text(
             'Level 1 Test',
-            style: AfacadTextStyles.textStyle20W500Blue,
+            style: AfacadTextStyles.textStyle20W500Blue(context),
           ),
         ),
         actions: [
@@ -47,10 +47,13 @@ class QuizView extends StatelessWidget {
                   spacing: screenHeight * .005,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('0', style: MontserratTextStyles.textStyle16W600Black),
+                    Text(
+                      '0',
+                      style: MontserratTextStyles.textStyle16W600Black(context),
+                    ),
                     Text(
                       'Correct',
-                      style: AfacadTextStyles.textStyle14W600Black,
+                      style: AfacadTextStyles.textStyle14W600Black(context),
                     ),
                   ],
                 ),
@@ -63,10 +66,13 @@ class QuizView extends StatelessWidget {
                   spacing: screenHeight * .005,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('0', style: MontserratTextStyles.textStyle16W600Black),
+                    Text(
+                      '0',
+                      style: MontserratTextStyles.textStyle16W600Black(context),
+                    ),
                     Text(
                       'INCorrect',
-                      style: AfacadTextStyles.textStyle14W600Black,
+                      style: AfacadTextStyles.textStyle14W600Black(context),
                     ),
                   ],
                 ),

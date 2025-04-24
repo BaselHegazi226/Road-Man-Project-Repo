@@ -27,7 +27,7 @@ class RecentJobCardTitleSection extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: AfacadTextStyles.textStyle20W600Black,
+            style: AfacadTextStyles.textStyle20W600Black(context),
             overflow: TextOverflow.ellipsis,
           ),
         ),

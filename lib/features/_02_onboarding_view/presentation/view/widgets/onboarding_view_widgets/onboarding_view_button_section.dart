@@ -19,7 +19,10 @@ class OnBoardingViewButtonSection extends StatelessWidget {
       children: [
         InkWell(
           onTap: skipButtonOnPressed,
-          child: Text('Skip', style: AfacadTextStyles.textStyle18W400Blue),
+          child: Text(
+            'Skip',
+            style: AfacadTextStyles.textStyle18W400Blue(context),
+          ),
         ),
         CustomTextButton(
           onPressed: nextButtonOnPressed,

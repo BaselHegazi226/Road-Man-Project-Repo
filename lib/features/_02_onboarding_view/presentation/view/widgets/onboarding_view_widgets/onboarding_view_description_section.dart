@@ -19,11 +19,20 @@ class OnBoardingViewDescriptionSection extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title1, style: AfacadTextStyles.textStyle24W600H150Black),
-            Text(title2, style: AfacadTextStyles.textStyle24W600H150Black),
+            Text(
+              title1,
+              style: AfacadTextStyles.textStyle24W600H150Black(context),
+            ),
+            Text(
+              title2,
+              style: AfacadTextStyles.textStyle24W600H150Black(context),
+            ),
           ],
         ),
-        Text(subTitle, style: AfacadTextStyles.textStyle16W400H150Black),
+        Text(
+          subTitle,
+          style: AfacadTextStyles.textStyle16W400H150Black(context),
+        ),
       ],
     );
   }

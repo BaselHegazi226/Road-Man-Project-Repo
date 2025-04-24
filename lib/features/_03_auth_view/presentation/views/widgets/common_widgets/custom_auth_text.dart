@@ -15,9 +15,9 @@ class CustomAuthText extends StatelessWidget {
       text,
       textAlign: textAlign,
       maxLines: 3,
-      style: AfacadTextStyles.textStyle12W400Black.copyWith(
-        letterSpacing: -.228,
-      ),
+      style: AfacadTextStyles.textStyle12W400Black(
+        context,
+      ).copyWith(letterSpacing: -.228),
       strutStyle: StrutStyle(leading: .3, forceStrutHeight: true),
     );
   }

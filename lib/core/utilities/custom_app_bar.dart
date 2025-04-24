@@ -3,7 +3,8 @@ import 'package:road_man_project/core/helper/const_variables.dart';
 
 import 'base_text_styles.dart';
 
-PreferredSizeWidget customAppBar({
+PreferredSizeWidget customAppBar(
+  BuildContext context, {
   required String text,
   required Function()? onPressed,
   Color backgroundColor = kAppPrimaryWhiteColor,
@@ -34,7 +35,9 @@ PreferredSizeWidget customAppBar({
     centerTitle: true,
     title: Text(
       text,
-      style: AfacadTextStyles.textStyle20W600Blue.copyWith(color: generalColor),
+      style: AfacadTextStyles.textStyle20W600Blue(
+        context,
+      ).copyWith(color: generalColor),
     ),
   );
 }

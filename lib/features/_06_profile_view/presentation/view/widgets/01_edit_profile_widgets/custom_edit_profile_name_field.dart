@@ -68,6 +68,7 @@ class CustomEditProfileNameField extends StatelessWidget {
         textAlign: TextAlign.start,
         obscuringCharacter: '●',
         style: ConstFunctions.editProfileTextStyle(
+          context,
           letterSpacing: textLetterSpacing,
         ),
         decoration: InputDecoration(
@@ -115,7 +116,9 @@ class CustomEditProfileNameField extends StatelessWidget {
             ],
           ),
           labelText: labelText,
-          labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(),
+          labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(
+            context,
+          ),
         ),
       ),
     );

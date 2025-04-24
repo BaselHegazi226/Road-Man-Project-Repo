@@ -20,10 +20,9 @@ class QuizViewCardQuestionAnswers extends StatelessWidget {
       children: [
         Text(
           question,
-          style: AfacadTextStyles.textStyle16W600Black.copyWith(
-            height: 1.5,
-            letterSpacing: -0.304,
-          ),
+          style: AfacadTextStyles.textStyle16W600Black(
+            context,
+          ).copyWith(height: 1.5, letterSpacing: -0.304),
         ),
         QuizViewCardRadioButton(answers: answers),
       ],

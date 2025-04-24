@@ -14,6 +14,7 @@ class ProfileView1 extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
+        context,
         text: 'Profile',
         onPressed: () {
           GoRouter.of(context).pop();
@@ -34,7 +35,10 @@ class ProfileView2 extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kAppPrimaryWhiteColor,
         centerTitle: true,
-        title: Text('Profile', style: AfacadTextStyles.textStyle20W600Black),
+        title: Text(
+          'Profile',
+          style: AfacadTextStyles.textStyle20W600Black(context),
+        ),
       ),
       body: const ProfileViewBody(),
     );

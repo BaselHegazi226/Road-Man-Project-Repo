@@ -77,6 +77,7 @@ class CustomEditProfilePasswordField extends StatelessWidget {
         obscuringCharacter: '●',
         textAlignVertical: TextAlignVertical.center,
         style: ConstFunctions.editProfileTextStyle(
+          context,
           letterSpacing: textLetterSpacing,
         ),
         decoration: InputDecoration(
@@ -133,7 +134,9 @@ class CustomEditProfilePasswordField extends StatelessWidget {
             onPressed: suffixIconOnPressed ?? () {},
           ),
           labelText: labelText,
-          labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(),
+          labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(
+            context,
+          ),
         ),
       ),
     );

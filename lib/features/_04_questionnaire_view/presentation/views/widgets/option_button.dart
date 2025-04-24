@@ -29,7 +29,7 @@ class OptionButton extends StatelessWidget {
         child: Text(
           textAlign: TextAlign.center,
           text,
-          style: AfacadTextStyles.textStyle14W500Black,
+          style: AfacadTextStyles.textStyle14W500Black(context),
         ),
       ),
     );

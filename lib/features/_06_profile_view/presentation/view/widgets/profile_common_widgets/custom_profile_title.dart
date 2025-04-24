@@ -6,6 +6,6 @@ class CustomProfileTitle extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AfacadTextStyles.textStyle16W700Black);
+    return Text(title, style: AfacadTextStyles.textStyle16W700Black(context));
   }
 }

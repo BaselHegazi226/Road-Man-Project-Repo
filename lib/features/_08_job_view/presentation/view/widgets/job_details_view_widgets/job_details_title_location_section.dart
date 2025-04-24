@@ -15,13 +15,16 @@ class JobDetailsTitleLocationSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 4,
       children: [
-        Text(title, style: AfacadTextStyles.textStyle20W600Black),
+        Text(title, style: AfacadTextStyles.textStyle20W600Black(context)),
         Row(
           spacing: 8,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(company, style: AfacadTextStyles.textStyle16W400Grey),
-            Text(location, style: AfacadTextStyles.textStyle16W400Grey),
+            Text(company, style: AfacadTextStyles.textStyle16W400Grey(context)),
+            Text(
+              location,
+              style: AfacadTextStyles.textStyle16W400Grey(context),
+            ),
           ],
         ),
       ],
