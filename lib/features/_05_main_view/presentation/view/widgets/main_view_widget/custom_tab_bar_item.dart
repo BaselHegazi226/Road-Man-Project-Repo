@@ -78,8 +78,8 @@ class CustomTabBarItem extends StatelessWidget {
             if (isSelected)
               Positioned(
                 top: -whiteLineHeight * 1.6,
-                left: index == 0 ? screenWidth * 0.05 : null,
-                right: index == 3 ? screenWidth * 0.05 : null,
+                // left: index == 0 ? screenWidth * 0.05 : null,
+                // right: index == 3 ? screenWidth * 0.05 : null,
                 child: const Icon(
                   CupertinoIcons.flag_fill,
                   size: 24,
