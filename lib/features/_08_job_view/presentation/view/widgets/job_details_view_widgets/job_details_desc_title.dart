@@ -7,6 +7,6 @@ class JobDetailsDescTitle extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AfacadTextStyles.textStyle20W600Black);
+    return Text(title, style: AfacadTextStyles.textStyle20W600Black(context));
   }
 }

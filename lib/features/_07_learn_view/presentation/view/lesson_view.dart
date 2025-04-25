@@ -12,6 +12,7 @@ class LessonView extends StatelessWidget {
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
+        context,
         text: 'Ui\\Ux Designer ',
         onPressed: () {
           GoRouter.of(context).pop();

@@ -21,16 +21,15 @@ class OtherRegisterSection extends StatelessWidget {
         children: [
           Text(
             blackText,
-            style: AfacadTextStyles.textStyle16W500H150Black.copyWith(
-              letterSpacing: -.304,
-            ),
+            style: AfacadTextStyles.textStyle16W500H150Black(
+              context,
+            ).copyWith(letterSpacing: -.304),
           ),
           Text(
             blueText,
-            style: AfacadTextStyles.textStyle16W700Blue.copyWith(
-              letterSpacing: -.304,
-              height: 1.5,
-            ),
+            style: AfacadTextStyles.textStyle16W700Blue(
+              context,
+            ).copyWith(letterSpacing: -.304, height: 1.5),
           ),
         ],
       ),

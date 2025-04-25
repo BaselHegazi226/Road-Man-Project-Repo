@@ -15,10 +15,13 @@ class TwoTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title1, style: AfacadTextStyles.textStyle16W500H150Black),
+        Text(title1, style: AfacadTextStyles.textStyle16W500H150Black(context)),
         TextButton(
           onPressed: title2onPressed,
-          child: Text(title2, style: AfacadTextStyles.textStyle16W600HBlue),
+          child: Text(
+            title2,
+            style: AfacadTextStyles.textStyle16W600HBlue(context),
+          ),
         ),
       ],
     );

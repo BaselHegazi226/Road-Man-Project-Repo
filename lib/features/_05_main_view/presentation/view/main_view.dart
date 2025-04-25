@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_05_main_view/presentation/view/widgets/main_view_widget/custom_bottom_nav_bar.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 
-import '../../../_09_home_view/home_view.dart';
+import '../../../_06_home_view/home_view.dart';
+import '../../../_09_profile_view/presentation/view/profile_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -30,7 +31,7 @@ class _HomeViewBodyState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kAppPrimaryWhiteColor,
       body: views[currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: currentIndex,
@@ -45,7 +46,7 @@ class _HomeViewBodyState extends State<MainView> {
 // import 'package:flutter/material.dart';
 // import 'package:google_nav_bar/google_nav_bar.dart';
 // import 'package:road_man_project/core/helper/const_variables.dart';
-// import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
+// import 'package:road_man_project/features/_09_profile_view/presentation/view/profile_view.dart';
 // import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 //
 // import '../../../../../_08_job_view/presentation/view/job_view.dart';

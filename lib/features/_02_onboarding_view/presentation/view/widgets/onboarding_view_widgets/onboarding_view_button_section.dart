@@ -14,17 +14,21 @@ class OnBoardingViewButtonSection extends StatelessWidget {
   final VoidCallback skipButtonOnPressed, nextButtonOnPressed;
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(
           onTap: skipButtonOnPressed,
-          child: Text('Skip', style: AfacadTextStyles.textStyle18W400Blue),
+          child: Text(
+            'Skip',
+            style: AfacadTextStyles.textStyle18W400Blue(context),
+          ),
         ),
         CustomTextButton(
           onPressed: nextButtonOnPressed,
-          buttonWidth: MediaQuery.sizeOf(context).width * .25,
-          buttonHeight: MediaQuery.sizeOf(context).height * .045,
+          buttonWidth: screenSize.width * .25,
+          buttonHeight: screenSize.height * .045,
           backgroundColor: kAppPrimaryBlueColor,
           child: CustomTitle(title: 'Next'),
         ),

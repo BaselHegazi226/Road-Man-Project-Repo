@@ -21,7 +21,9 @@ class FavouriteCardListView extends StatelessWidget {
                   children: [
                     Text(
                       'No Favourite',
-                      style: AfacadTextStyles.textStyle24W700Black.copyWith(
+                      style: AfacadTextStyles.textStyle24W700Black(
+                        context,
+                      ).copyWith(
                         fontSize: screenWidth * 0.06, // 6% من عرض الشاشة
                       ),
                     ),
@@ -32,7 +34,9 @@ class FavouriteCardListView extends StatelessWidget {
                     ),
                     Text(
                       'Items Yet!',
-                      style: AfacadTextStyles.textStyle24W700Black.copyWith(
+                      style: AfacadTextStyles.textStyle24W700Black(
+                        context,
+                      ).copyWith(
                         fontSize: screenWidth * 0.06, // 6% من عرض الشاشة
                       ),
                     ),

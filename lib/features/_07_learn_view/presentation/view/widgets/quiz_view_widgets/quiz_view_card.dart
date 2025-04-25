@@ -10,10 +10,16 @@ class QuizViewCard extends StatelessWidget {
     required this.quizViewCardModel,
     required this.screenHeight,
     required this.screenWidth,
+    required this.selectedAnswer,
+    required this.hasAnswered,
+    required this.onAnswerSelected,
   });
 
   final double screenHeight, screenWidth;
   final QuizViewCardModel quizViewCardModel;
+  final String? selectedAnswer;
+  final bool hasAnswered;
+  final Function(String, bool) onAnswerSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,6 @@ class QuizViewCard extends StatelessWidget {
       alignment: Alignment.center,
       child: Container(
         constraints: BoxConstraints(
-          // أقصى ارتفاع يسمح بعرضه قبل ما يبدأ Scroll
           maxHeight: screenHeight * 0.22,
           minHeight: 0,
         ),
@@ -46,6 +51,9 @@ class QuizViewCard extends StatelessWidget {
           child: QuizViewCardQuestionAnswers(
             question: quizViewCardModel.questionText,
             answers: quizViewCardModel.answers,
+            selectedAnswer: selectedAnswer,
+            hasAnswered: hasAnswered,
+            onAnswerSelected: onAnswerSelected,
           ),
         ),
       ),

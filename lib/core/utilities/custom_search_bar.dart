@@ -26,9 +26,9 @@ class CustomSearchBar extends StatelessWidget {
       backgroundColor: WidgetStateProperty.all(const Color(0xffE6E8EE)),
       hintText: hintText,
       hintStyle: WidgetStatePropertyAll(
-        AfacadTextStyles.textStyle16W500H150Black.copyWith(
-          color: kTextGreyHalfOpacityPrimaryColor,
-        ),
+        AfacadTextStyles.textStyle16W500H150Black(
+          context,
+        ).copyWith(color: kTextGreyHalfOpacityPrimaryColor),
       ),
       leading: Icon(
         Icons.search_outlined,

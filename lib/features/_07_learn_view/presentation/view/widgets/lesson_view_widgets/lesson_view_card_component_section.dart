@@ -19,10 +19,10 @@ class LessonViewCardComponentSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(lesson, style: JostTextStyles.textStyle15W600Black),
+        Text(lesson, style: JostTextStyles.textStyle15W600Black(context)),
         SizedBox(height: screenHeight * .005),
-        Text(lessonTitle, style: JostTextStyles.textStyle15W600Blue),
-        Text(lessonTime, style: AfacadTextStyles.textStyle15W500Grey),
+        Text(lessonTitle, style: JostTextStyles.textStyle15W600Blue(context)),
+        Text(lessonTime, style: AfacadTextStyles.textStyle15W500Grey(context)),
       ],
     );
   }

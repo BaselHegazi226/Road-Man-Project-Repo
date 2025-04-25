@@ -1,12 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/questionnaire_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/about_app_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/edit_profile_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/faq_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/privacy_policy_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/profile_view.dart';
-import 'package:road_man_project/features/_06_profile_view/presentation/view/settings_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/lesson_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/quiz_view.dart';
@@ -19,6 +13,13 @@ import '../../features/_02_onboarding_view/presentation/view/onboarding_page_vie
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
 import '../../features/_05_main_view/presentation/view/main_view.dart';
+import '../../features/_09_profile_view/presentation/view/about_app_view.dart';
+import '../../features/_09_profile_view/presentation/view/edit_profile_view.dart';
+import '../../features/_09_profile_view/presentation/view/faq_view.dart';
+import '../../features/_09_profile_view/presentation/view/learning_preferences_view.dart';
+import '../../features/_09_profile_view/presentation/view/privacy_policy_view.dart';
+import '../../features/_09_profile_view/presentation/view/profile_view.dart';
+import '../../features/_09_profile_view/presentation/view/settings_view.dart';
 import 'routes.dart';
 
 abstract class AppRouter {
@@ -92,6 +93,10 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.learningPathViewId,
         builder: (context, state) => const LearningPathView(),
+      ),
+      GoRoute(
+        path: Routes.learningPreferencesViewId,
+        builder: (context, state) => const LearningPreferencesView(),
       ),
       GoRoute(
         path: Routes.lessonViewId,

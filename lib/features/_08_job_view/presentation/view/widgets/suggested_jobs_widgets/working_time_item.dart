@@ -27,9 +27,9 @@ class WorkingTimeItem extends StatelessWidget {
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AfacadTextStyles.textStyle14W400Black.copyWith(
-            color: kTextBlackPrimaryColor,
-          ),
+          style: AfacadTextStyles.textStyle14W400Black(
+            context,
+          ).copyWith(color: kTextBlackPrimaryColor),
         ),
       ),
     );

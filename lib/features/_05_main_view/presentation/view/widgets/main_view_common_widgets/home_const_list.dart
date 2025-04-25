@@ -12,7 +12,7 @@ class HomeConstList {
       title: 'Profile',
     ),
     DashboardItemModel(
-      routeName: Routes.learningPathViewId,
+      routeName: Routes.learningPreferencesViewId,
       prefixIcon: Icons.local_library_outlined,
       title: 'Learning preferences',
     ),

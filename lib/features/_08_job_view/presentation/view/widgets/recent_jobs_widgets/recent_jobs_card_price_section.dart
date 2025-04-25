@@ -19,7 +19,7 @@ class RecentJobsCardPriceSection extends StatelessWidget {
     return Row(
       spacing: screenWidth * 0.02,
       children: [
-        Text(salary, style: AfacadTextStyles.textStyle14W400Grey),
+        Text(salary, style: AfacadTextStyles.textStyle14W400Grey(context)),
         Container(
           padding: EdgeInsets.symmetric(
             horizontal: screenWidth * 0.02,
@@ -29,7 +29,10 @@ class RecentJobsCardPriceSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(screenWidth * 0.02),
             border: Border.all(color: const Color(0xff8A8C90), width: 1.5),
           ),
-          child: Text(jobType, style: AfacadTextStyles.textStyle14W400Black),
+          child: Text(
+            jobType,
+            style: AfacadTextStyles.textStyle14W400Black(context),
+          ),
         ),
       ],
     );

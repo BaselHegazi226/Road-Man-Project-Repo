@@ -21,7 +21,7 @@ class NotNotificationViewBody extends StatelessWidget {
           ),
           Text(
             'No Notification Yet',
-            style: AfacadTextStyles.textStyle24W700Black,
+            style: AfacadTextStyles.textStyle24W700Black(context),
           ),
         ],
       ),

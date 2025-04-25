@@ -37,7 +37,7 @@ class _RecentJobsItemState extends State<RecentJobsItem> {
         },
         child: Text(
           widget.text,
-          style: AfacadTextStyles.textStyle16W600Black.copyWith(
+          style: AfacadTextStyles.textStyle16W600Black(context).copyWith(
             color:
                 !isActiveButton
                     ? kTextBlackPrimaryColor

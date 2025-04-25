@@ -17,7 +17,10 @@ class _FavouriteCardTitleSectionState extends State<FavouriteCardTitleSection> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.title, style: AfacadTextStyles.textStyle20W600Black),
+        Text(
+          widget.title,
+          style: AfacadTextStyles.textStyle20W600Black(context),
+        ),
         Icon(CupertinoIcons.heart_fill, size: 24, color: kEditProfileIconColor),
       ],
     );

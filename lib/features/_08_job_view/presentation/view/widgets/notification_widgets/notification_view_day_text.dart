@@ -20,15 +20,15 @@ class NotificationViewDayText extends StatelessWidget {
       children: [
         Text(
           dayText,
-          style: AfacadTextStyles.textStyle14W500Black.copyWith(
-            color: kTextGreyHalfOpacityPrimaryColor,
-          ),
+          style: AfacadTextStyles.textStyle14W500Black(
+            context,
+          ).copyWith(color: kTextGreyHalfOpacityPrimaryColor),
         ),
         Text(
           formattedDate,
-          style: AfacadTextStyles.textStyle12W400Grey.copyWith(
-            color: kTextGreyHalfOpacityPrimaryColor,
-          ),
+          style: AfacadTextStyles.textStyle12W400Grey(
+            context,
+          ).copyWith(color: kTextGreyHalfOpacityPrimaryColor),
         ),
       ],
     );

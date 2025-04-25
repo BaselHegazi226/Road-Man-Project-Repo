@@ -12,6 +12,7 @@ class VerificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(
+        context,
         generalColor: kAppPrimaryBlueColor,
         text: 'Verification',
         onPressed: () {

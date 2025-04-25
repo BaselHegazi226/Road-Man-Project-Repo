@@ -1,3 +1,29 @@
+// class QuizViewCardQuestionAnswers extends StatelessWidget {
+//   const QuizViewCardQuestionAnswers({
+//     super.key,
+//     required this.question,
+//     required this.answers,
+//   });
+//   final String question;
+//   final List<QuizViewCardAnswer> answers;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       spacing: MediaQuery.sizeOf(context).height * .005,
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           question,
+//           style: AfacadTextStyles.textStyle16W600Black(
+//             context,
+//           ).copyWith(height: 1.5, letterSpacing: -0.304),
+//         ),
+//         QuizViewCardRadioButton(answers: answers),
+//       ],
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/quiz_view_card_model.dart';
@@ -8,9 +34,17 @@ class QuizViewCardQuestionAnswers extends StatelessWidget {
     super.key,
     required this.question,
     required this.answers,
+    required this.selectedAnswer,
+    required this.hasAnswered,
+    required this.onAnswerSelected,
   });
+
   final String question;
   final List<QuizViewCardAnswer> answers;
+  final String? selectedAnswer;
+  final bool hasAnswered;
+  final Function(String, bool) onAnswerSelected;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,12 +54,16 @@ class QuizViewCardQuestionAnswers extends StatelessWidget {
       children: [
         Text(
           question,
-          style: AfacadTextStyles.textStyle16W600Black.copyWith(
-            height: 1.5,
-            letterSpacing: -0.304,
-          ),
+          style: AfacadTextStyles.textStyle16W600Black(
+            context,
+          ).copyWith(height: 1.5, letterSpacing: -0.304),
         ),
-        QuizViewCardRadioButton(answers: answers),
+        QuizViewCardRadioButton(
+          answers: answers,
+          selectedAnswer: selectedAnswer,
+          hasAnswered: hasAnswered,
+          onAnswerSelected: onAnswerSelected,
+        ),
       ],
     );
   }

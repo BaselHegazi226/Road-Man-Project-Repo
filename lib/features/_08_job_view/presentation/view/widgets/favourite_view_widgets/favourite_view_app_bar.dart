@@ -10,7 +10,12 @@ AppBar favouriteViewAppBar(BuildContext context) {
   final double screenWidth = MediaQuery.sizeOf(context).width;
   return AppBar(
     backgroundColor: kAppPrimaryWhiteColor,
-    title: Text('Favourite', style: AfacadTextStyles.textStyle20W500Black),
+    title: Text(
+      'Favourite',
+      style: AfacadTextStyles.textStyle20W500Blue(
+        context,
+      ).copyWith(color: kAppPrimaryBlackColor),
+    ),
     centerTitle: true,
     leading: IconButton(
       onPressed: () {

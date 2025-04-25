@@ -11,12 +11,14 @@ class JobResponsibilitiesDescItem extends StatelessWidget {
       spacing: 4,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('●', style: AfacadTextStyles.textStyle20W600Black),
+        Text('●', style: AfacadTextStyles.textStyle20W600Black(context)),
 
         Expanded(
           child: Text(
             text,
-            style: AfacadTextStyles.textStyle14W400Black.copyWith(height: 1.5),
+            style: AfacadTextStyles.textStyle14W400Black(
+              context,
+            ).copyWith(height: 1.5),
           ),
         ),
       ],

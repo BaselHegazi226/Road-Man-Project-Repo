@@ -7,6 +7,8 @@ Color kDisableColor = Colors.grey;
 const Color kAppPrimaryBlueColor = Color(0xff2352A1);
 const Color kAppPrimaryWhiteColor = Color(0xffF3F6F5);
 const Color kAppPrimaryBlackColor = Color(0xff131314);
+const Color kAppPrimaryWrongColor = Colors.red;
+const Color kAppPrimaryCorrectColor = Colors.green;
 const Color kSecondlyDarkWhiteColor = Color(0xffE6E8EE);
 const Color kSecondlyLightWhiteColor = Color(0xffF5F5F5);
 const Color kQuestionnaireButtonColor = Color(0xffE6E8EE);
@@ -20,8 +22,6 @@ const Color kQuizViewSecondlyColor = Color(0xff4A4A4A);
 
 const Color kCheckPasswordItemColor = Color(0xff131314);
 const Color kOtpPinThemeBorderColor = Color(0xff131314);
-
-
 
 const Color kFilledTextFormFieldColor = Color(0xffE6E8EE);
 
@@ -48,7 +48,14 @@ const Color kSettingsSwitchInactiveThumbColor = Color(0xffF4F5F8);
 const Color kSettingsContainerColor = Color(0xffE6E8EE);
 const Color kSettingsTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
 const Color kSettingsHintTextFormFieldColor = Color.fromRGBO(19, 19, 20, 0.50);
+const Color kLearningPreferencesCardTextColor = Color.fromRGBO(
+  19,
+  19,
+  20,
+  0.50,
+);
 const Color kSettingsBackgroundFormFieldColor = Color(0xffE6E8EE);
+const Color kLearningPreferencesCardColor = Color(0xffE6E8EE);
 const Color kSettingsBorderFormFieldColor = Color(0xff131314);
 
 const Color kLogoutLineColor = Color(0xff131314);

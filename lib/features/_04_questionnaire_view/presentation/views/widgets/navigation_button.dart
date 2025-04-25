@@ -41,7 +41,7 @@ class NavigationButtons extends StatelessWidget {
                   ),
                   Text(
                     'Previous',
-                    style: AfacadTextStyles.textStyle16W600HBlue,
+                    style: AfacadTextStyles.textStyle16W600HBlue(context),
                   ),
                 ],
               ),
@@ -52,7 +52,10 @@ class NavigationButtons extends StatelessWidget {
               child: Row(
                 spacing: screenWidth * .01,
                 children: [
-                  Text('Next', style: AfacadTextStyles.textStyle16W600HBlue),
+                  Text(
+                    'Next',
+                    style: AfacadTextStyles.textStyle16W600HBlue(context),
+                  ),
                   const Icon(Icons.arrow_forward_ios, size: 16),
                 ],
               ),

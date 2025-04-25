@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/quiz_view_card_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_radio_button_circle.dart';
-import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_radio_button_text.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_radio_button_text.dart';
 
-class QuizViewCardRadioButton extends StatefulWidget {
-  const QuizViewCardRadioButton({super.key, required this.answers});
+class QuizViewCardRadioButton extends StatelessWidget {
+  const QuizViewCardRadioButton({
+    super.key,
+    required this.answers,
+    required this.selectedAnswer,
+    required this.hasAnswered,
+    required this.onAnswerSelected,
+  });
+
   final List<QuizViewCardAnswer> answers;
-
-  @override
-  State<QuizViewCardRadioButton> createState() =>
-      _QuizViewCardRadioButtonState();
-}
-
-class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
-  String? selected;
+  final String? selectedAnswer;
+  final bool hasAnswered;
+  final Function(String, bool) onAnswerSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,14 @@ class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
 
     return Column(
       children:
-          widget.answers.map((answer) {
-            final isSelected = selected == answer.answerText;
+          answers.map((answer) {
+            final isSelected = selectedAnswer == answer.answerText;
             return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selected = answer.answerText;
-                });
-              },
+              onTap:
+                  hasAnswered
+                      ? null
+                      : () =>
+                          onAnswerSelected(answer.answerText, answer.isCorrect),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: screenHeight * .005),
                 child: Row(
@@ -39,15 +41,20 @@ class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
                     QuizViewCardRadioButtonCircle(
                       isSelected: isSelected,
                       size: screenWidth * .06,
-                      selectedColor: kAppPrimaryBlueColor,
+                      selectedColor:
+                          answer.isCorrect
+                              ? kAppPrimaryCorrectColor
+                              : kAppPrimaryWrongColor,
                       unselectedColor: kQuizViewSecondlyColor,
                     ),
-                    // استخدام Expanded هنا للسماح للنص بالنزول لسطر آخر
                     Expanded(
                       child: QuizViewCardRadioButtonText(
                         answerText: answer.answerText,
                         isSelected: isSelected,
-                        selectedColor: kAppPrimaryBlueColor,
+                        selectedColor:
+                            answer.isCorrect
+                                ? kAppPrimaryCorrectColor
+                                : kAppPrimaryWrongColor,
                         unselectedColor: kAppPrimaryBlackColor,
                       ),
                     ),

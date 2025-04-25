@@ -1,81 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/core/utilities/base_text_styles.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_app_bar.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_body.dart';
 
-class QuizView extends StatelessWidget {
+import '../../../../core/helper/const_variables.dart';
+
+class QuizView extends StatefulWidget {
   const QuizView({super.key});
 
   @override
+  State<QuizView> createState() => _QuizViewState();
+}
+
+class _QuizViewState extends State<QuizView> {
+  int correctCount = 0;
+  int incorrectCount = 0;
+  final Map<int, String?> selectedAnswers = {};
+  final Map<int, bool> hasAnsweredMap = {};
+
+  void _updateAnswer(int questionId, String answerText, bool isCorrect) {
+    setState(() {
+      selectedAnswers[questionId] = answerText;
+      hasAnsweredMap[questionId] = true;
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        incorrectCount++;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.sizeOf(context).width;
-    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: kAppPrimaryWhiteColor,
-      appBar: AppBar(
-        backgroundColor: kQuizViewPrimaryColor,
-        titleSpacing: screenWidth * .04,
-        leading: IconButton(
-          padding: EdgeInsets.only(top: screenHeight * .02),
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_new_outlined,
-            size: screenWidth * 0.05,
-          ),
-        ),
-        title: Padding(
-          padding: EdgeInsets.only(top: screenHeight * .02),
-          child: Text(
-            'Level 1 Test',
-            style: AfacadTextStyles.textStyle20W500Blue,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: screenWidth * .04,
-              bottom: screenHeight * .01,
-            ),
-            child: Row(
-              spacing: screenWidth * .04,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  spacing: screenHeight * .005,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text('0', style: MontserratTextStyles.textStyle16W600Black),
-                    Text(
-                      'Correct',
-                      style: AfacadTextStyles.textStyle14W600Black,
-                    ),
-                  ],
-                ),
-                VerticalDivider(
-                  color: kAppPrimaryBlackColor,
-                  thickness: 1,
-                  indent: 8,
-                ),
-                Column(
-                  spacing: screenHeight * .005,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text('0', style: MontserratTextStyles.textStyle16W600Black),
-                    Text(
-                      'INCorrect',
-                      style: AfacadTextStyles.textStyle14W600Black,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
+      appBar: QuizViewAppBar(
+        correctCount: correctCount,
+        incorrectCount: incorrectCount,
       ),
-      body: const QuizViewBody(),
+      body: QuizViewBody(
+        selectedAnswers: selectedAnswers,
+        hasAnsweredMap: hasAnsweredMap,
+        onAnswerSelected: _updateAnswer,
+      ),
     );
   }
 }

@@ -12,8 +12,11 @@ class SuggestedJobsPriceSubscriptionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(price, style: AfacadTextStyles.textStyle16W600HBlue),
-        Text(subscriptionType, style: AfacadTextStyles.textStyle14W400Grey),
+        Text(price, style: AfacadTextStyles.textStyle16W600HBlue(context)),
+        Text(
+          subscriptionType,
+          style: AfacadTextStyles.textStyle14W400Grey(context),
+        ),
       ],
     );
   }

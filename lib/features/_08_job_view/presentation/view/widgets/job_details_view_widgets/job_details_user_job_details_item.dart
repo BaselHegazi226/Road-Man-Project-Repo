@@ -44,8 +44,14 @@ class JobDetailsUserJobDetailsItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 6,
               children: [
-                Text(title, style: AfacadTextStyles.textStyle14W400Black),
-                Text(subTitle, style: AfacadTextStyles.textStyle14W400Blue),
+                Text(
+                  title,
+                  style: AfacadTextStyles.textStyle14W400Black(context),
+                ),
+                Text(
+                  subTitle,
+                  style: AfacadTextStyles.textStyle14W400Blue(context),
+                ),
               ],
             ),
           ],

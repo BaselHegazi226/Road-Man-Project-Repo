@@ -42,7 +42,8 @@ AppBar jobDetailsAppbar(BuildContext context) {
     ],
     title: Text(
       'Job Details',
-      style: AfacadTextStyles.textStyle20W500LightWhite.copyWith(
+      style: AfacadTextStyles.textStyle20W500Blue(context).copyWith(
+        color: kSecondlyLightWhiteColor,
         fontSize: screenWidth * 0.05,
       ), // جعل النص ديناميكي
     ),

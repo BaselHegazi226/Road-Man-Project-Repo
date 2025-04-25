@@ -39,13 +39,19 @@ class FavouriteCardLocationSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 2,
               children: [
-                Text(company, style: AfacadTextStyles.textStyle14W400Grey),
-                Text(location, style: AfacadTextStyles.textStyle14W400Grey),
+                Text(
+                  company,
+                  style: AfacadTextStyles.textStyle14W400Grey(context),
+                ),
+                Text(
+                  location,
+                  style: AfacadTextStyles.textStyle14W400Grey(context),
+                ),
               ],
             ),
           ],
         ),
-        Text(timeLeft, style: AfacadTextStyles.textStyle12W400Grey),
+        Text(timeLeft, style: AfacadTextStyles.textStyle12W400Grey(context)),
       ],
     );
   }

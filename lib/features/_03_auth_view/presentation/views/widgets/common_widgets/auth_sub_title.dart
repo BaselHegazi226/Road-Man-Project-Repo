@@ -10,9 +10,9 @@ class AuthSubTitle extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       subTitle,
-      style: AfacadTextStyles.textStyle16W600H150Black.copyWith(
-        letterSpacing: -0.304,
-      ),
+      style: AfacadTextStyles.textStyle16W600H150Black(
+        context,
+      ).copyWith(letterSpacing: -0.304),
     );
   }
 }
