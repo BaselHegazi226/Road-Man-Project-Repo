@@ -43,7 +43,7 @@ class QuizViewCardRadioButton extends StatelessWidget {
                       size: screenWidth * .06,
                       selectedColor:
                           answer.isCorrect
-                              ? kAppPrimaryBlueColor
+                              ? kAppPrimaryCorrectColor
                               : kAppPrimaryWrongColor,
                       unselectedColor: kQuizViewSecondlyColor,
                     ),
@@ -53,7 +53,7 @@ class QuizViewCardRadioButton extends StatelessWidget {
                         isSelected: isSelected,
                         selectedColor:
                             answer.isCorrect
-                                ? kAppPrimaryBlueColor
+                                ? kAppPrimaryCorrectColor
                                 : kAppPrimaryWrongColor,
                         unselectedColor: kAppPrimaryBlackColor,
                       ),
