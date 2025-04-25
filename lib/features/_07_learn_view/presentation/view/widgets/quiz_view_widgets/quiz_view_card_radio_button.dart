@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/quiz_view_card_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_radio_button_circle.dart';
-import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_radio_button_text.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_radio_button_text.dart';
 
 class QuizViewCardRadioButton extends StatelessWidget {
   const QuizViewCardRadioButton({
