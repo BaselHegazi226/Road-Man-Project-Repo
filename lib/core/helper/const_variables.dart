@@ -8,6 +8,7 @@ const Color kAppPrimaryBlueColor = Color(0xff2352A1);
 const Color kAppPrimaryWhiteColor = Color(0xffF3F6F5);
 const Color kAppPrimaryBlackColor = Color(0xff131314);
 const Color kAppPrimaryWrongColor = Colors.red;
+const Color kAppPrimaryCorrectColor = Colors.green;
 const Color kSecondlyDarkWhiteColor = Color(0xffE6E8EE);
 const Color kSecondlyLightWhiteColor = Color(0xffF5F5F5);
 const Color kQuestionnaireButtonColor = Color(0xffE6E8EE);
