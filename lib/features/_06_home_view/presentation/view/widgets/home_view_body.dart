@@ -18,11 +18,14 @@ class HomeViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: screenSize.height * .03,
           children: [
-            SizedBox(height: screenSize.height * .08), // Space for top header
+            SizedBox(height: screenSize.height * .04), // Space for top header
             const WelcomeSection(),
             const CurrentPathCard(),
             const ProgressSection(),
             const RecommendedJobsSection(),
+            SizedBox(
+              height: screenSize.height * .02,
+            ), // Space for bottom header
           ],
         ),
       ),
