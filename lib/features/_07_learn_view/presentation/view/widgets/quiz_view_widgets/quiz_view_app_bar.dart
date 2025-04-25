@@ -27,7 +27,11 @@ class QuizViewAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () {
           GoRouter.of(context).pop();
         },
-        icon: Icon(Icons.arrow_back_ios_new_outlined, size: screenWidth * 0.05),
+        icon: Icon(
+          Icons.arrow_back_ios_new_outlined,
+          size: screenWidth * 0.05,
+          color: kAppPrimaryBlueColor,
+        ),
       ),
       title: Padding(
         padding: EdgeInsets.only(top: screenHeight * .02),
@@ -54,25 +58,50 @@ class QuizViewAppBar extends StatelessWidget implements PreferredSizeWidget {
         spacing: screenWidth * .04,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildScoreColumn('$correctCount', 'Correct', context),
+          _buildScoreColumn(
+            '$correctCount',
+            'Correct',
+            kAppPrimaryCorrectColor,
+            context,
+          ),
           const VerticalDivider(
             color: kAppPrimaryBlackColor,
             thickness: 1,
             indent: 8,
           ),
-          _buildScoreColumn('$incorrectCount', 'INCorrect', context),
+          _buildScoreColumn(
+            '$incorrectCount',
+            'INCorrect',
+            kAppPrimaryWrongColor,
+            context,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildScoreColumn(String count, String label, BuildContext context) {
+  Widget _buildScoreColumn(
+    String count,
+    String label,
+    Color color,
+    BuildContext context,
+  ) {
     return Column(
       spacing: MediaQuery.sizeOf(context).height * .005,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(count, style: MontserratTextStyles.textStyle16W600Black(context)),
-        Text(label, style: AfacadTextStyles.textStyle14W600Black(context)),
+        Text(
+          count,
+          style: MontserratTextStyles.textStyle16W600Black(
+            context,
+          ).copyWith(color: color),
+        ),
+        Text(
+          label,
+          style: AfacadTextStyles.textStyle14W600Black(
+            context,
+          ).copyWith(color: color),
+        ),
       ],
     );
   }
