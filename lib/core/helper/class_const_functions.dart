@@ -98,7 +98,7 @@ class ConstFunctions {
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: Colors.transparent, width: 1),
+      borderSide: BorderSide(color: color, width: 1),
     );
   }
 
