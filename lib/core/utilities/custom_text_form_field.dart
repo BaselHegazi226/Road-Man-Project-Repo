@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../helper/class_const_functions.dart';
 import '../helper/const_variables.dart';
@@ -45,9 +46,9 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height * .05,
       child: TextFormField(
         onTap: () {
           FocusScope.of(context).requestFocus(focusNode);
@@ -102,14 +103,21 @@ class CustomTextFormField extends StatelessWidget {
                     ? kBorderTextFormFieldColor // Change to focus color on error
                     : kErrorColor,
           ),
-          errorStyle: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-          ),
+          errorStyle: AfacadTextStyles.textStyle12W400Black(
+            context,
+          ).copyWith(color: kAppPrimaryWrongColor),
           errorText: errorMess,
           fillColor: backgroundColor,
           filled: true,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: screenSize.height * .015,
+            horizontal: screenSize.width * .02,
+          ), // Adjusted padding
+          errorMaxLines:
+              1, // Ensures error text doesn't affect the height of the TextField
         ),
+        minLines: 1, // Ensures a fixed height for the TextField
+        maxLines: 1, // Keep the height consistent
       ),
     );
   }
