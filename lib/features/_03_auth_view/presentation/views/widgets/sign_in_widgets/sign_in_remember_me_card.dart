@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
-class RememberMeCard extends StatelessWidget {
+class RememberMeCard extends StatefulWidget {
   const RememberMeCard({super.key});
 
   @override
+  State<RememberMeCard> createState() => _RememberMeCardState();
+}
+
+class _RememberMeCardState extends State<RememberMeCard> {
+  bool isActiveIcon = false;
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
       width: screenWidth * 0.09, // نسبة من عرض الشاشة
@@ -25,11 +30,17 @@ class RememberMeCard extends StatelessWidget {
       child: Center(
         child: IconButton(
           icon: Icon(
-            Icons.check_box_outline_blank_rounded,
-            color: Colors.transparent,
+            isActiveIcon
+                ? Icons.check_outlined
+                : Icons.check_box_outline_blank_outlined,
+            color: isActiveIcon ? kAppPrimaryBlueColor : Colors.transparent,
             size: screenWidth * 0.07, // نسبة من العرض
           ),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              isActiveIcon = !isActiveIcon;
+            });
+          },
           padding: EdgeInsets.zero,
         ),
       ),
