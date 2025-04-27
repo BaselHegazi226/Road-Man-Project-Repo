@@ -43,11 +43,15 @@ class CustomTabBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Padding(
-      padding: !isSelected ? const EdgeInsets.only(top: 16) : EdgeInsets.zero,
+      padding:
+          !isSelected
+              ? EdgeInsets.only(top: screenSize.height * .02)
+              : EdgeInsets.zero,
       child: Icon(
         getIcon(index, isSelected),
-        size: 24,
+        size: screenSize.height * .03,
         color: kAppPrimaryWhiteColor,
       ),
     );

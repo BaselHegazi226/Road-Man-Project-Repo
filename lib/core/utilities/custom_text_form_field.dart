@@ -84,9 +84,7 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hintText,
           hintStyle: ConstFunctions.hintTextFormFieldStyle(context),
           border: ConstFunctions.outlineInputBorder(),
-          enabledBorder: ConstFunctions.outlineInputBorder(
-            color: kBorderTextFormFieldColor,
-          ),
+          enabledBorder: ConstFunctions.outlineInputBorder(),
           focusedBorder: ConstFunctions.outlineInputBorder(
             color: kBorderTextFormFieldColor, // Focus color applied here
           ),
