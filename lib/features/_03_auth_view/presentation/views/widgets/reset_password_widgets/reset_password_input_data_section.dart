@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/password_text_form_field.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
-import '../../../../../../core/utilities/custom_text_form_field.dart';
 import '../../../../../../core/utilities/custom_title.dart';
 import '../sign_up_widgets/check_password_section.dart';
 
@@ -97,7 +97,7 @@ class _ResetPasswordInputDataSectionState
     return Column(
       spacing: screenHeight * .02,
       children: [
-        CustomTextFormField(
+        PasswordTextFormField(
           hintText: 'New Password',
           focusNode: passwordFocusNode,
           textEditingController: passwordEditingController,
@@ -134,7 +134,7 @@ class _ResetPasswordInputDataSectionState
           containsUpperCase: containsUpperCase,
           containsLowerCase: containsLowerCase,
         ),
-        CustomTextFormField(
+        PasswordTextFormField(
           hintText: 'Confirm Password',
           focusNode: confirmPasswordFocusNode,
           textEditingController: confirmPasswordEditingController,
