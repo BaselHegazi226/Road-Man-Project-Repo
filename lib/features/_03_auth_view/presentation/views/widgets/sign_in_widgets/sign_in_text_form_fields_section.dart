@@ -1,14 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/password_text_form_field.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
 class SignInTextFormFieldsSection extends StatefulWidget {
-  const SignInTextFormFieldsSection({super.key, required this.formKey});
+  const SignInTextFormFieldsSection({
+    super.key,
+    required this.formKey,
+    required this.passwordEditingController,
+    required this.emailEditingController,
+  });
   final GlobalKey<FormState> formKey;
+  final TextEditingController passwordEditingController;
+  final TextEditingController emailEditingController;
   @override
   State<SignInTextFormFieldsSection> createState() =>
       _SignInTextFormFieldsSectionState();
@@ -25,14 +33,16 @@ class _SignInTextFormFieldsSectionState
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
 
-  TextEditingController passwordEditingController = TextEditingController();
-  TextEditingController emailEditingController = TextEditingController();
+  late TextEditingController passwordEditingController;
+  late TextEditingController emailEditingController;
 
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   void initState() {
     super.initState();
+    emailEditingController = widget.emailEditingController;
+    passwordEditingController = widget.passwordEditingController;
     focusListenerFun();
     controllerListenerFun();
   }
@@ -121,7 +131,7 @@ class _SignInTextFormFieldsSectionState
           CustomTextFormField(
             backgroundColor: kFilledTextFormFieldColor,
             hintText: 'Email',
-            textEditingController: TextEditingController(),
+            textEditingController: emailEditingController,
             keyboardType: TextInputType.text,
             textColor: kTextBlackPrimaryColor,
             prefixIcon: Icons.email_outlined,
@@ -140,10 +150,11 @@ class _SignInTextFormFieldsSectionState
               email = newValue;
             },
           ),
-          CustomTextFormField(
+          PasswordTextFormField(
             backgroundColor: kFilledTextFormFieldColor,
+            obscureText: obscurePassword,
             hintText: 'Password',
-            textEditingController: TextEditingController(),
+            textEditingController: passwordEditingController,
             keyboardType: TextInputType.text,
             textColor: kTextBlackPrimaryColor,
             prefixIcon: Icons.lock_outline,
