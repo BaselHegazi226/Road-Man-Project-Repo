@@ -9,15 +9,12 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
-  final IconData? suffixIcon;
   final IconData? prefixIcon;
   final FocusNode? focusNode; // Added FocusNode
   final String? errorMess;
   final Color textColor;
   final Color backgroundColor;
-  final double suffixIconSize;
   final double prefixIconSize;
-  final void Function()? suffixIconOnPressed;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
@@ -33,15 +30,12 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.onChanged,
     this.prefixIcon,
-    this.suffixIcon,
     this.focusNode,
     this.validator,
     this.errorMess,
     this.prefixIconSize = 24,
-    this.suffixIconSize = 24,
     this.onFieldSubmitted,
     this.onSaved,
-    this.suffixIconOnPressed,
   });
 
   @override
@@ -68,14 +62,6 @@ class CustomTextFormField extends StatelessWidget {
         style: ConstFunctions.textTextFormFieldStyle(context),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.auto,
-          suffixIcon: IconButton(
-            icon: Icon(
-              suffixIcon,
-              size: suffixIconSize,
-              color: kIconTextFormFieldColor,
-            ),
-            onPressed: suffixIconOnPressed ?? () {},
-          ),
           prefixIcon: Icon(
             prefixIcon,
             size: prefixIconSize,
