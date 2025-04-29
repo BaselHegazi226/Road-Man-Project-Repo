@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/custom_circle_indicator.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_event.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_state.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/sign_in_remember_password_section.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_in_widgets/sign_in_text_form_fields_section.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
 import '../../../../../../core/utilities/custom_title.dart';
+import '../../../../../../core/utilities/dialogState.dart';
 import 'other_register_section.dart';
 
 class SignInInputDataSection extends StatefulWidget {
@@ -18,14 +24,20 @@ class SignInInputDataSection extends StatefulWidget {
 
 class _SignInInputDataSectionState extends State<SignInInputDataSection> {
   final _formKey = GlobalKey<FormState>();
-
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       spacing: screenHeight * 0.02,
       children: [
-        SignInTextFormFieldsSection(formKey: _formKey),
+        SignInTextFormFieldsSection(
+          formKey: _formKey,
+          emailEditingController: emailController,
+          passwordEditingController: passwordController,
+        ),
         RememberMeForgetPasswordSection(
           forgetPasswordPressed: () {
             GoRouter.of(context).push(Routes.forgetPasswordViewId);
@@ -34,20 +46,50 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
         Padding(
           padding: EdgeInsets.only(top: screenHeight * 0.02),
           child: Column(
-            spacing: screenHeight * 0.03,
+            spacing: screenHeight * 0.02,
             children: [
-              CustomTextButton(
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    _formKey.currentState?.save();
-                    // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is SignInSuccess) {
+                    customAwesomeDialog(
+                      context: context,
+                      dialogState: 'success',
+                      onSuccessPressed: () {
+                        GoRouter.of(context).push(Routes.mainViewId);
+                      },
+                      onCancelPressed: () {
+                        GoRouter.of(context).push(Routes.mainViewId);
+                      },
+                    );
+                  } else if (state is SignInSuccess) {
+                    failureAwesomeDialog(context);
+                  } else {
+                    print('loading sign in');
                   }
                 },
-                backgroundColor: kAppPrimaryBlueColor,
-                child: CustomTitle(
-                  title: 'Sign in',
-                  textColor: kSecondlyLightWhiteColor,
-                ),
+                builder: (context, state) {
+                  return CustomTextButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        _formKey.currentState?.save();
+                        context.read<AuthBloc>().add(
+                          SignInEvent(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          ),
+                        );
+                      }
+                    },
+                    backgroundColor: kAppPrimaryBlueColor,
+                    child:
+                        state is SignInLoading
+                            ? CustomCircleIndicator()
+                            : CustomTitle(
+                              title: 'Sign in',
+                              textColor: kSecondlyLightWhiteColor,
+                            ),
+                  );
+                },
               ),
               CustomTextButton(
                 onPressed: () {
