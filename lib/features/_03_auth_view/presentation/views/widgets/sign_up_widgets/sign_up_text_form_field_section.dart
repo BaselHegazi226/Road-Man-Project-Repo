@@ -4,8 +4,18 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import '../../../../../../core/utilities/custom_text_form_field.dart';
 
 class SignUpTextFormFieldSection extends StatefulWidget {
-  const SignUpTextFormFieldSection({super.key, required this.formKey});
+  const SignUpTextFormFieldSection({
+    super.key,
+    required this.formKey,
+    required this.nameController,
+    required this.emailController,
+    required this.passwordController,
+  });
   final GlobalKey<FormState> formKey;
+  final TextEditingController nameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
   @override
   State<SignUpTextFormFieldSection> createState() =>
       _SignUpTextFormFieldSectionState();
@@ -20,17 +30,24 @@ class _SignUpTextFormFieldSectionState
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode nameFocusNode = FocusNode();
 
-  TextEditingController passwordEditingController = TextEditingController();
-  TextEditingController nameEditingController = TextEditingController();
-  TextEditingController emailEditingController = TextEditingController();
+  late TextEditingController passwordEditingController;
+  late TextEditingController nameEditingController;
+  late TextEditingController emailEditingController;
 
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   void initState() {
     super.initState();
+    fieldsControllerValues();
     focusFun();
     listenerFun();
+  }
+
+  void fieldsControllerValues() {
+    nameEditingController = widget.nameController;
+    emailEditingController = widget.emailController;
+    passwordEditingController = widget.passwordController;
   }
 
   @override
@@ -147,7 +164,7 @@ class _SignUpTextFormFieldSectionState
             },
           ),
           SignUpPasswordSection(
-            passwordEditingController: passwordEditingController,
+            passwordEditingController: widget.passwordController,
             passwordFocusNode: passwordFocusNode,
           ),
         ],
