@@ -53,16 +53,25 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
                   if (state is SignInSuccess) {
                     customAwesomeDialog(
                       context: context,
-                      dialogState: 'success',
-                      onSuccessPressed: () {
-                        GoRouter.of(context).push(Routes.mainViewId);
-                      },
-                      onCancelPressed: () {
+                      isSuccess: true,
+                      title: 'Sign in Success',
+                      description:
+                          'You have successfully sign into Road Man. Enjoy exploring all the features available to you',
+                      onPressed: () {
                         GoRouter.of(context).push(Routes.mainViewId);
                       },
                     );
                   } else if (state is SignInSuccess) {
-                    failureAwesomeDialog(context);
+                    customAwesomeDialog(
+                      context: context,
+                      isSuccess: false,
+                      title: 'Sign In Failure',
+                      description:
+                          'There was an issue with your registration. Please check your details and try again. If the problem persists, contact support',
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                    );
                   } else {
                     print('loading sign in');
                   }
