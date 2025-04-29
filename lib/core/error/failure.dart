@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 
 abstract class Failure {
-  final String errorMessage;
+  final String? errorMessage;
 
   const Failure({required this.errorMessage});
 }
 
 class ServerFailure extends Failure {
-  ServerFailure({required super.errorMessage});
+  const ServerFailure({required super.errorMessage});
 
   factory ServerFailure.fromDioException(DioException dioException) {
     switch (dioException.type) {
@@ -40,6 +40,11 @@ class ServerFailure extends Failure {
         return ServerFailure(
           errorMessage: 'Unexpected error. Please try again.',
         );
+      // دي أهم نقطة - تغطية أي حالة مش محسوبة
+      default:
+        return ServerFailure(
+          errorMessage: 'Something went wrong. Please try again.',
+        );
     }
   }
 
@@ -48,36 +53,36 @@ class ServerFailure extends Failure {
     required dynamic responseData,
   }) {
     if (statusCode == null) {
-      return ServerFailure(errorMessage: 'Unknown server error.');
+      return const ServerFailure(errorMessage: 'Unknown server error.');
     }
 
-    // لو السيرفر بيرجع رسالة خطأ جوه الـ data
     if (responseData is Map<String, dynamic> && responseData['error'] != null) {
-      return ServerFailure(errorMessage: responseData['error']);
+      return ServerFailure(errorMessage: responseData['error'].toString());
     }
 
-    // بناءً على الكود
     switch (statusCode) {
       case 400:
-        return ServerFailure(
+        return const ServerFailure(
           errorMessage: 'Bad request. Please check your input.',
         );
       case 401:
-        return ServerFailure(errorMessage: 'Unauthorized. Please login.');
+        return const ServerFailure(errorMessage: 'Unauthorized. Please login.');
       case 403:
-        return ServerFailure(errorMessage: 'Forbidden. Access denied.');
+        return const ServerFailure(errorMessage: 'Forbidden. Access denied.');
       case 404:
-        return ServerFailure(errorMessage: 'Resource not found.');
+        return const ServerFailure(errorMessage: 'Resource not found.');
       case 409:
-        return ServerFailure(errorMessage: 'Conflict. Duplicate resource.');
+        return const ServerFailure(
+          errorMessage: 'Conflict. Duplicate resource.',
+        );
       case 422:
-        return ServerFailure(
+        return const ServerFailure(
           errorMessage: 'Validation error. Check your data.',
         );
       case 500:
-        return ServerFailure(errorMessage: 'Internal server error.');
+        return const ServerFailure(errorMessage: 'Internal server error.');
       case 503:
-        return ServerFailure(errorMessage: 'Service unavailable.');
+        return const ServerFailure(errorMessage: 'Service unavailable.');
       default:
         return ServerFailure(errorMessage: 'Error occurred: $statusCode');
     }
