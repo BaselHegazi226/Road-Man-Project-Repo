@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/custom_circle_indicator.dart';
+import 'package:road_man_project/core/utilities/dialogState.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_event.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_state.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/sign_up_text_form_field_section.dart';
+import 'package:road_man_project/generated/assets.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
@@ -16,6 +24,9 @@ class SignUpInputDataSection extends StatefulWidget {
 
 class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +37,54 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
       children: [
         Padding(
           padding: EdgeInsets.only(bottom: screenHeight * .005),
-          child: SignUpTextFormFieldSection(formKey: _formKey),
+          child: SignUpTextFormFieldSection(
+            formKey: _formKey,
+            nameController: nameController,
+            emailController: emailController,
+            passwordController: passwordController,
+          ),
         ),
-        CustomTextButton(
-          onPressed: () {
-            if (_formKey.currentState?.validate() ?? false) {
-              _formKey.currentState?.save();
-              // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
-            }
+        BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is SignUpSuccess) {
+              customAwesomeDialog(
+                context: context,
+                dialogState: 'success',
+                onSuccessPressed: () {
+                  GoRouter.of(context).push(Routes.mainViewId);
+                },
+                onCancelPressed: () {
+                  GoRouter.of(context).push(Routes.mainViewId);
+                },
+              );
+            } else if (state is SignUpFailure) {
+              failureAwesomeDialog(context);
+            } else {}
           },
-          backgroundColor: kAppPrimaryBlueColor,
-          child: const CustomTitle(title: 'Sign up'),
+          builder: (context, state) {
+            return CustomTextButton(
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  _formKey.currentState?.save();
+                  // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+                  context.read<AuthBloc>().add(
+                    SignUpEvent(
+                      name: nameController.text.trim(),
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                      image: Assets.googleImage,
+                      dateTime: DateTime.now(),
+                    ),
+                  );
+                }
+              },
+              backgroundColor: kAppPrimaryBlueColor,
+              child:
+                  state is SignUpLoading
+                      ? const CustomCircleIndicator()
+                      : const CustomTitle(title: 'Sign up'),
+            );
+          },
         ),
         OtherRegisterSection(
           onTap: () {
