@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/password_text_form_field.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/check_password_section.dart';
-
-import '../../../../../../core/utilities/custom_text_form_field.dart';
 
 class SignUpPasswordSection extends StatefulWidget {
   const SignUpPasswordSection({
@@ -27,11 +26,17 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
   bool containsPassLength = false;
 
   String? password, passwordErrorMessage;
+  late TextEditingController passwordEditingController;
 
   @override
   void initState() {
     super.initState();
+    passwordControllerValue();
     focusFun();
+  }
+
+  void passwordControllerValue() {
+    passwordEditingController = widget.passwordEditingController;
   }
 
   @override
@@ -83,7 +88,7 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
     return Column(
       spacing: screenHeight * 0.02,
       children: [
-        CustomTextFormField(
+        PasswordTextFormField(
           hintText: 'Password',
           focusNode: widget.passwordFocusNode,
           textEditingController: widget.passwordEditingController,
@@ -100,7 +105,8 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
             if (value!.isEmpty) {
               return 'Please enter a password';
             } else if (!RegExp(
-              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,}\$',
+              //              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$',//ده الصح اللي هيكون موجود عندي في التطبيق بعد لما حازم يعدلها عنده
+              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$', // دي المتوافقه مع نسخه حازم اللي هتتعدل بعد كده
             ).hasMatch(value)) {
               return 'Please enter a valid password! (Aa#12345)';
             }
