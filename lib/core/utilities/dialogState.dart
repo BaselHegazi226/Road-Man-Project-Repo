@@ -1,14 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
-import '../helper/class_const_functions.dart';
 import '../helper/const_variables.dart';
 import 'custom_text_button.dart';
 
 void customAwesomeDialog({
   required BuildContext context,
+  required bool isSuccess, // Add a parameter to indicate success or failure
   final bool needCancel = false,
-  required final String dialogState,
   final String title = 'Success process',
   final String description = 'You are in active mode',
   final Color dialogStateColor = kAppPrimaryBlueColor,
@@ -18,70 +18,44 @@ void customAwesomeDialog({
   final double titleSize = 24,
   final Color descriptionColor = kSecondlyDarkWhiteColor,
   final double descriptionSize = 18,
-  required void Function()? onSuccessPressed,
-  required void Function()? onCancelPressed,
+  required void Function()? onPressed,
 }) {
+  // Set success or failure icon and title dynamically
+  final iconColor = isSuccess ? kAppPrimaryBlueColor : kAppPrimaryWrongColor;
+  final dialogTitle = isSuccess ? 'Success process' : 'Failure process';
+  final dialogDescription =
+      isSuccess
+          ? 'Process completed successfully'
+          : 'Process did n\'t complete';
+  final dialogButtonColor =
+      isSuccess ? kAppPrimaryBlueColor : kAppPrimaryWrongColor;
+
   AwesomeDialog(
     context: context,
-    dialogType: ConstFunctions.dialogType(type: dialogState),
+    dialogType: DialogType.noHeader,
+    customHeader: Icon(
+      Icons.check_circle,
+      color: iconColor,
+      size: MediaQuery.sizeOf(context).width * .24,
+    ),
     dialogBackgroundColor: dialogBackgroundColor,
     width: double.infinity,
-    buttonsBorderRadius: BorderRadius.circular(8),
+    buttonsBorderRadius: BorderRadius.circular(
+      MediaQuery.sizeOf(context).width * .02,
+    ),
     dismissOnTouchOutside: true,
     dismissOnBackKeyPress: true,
     headerAnimationLoop: false,
     animType: AnimType.scale,
-    title: title,
-    desc: description,
+    title: title.isEmpty ? dialogTitle : title,
+    desc: description.isEmpty ? dialogDescription : description,
     showCloseIcon: true,
     borderSide: BorderSide(color: dialogBorderColor, width: 2),
-
     btnOk: CustomTextButton(
-      onPressed: onSuccessPressed,
-      backgroundColor: dialogStateColor,
+      onPressed: onPressed,
+      backgroundColor: dialogButtonColor,
       shadowColor: Colors.transparent,
-      child: Text('Ok'),
+      child: Text('Ok', style: AfacadTextStyles.textStyle14W500White(context)),
     ),
-    btnCancel:
-        needCancel
-            ? CustomTextButton(
-              onPressed: onCancelPressed,
-              backgroundColor: Colors.black.withAlpha(126),
-              shadowColor: Colors.transparent,
-              child: Text('Cancel'),
-            )
-            : null,
-    //btnOkColor: dialogStateColor,
-    // btnCancelColor: Colors.black.withOpacity(.8),
-    // btnCancelOnPress: () {
-    //   print('cancel');
-    // },
-    // btnOkOnPress: () {
-    //   print('press ok success');
-    // },
-  ).show();
-}
-
-void failureAwesomeDialog(BuildContext context) {
-  AwesomeDialog(
-    context: context,
-    dialogType: DialogType.error,
-    borderSide: const BorderSide(color: Colors.white, width: 2),
-    width: MediaQuery.sizeOf(context).width * .7,
-    buttonsBorderRadius: const BorderRadius.all(Radius.circular(8)),
-    dismissOnTouchOutside: true,
-    dismissOnBackKeyPress: true,
-    headerAnimationLoop: false,
-    animType: AnimType.scale,
-    title: 'Success',
-    desc: 'Process Failure',
-
-    showCloseIcon: true,
-    btnCancelOnPress: () {
-      //print('cancel');
-    },
-    btnOkOnPress: () {
-      //print('press ok failure');
-    },
   ).show();
 }
