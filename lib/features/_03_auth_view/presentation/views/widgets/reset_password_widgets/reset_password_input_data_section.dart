@@ -1,6 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/custom_circle_indicator.dart';
+import 'package:road_man_project/core/utilities/dialogState.dart';
 import 'package:road_man_project/core/utilities/password_text_form_field.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_event.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_state.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
@@ -8,7 +16,8 @@ import '../../../../../../core/utilities/custom_title.dart';
 import '../sign_up_widgets/check_password_section.dart';
 
 class ResetPasswordInputDataSection extends StatefulWidget {
-  const ResetPasswordInputDataSection({super.key});
+  const ResetPasswordInputDataSection({super.key, required this.emailAndOtp});
+  final Map<String, dynamic> emailAndOtp;
 
   @override
   State<ResetPasswordInputDataSection> createState() =>
@@ -22,7 +31,7 @@ class _ResetPasswordInputDataSectionState
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode confirmPasswordFocusNode = FocusNode();
 
-  TextEditingController passwordEditingController = TextEditingController();
+  TextEditingController newPasswordEditingController = TextEditingController();
   TextEditingController confirmPasswordEditingController =
       TextEditingController();
 
@@ -50,7 +59,7 @@ class _ResetPasswordInputDataSectionState
   }
 
   void clearFun() {
-    passwordEditingController.clear();
+    newPasswordEditingController.clear();
     confirmPasswordEditingController.clear();
   }
 
@@ -100,7 +109,7 @@ class _ResetPasswordInputDataSectionState
         PasswordTextFormField(
           hintText: 'New Password',
           focusNode: passwordFocusNode,
-          textEditingController: passwordEditingController,
+          textEditingController: newPasswordEditingController,
           prefixIcon: Icons.lock_outline,
           obscureText: obscurePassword,
           suffixIcon:
@@ -163,12 +172,60 @@ class _ResetPasswordInputDataSectionState
         ),
         Padding(
           padding: EdgeInsets.only(top: screenHeight * .02),
-          child: CustomTextButton(
-            onPressed: () {
-              if (!_formKey.currentState!.validate()) {}
+          child: BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is ResetPasswordSuccess) {
+                customAwesomeDialog(
+                  context: context,
+                  isSuccess: true,
+                  title: 'Password Updated Successfully',
+                  description:
+                      'Your password has been changed. Please log in with your new password',
+                  buttonText: 'Continue to Sign in',
+                  onPressed: () {
+                    GoRouter.of(context).push(Routes.signInViewId);
+                  },
+                );
+              } else if (state is ResetPasswordFailure) {
+                customAwesomeDialog(
+                  context: context,
+                  isSuccess: false,
+                  title: 'Password Update Failed',
+                  description: state.errorMessage,
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                );
+              }
             },
-            backgroundColor: kAppPrimaryBlueColor,
-            child: const CustomTitle(title: 'Update Password'),
+            builder: (context, state) {
+              return CustomTextButton(
+                onPressed:
+                    state is ResetPasswordLoading
+                        ? null
+                        : () {
+                          if (!_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            context.read<AuthBloc>().add(
+                              ResetPasswordEvent(
+                                email: widget.emailAndOtp['email'],
+                                otp: widget.emailAndOtp['otp'],
+                                newPassword:
+                                    newPasswordEditingController.text.trim(),
+                                confirmPassword:
+                                    confirmPasswordEditingController.text
+                                        .trim(),
+                              ),
+                            );
+                          }
+                        },
+                backgroundColor: kAppPrimaryBlueColor,
+                child:
+                    state is ResetPasswordLoading
+                        ? const CustomCircleIndicator()
+                        : const CustomTitle(title: 'Update Password'),
+              );
+            },
           ),
         ),
       ],
