@@ -8,7 +8,8 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import '../common_widgets/custom_image.dart';
 
 class ResetPasswordViewBody extends StatelessWidget {
-  const ResetPasswordViewBody({super.key});
+  const ResetPasswordViewBody({super.key, required this.emailAndOtp});
+  final Map<String, dynamic> emailAndOtp;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class ResetPasswordViewBody extends StatelessWidget {
               text:
                   'Create a new password for your account.                                                    Make sure to choose a strong and secure password',
             ),
-            const ResetPasswordInputDataSection(),
+            ResetPasswordInputDataSection(emailAndOtp: emailAndOtp),
           ],
         ),
       ),
