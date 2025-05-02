@@ -11,6 +11,7 @@ void customAwesomeDialog({
   final bool needCancel = false,
   final String title = 'Success process',
   final String description = 'You are in active mode',
+  final String buttonText = 'ok',
   final Color dialogStateColor = kAppPrimaryBlueColor,
   final Color dialogBackgroundColor = kSecondlyLightWhiteColor,
   final Color dialogBorderColor = kSecondlyLightWhiteColor,
@@ -55,7 +56,11 @@ void customAwesomeDialog({
       onPressed: onPressed,
       backgroundColor: dialogButtonColor,
       shadowColor: Colors.transparent,
-      child: Text('Ok', style: AfacadTextStyles.textStyle14W500White(context)),
+      child: Text(
+        buttonText,
+        style: AfacadTextStyles.textStyle14W500White(context),
+        softWrap: true,
+      ),
     ),
   ).show();
 }
