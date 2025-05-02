@@ -8,7 +8,6 @@ import 'package:road_man_project/features/_03_auth_view/presentation/view_model/
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_event.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_state.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/sign_up_text_form_field_section.dart';
-import 'package:road_man_project/generated/assets.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
 import '../../../../../../core/utilities/custom_text_button.dart';
@@ -51,10 +50,10 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
                 context: context,
                 isSuccess: true,
                 title: 'Sign Up Success',
-                description:
-                    'You have successfully sign up to Road Man. Enjoy exploring all the features available to you',
+                description: 'Check inbox and verify code please!',
+                buttonText: 'Continue to Verify code',
                 onPressed: () {
-                  GoRouter.of(context).push(Routes.mainViewId);
+                  GoRouter.of(context).push(Routes.verificationEmailViewId);
                 },
               );
             } else if (state is SignUpFailure) {
@@ -62,8 +61,7 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
                 context: context,
                 isSuccess: false,
                 title: 'Sign Up Failure',
-                description:
-                    'There was an issue with your registration. Please check your details and try again. If the problem persists, contact support',
+                description: state.errorMessage,
                 onPressed: () {
                   GoRouter.of(context).pop();
                 },
@@ -72,21 +70,22 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
           },
           builder: (context, state) {
             return CustomTextButton(
-              onPressed: () {
-                if (_formKey.currentState?.validate() ?? false) {
-                  _formKey.currentState?.save();
-                  // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
-                  context.read<AuthBloc>().add(
-                    SignUpEvent(
-                      name: nameController.text.trim(),
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                      image: Assets.googleImage,
-                      dateTime: DateTime.now(),
-                    ),
-                  );
-                }
-              },
+              onPressed:
+                  state is SignUpLoading
+                      ? null
+                      : () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          _formKey.currentState?.save();
+                          // ✅ هنا يمكنك إرسال البيانات إلى السيرفر بعد التحقق منها
+                          context.read<AuthBloc>().add(
+                            SignUpEvent(
+                              name: nameController.text.trim(),
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            ),
+                          );
+                        }
+                      },
               backgroundColor: kAppPrimaryBlueColor,
               child:
                   state is SignUpLoading
