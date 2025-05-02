@@ -43,7 +43,7 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
             passwordController: passwordController,
           ),
         ),
-        BlocConsumer<AuthBloc, AuthState>(
+        BlocConsumer<AuthBloc, AuthStates>(
           listener: (context, state) {
             if (state is SignUpSuccess) {
               customAwesomeDialog(
