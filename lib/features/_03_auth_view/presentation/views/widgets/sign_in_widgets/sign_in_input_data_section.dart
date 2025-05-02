@@ -48,7 +48,7 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
           child: Column(
             spacing: screenHeight * 0.02,
             children: [
-              BlocConsumer<AuthBloc, AuthState>(
+              BlocConsumer<AuthBloc, AuthStates>(
                 listener: (context, state) {
                   if (state is SignInSuccess) {
                     customAwesomeDialog(
