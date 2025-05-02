@@ -1,18 +1,18 @@
-abstract class AuthState {}
+abstract class AuthStates {}
 
-class AuthInitial extends AuthState {}
+class AuthInitial extends AuthStates {}
 
 //Sign Up States
-class SignUpInitial extends AuthState {}
+class SignUpInitial extends AuthStates {}
 
-class SignUpFailure extends AuthState {
+class SignUpFailure extends AuthStates {
   final String errorMessage;
   SignUpFailure({required this.errorMessage});
 }
 
-class SignUpLoading extends AuthState {}
+class SignUpLoading extends AuthStates {}
 
-class SignUpSuccess extends AuthState {
+class SignUpSuccess extends AuthStates {
   final String name;
   final String email;
   final String password;
@@ -24,17 +24,17 @@ class SignUpSuccess extends AuthState {
   });
 }
 
-//Sign Ip States
-class SignInInitial extends AuthState {}
+//Sign In States
+class SignInInitial extends AuthStates {}
 
-class SignInFailure extends AuthState {
+class SignInFailure extends AuthStates {
   final String errorMessage;
   SignInFailure({required this.errorMessage});
 }
 
-class SignInLoading extends AuthState {}
+class SignInLoading extends AuthStates {}
 
-class SignInSuccess extends AuthState {
+class SignInSuccess extends AuthStates {
   final String email;
   final String password;
 
@@ -42,32 +42,32 @@ class SignInSuccess extends AuthState {
 }
 
 //Forget Password States
-class ForgetPasswordInitial extends AuthState {}
+class ForgetPasswordInitial extends AuthStates {}
 
-class ForgetPasswordFailure extends AuthState {
+class ForgetPasswordFailure extends AuthStates {
   final String errorMessage;
   ForgetPasswordFailure({required this.errorMessage});
 }
 
-class ForgetPasswordLoading extends AuthState {}
+class ForgetPasswordLoading extends AuthStates {}
 
-class ForgetPasswordSuccess extends AuthState {
+class ForgetPasswordSuccess extends AuthStates {
   final String email;
 
   ForgetPasswordSuccess({required this.email});
 }
 
 //Reset Password States
-class ResetPasswordInitial extends AuthState {}
+class ResetPasswordInitial extends AuthStates {}
 
-class ResetPasswordFailure extends AuthState {
+class ResetPasswordFailure extends AuthStates {
   final String errorMessage;
   ResetPasswordFailure({required this.errorMessage});
 }
 
-class ResetPasswordLoading extends AuthState {}
+class ResetPasswordLoading extends AuthStates {}
 
-class ResetPasswordSuccess extends AuthState {
+class ResetPasswordSuccess extends AuthStates {
   final String email, otp, newPassword, confirmPassword;
 
   ResetPasswordSuccess({
@@ -79,32 +79,32 @@ class ResetPasswordSuccess extends AuthState {
 }
 
 //Verification After Forget Password States
-class VerificationOtpInitial extends AuthState {}
+class VerificationOtpInitial extends AuthStates {}
 
-class VerificationOtpFailure extends AuthState {
+class VerificationOtpFailure extends AuthStates {
   final String errorMessage;
   VerificationOtpFailure({required this.errorMessage});
 }
 
-class VerificationOtpLoading extends AuthState {}
+class VerificationOtpLoading extends AuthStates {}
 
-class VerificationOtpSuccess extends AuthState {
+class VerificationOtpSuccess extends AuthStates {
   final String email, otp;
 
   VerificationOtpSuccess({required this.email, required this.otp});
 }
 
 //Verification Email States
-class VerificationEmailInitial extends AuthState {}
+class VerificationEmailInitial extends AuthStates {}
 
-class VerificationEmailFailure extends AuthState {
+class VerificationEmailFailure extends AuthStates {
   final String errorMessage;
   VerificationEmailFailure({required this.errorMessage});
 }
 
-class VerificationEmailLoading extends AuthState {}
+class VerificationEmailLoading extends AuthStates {}
 
-class VerificationEmailSuccess extends AuthState {
+class VerificationEmailSuccess extends AuthStates {
   final String email, otp;
 
   VerificationEmailSuccess({required this.email, required this.otp});
