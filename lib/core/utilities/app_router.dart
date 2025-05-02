@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/reset_password_view.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/verification_otp_view.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/questionnaire_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/lesson_view.dart';
@@ -12,6 +14,7 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/notific
 import '../../features/_02_onboarding_view/presentation/view/onboarding_page_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
+import '../../features/_03_auth_view/presentation/views/verification_email_view.dart';
 import '../../features/_05_main_view/presentation/view/main_view.dart';
 import '../../features/_09_profile_view/presentation/view/about_app_view.dart';
 import '../../features/_09_profile_view/presentation/view/edit_profile_view.dart';
@@ -25,7 +28,7 @@ import 'routes.dart';
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const MainView()),
+      GoRoute(path: '/', builder: (context, state) => const SignInView()),
       GoRoute(
         path: Routes.onBoardingPageViewId,
         builder: (context, state) => const OnboardingPageView(),
@@ -45,6 +48,18 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.forgetPasswordViewId,
         builder: (context, state) => const ForgetPasswordView(),
+      ),
+      GoRoute(
+        path: Routes.resetPasswordViewId,
+        builder: (context, state) => const ResetPasswordView(),
+      ),
+      GoRoute(
+        path: Routes.verificationOtpViewId,
+        builder: (context, state) => const VerificationOtpView(),
+      ),
+      GoRoute(
+        path: Routes.verificationEmailViewId,
+        builder: (context, state) => const VerificationEmailView(),
       ),
       GoRoute(
         path: Routes.mainViewId,

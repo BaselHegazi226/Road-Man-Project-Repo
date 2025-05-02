@@ -5,6 +5,9 @@ class Routes {
   static String signUpViewId = '/SignUpView';
   static String signInViewId = '/SignInView';
   static String forgetPasswordViewId = '/ForgetPasswordView';
+  static String resetPasswordViewId = '/resetPasswordViewId';
+  static String verificationEmailViewId = '/verificationEmailViewId';
+  static String verificationOtpViewId = '/verificationOtpViewId';
   static String mainViewId = '/mainView';
   static String learningPathViewId = '/learningPathViewId';
   static String learningPreferencesViewId = '/learningPreferencesViewId';
