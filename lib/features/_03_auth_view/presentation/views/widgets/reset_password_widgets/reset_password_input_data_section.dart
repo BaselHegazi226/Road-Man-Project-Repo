@@ -172,7 +172,7 @@ class _ResetPasswordInputDataSectionState
         ),
         Padding(
           padding: EdgeInsets.only(top: screenHeight * .02),
-          child: BlocConsumer<AuthBloc, AuthState>(
+          child: BlocConsumer<AuthBloc, AuthStates>(
             listener: (context, state) {
               if (state is ResetPasswordSuccess) {
                 customAwesomeDialog(
