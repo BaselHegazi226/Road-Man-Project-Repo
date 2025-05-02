@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/custom_app_bar.dart';
-import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/reset_password_widgets/reset_password_view_body.dart';
+import 'package:road_man_project/features/_03_auth_view/data/repos/auth_repo_implement.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_bloc.dart';
+import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/forget_password_widgets/forget_password_view_body.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});
@@ -19,7 +22,10 @@ class ForgetPasswordView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: const ResetPasswordViewBody(),
+      body: BlocProvider(
+        create: (context) => AuthBloc(authRepo: AuthRepoImplement()),
+        child: const ForgetPasswordViewBody(),
+      ),
     );
   }
 }
