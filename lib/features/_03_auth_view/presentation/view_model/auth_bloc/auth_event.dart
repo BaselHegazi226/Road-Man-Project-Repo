@@ -5,15 +5,11 @@ class SignUpEvent extends AuthEvent {
   final String name;
   final String email;
   final String password;
-  final DateTime dateTime;
-  final String image;
 
   SignUpEvent({
     required this.name,
     required this.email,
     required this.password,
-    required this.dateTime,
-    required this.image,
   });
 }
 
@@ -22,4 +18,30 @@ class SignInEvent extends AuthEvent {
   final String password;
 
   SignInEvent({required this.email, required this.password});
+}
+
+class ForgetPasswordEvent extends AuthEvent {
+  final String email;
+
+  ForgetPasswordEvent({required this.email});
+}
+
+class VerifyOtpEvent extends AuthEvent {
+  final String email, otp;
+  VerifyOtpEvent({required this.email, required this.otp});
+}
+
+class VerifyEmailEvent extends AuthEvent {
+  final String email, otp;
+  VerifyEmailEvent({required this.email, required this.otp});
+}
+
+class ResetPasswordEvent extends AuthEvent {
+  final String email, otp, newPassword, confirmPassword;
+  ResetPasswordEvent({
+    required this.email,
+    required this.otp,
+    required this.newPassword,
+    required this.confirmPassword,
+  });
 }
