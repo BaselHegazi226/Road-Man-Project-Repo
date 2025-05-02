@@ -62,7 +62,7 @@ class _VerificationEmailInputDataSectionState
             otpFocusNodes: otpFocusNodes,
           ),
         ),
-        BlocConsumer<AuthBloc, AuthState>(
+        BlocConsumer<AuthBloc, AuthStates>(
           listener: (context, state) {
             if (state is ForgetPasswordSuccess) {
               showSnackBar(
@@ -95,9 +95,9 @@ class _VerificationEmailInputDataSectionState
         ),
         Padding(
           padding: EdgeInsets.only(top: screenHeight * .005),
-          child: BlocConsumer<AuthBloc, AuthState>(
+          child: BlocConsumer<AuthBloc, AuthStates>(
             listener: (context, state) {
-              if (state is VerificationOtpSuccess) {
+              if (state is VerificationEmailSuccess) {
                 customAwesomeDialog(
                   context: context,
                   isSuccess: true,
@@ -115,7 +115,7 @@ class _VerificationEmailInputDataSectionState
                     );
                   },
                 );
-              } else if (state is VerificationOtpFailure) {
+              } else if (state is VerificationEmailFailure) {
                 customAwesomeDialog(
                   context: context,
                   title: 'Verification Failed',
@@ -131,7 +131,7 @@ class _VerificationEmailInputDataSectionState
             builder: (context, state) {
               return CustomTextButton(
                 onPressed:
-                    state is VerificationOtpLoading
+                    state is VerificationEmailLoading
                         ? null
                         : () {
                           if (_formKey.currentState!.validate()) {
@@ -148,7 +148,7 @@ class _VerificationEmailInputDataSectionState
                         },
                 backgroundColor: kAppPrimaryBlueColor,
                 child:
-                    state is VerificationOtpLoading
+                    state is VerificationEmailLoading
                         ? const CustomCircleIndicator()
                         : CustomTitle(title: 'Verify Email'),
               );
