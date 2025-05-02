@@ -62,7 +62,7 @@ class _VerificationOtpInputDataSectionState
             otpFocusNodes: otpFocusNodes,
           ),
         ),
-        BlocConsumer<AuthBloc, AuthState>(
+        BlocConsumer<AuthBloc, AuthStates>(
           listener: (context, state) {
             if (state is ForgetPasswordSuccess) {
               showSnackBar(
@@ -94,7 +94,7 @@ class _VerificationOtpInputDataSectionState
         ),
         Padding(
           padding: EdgeInsets.only(top: screenHeight * .005),
-          child: BlocConsumer<AuthBloc, AuthState>(
+          child: BlocConsumer<AuthBloc, AuthStates>(
             listener: (context, state) {
               if (state is VerificationOtpSuccess) {
                 customAwesomeDialog(
