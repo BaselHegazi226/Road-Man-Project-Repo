@@ -14,9 +14,7 @@ class VerificationEmailViewBody extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.04,
-      ), // 5% من العرض بدل 16 بكسل
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
       child: Column(
         children: [
           ClipRect(
@@ -27,9 +25,7 @@ class VerificationEmailViewBody extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
-              top: screenHeight * 0.07,
-            ), // 7% من الطول بدل 58 بكسل
+            padding: EdgeInsets.only(top: screenHeight * 0.07),
             child: CustomAuthText(
               text:
                   'We have sent a verification code to your email or phone number. Enter the code below to complete the process.',
