@@ -78,17 +78,20 @@ class _SignInInputDataSectionState extends State<SignInInputDataSection> {
                 },
                 builder: (context, state) {
                   return CustomTextButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        _formKey.currentState?.save();
-                        context.read<AuthBloc>().add(
-                          SignInEvent(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed:
+                        state is SignInLoading
+                            ? null
+                            : () {
+                              if (_formKey.currentState?.validate() ?? false) {
+                                _formKey.currentState?.save();
+                                context.read<AuthBloc>().add(
+                                  SignInEvent(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  ),
+                                );
+                              }
+                            },
                     backgroundColor: kAppPrimaryBlueColor,
                     child:
                         state is SignInLoading
