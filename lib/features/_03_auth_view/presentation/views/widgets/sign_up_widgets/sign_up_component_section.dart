@@ -3,7 +3,6 @@ import 'package:road_man_project/features/_03_auth_view/presentation/views/widge
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/sign_up_widgets/sign_up_input_data_section.dart';
 
 import '../common_widgets/auth_sub_title.dart';
-import '../common_widgets/social_auth_card_section.dart';
 
 class SignUpComponentSection extends StatelessWidget {
   const SignUpComponentSection({super.key});
@@ -19,18 +18,10 @@ class SignUpComponentSection extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(
-                top: screenHeight * 0.03,
-                bottom: screenHeight * 0.015,
-              ),
-              child: SocialAuthCardSection(
-                onPressed1: () {},
-                onPressed2: () {},
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: screenHeight * 0.03),
-              child: const AuthSubTitle(subTitle: 'Or use your email account'),
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02,
+              ), // بدل 24px
+              child: const AuthSubTitle(subTitle: 'Use Your Email Account'),
             ),
             SignUpInputDataSection(),
           ],
