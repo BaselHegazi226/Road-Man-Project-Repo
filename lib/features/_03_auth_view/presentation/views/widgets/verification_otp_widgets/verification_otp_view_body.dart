@@ -29,6 +29,7 @@ class VerificationOtpViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
               top: screenHeight * 0.07,
+              bottom: screenHeight * .03,
             ), // 7% من الطول بدل 58 بكسل
             child: CustomAuthText(
               text:
