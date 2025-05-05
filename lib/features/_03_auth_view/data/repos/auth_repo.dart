@@ -32,4 +32,10 @@ abstract class AuthRepo {
     required String email,
     required String otp,
   });
+  Future<Either<Failure, void>> sendAgainVerificationEmail({
+    required String email,
+    required String otp,
+  });
+  Future<Either<Failure, String>> signInWithGoogle();
+  Future<Either<Failure, void>> signInWithGoogleToken({required String token});
 }
