@@ -1,58 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
-//
-// class CustomTextFormFieldOtpPinPut extends StatelessWidget {
-//   const CustomTextFormFieldOtpPinPut({
-//     super.key,
-//     this.pinCount = 4,
-//     required this.validator,
-//     this.onSubmitted,
-//     this.onCompleted,
-//   });
-//   final int pinCount;
-//   final String? Function(String?)? validator;
-//   final void Function(String)? onSubmitted;
-//   final void Function(String)? onCompleted;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Pinput(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       separatorBuilder: (index) => SizedBox(width: 12),
-//       length: pinCount,
-//       defaultPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
-//       disabledPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(context),
-//       focusedPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-//         context,
-//         borderColor: kAppPrimaryBlueColor,
-//       ),
-//       errorPinTheme: PinThemesPinPutOtpClass.customPinThemeFunc(
-//         context,
-//         borderColor: kErrorColor,
-//       ),
-//       pinContentAlignment: Alignment.center,
-//       pinAnimationType: PinAnimationType.rotation,
-//       validator: validator,
-//       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-//       showCursor: true,
-//       onSubmitted: onSubmitted,
-//       onCompleted: onCompleted,
-//     );
-//   }
-// }
-//manual text form field otp
 
 class CustomTextFormFieldOtp extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
   final bool obscureText;
   final TextInputType keyboardType;
-  final FocusNode? focusNode; // Added FocusNode
+  final FocusNode? focusNode;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final Color generalColor;
   final Color backgroundColor;
-  // final void Function(String?)? onSaved;
 
   const CustomTextFormFieldOtp({
     super.key,
@@ -65,14 +24,13 @@ class CustomTextFormFieldOtp extends StatelessWidget {
     this.onChanged,
     this.focusNode,
     this.validator,
-    // required this.onSaved,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width * .16,
-      height: MediaQuery.sizeOf(context).width * .17,
+      width: 50,
+      height: 55,
       child: TextFormField(
         onTap: () {
           FocusScope.of(context).requestFocus(focusNode);
@@ -81,27 +39,24 @@ class CustomTextFormFieldOtp extends StatelessWidget {
           LengthLimitingTextInputFormatter(1),
           FilteringTextInputFormatter.singleLineFormatter,
         ],
-        // onSaved: onSaved,
         keyboardType: keyboardType,
         controller: textEditingController,
         obscureText: obscureText,
         onChanged: onChanged,
-        focusNode: focusNode, // Assigned FocusNode
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return '';
-          }
-          return null;
-        },
+        focusNode: focusNode,
+        validator:
+            validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return '';
+              }
+              return null;
+            },
         textInputAction: TextInputAction.next,
         cursorColor: kCursorFieldColor,
         textAlign: TextAlign.center,
         cursorHeight: 28,
         cursorOpacityAnimates: true,
-        cursorErrorColor:
-            focusNode != null && focusNode!.hasFocus
-                ? kErrorColor // Change to focus color on error
-                : generalColor,
         style: TextStyle(
           color: generalColor,
           fontWeight: FontWeight.w400,
@@ -114,42 +69,12 @@ class CustomTextFormFieldOtp extends StatelessWidget {
             color: kTextOtpFieldColor,
             fontWeight: FontWeight.w400,
           ),
-          border: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kBorderOtpFieldColor,
-          ),
-          enabledBorder: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kBorderOtpFieldColor,
-          ),
-          focusedBorder: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kBorderOtpFieldColor,
-          ),
-          disabledBorder: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kBorderOtpFieldColor,
-          ),
-          errorBorder: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? generalColor // Change to focus color on error
-                    : kErrorColor,
-          ),
-          focusedErrorBorder: outlineInputBorder(
-            color:
-                focusNode != null && focusNode!.hasFocus
-                    ? kErrorColor // Change to focus color on error
-                    : generalColor,
-          ),
+          border: outlineInputBorder(color: generalColor),
+          enabledBorder: outlineInputBorder(color: generalColor),
+          focusedBorder: outlineInputBorder(color: generalColor),
+          disabledBorder: outlineInputBorder(color: generalColor),
+          errorBorder: outlineInputBorder(color: kErrorColor),
+          focusedErrorBorder: outlineInputBorder(color: kErrorColor),
           errorStyle: const TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 12,
@@ -157,9 +82,7 @@ class CustomTextFormFieldOtp extends StatelessWidget {
           ),
           fillColor: backgroundColor,
           filled: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 16),
-          errorText: null,
-          errorMaxLines: 1,
+          contentPadding: const EdgeInsets.symmetric(vertical: 16),
         ),
       ),
     );
@@ -170,7 +93,7 @@ class CustomTextFormFieldOtp extends StatelessWidget {
     required Color color,
   }) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+      borderRadius: BorderRadius.circular(borderRadius),
       borderSide: BorderSide(color: color, width: 2),
     );
   }
