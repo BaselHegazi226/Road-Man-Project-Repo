@@ -17,8 +17,6 @@ class VerificationEmailFields extends StatelessWidget {
   final List<TextEditingController> otpControllers;
   final List<FocusNode> otpFocusNodes;
 
-  // onPaste and onOtpChanged can be handled here directly or passed as callbacks if needed
-
   void _onOtpChanged(BuildContext context, String value, int index) {
     if (value.isNotEmpty) {
       if (index < otpControllers.length - 1) {
@@ -52,16 +50,21 @@ class VerificationEmailFields extends StatelessWidget {
             _onPaste(clipboardData.text ?? '');
           }
         },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            otpControllers.length,
-            (index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: CustomTextFormFieldOtp(
-                textEditingController: otpControllers[index],
-                focusNode: otpFocusNodes[index],
-                onChanged: (value) => _onOtpChanged(context, value, index),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              otpControllers.length,
+              (index) => Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.sizeOf(context).width * .01,
+                ),
+                child: CustomTextFormFieldOtp(
+                  textEditingController: otpControllers[index],
+                  focusNode: otpFocusNodes[index],
+                  onChanged: (value) => _onOtpChanged(context, value, index),
+                ),
               ),
             ),
           ),
