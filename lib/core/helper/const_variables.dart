@@ -75,3 +75,6 @@ const Color kDashboardColor = Color(0xffE6E8EE);
 const Color onboardingIndicatorColor = Color(0xff757575);
 
 const Color kWelcomeSecColor = Color(0xFFD9D9D9);
+
+const Color kSocialCardShadowColor = Color.fromRGBO(158, 158, 158, 0.3);
+const Color kSocialCardShadow2Color = Color.fromRGBO(158, 158, 158, 0.15);
