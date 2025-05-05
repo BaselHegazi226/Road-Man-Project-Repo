@@ -109,3 +109,19 @@ class VerificationEmailSuccess extends AuthStates {
 
   VerificationEmailSuccess({required this.email, required this.otp});
 }
+
+//SendAgainVerification Email States
+class SendAgainVerificationInitial extends AuthStates {}
+
+class SendAgainVerificationFailure extends AuthStates {
+  final String errorMessage;
+  SendAgainVerificationFailure({required this.errorMessage});
+}
+
+class SendAgainVerificationLoading extends AuthStates {}
+
+class SendAgainVerificationSuccess extends AuthStates {
+  final String email, otp;
+
+  SendAgainVerificationSuccess({required this.email, required this.otp});
+}
