@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthStates> {
     on<ForgetPasswordEvent>(_onForgetPasswordEvent);
     on<VerifyOtpEvent>(_onVerifyOtpEvent);
     on<VerifyEmailEvent>(_onVerifyEmailEvent);
+    on<SendAgainVerifyEmailEvent>(_onSendAgainVerifyEmail);
     on<ResetPasswordEvent>(_onResetPasswordEvent);
   }
   //Sign up Event
@@ -96,12 +97,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthStates> {
     Emitter<AuthStates> emit,
   ) async {
     emit(VerificationOtpLoading());
+    print('otp loading');
     var result = await authRepo.verificationOtp(
       email: event.email,
       otp: event.otp,
     );
     result.fold(
       (error) {
+        print('otp error: ${error.errorMessage}');
         return emit(
           VerificationOtpFailure(
             errorMessage: error.errorMessage ?? 'bloc error',
@@ -135,6 +138,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthStates> {
       (success) {
         return emit(
           VerificationEmailSuccess(email: event.email, otp: event.otp),
+        );
+      },
+    );
+  }
+
+  //sendAgainVerifyEmail Event
+  Future<void> _onSendAgainVerifyEmail(
+    SendAgainVerifyEmailEvent event,
+    Emitter<AuthStates> emit,
+  ) async {
+    emit(SendAgainVerificationLoading());
+    var result = await authRepo.sendAgainVerificationEmail(
+      email: event.email,
+      otp: event.otp,
+    );
+    result.fold(
+      (error) {
+        return emit(
+          SendAgainVerificationFailure(
+            errorMessage: error.errorMessage ?? 'bloc error',
+          ),
+        );
+      },
+      (success) {
+        return emit(
+          SendAgainVerificationSuccess(email: event.email, otp: event.otp),
         );
       },
     );
