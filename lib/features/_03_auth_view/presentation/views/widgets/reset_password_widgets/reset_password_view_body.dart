@@ -19,7 +19,7 @@ class ResetPasswordViewBody extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
         child: Column(
-          spacing: screenHeight * .04,
+          spacing: screenHeight * .02,
           children: [
             CustomImage(
               imageBottomPadding: screenHeight * .005,
