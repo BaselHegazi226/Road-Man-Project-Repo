@@ -25,7 +25,6 @@ class _ForgetPasswordInputDataSectionState
         spacing: screenHeight * .03,
         children: [
           ForgetPasswordFieldsSection(
-            formKey: _formKey,
             emailEditingController: emailEditingController,
           ),
           ForgetPasswordButton(
