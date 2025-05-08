@@ -67,7 +67,11 @@ class PasswordTextFormField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.bottom,
         style: ConstFunctions.textTextFormFieldStyle(context),
         decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          floatingLabelBehavior:
+              focusNode?.hasFocus == true
+                  ? FloatingLabelBehavior.auto
+                  : FloatingLabelBehavior
+                      .never, // Change label behavior based on focus
           suffixIcon: IconButton(
             icon: Icon(
               suffixIcon,
