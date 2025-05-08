@@ -25,66 +25,35 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
   bool containsNumbers = false;
   bool containsPassLength = false;
 
-  String? password, passwordErrorMessage;
-  late TextEditingController passwordEditingController;
+  String? password;
 
   @override
   void initState() {
     super.initState();
-    passwordControllerValue();
-    focusFun();
-  }
-
-  void passwordControllerValue() {
-    passwordEditingController = widget.passwordEditingController;
+    widget.passwordFocusNode.addListener(() {
+      setState(() {}); // لتحديث الحالة عند الفوكس
+    });
   }
 
   @override
   void dispose() {
-    disposeFun();
+    // لا تفعل dispose للـ FocusNode لأنه جاي من parent
     super.dispose();
   }
 
-  void clearFun() {
-    widget.passwordEditingController.clear();
-  }
-
-  void focusFun() {
-    widget.passwordFocusNode.addListener(() {
-      setState(() {});
-    });
-  }
-
-  void disposeFun() {
-    widget.passwordFocusNode.dispose();
-  }
-
   void regExpForCheckPasswordVarsFun(String value) {
-    containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
-    containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
-    containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
-    containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
-    containsPassLength = RegExp(r'.{8,}').hasMatch(value);
-  }
-
-  void onResetFun() {
-    clearFun();
-    defaultPasswordChecksFun();
-  }
-
-  void defaultPasswordChecksFun() {
     setState(() {
-      containsNumbers = false;
-      containsSpecialChar = false;
-      containsPassLength = false;
-      containsUpperCase = false;
-      containsLowerCase = false;
+      containsLowerCase = RegExp(r'(?=.*[a-z])').hasMatch(value);
+      containsUpperCase = RegExp(r'(?=.*[A-Z])').hasMatch(value);
+      containsNumbers = RegExp(r'(?=.*\d)').hasMatch(value);
+      containsSpecialChar = RegExp(r'[^a-zA-Z0-9\s]').hasMatch(value);
+      containsPassLength = RegExp(r'.{8,}').hasMatch(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
       spacing: screenHeight * 0.02,
       children: [
@@ -102,19 +71,16 @@ class _SignUpPasswordSectionState extends State<SignUpPasswordSection> {
             });
           },
           validator: (value) {
-            if (value!.isEmpty) {
+            if (value == null || value.isEmpty) {
               return 'Please enter a password';
             } else if (!RegExp(
-              //              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$',//ده الصح اللي هيكون موجود عندي في التطبيق بعد لما حازم يعدلها عنده
-              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$', // دي المتوافقه مع نسخه حازم اللي هتتعدل بعد كده
+              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$',
             ).hasMatch(value)) {
               return 'Please enter a valid password! (Aa#12345)';
             }
             return null;
           },
-          onChanged: (password) {
-            regExpForCheckPasswordVarsFun(password);
-          },
+          onChanged: regExpForCheckPasswordVarsFun,
           onSaved: (value) {
             password = value;
           },
