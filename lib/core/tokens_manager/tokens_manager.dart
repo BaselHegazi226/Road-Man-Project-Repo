@@ -8,6 +8,8 @@ class SecureStorageHelper {
   static Future<void> saveUserTokens(UserTokenModel userToken) async {
     await _storage.write(key: 'token', value: userToken.token);
     await _storage.write(key: 'refreshToken', value: userToken.refreshToken);
+    print('User token: ${userToken.token}');
+    print('refreshToken token: ${userToken.refreshToken}');
   }
 
   static Future<UserTokenModel?> getUserTokens() async {
