@@ -49,6 +49,7 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
         ),
 
         SocialAuthCardSection(
+          title: 'Sign up With google',
           authButtonIsLoading: anyButtonIsLoading,
           onSocialAuthLoadingChanged: (isLoading) {
             setState(() {
