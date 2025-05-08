@@ -7,10 +7,8 @@ class ForgetPasswordFieldsSection extends StatefulWidget {
   const ForgetPasswordFieldsSection({
     super.key,
     required this.emailEditingController,
-    required this.formKey,
   });
   final TextEditingController emailEditingController;
-  final GlobalKey<FormState> formKey;
   @override
   State<ForgetPasswordFieldsSection> createState() =>
       _ForgetPasswordFieldsSectionState();
@@ -68,29 +66,26 @@ class _ForgetPasswordFieldsSectionState
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: widget.formKey,
-      child: CustomTextFormField(
-        backgroundColor: kFilledTextFormFieldColor,
-        hintText: 'Email',
-        textEditingController: emailEditingController,
-        textColor: kTextBlackPrimaryColor,
-        prefixIcon: Icons.email_outlined,
-        validator: (email) {
-          String? trimmedValue = email?.trim();
-          if (trimmedValue == null || trimmedValue.isEmpty) {
-            return 'Please enter an email';
-          } else if (!RegExp(
-            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-          ).hasMatch(trimmedValue)) {
-            return 'Please enter a valid email';
-          }
-          return null;
-        },
-        onSaved: (newValue) {
-          email = newValue;
-        },
-      ),
+    return CustomTextFormField(
+      backgroundColor: kFilledTextFormFieldColor,
+      hintText: 'Email',
+      textEditingController: emailEditingController,
+      textColor: kTextBlackPrimaryColor,
+      prefixIcon: Icons.email_outlined,
+      validator: (email) {
+        String? trimmedValue = email?.trim();
+        if (trimmedValue == null || trimmedValue.isEmpty) {
+          return 'Please enter an email';
+        } else if (!RegExp(
+          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+        ).hasMatch(trimmedValue)) {
+          return 'Please enter a valid email';
+        }
+        return null;
+      },
+      onSaved: (newValue) {
+        email = newValue;
+      },
     );
   }
 }
