@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../profile_common_widgets/profile_const_list.dart';
+import '../00_profile_common_widgets/profile_const_list.dart';
 import 'faq_item.dart';
 
 class FaqItemsSection extends StatelessWidget {
