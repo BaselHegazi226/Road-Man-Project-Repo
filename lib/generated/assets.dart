@@ -30,4 +30,10 @@ class Assets {
       'assets/images/home/notifications.svg';
   static const String save = 'assets/images/home/save.svg';
   static const String summarize = 'assets/images/home/summarize.svg';
+  static const String roadManLogoImage =
+      'assets/images/splash_logo/logo_svg_blue.png';
+  static const String roadManLogoWithoutTextImage =
+      'assets/images/splash_logo/logo_svg_blue_without_road_man_text.png';
+  static const String roadManTextImage =
+      'assets/images/splash_logo/road_man_text.png';
 }
