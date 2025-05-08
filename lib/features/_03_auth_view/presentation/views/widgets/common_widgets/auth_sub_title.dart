@@ -16,7 +16,7 @@ class AuthSubTitle extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       subTitle,
-      style: AfacadTextStyles.textStyle18W600H150Black(
+      style: AfacadTextStyles.textStyle16W500H150Black(
         context,
       ).copyWith(color: textColor, letterSpacing: -0.304),
     );
