@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/core/utilities/custom_circle_indicator.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
-import 'package:road_man_project/core/utilities/custom_title.dart';
 import 'package:road_man_project/core/utilities/dialogState.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/social_auth_bloc/social_auth_bloc.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/social_auth_bloc/social_auth_event.dart';
@@ -17,8 +18,9 @@ class SocialAuthCardSection extends StatefulWidget {
     super.key,
     required this.authButtonIsLoading,
     required this.onSocialAuthLoadingChanged,
+    required this.title,
   });
-
+  final String title;
   final bool authButtonIsLoading;
   final ValueChanged<bool> onSocialAuthLoadingChanged;
 
@@ -31,6 +33,7 @@ class _SocialAuthCardSectionState extends State<SocialAuthCardSection> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
     return BlocConsumer<SocialAuthBloc, SocialAuthStates>(
@@ -79,12 +82,19 @@ class _SocialAuthCardSectionState extends State<SocialAuthCardSection> {
                   ? CustomCircleIndicator(color: kAppPrimaryBlueColor)
                   : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: screenWidth * .005,
+                    spacing: screenWidth * .03,
                     children: [
-                      CustomTitle(
-                        title: 'Continue With Google ',
-                        textColor: kAppPrimaryBlueColor,
+                      Padding(
+                        padding: EdgeInsets.only(bottom: screenHeight * .005),
+                        child: Icon(
+                          FontAwesomeIcons.googlePlusG,
+                          color: kAppPrimaryBlueColor,
+                          size: screenWidth * .05,
+                        ),
+                      ),
+                      Text(
+                        widget.title,
+                        style: AfacadTextStyles.textStyle20W700Blue(context),
                       ),
                     ],
                   ),
