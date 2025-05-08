@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,9 +8,12 @@ import 'package:road_man_project/core/error/failure.dart';
 import 'package:road_man_project/features/_03_auth_view/data/model/forget_password_model.dart';
 import 'package:road_man_project/features/_03_auth_view/data/model/sign_in_model.dart';
 import 'package:road_man_project/features/_03_auth_view/data/model/sign_in_with_google_token_model.dart';
+import 'package:road_man_project/features/_03_auth_view/data/model/user_token_model.dart';
 import 'package:road_man_project/features/_03_auth_view/data/model/verification_otp_model.dart';
 import 'package:road_man_project/features/_03_auth_view/data/repos/auth_repo.dart';
 
+import '../../../../core/tokens_manager/tokens_manager.dart';
+import '../model/refresh_token_model.dart';
 import '../model/reset_password_model.dart';
 import '../model/sign_up_model.dart';
 import '../model/verify_email_model.dart';
@@ -87,7 +92,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signIn({
+  Future<Either<Failure, UserTokenModel>> signIn({
     required String email,
     required String password,
   }) async {
@@ -97,7 +102,10 @@ class AuthRepoImplement implements AuthRepo {
     try {
       final response = await dio.post(signInPath, data: signInModel.toJson());
       if (response.statusCode == 200) {
-        return right(null);
+        final data =
+            response.data is String ? jsonDecode(response.data) : response.data;
+        final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        return right(userTokenModel);
       } else {
         return left(
           ServerFailure.fromResponse(
@@ -312,8 +320,91 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Either<Failure, void>> signOut() async {
+    final String signOutPath =
+        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/sign-out';
+
+    try {
+      final userTokens = await SecureStorageHelper.getUserTokens();
+
+      if (userTokens == null || userTokens.token.isEmpty) {
+        return left(ServerFailure(errorMessage: 'Token not found.'));
+      }
+
+      final response = await dio.post(
+        signOutPath,
+        options: Options(
+          headers: {'Authorization': 'Bearer ${userTokens.token}'},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        // ✅ امسح التوكن بعد تسجيل الخروج الناجح
+        await SecureStorageHelper.clearTokens();
+        return right(null);
+      } else {
+        return left(
+          ServerFailure.fromResponse(
+            statusCode: response.statusCode!,
+            responseData: response.data,
+          ),
+        );
+      }
+    } on DioException catch (dioException) {
+      return left(ServerFailure.fromDioException(dioException));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserTokenModel>> refreshToken({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
+    final refreshTokenPath =
+        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/refresh-token';
+    final userTokens = await SecureStorageHelper.getUserTokens();
+
+    try {
+      // التأكد من وجود التوكنات في ال SecureStorageHelper
+      if (userTokens == null || userTokens.token.isEmpty) {
+        return left(ServerFailure(errorMessage: 'Token not found.'));
+      }
+      // تحضير التوكنات القديمة لإرسالها إلى السيرفر
+      final refreshTokenModel = RefreshTokenModel(
+        accessToken: userTokens.token,
+        refreshToken: userTokens.refreshToken,
+      );
+
+      // إرسال طلب التحديث للسيرفر
+      final response = await dio.post(
+        refreshTokenPath,
+        data: refreshTokenModel.toJson(),
+      );
+
+      // التعامل مع الاستجابة
+      if (response.statusCode == 200) {
+        // استخراج التوكنات الجديدة من الاستجابة
+        final newTokenModel = UserTokenModel.fromJson(response.data);
+
+        // تخزين التوكنات الجديدة في SecureStorageHelper
+        await SecureStorageHelper.saveUserTokens(newTokenModel);
+
+        // إرجاع التوكنات الجديدة
+        return right(newTokenModel);
+      } else {
+        return left(
+          ServerFailure.fromResponse(
+            statusCode: response.statusCode,
+            responseData: response.data,
+          ),
+        );
+      }
+    } on DioException catch (dioException) {
+      return left(ServerFailure.fromDioException(dioException));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
   }
 }
