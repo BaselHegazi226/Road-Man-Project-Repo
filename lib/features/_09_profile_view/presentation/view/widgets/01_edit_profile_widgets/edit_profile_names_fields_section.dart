@@ -2,31 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
 import 'custom_edit_profile_name_field.dart';
+import 'edit_profile_email_item.dart';
 
-class EditProfileNamesFieldsSection extends StatelessWidget {
-  const EditProfileNamesFieldsSection({super.key});
+class EditProfileNamesFieldsSection extends StatefulWidget {
+  const EditProfileNamesFieldsSection({
+    super.key,
+    required this.nameEditingController,
+  });
+  final TextEditingController nameEditingController;
+  @override
+  State<EditProfileNamesFieldsSection> createState() =>
+      _EditProfileNamesFieldsSectionState();
+}
 
+class _EditProfileNamesFieldsSectionState
+    extends State<EditProfileNamesFieldsSection> {
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     return Column(
-      spacing: 16,
+      spacing: screenHeight * .03,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomEditProfileNameField(
-          textEditingController: TextEditingController(),
+          textEditingController: widget.nameEditingController,
           prefixIcon: Icons.person_outline_outlined,
           underlineColor: Colors.transparent,
           fullColor: kEditProfileContainer1Color,
           shadowColor: Colors.grey.withAlpha(127),
           labelText: 'Full Name',
           textLetterSpacing: .96,
+          validator: (name) {
+            String? trimmedValue = name?.trim();
+            if (trimmedValue == null || trimmedValue.isEmpty) {
+              return 'Please enter a name';
+            }
+            if (trimmedValue.length < 8) {
+              return 'Enter at least 8 letters';
+            }
+            if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(trimmedValue)) {
+              return 'Enter a valid name (letters only)';
+            }
+            return null;
+          },
         ),
-        CustomEditProfileNameField(
-          textEditingController: TextEditingController(),
-          underlineColor: Colors.transparent,
-          prefixIcon: Icons.email_outlined,
-          labelText: 'Email',
-        ),
+        EditProfileEmailItem(hintText: 'hintText', email: 'basel@gmail.com'),
       ],
     );
   }
