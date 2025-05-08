@@ -28,12 +28,12 @@ class _SplashView2State extends State<SplashView2>
 
     _rightTextController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 12),
+      duration: const Duration(seconds: 6),
     );
 
     _leftImageController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 12),
+      duration: const Duration(seconds: 6),
     );
 
     _rightTextAnimation = Tween<Offset>(
