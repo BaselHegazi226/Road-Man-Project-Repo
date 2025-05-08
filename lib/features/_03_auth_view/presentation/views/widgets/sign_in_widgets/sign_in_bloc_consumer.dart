@@ -39,13 +39,12 @@ class _SignInBlocConsumerState extends State<SignInBlocConsumer> {
     );
   }
 
-  void _handleSignInFailure(BuildContext context) {
+  void _handleSignInFailure(BuildContext context, SignInFailure state) {
     customAwesomeDialog(
       context: context,
       isSuccess: false,
       title: 'Sign In Failure',
-      description:
-          'Please check your credentials and try again. Contact support if the issue persists.',
+      description: state.errorMessage,
       onPressed: () {
         GoRouter.of(context).pop();
       },
@@ -59,7 +58,7 @@ class _SignInBlocConsumerState extends State<SignInBlocConsumer> {
         if (state is SignInSuccess) {
           _handleSignInSuccess(context);
         } else if (state is SignInFailure) {
-          _handleSignInFailure(context);
+          _handleSignInFailure(context, state);
         }
 
         setState(() {
