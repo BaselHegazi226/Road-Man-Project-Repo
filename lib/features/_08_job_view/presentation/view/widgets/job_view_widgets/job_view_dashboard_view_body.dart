@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 
 import '../../../../../_05_main_view/presentation/view/widgets/custom_dashboard_widgets/custom_dashboard_icon_title.dart';
-import '../../../../../_09_profile_view/presentation/view/widgets/profile_common_widgets/profile_user_info.dart';
+import '../../../../../_09_profile_view/presentation/view/widgets/00_profile_common_widgets/profile_user_info.dart';
 import 'job_view_dashboard_items_section.dart';
 
 class JobViewDashboardViewBody extends StatelessWidget {
@@ -22,7 +22,7 @@ class JobViewDashboardViewBody extends StatelessWidget {
       child: Column(
         spacing: screenHeight * .01,
         children: [
-          const ProfileUserInfo(),
+          ProfileUserInfo(name: 'name', email: 'email@gmail.com', photo: ''),
           Divider(thickness: .5, color: kLogoutLineColor),
           const JobViewDashboardItemsSection(),
           const Spacer(),
