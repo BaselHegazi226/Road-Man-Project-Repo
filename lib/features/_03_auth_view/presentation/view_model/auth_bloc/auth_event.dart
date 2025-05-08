@@ -50,3 +50,10 @@ class ResetPasswordEvent extends AuthEvent {
     required this.confirmPassword,
   });
 }
+
+class RefreshTokenEvent extends AuthEvent {
+  final String accessToken;
+  final String refreshToken;
+
+  RefreshTokenEvent({required this.accessToken, required this.refreshToken});
+}
