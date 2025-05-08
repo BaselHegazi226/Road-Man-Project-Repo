@@ -25,15 +25,15 @@ class RefreshTokenCubit extends Cubit<RefreshTokenStates> {
       refreshToken: userTokens.refreshToken,
     );
 
-    result.fold(
-      (failure) {
+    await result.fold(
+      (failure) async {
         emit(
           RefreshTokenFailure(
             errorMessage: failure.errorMessage ?? 'Bloc Error',
           ),
         ); // في حالة الفشل
       },
-      (userToken) {
+      (userToken) async {
         emit(RefreshTokenSuccess(userToken: userToken)); // في حالة النجاح
       },
     );

@@ -15,15 +15,15 @@ class GetUserInfoCubit extends Cubit<ProfileStates> {
 
     final result = await profileRepos.getUserInfo();
 
-    result.fold(
-      (error) {
+    await result.fold(
+      (error) async {
         emit(
           GetUserInfoFailureState(
             errorMessage: error.errorMessage ?? 'Unknown error',
           ),
         );
       },
-      (success) {
+      (success) async {
         final userInfo = UserInfoModel.fromJson(success);
         emit(GetUserInfoSuccessState(userInfoModel: userInfo));
       },

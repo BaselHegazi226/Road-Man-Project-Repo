@@ -20,8 +20,8 @@ class SocialAuthBloc extends Bloc<SocialAuthEvent, SocialAuthStates> {
     emit(SignInWithGoogleLoading());
     print('Sign in with google loading');
     var result = await authRepo.signInWithGoogle();
-    result.fold(
-      (error) {
+    await result.fold(
+      (error) async {
         print('Sign in with google failure');
         print('error message : ${error.errorMessage}');
         return emit(
@@ -30,7 +30,7 @@ class SocialAuthBloc extends Bloc<SocialAuthEvent, SocialAuthStates> {
           ),
         );
       },
-      (success) {
+      (success) async {
         print('Sign in with google success');
         return emit(SignInWithGoogleSuccess(token: success));
       },
@@ -44,15 +44,15 @@ class SocialAuthBloc extends Bloc<SocialAuthEvent, SocialAuthStates> {
   ) async {
     emit(SignInWithGoogleTokenLoading());
     var result = await authRepo.signInWithGoogleToken(token: event.token);
-    result.fold(
-      (error) {
+    await result.fold(
+      (error) async {
         return emit(
           SignInWithGoogleFailure(
             errorMessage: error.errorMessage ?? 'bloc error',
           ),
         );
       },
-      (success) {
+      (success) async {
         return emit(SignInWithGoogleTokenSuccess());
       },
     );

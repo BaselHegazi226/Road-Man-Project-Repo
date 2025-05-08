@@ -20,15 +20,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
       photo: event.photo,
       dateOfBirth: event.dateOfBirth,
     );
-    result.fold(
-      (error) {
+    await result.fold(
+      (error) async {
         return emit(
           UpdateProfileFailureState(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
-      (success) {
+      (success) async {
         return emit(UpdateProfileSuccessState());
       },
     );
@@ -44,15 +44,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
       newPassword: event.newPassword,
       confirmPassword: event.confirmPassword,
     );
-    result.fold(
-      (error) {
+    await result.fold(
+      (error) async {
         return emit(
           ChangePasswordFailureState(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
-      (success) {
+      (success) async {
         return emit(ChangePasswordSuccessState());
       },
     );
