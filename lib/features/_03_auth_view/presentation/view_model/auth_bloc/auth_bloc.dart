@@ -4,6 +4,8 @@ import 'package:road_man_project/features/_03_auth_view/data/repos/auth_repo.dar
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_event.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/auth_bloc/auth_state.dart';
 
+import '../../../../../core/tokens_manager/tokens_manager.dart';
+
 class AuthBloc extends Bloc<AuthEvent, AuthStates> {
   final AuthRepo authRepo;
 
@@ -62,7 +64,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthStates> {
           SignInFailure(errorMessage: error.errorMessage ?? 'bloc error'),
         );
       },
-      (success) {
+      (userToken) async {
+        // ✅ احفظ التوكن بعد النجاح
+        await SecureStorageHelper.saveUserTokens(userToken);
         return emit(
           SignInSuccess(email: event.email, password: event.password),
         );
