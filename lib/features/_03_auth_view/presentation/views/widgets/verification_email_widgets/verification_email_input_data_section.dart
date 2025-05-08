@@ -62,15 +62,14 @@ class _VerificationEmailInputDataSectionState
           padding: EdgeInsets.only(top: screenHeight * .005),
           child: VerifyEmailButton(
             formKey: _formKey,
-            isLoading: isLoading,
-            sendAgainIsLoading: sendAgainIsLoading,
             otpControllers: otpControllers,
             email: widget.email,
-            onValidationFailed: () {
-              setState(() {
-                autoValidateMode = AutovalidateMode.always;
-              });
-            },
+            autoValidateMode: autoValidateMode,
+            setAutoValidateMode:
+                (mode) => setState(() => autoValidateMode = mode),
+            isLoading: isLoading,
+            sendAgainIsLoading: sendAgainIsLoading,
+            setLoading: (value) => setState(() => isLoading = value),
           ),
         ),
       ],
