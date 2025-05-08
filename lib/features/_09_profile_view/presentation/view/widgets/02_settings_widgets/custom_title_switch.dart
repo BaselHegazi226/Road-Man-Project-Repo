@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../profile_common_widgets/custom_advanced_switch.dart';
-import '../profile_common_widgets/custom_profile_title.dart';
+import '../00_profile_common_widgets/custom_advanced_switch.dart';
+import '../00_profile_common_widgets/custom_profile_title.dart';
 
 class CustomTitleSwitch extends StatelessWidget {
   const CustomTitleSwitch({
