@@ -105,6 +105,7 @@ class AuthRepoImplement implements AuthRepo {
         final data =
             response.data is String ? jsonDecode(response.data) : response.data;
         final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        await SecureStorageHelper.saveUserTokens(userTokenModel);
         return right(userTokenModel);
       } else {
         return left(
