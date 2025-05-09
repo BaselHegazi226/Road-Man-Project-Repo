@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/profile/faq_item_model.dart';
-import '../profile_common_widgets/custom_title_subtitle.dart';
+import '../00_profile_common_widgets/custom_title_subtitle.dart';
 
 class FaqItem extends StatelessWidget {
   const FaqItem({super.key, required this.faqItemModel});

@@ -36,10 +36,18 @@ class CustomEditProfileNameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double screenWidth = MediaQuery.sizeOf(context).width;
+
     return Container(
-      width: MediaQuery.sizeOf(context).width,
-      padding: EdgeInsets.only(top: 12, bottom: 16, left: 16, right: 16),
-      height: 72,
+      width: screenWidth,
+      padding: EdgeInsets.only(
+        top: screenHeight * .015,
+        bottom: screenHeight * .02,
+        left: screenWidth * .04,
+        right: screenWidth * .01,
+      ),
+      height: screenHeight * .08,
       decoration: BoxDecoration(
         color: fullColor,
         borderRadius: BorderRadius.circular(8),
@@ -73,7 +81,7 @@ class CustomEditProfileNameField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          contentPadding: EdgeInsets.only(bottom: 8),
+          contentPadding: EdgeInsets.only(bottom: screenHeight * .01),
           border: UnderlineInputBorder(
             borderSide: BorderSide(
               color: kEditProfileFieldBorderColor,
@@ -103,17 +111,23 @@ class CustomEditProfileNameField extends StatelessWidget {
           ),
           prefixIcon: Row(
             mainAxisSize: MainAxisSize.min,
-            spacing: 8,
+            spacing: screenWidth * .03,
             children: [
-              Icon(prefixIcon, size: 24, color: kEditProfileIconColor),
-              Padding(
-                padding: EdgeInsets.only(bottom: 6),
-                child: VerticalDivider(
-                  thickness: 1,
-                  color: kEditProfileDividerColor,
-                ),
+              Icon(
+                prefixIcon,
+                size: screenWidth * .06,
+                color: kEditProfileIconColor,
+              ),
+              Container(
+                width: screenWidth * .005,
+                color: kEditProfileDividerColor,
               ),
             ],
+          ),
+          suffixIcon: Icon(
+            Icons.edit_outlined,
+            color: kEditProfileTitleColor,
+            size: screenWidth * .06,
           ),
           labelText: labelText,
           labelStyle: ConstFunctions.editProfilePasswordFieldStyleLabelStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../profile_common_widgets/custom_profile_blue_text_button.dart';
+import '../00_profile_common_widgets/custom_profile_blue_text_button.dart';
 import 'faq_items_section.dart';
 
 class FaqViewBody extends StatelessWidget {

@@ -61,14 +61,20 @@ class CustomTextFormField extends StatelessWidget {
         textAlignVertical: TextAlignVertical.bottom,
         style: ConstFunctions.textTextFormFieldStyle(context),
         decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          floatingLabelBehavior:
+              focusNode?.hasFocus == true
+                  ? FloatingLabelBehavior.auto
+                  : FloatingLabelBehavior
+                      .never, // Change label behavior based on focus
           prefixIcon: Icon(
             prefixIcon,
             size: prefixIconSize,
             color: kIconTextFormFieldColor,
           ),
           hintText: hintText,
+          labelText: hintText,
           hintStyle: ConstFunctions.hintTextFormFieldStyle(context),
+          labelStyle: ConstFunctions.hintTextFormFieldStyle(context),
           border: ConstFunctions.outlineInputBorder(),
           enabledBorder: ConstFunctions.outlineInputBorder(),
           focusedBorder: ConstFunctions.outlineInputBorder(

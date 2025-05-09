@@ -7,6 +7,7 @@ import 'package:road_man_project/features/_03_auth_view/presentation/view_model/
 import 'package:road_man_project/features/_03_auth_view/presentation/views/widgets/verification_email_widgets/verification_email_view_body.dart';
 
 import '../../../../core/helper/const_variables.dart';
+import '../../../../core/utilities/custom_flexible_widget.dart';
 
 class VerificationEmailView extends StatelessWidget {
   const VerificationEmailView({super.key});
@@ -15,6 +16,7 @@ class VerificationEmailView extends StatelessWidget {
   Widget build(BuildContext context) {
     final String email = GoRouterState.of(context).extra as String;
     return Scaffold(
+      backgroundColor: kAppPrimaryWhiteColor,
       appBar: customAppBar(
         context,
         generalColor: kAppPrimaryBlueColor,
@@ -25,7 +27,9 @@ class VerificationEmailView extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => AuthBloc(authRepo: AuthRepoImplement()),
-        child: VerificationEmailViewBody(email: email),
+        child: CustomFlexibleWidget(
+          child: VerificationEmailViewBody(email: email),
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
 import '../helper/const_variables.dart';
@@ -53,7 +54,14 @@ void customAwesomeDialog({
     showCloseIcon: true,
     borderSide: BorderSide(color: dialogBorderColor, width: 2),
     btnOk: CustomTextButton(
-      onPressed: onPressed,
+      onPressed: () {
+        if (isSuccess) {
+          GoRouter.of(context).pop();
+        }
+        if (onPressed != null) {
+          onPressed();
+        }
+      },
       backgroundColor: dialogButtonColor,
       shadowColor: Colors.transparent,
       child: Text(

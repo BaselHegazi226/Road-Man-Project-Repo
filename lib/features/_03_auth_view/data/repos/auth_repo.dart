@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:road_man_project/core/error/failure.dart';
+import 'package:road_man_project/features/_03_auth_view/data/model/user_token_model.dart';
 
 abstract class AuthRepo {
   Future<Either<Failure, void>> signUp({
@@ -7,7 +8,7 @@ abstract class AuthRepo {
     required String email,
     required String password,
   });
-  Future<Either<Failure, void>> signIn({
+  Future<Either<Failure, UserTokenModel>> signIn({
     required String email,
     required String password,
   });
@@ -31,5 +32,20 @@ abstract class AuthRepo {
   Future<Either<Failure, void>> verificationEmail({
     required String email,
     required String otp,
+  });
+  Future<Either<Failure, void>> sendAgainVerificationEmail({
+    required String email,
+    required String otp,
+  });
+  Future<Either<Failure, String>> signInWithGoogle();
+  Future<Either<Failure, void>> signInWithGoogleToken({required String token});
+  Future<Either<Failure, UserTokenModel>> refreshToken({
+    required String accessToken,
+    required String refreshToken,
+  });
+  Future<Either<Failure, T>> _executeWithRefreshToken<T>({
+    required Future<Either<Failure, T>> Function() executeRequest,
+    required String accessToken,
+    required String refreshToken,
   });
 }

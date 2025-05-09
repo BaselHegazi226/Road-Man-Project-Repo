@@ -1,3 +1,5 @@
+import 'package:road_man_project/features/_03_auth_view/data/model/refresh_token_model.dart';
+
 abstract class AuthStates {}
 
 class AuthInitial extends AuthStates {}
@@ -108,4 +110,33 @@ class VerificationEmailSuccess extends AuthStates {
   final String email, otp;
 
   VerificationEmailSuccess({required this.email, required this.otp});
+}
+
+//SendAgainVerification Email States
+class SendAgainVerificationInitial extends AuthStates {}
+
+class SendAgainVerificationFailure extends AuthStates {
+  final String errorMessage;
+  SendAgainVerificationFailure({required this.errorMessage});
+}
+
+class SendAgainVerificationLoading extends AuthStates {}
+
+class SendAgainVerificationSuccess extends AuthStates {
+  final String email, otp;
+
+  SendAgainVerificationSuccess({required this.email, required this.otp});
+}
+
+//Refresh Token States
+class RefreshTokenLoading extends AuthStates {}
+
+class RefreshTokenSuccess extends AuthStates {
+  final RefreshTokenModel newTokens;
+  RefreshTokenSuccess({required this.newTokens});
+}
+
+class RefreshTokenFailure extends AuthStates {
+  final String errorMessage;
+  RefreshTokenFailure({required this.errorMessage});
 }

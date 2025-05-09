@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/features/_01_splash_view2/splash_view2.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/reset_password_view.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/verification_otp_view.dart';
@@ -10,6 +11,8 @@ import 'package:road_man_project/features/_08_job_view/presentation/view/favouri
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_details_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/job_view.dart';
 import 'package:road_man_project/features/_08_job_view/presentation/view/notification_view.dart';
+import 'package:road_man_project/features/_09_profile_view/presentation/view/change_password_view.dart';
+import 'package:road_man_project/features/_09_profile_view/presentation/view/profile_forget_password_view.dart';
 
 import '../../features/_02_onboarding_view/presentation/view/onboarding_page_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
@@ -29,7 +32,7 @@ abstract class AppRouter {
   static final router = GoRouter(
     initialLocation: Routes.questionnaireViewId,
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SignInView()),
+      GoRoute(path: '/', builder: (context, state) => const SplashView2()),
       GoRoute(
         path: Routes.onBoardingPageViewId,
         builder: (context, state) => const OnboardingPageView(),
@@ -73,6 +76,14 @@ abstract class AppRouter {
       GoRoute(
         path: Routes.editProfileViewId,
         builder: (context, state) => const EditProfileView(),
+      ),
+      GoRoute(
+        path: Routes.changePasswordViewId,
+        builder: (context, state) => const ChangePasswordView(),
+      ),
+      GoRoute(
+        path: Routes.profileForgetPasswordViewId,
+        builder: (context, state) => const ProfileForgetPasswordView(),
       ),
       GoRoute(
         path: Routes.settingsViewId,

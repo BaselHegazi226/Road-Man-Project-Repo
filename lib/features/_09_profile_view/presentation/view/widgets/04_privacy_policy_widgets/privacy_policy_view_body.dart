@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view/widgets/04_privacy_policy_widgets/privacy_policy_items_section.dart';
 
-import '../profile_common_widgets/custom_profile_blue_text_button.dart';
-import '../profile_common_widgets/custom_profile_title.dart';
+import '../00_profile_common_widgets/custom_profile_blue_text_button.dart';
+import '../00_profile_common_widgets/custom_profile_title.dart';
 
 class PrivacyPolicyViewBody extends StatelessWidget {
   const PrivacyPolicyViewBody({super.key});

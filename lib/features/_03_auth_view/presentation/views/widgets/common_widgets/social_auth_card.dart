@@ -5,45 +5,45 @@ import '../../../../../../core/helper/const_variables.dart';
 class SocialAuthCard extends StatelessWidget {
   const SocialAuthCard({
     super.key,
-    required this.iconData,
-    this.iconSize = 24,
+    required this.widget,
     required this.onPressed,
   });
-  final IconData iconData;
-  final double iconSize;
+  final Widget widget;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    // double screenWidth = MediaQuery.sizeOf(context).width;
-    // double screenHeight = MediaQuery.sizeOf(context).height;
-    return Container(
-      width: 60,
-      height: 54,
-      decoration: BoxDecoration(
-        color: Color(0xffF5F5F5),
-        border: Border.all(color: Color(0xffF5F5F5)),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(158, 158, 158, 0.3),
-            offset: Offset(4, 4),
-            blurRadius: 8,
-            spreadRadius: -4,
+    double screenWidth = MediaQuery.sizeOf(context).width;
+    double screenHeight = MediaQuery.sizeOf(context).height;
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: screenWidth,
+        height: screenHeight * .0625, //54
+        decoration: BoxDecoration(
+          color: kSecondlyLightWhiteColor,
+          border: Border.all(color: kAppPrimaryBlueColor),
+          borderRadius: BorderRadius.circular(screenWidth * .02),
+          boxShadow: [
+            BoxShadow(
+              color: kSocialCardShadowColor,
+              offset: Offset(4, 4),
+              blurRadius: 8,
+              spreadRadius: -4,
+            ),
+            BoxShadow(
+              color: kSocialCardShadow2Color,
+              offset: Offset(2, 4),
+              blurRadius: 8,
+              spreadRadius: 0,
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * .02,
+            vertical: screenHeight * .005,
           ),
-          BoxShadow(
-            color: Color.fromRGBO(158, 158, 158, 0.15),
-            offset: Offset(2, 4),
-            blurRadius: 8,
-            spreadRadius: 0,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-        child: IconButton(
-          onPressed: onPressed,
-          icon: Icon(iconData, color: kAppPrimaryBlueColor, size: iconSize),
-          padding: EdgeInsets.zero,
+          child: widget,
         ),
       ),
     );

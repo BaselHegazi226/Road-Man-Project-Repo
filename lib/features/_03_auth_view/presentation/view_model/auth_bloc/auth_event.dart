@@ -36,6 +36,11 @@ class VerifyEmailEvent extends AuthEvent {
   VerifyEmailEvent({required this.email, required this.otp});
 }
 
+class SendAgainVerifyEmailEvent extends AuthEvent {
+  final String email, otp;
+  SendAgainVerifyEmailEvent({required this.email, required this.otp});
+}
+
 class ResetPasswordEvent extends AuthEvent {
   final String email, otp, newPassword, confirmPassword;
   ResetPasswordEvent({
@@ -44,4 +49,11 @@ class ResetPasswordEvent extends AuthEvent {
     required this.newPassword,
     required this.confirmPassword,
   });
+}
+
+class RefreshTokenEvent extends AuthEvent {
+  final String accessToken;
+  final String refreshToken;
+
+  RefreshTokenEvent({required this.accessToken, required this.refreshToken});
 }

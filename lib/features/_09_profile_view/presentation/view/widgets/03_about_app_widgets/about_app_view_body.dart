@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../profile_common_widgets/custom_title_subtitle.dart';
+import '../00_profile_common_widgets/custom_title_subtitle.dart';
 import 'key_features_section.dart';
 
 class AboutAppViewBody extends StatelessWidget {

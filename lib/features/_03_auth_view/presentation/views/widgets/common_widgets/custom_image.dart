@@ -14,7 +14,7 @@ class CustomImage extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: screenHeight * 0.06, // 6% من الطول بدل 48 بكسل
+        top: screenHeight * 0.03, // 6% من الطول بدل 24 بكسل
         bottom:
             imageBottomPadding ??
             screenHeight * 0.07, // 7% من الطول بدل 58 بكسل
