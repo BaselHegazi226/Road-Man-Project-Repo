@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:road_man_project/features/_01_splash_view2/presentation/view/widgets/splash_view2_body.dart';
 
-import '../../core/utilities/routes.dart';
 import '../_03_auth_view/presentation/view_model/refresh_token_cubit/refresh_token_cubit.dart';
 import '../_03_auth_view/presentation/view_model/refresh_token_cubit/refresh_token_state.dart';
 
@@ -28,6 +27,7 @@ class _SplashView2State extends State<SplashView2>
   bool _showO = false;
   bool _showA = false;
   bool _showDman = false;
+  bool _showWelcomeMessage = false;
 
   @override
   void initState() {
@@ -68,6 +68,7 @@ class _SplashView2State extends State<SplashView2>
         _aController.forward().then((_) {
           setState(() => _showDman = true);
           _dmanController.forward().then((_) {
+            setState(() => _showWelcomeMessage = true);
             BlocProvider.of<RefreshTokenCubit>(context).refreshTokenCubitFun();
           });
         });
@@ -88,70 +89,23 @@ class _SplashView2State extends State<SplashView2>
   Widget build(BuildContext context) {
     return BlocListener<RefreshTokenCubit, RefreshTokenStates>(
       listener: (context, state) {
-        if (state is RefreshTokenSuccess) {
-          GoRouter.of(context).go(Routes.mainViewId);
-        } else if (state is RefreshTokenFailure) {
-          GoRouter.of(context).go(Routes.onBoardingPageViewId);
-        }
+        // if (state is RefreshTokenSuccess) {
+        //   GoRouter.of(context).go(Routes.mainViewId);
+        // } else if (state is RefreshTokenFailure) {
+        //   GoRouter.of(context).go(Routes.onBoardingPageViewId);
+        // }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: Container(
-            color: Colors.transparent,
-            padding: EdgeInsets.only(
-              right: MediaQuery.sizeOf(context).width * .3,
-            ),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                /// R
-                SlideTransition(
-                  position: _rAnimation,
-                  child: Image.asset('assets/images/splash_logo/R.png'),
-                ),
-
-                /// O
-                Positioned(
-                  top: -5,
-                  left: 64,
-                  child: Visibility(
-                    visible: _showO,
-                    child: SlideTransition(
-                      position: _oAnimation,
-                      child: Image.asset('assets/images/splash_logo/O.png'),
-                    ),
-                  ),
-                ),
-
-                /// A
-                Positioned(
-                  bottom: -10,
-                  left: 92,
-                  child: Visibility(
-                    visible: _showA,
-                    child: SlideTransition(
-                      position: _aAnimation,
-                      child: Image.asset('assets/images/splash_logo/A.png'),
-                    ),
-                  ),
-                ),
-
-                /// Dman
-                Positioned(
-                  bottom: -5,
-                  left: 170,
-                  child: Visibility(
-                    visible: _showDman,
-                    child: SlideTransition(
-                      position: _dmanAnimation,
-                      child: Image.asset('assets/images/splash_logo/DMan.png'),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        body: SplashView2Body(
+          rAnimation: _rAnimation,
+          showO: _showO,
+          oAnimation: _oAnimation,
+          showA: _showA,
+          aAnimation: _aAnimation,
+          showDman: _showDman,
+          dmanAnimation: _dmanAnimation,
+          showWelcomeMessage: _showWelcomeMessage,
         ),
       ),
     );
