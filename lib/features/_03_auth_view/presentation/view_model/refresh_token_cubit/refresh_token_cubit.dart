@@ -20,22 +20,28 @@ class RefreshTokenCubit extends Cubit<RefreshTokenStates> {
       return;
     }
 
-    final result = await authRepo.refreshToken(
-      accessToken: userTokens.token,
-      refreshToken: userTokens.refreshToken,
-    );
+    final expirationDate = await SecureStorageHelper.getUserTokenExpiration();
+    if (DateTime.now().isAfter(expirationDate)) {
+      // إذا كانت التوكن قد انتهت، نحتاج لتحديثها
+      final result = await authRepo.refreshToken(
+        accessToken: userTokens.token,
+        refreshToken: userTokens.refreshToken,
+      );
 
-    await result.fold(
-      (failure) async {
-        emit(
-          RefreshTokenFailure(
-            errorMessage: failure.errorMessage ?? 'Bloc Error',
-          ),
-        ); // في حالة الفشل
-      },
-      (userToken) async {
-        emit(RefreshTokenSuccess(userToken: userToken)); // في حالة النجاح
-      },
-    );
+      await result.fold(
+        (failure) async {
+          emit(
+            RefreshTokenFailure(
+              errorMessage: failure.errorMessage ?? 'Bloc Error',
+            ),
+          ); // في حالة الفشل
+        },
+        (userToken) async {
+          emit(RefreshTokenSuccess(userToken: userToken)); // في حالة النجاح
+        },
+      );
+    } else {
+      emit(RefreshTokenFailure(errorMessage: 'Token is still valid.'));
+    }
   }
 }

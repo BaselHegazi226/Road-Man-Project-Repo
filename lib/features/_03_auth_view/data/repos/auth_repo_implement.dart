@@ -365,6 +365,7 @@ class AuthRepoImplement implements AuthRepo {
   }) async {
     final refreshTokenPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/refresh-token';
+
     final userTokens = await SecureStorageHelper.getUserTokens();
 
     try {
@@ -372,35 +373,42 @@ class AuthRepoImplement implements AuthRepo {
       if (userTokens == null || userTokens.token.isEmpty) {
         return left(ServerFailure(errorMessage: 'Token not found.'));
       }
-      // تحضير التوكنات القديمة لإرسالها إلى السيرفر
-      final refreshTokenModel = RefreshTokenModel(
-        accessToken: userTokens.token,
-        refreshToken: userTokens.refreshToken,
-      );
 
-      // إرسال طلب التحديث للسيرفر
-      final response = await dio.post(
-        refreshTokenPath,
-        data: refreshTokenModel.toJson(),
-      );
-
-      // التعامل مع الاستجابة
-      if (response.statusCode == 200) {
-        // استخراج التوكنات الجديدة من الاستجابة
-        final newTokenModel = UserTokenModel.fromJson(response.data);
-
-        // تخزين التوكنات الجديدة في SecureStorageHelper
-        await SecureStorageHelper.saveUserTokens(newTokenModel);
-
-        // إرجاع التوكنات الجديدة
-        return right(newTokenModel);
-      } else {
-        return left(
-          ServerFailure.fromResponse(
-            statusCode: response.statusCode,
-            responseData: response.data,
-          ),
+      // تحقق من صلاحية التوكن
+      final expirationDate = await SecureStorageHelper.getUserTokenExpiration();
+      if (DateTime.now().isAfter(expirationDate)) {
+        // التوكن انتهت صلاحيتها، نحتاج لتحديثها
+        final refreshTokenModel = RefreshTokenModel(
+          accessToken: userTokens.token,
+          refreshToken: userTokens.refreshToken,
         );
+
+        // إرسال طلب التحديث للسيرفر
+        final response = await dio.post(
+          refreshTokenPath,
+          data: refreshTokenModel.toJson(),
+        );
+
+        // التعامل مع الاستجابة
+        if (response.statusCode == 200) {
+          // استخراج التوكنات الجديدة من الاستجابة
+          final newTokenModel = UserTokenModel.fromJson(response.data);
+
+          // تخزين التوكنات الجديدة في SecureStorageHelper
+          await SecureStorageHelper.saveUserTokens(newTokenModel);
+
+          // إرجاع التوكنات الجديدة
+          return right(newTokenModel);
+        } else {
+          return left(
+            ServerFailure.fromResponse(
+              statusCode: response.statusCode,
+              responseData: response.data,
+            ),
+          );
+        }
+      } else {
+        return right(userTokens); // التوكن ما زالت صالحة
       }
     } on DioException catch (dioException) {
       return left(ServerFailure.fromDioException(dioException));
