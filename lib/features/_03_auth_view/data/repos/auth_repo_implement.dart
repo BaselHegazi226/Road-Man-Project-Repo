@@ -245,7 +245,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signInWithGoogleToken({
+  Future<Either<Failure, UserTokenModel>> signInWithGoogleToken({
     required String token,
   }) async {
     final String signInWithGoogleTokenPath =
@@ -257,7 +257,10 @@ class AuthRepoImplement implements AuthRepo {
         data: signInWithGoogleTokenModel.toJson(),
       );
       if (response.statusCode == 200) {
-        return right(null);
+        final data = response.data;
+        final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        await SecureStorageHelper.saveUserTokens(userTokenModel);
+        return right(userTokenModel);
       } else {
         return left(
           ServerFailure.fromResponse(

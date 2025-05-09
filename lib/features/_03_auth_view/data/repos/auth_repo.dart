@@ -38,7 +38,9 @@ abstract class AuthRepo {
     required String otp,
   });
   Future<Either<Failure, String>> signInWithGoogle();
-  Future<Either<Failure, void>> signInWithGoogleToken({required String token});
+  Future<Either<Failure, UserTokenModel>> signInWithGoogleToken({
+    required String token,
+  });
   Future<Either<Failure, UserTokenModel>> refreshToken({
     required String accessToken,
     required String refreshToken,
