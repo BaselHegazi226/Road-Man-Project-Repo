@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:road_man_project/features/_01_splash_view2/presentation/view/widgets/splash_view2_body.dart';
 
+import '../../core/utilities/routes.dart';
 import '../_03_auth_view/presentation/view_model/refresh_token_cubit/refresh_token_cubit.dart';
 import '../_03_auth_view/presentation/view_model/refresh_token_cubit/refresh_token_state.dart';
 
@@ -89,11 +91,11 @@ class _SplashView2State extends State<SplashView2>
   Widget build(BuildContext context) {
     return BlocListener<RefreshTokenCubit, RefreshTokenStates>(
       listener: (context, state) {
-        // if (state is RefreshTokenSuccess) {
-        //   GoRouter.of(context).go(Routes.mainViewId);
-        // } else if (state is RefreshTokenFailure) {
-        //   GoRouter.of(context).go(Routes.onBoardingPageViewId);
-        // }
+        if (state is RefreshTokenSuccess) {
+          GoRouter.of(context).go(Routes.mainViewId);
+        } else if (state is RefreshTokenFailure) {
+          GoRouter.of(context).go(Routes.onBoardingPageViewId);
+        }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
