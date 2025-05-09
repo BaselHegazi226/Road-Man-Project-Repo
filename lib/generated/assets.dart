@@ -36,4 +36,8 @@ class Assets {
       'assets/images/splash_logo/logo_svg_blue_without_road_man_text.png';
   static const String roadManTextImage =
       'assets/images/splash_logo/road_man_text.png';
+  static const String logoRImage = 'assets/images/splash_logo/R.png';
+  static const String logoOImage = 'assets/images/splash_logo/O.png';
+  static const String logoAImage = 'assets/images/splash_logo/A.png';
+  static const String logoDManImage = 'assets/images/splash_logo/DMan.png';
 }
