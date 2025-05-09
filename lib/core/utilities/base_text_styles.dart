@@ -30,6 +30,7 @@ class BaseTextStyles {
 
 //Afacad TextStyle Class
 
+
 class AfacadTextStyles extends BaseTextStyles {
   const AfacadTextStyles({
     required super.color,
