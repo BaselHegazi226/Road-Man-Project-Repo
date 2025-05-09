@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 
+import 'logo_visibility_widget.dart';
+
 class SplashView2Body extends StatelessWidget {
   const SplashView2Body({
     super.key,
@@ -31,66 +33,22 @@ class SplashView2Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: screenSize.height * .03,
         children: [
-          Container(
-            padding: EdgeInsets.only(
-              right: MediaQuery.sizeOf(context).width * .35,
-            ),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                /// R
-                SlideTransition(
-                  position: _rAnimation,
-                  child: Image.asset('assets/images/splash_logo/R.png'),
-                ),
-
-                /// O
-                Positioned(
-                  top: -5,
-                  left: 64,
-                  child: Visibility(
-                    visible: _showO,
-                    child: SlideTransition(
-                      position: _oAnimation,
-                      child: Image.asset('assets/images/splash_logo/O.png'),
-                    ),
-                  ),
-                ),
-
-                /// A
-                Positioned(
-                  bottom: -10,
-                  left: 92,
-                  child: Visibility(
-                    visible: _showA,
-                    child: SlideTransition(
-                      position: _aAnimation,
-                      child: Image.asset('assets/images/splash_logo/A.png'),
-                    ),
-                  ),
-                ),
-
-                /// Dman
-                Positioned(
-                  bottom: -5,
-                  left: 170,
-                  child: Visibility(
-                    visible: _showDman,
-                    child: SlideTransition(
-                      position: _dmanAnimation,
-                      child: Image.asset('assets/images/splash_logo/DMan.png'),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          LogoVisibilityWidget(
+            rAnimation: _rAnimation,
+            showO: _showO,
+            oAnimation: _oAnimation,
+            showA: _showA,
+            aAnimation: _aAnimation,
+            showDman: _showDman,
+            dmanAnimation: _dmanAnimation,
           ),
-          const SizedBox(height: 32),
 
           /// Welcome Message
           if (showWelcomeMessage)
