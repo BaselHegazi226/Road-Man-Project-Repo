@@ -46,6 +46,20 @@ class AfacadTextStyles extends BaseTextStyles {
         fontWeight: FontWeight.w400,
       ).getTextStyle(context);
 
+  static TextStyle textStyle16W400Black(BuildContext context) =>
+      const AfacadTextStyles(
+        color: kTextBlackPrimaryColor,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+      ).getTextStyle(context);
+
+  static TextStyle textStyle18W600Black(BuildContext context) =>
+      const AfacadTextStyles(
+        color: kTextBlackPrimaryColor,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      ).getTextStyle(context);
+
   static TextStyle textStyle12W400Grey(BuildContext context) =>
       const AfacadTextStyles(
         color: kTextGreyPrimaryColor,

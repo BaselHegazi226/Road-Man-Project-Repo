@@ -27,6 +27,7 @@ import 'routes.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
+    initialLocation: Routes.questionnaireViewId,
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SignInView()),
       GoRoute(
