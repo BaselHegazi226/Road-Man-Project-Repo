@@ -34,7 +34,7 @@ class _SignInBlocConsumerState extends State<SignInBlocConsumer> {
       title: 'Sign in Success',
       description: 'You have successfully signed into Road Man.',
       onPressed: () {
-        GoRouter.of(context).push(Routes.mainViewId);
+        GoRouter.of(context).push(Routes.questionnaireViewId);
       },
     );
   }
