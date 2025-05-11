@@ -40,4 +40,6 @@ class Assets {
   static const String logoOImage = 'assets/images/splash_logo/O.png';
   static const String logoAImage = 'assets/images/splash_logo/A.png';
   static const String logoDManImage = 'assets/images/splash_logo/DMan.png';
+  static const String profileDefaultImage =
+      'assets/images/profile/profile_image.jpeg';
 }
