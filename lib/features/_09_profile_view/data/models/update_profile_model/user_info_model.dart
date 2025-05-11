@@ -41,7 +41,7 @@ class UserInfoModel {
       'email': email,
       'photo': photo,
       'name': name,
-      'birthDate': dateOfBirth,
+      'dateOfBirth': dateOfBirth,
     };
   }
 }
