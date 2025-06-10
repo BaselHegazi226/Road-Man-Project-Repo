@@ -92,7 +92,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserTokenModel>> signIn({
+  Future<Either<Failure, UserTokensModel>> signIn({
     required String email,
     required String password,
   }) async {
@@ -104,7 +104,7 @@ class AuthRepoImplement implements AuthRepo {
       if (response.statusCode == 200) {
         final data =
             response.data is String ? jsonDecode(response.data) : response.data;
-        final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
         await SecureStorageHelper.saveUserTokens(userTokenModel);
         return right(userTokenModel);
       } else {
@@ -245,7 +245,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserTokenModel>> signInWithGoogleToken({
+  Future<Either<Failure, UserTokensModel>> signInWithGoogleToken({
     required String token,
   }) async {
     final String signInWithGoogleTokenPath =
@@ -258,7 +258,7 @@ class AuthRepoImplement implements AuthRepo {
       );
       if (response.statusCode == 200) {
         final data = response.data;
-        final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
         await SecureStorageHelper.saveUserTokens(userTokenModel);
         return right(userTokenModel);
       } else {
@@ -362,7 +362,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserTokenModel>> refreshToken({
+  Future<Either<Failure, UserTokensModel>> refreshToken({
     required String accessToken,
     required String refreshToken,
   }) async {
@@ -395,7 +395,7 @@ class AuthRepoImplement implements AuthRepo {
         // التعامل مع الاستجابة
         if (response.statusCode == 200) {
           // استخراج التوكنات الجديدة من الاستجابة
-          final newTokenModel = UserTokenModel.fromJson(response.data);
+          final newTokenModel = UserTokensModel.fromJson(response.data);
 
           // تخزين التوكنات الجديدة في SecureStorageHelper
           await SecureStorageHelper.saveUserTokens(newTokenModel);
