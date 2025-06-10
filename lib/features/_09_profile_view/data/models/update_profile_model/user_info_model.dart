@@ -1,7 +1,8 @@
 import '../../../../../generated/assets.dart';
 
 class UserInfoModel {
-  final String userID, name, email, photo, dateOfBirth;
+  final String? name, email, photo, dateOfBirth;
+  final int? userID;
 
   UserInfoModel({
     required this.userID,
@@ -24,14 +25,15 @@ class UserInfoModel {
     final String resolvedPhoto =
         rawPhoto.isNotEmpty && hasAllowedExtension
             ? rawPhoto
-            : Assets.profileDefaultImage;
+            : Assets.profileProfileUserImage;
 
     return UserInfoModel(
-      userID: json['userID'],
-      email: json['email'],
+      userID: json['userID'] ?? 0,
+      email: json['email'] ?? 'user@gmail.com',
       photo: resolvedPhoto,
-      name: json['name'],
-      dateOfBirth: json['birthDate'],
+      name: json['name'] ?? 'newUser',
+      dateOfBirth:
+          json['dateOfBirth']?.toString() ?? DateTime.now().toIso8601String(),
     );
   }
 
