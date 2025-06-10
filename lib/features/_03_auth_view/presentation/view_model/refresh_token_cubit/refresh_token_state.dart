@@ -12,6 +12,6 @@ class RefreshTokenFailure extends RefreshTokenStates {
 }
 
 class RefreshTokenSuccess extends RefreshTokenStates {
-  final UserTokenModel userToken;
+  final UserTokensModel userToken;
   RefreshTokenSuccess({required this.userToken});
 }
