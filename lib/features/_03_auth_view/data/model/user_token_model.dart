@@ -1,8 +1,8 @@
-class UserTokenModel {
+class UserTokensModel {
   final String token, refreshToken;
-  UserTokenModel({required this.token, required this.refreshToken});
-  factory UserTokenModel.fromJson(Map<String, dynamic> json) {
-    return UserTokenModel(
+  UserTokensModel({required this.token, required this.refreshToken});
+  factory UserTokensModel.fromJson(Map<String, dynamic> json) {
+    return UserTokensModel(
       token: json['token'],
       refreshToken: json['refreshToken'],
     );
