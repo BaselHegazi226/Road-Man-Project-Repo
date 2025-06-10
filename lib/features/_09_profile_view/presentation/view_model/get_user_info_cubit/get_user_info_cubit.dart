@@ -3,6 +3,7 @@ import 'package:road_man_project/features/_09_profile_view/data/models/update_pr
 import 'package:road_man_project/features/_09_profile_view/data/repos/profile_repos/profile_repos.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_state.dart';
 
+import '../../../../../core/tokens_manager/user_info_manager.dart';
 import 'get_user_info_state.dart';
 
 class GetUserInfoCubit extends Cubit<ProfileStates> {
@@ -10,10 +11,10 @@ class GetUserInfoCubit extends Cubit<ProfileStates> {
 
   GetUserInfoCubit({required this.profileRepos}) : super(ProfileInitial());
 
-  Future<void> getUserInfo() async {
+  Future<void> getUserInfo({required String userToken}) async {
     emit(GetUserInfoLoadingState());
 
-    final result = await profileRepos.getUserInfo();
+    final result = await profileRepos.getUserInfo(userToken: userToken);
 
     await result.fold(
       (error) async {
@@ -24,9 +25,34 @@ class GetUserInfoCubit extends Cubit<ProfileStates> {
         );
       },
       (success) async {
-        final userInfo = UserInfoModel.fromJson(success);
-        emit(GetUserInfoSuccessState(userInfoModel: userInfo));
+        final userInfoModel = UserInfoModel.fromJson(success);
+        await UserInfoStorageHelper.saveUserInfo(
+          userId: userInfoModel.userID!,
+          name: userInfoModel.name!,
+          email: userInfoModel.email!,
+          photo: userInfoModel.photo!,
+          dateOfBirth: userInfoModel.dateOfBirth!,
+        );
+        emit(GetUserInfoSuccessState(userInfoModel: userInfoModel));
       },
     );
+  }
+
+  /// ✅ الدالة الجديدة لاسترجاع بيانات المستخدم من التخزين المحلي
+  Future<void> getUserInfoFromLocal() async {
+    final localData = await UserInfoStorageHelper.getUserInfo();
+
+    if (localData != null) {
+      final userInfoModel = UserInfoModel(
+        userID: int.parse(localData['user_id']!),
+        name: localData['name'],
+        email: localData['email'],
+        photo: localData['photo'],
+        dateOfBirth: localData['date_of_birth'],
+      );
+      emit(GetUserInfoLocalSuccessState(userInfoModel: userInfoModel));
+    } else {
+      emit(GetUserInfoFailureState(errorMessage: 'No local user info found.'));
+    }
   }
 }
