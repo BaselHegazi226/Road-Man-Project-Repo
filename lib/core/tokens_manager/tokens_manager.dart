@@ -3,69 +3,68 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../features/_03_auth_view/data/model/user_token_model.dart';
 
 class SecureStorageHelper {
+  // إنشاء instance من SecureStorage
   static final _storage = FlutterSecureStorage();
 
-  // تخزين التوكنات مع تاريخ انتهاء الصلاحية
-  static Future<void> saveUserTokens(UserTokenModel userToken) async {
+  // دالة لتخزين التوكنات وتواريخ انتهاء الصلاحية
+  static Future<void> saveUserTokens(UserTokensModel userToken) async {
+    // حفظ التوكن في التخزين
     await _storage.write(key: 'token', value: userToken.token);
+
+    // حفظ الريفرش توكن
     await _storage.write(key: 'refreshToken', value: userToken.refreshToken);
 
-    // تخزين تاريخ انتهاء صلاحية التوكن
-    final expirationDate = DateTime.now().add(
-      Duration(hours: 23, minutes: 30),
-    ); // التوكن ينتهي بعد 23 ساعة و 30 دقيقة
+    // حساب تاريخ انتهاء التوكن (23 ساعة و30 دقيقة)
+    final expirationDate = DateTime.now().add(Duration(hours: 23, minutes: 30));
+
+    // تخزين تاريخ انتهاء التوكن
     await _storage.write(
       key: 'tokenExpiration',
       value: expirationDate.toIso8601String(),
     );
 
-    // تخزين تاريخ انتهاء صلاحية الـ refresh token
+    // حساب تاريخ انتهاء الريفرش توكن (13 يوم و23 ساعة و30 دقيقة)
     final refreshTokenExpiration = DateTime.now().add(
       Duration(days: 13, hours: 23, minutes: 30),
-    ); // الـ refresh token ينتهي بعد 13 يوم و 23 ساعة و 30 دقيقة
+    );
+
+    // تخزين تاريخ انتهاء صلاحية الريفرش توكن
     await _storage.write(
       key: 'refreshTokenExpiration',
       value: refreshTokenExpiration.toIso8601String(),
     );
   }
 
-  // الحصول على التوكنات من الـ SecureStorage
-  static Future<UserTokenModel?> getUserTokens() async {
+  // دالة للحصول على التوكنات فقط (بدون التحقق من صلاحيتها)
+  static Future<UserTokensModel?> getUserTokens() async {
+    // قراءة التوكن والريفرش توكن من التخزين
     String? token = await _storage.read(key: 'token');
     String? refreshToken = await _storage.read(key: 'refreshToken');
-    String? tokenExpiration = await _storage.read(key: 'tokenExpiration');
-    String? refreshTokenExpiration = await _storage.read(
-      key: 'refreshTokenExpiration',
-    );
 
-    if (token != null &&
-        refreshToken != null &&
-        tokenExpiration != null &&
-        refreshTokenExpiration != null) {
-      final expirationDate = DateTime.parse(tokenExpiration);
-      final refreshExpirationDate = DateTime.parse(refreshTokenExpiration);
-
-      // التحقق إذا كانت التوكنات قد انتهت
-      if (DateTime.now().isAfter(expirationDate)) {
-        // التوكن انتهت صلاحيتها
-        return null;
-      } else {
-        // التوكن مازالت صالحة
-        return UserTokenModel(token: token, refreshToken: refreshToken);
-      }
+    // التحقق من وجود القيم وإرجاعها
+    if (token != null && refreshToken != null) {
+      return UserTokensModel(token: token, refreshToken: refreshToken);
     }
-    return null; // في حاله عدم وجود التوكنات
+
+    // إرجاع null في حال عدم وجود التوكنات
+    return null;
   }
 
-  // هذه الدالة لإرجاع تاريخ انتهاء صلاحية التوكن
+  // دالة للحصول على تاريخ انتهاء التوكن
   static Future<DateTime> getUserTokenExpiration() async {
+    // قراءة تاريخ انتهاء التوكن
     String? expiration = await _storage.read(key: 'tokenExpiration');
+
+    // تحويل النص إلى تاريخ إذا كان موجوداً
     if (expiration != null) {
       return DateTime.parse(expiration);
     }
+
+    // رمي استثناء في حال عدم وجود التاريخ
     throw Exception("Token expiration not found");
   }
 
+  // دالة لمسح كل التوكنات من التخزين
   static Future<void> clearTokens() async {
     await _storage.delete(key: 'token');
     await _storage.delete(key: 'refreshToken');
