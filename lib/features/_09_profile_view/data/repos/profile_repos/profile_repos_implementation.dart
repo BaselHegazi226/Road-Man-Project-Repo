@@ -80,11 +80,16 @@ class ProfileReposImplementation extends ProfileRepos {
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> getUserInfo() async {
+  Future<Either<Failure, Map<String, dynamic>>> getUserInfo({
+    required String userToken,
+  }) async {
     final String userInfoPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/GetUserInfomation';
     try {
-      final response = await dio.get(userInfoPath);
+      final response = await dio.get(
+        userInfoPath,
+        options: Options(headers: {'Authorization': "Bearer $userToken"}),
+      );
 
       if (response.statusCode == 200) {
         final userInfoModel = UserInfoModel.fromJson(response.data);
