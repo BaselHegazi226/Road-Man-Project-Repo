@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/user_info_model.dart';
 
 class UserInfoStorageHelper {
   static const String _boxName = 'user_info';
@@ -8,57 +9,37 @@ class UserInfoStorageHelper {
     return await Hive.openBox(_boxName);
   }
 
-  /// حفظ بيانات المستخدم
-  static Future<void> saveUserInfo({
-    required String name,
-    required String email,
-    required String photo,
-    required int userId,
-    required String dateOfBirth,
-  }) async {
+  /// حفظ بيانات المستخدم باستخدام الموديل
+  static Future<void> saveUserInfo(UserInfoModel user) async {
     final box = await _openBox();
+    final data = user.toJson();
 
-    await box.put('user_id', userId);
-    await box.put('user_name', name);
-    await box.put('user_email', email);
-    await box.put('user_photo', photo);
-    await box.put('date_of_birth', dateOfBirth);
+    for (final entry in data.entries) {
+      await box.put(entry.key, entry.value);
+    }
   }
 
-  /// استرجاع بيانات المستخدم
-  static Future<Map<String, dynamic>?> getUserInfo() async {
+  /// استرجاع بيانات المستخدم كموديل
+  static Future<UserInfoModel?> getUserInfo() async {
     final box = await _openBox();
 
-    final userId = box.get('user_id');
-    final name = box.get('user_name');
-    final email = box.get('user_email');
-    final photo = box.get('user_photo');
-    final dateOfBirth = box.get('date_of_birth');
+    final data = {
+      'userID': box.get('userID'),
+      'name': box.get('name'),
+      'email': box.get('email'),
+      'photo': box.get('photo'),
+      'dateOfBirth': box.get('dateOfBirth'),
+    };
 
-    if (userId != null &&
-        name != null &&
-        email != null &&
-        photo != null &&
-        dateOfBirth != null) {
-      return {
-        'user_id': userId,
-        'name': name,
-        'email': email,
-        'photo': photo,
-        'date_of_birth': dateOfBirth,
-      };
-    }
-    return null;
+    final allNotNull = data.values.every((value) => value != null);
+    if (!allNotNull) return null;
+
+    return UserInfoModel.fromJson(data);
   }
 
   /// حذف بيانات المستخدم
   static Future<void> clearUserInfo() async {
     final box = await _openBox();
-
-    await box.delete('user_id');
-    await box.delete('user_name');
-    await box.delete('user_email');
-    await box.delete('user_photo');
-    await box.delete('date_of_birth');
+    await box.deleteAll(['userID', 'name', 'email', 'photo', 'dateOfBirth']);
   }
 }
