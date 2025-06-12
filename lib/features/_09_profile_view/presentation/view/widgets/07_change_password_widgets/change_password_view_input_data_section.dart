@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/custom_circle_indicator.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
 import 'package:road_man_project/core/utilities/show_snack_bar.dart';
+import 'package:road_man_project/core/utilities/text_under_line.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view/widgets/01_edit_profile_widgets/edit_profile_password_fields_section.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_bloc.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_event.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_state.dart';
+
+import '../../../../../../core/utilities/routes.dart';
 
 class ChangePasswordViewInputDataSection extends StatefulWidget {
   const ChangePasswordViewInputDataSection({super.key});
@@ -27,11 +31,12 @@ class _ChangePasswordViewInputDataSectionState
       TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool buttonIsLoading = false;
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         EditProfilePasswordFieldsSection(
           formKey: _formKey,
@@ -43,28 +48,18 @@ class _ChangePasswordViewInputDataSectionState
         BlocConsumer<ProfileBloc, ProfileStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
-              setState(() {
-                buttonIsLoading = false;
-              });
               showSnackBar(
                 context,
                 'Password Successfully Updated',
                 kAppPrimaryBlueColor,
               );
+              clearFun();
             } else if (state is ChangePasswordFailureState) {
-              setState(() {
-                buttonIsLoading = false;
-              });
-              showSnackBar(
-                context,
-                'Password Failed Updated',
-                kAppPrimaryBlueColor,
-              );
-            } else {
-              setState(() {
-                buttonIsLoading = true;
-              });
+              showSnackBar(context, state.errorMessage, kAppPrimaryBlueColor);
             }
+            setState(() {
+              buttonIsLoading = state is ChangePasswordLoadingState;
+            });
           },
           builder: (context, state) {
             return CustomTextButton(
@@ -94,20 +89,22 @@ class _ChangePasswordViewInputDataSectionState
             );
           },
         ),
-        // TextButton(
-        //   onPressed: () {
-        //     GoRouter.of(context).push(Routes.profileForgetPasswordViewId);
-        //   },
-        //   child: Text(
-        //     maxLines: 1,
-        //     textAlign: TextAlign.right,
-        //     'Forget your password ?',
-        //     style: AfacadTextStyles.textStyle14W700H150Blue(
-        //       context,
-        //     ).copyWith(letterSpacing: .266, color: kAppPrimaryWrongColor),
-        //   ),
-        // ),
+        TextButton(
+          onPressed: () {
+            GoRouter.of(context).push(Routes.profileForgetPasswordViewId);
+          },
+          child: TextUnderLine(
+            text: 'Forget your password?',
+            textColor: kAppPrimaryWrongColor,
+          ),
+        ),
       ],
     );
+  }
+
+  void clearFun() {
+    currentPasswordEditingController.clear();
+    newPasswordEditingController.clear();
+    confirmPasswordEditingController.clear();
   }
 }
