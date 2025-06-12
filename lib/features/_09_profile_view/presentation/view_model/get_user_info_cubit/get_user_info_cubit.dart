@@ -26,30 +26,17 @@ class GetUserInfoCubit extends Cubit<ProfileStates> {
       },
       (success) async {
         final userInfoModel = UserInfoModel.fromJson(success);
-        await UserInfoStorageHelper.saveUserInfo(
-          userId: userInfoModel.userID!,
-          name: userInfoModel.name!,
-          email: userInfoModel.email!,
-          photo: userInfoModel.photo!,
-          dateOfBirth: userInfoModel.dateOfBirth!,
-        );
+        await UserInfoStorageHelper.saveUserInfo(userInfoModel);
         emit(GetUserInfoSuccessState(userInfoModel: userInfoModel));
       },
     );
   }
 
   /// ✅ الدالة الجديدة لاسترجاع بيانات المستخدم من التخزين المحلي
-  Future<void> getUserInfoFromLocal() async {
-    final localData = await UserInfoStorageHelper.getUserInfo();
+  Future<void> localGetUserInfo() async {
+    final userInfoModel = await UserInfoStorageHelper.getUserInfo();
 
-    if (localData != null) {
-      final userInfoModel = UserInfoModel(
-        userID: int.parse(localData['user_id']!),
-        name: localData['name'],
-        email: localData['email'],
-        photo: localData['photo'],
-        dateOfBirth: localData['date_of_birth'],
-      );
+    if (userInfoModel != null) {
       emit(GetUserInfoLocalSuccessState(userInfoModel: userInfoModel));
     } else {
       emit(GetUserInfoFailureState(errorMessage: 'No local user info found.'));
