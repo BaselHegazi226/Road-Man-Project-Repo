@@ -46,4 +46,21 @@ class UserInfoModel {
       'dateOfBirth': dateOfBirth,
     };
   }
+
+  /// ✅ copyWith لتعديل أي قيمة داخل الموديل
+  UserInfoModel copyWith({
+    int? userID,
+    String? email,
+    String? photo,
+    String? name,
+    String? dateOfBirth,
+  }) {
+    return UserInfoModel(
+      userID: userID ?? this.userID,
+      email: email ?? this.email,
+      photo: photo ?? this.photo,
+      name: name ?? this.name,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+    );
+  }
 }
