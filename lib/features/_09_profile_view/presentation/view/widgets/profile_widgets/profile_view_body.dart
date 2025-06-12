@@ -33,7 +33,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
   Future<void> _initializeUserInfo() async {
     final cubit = BlocProvider.of<GetUserInfoCubit>(context);
 
-    await cubit.getUserInfoFromLocal();
+    await cubit.localGetUserInfo();
 
     final localData = await UserInfoStorageHelper.getUserInfo();
     if (localData == null) {
