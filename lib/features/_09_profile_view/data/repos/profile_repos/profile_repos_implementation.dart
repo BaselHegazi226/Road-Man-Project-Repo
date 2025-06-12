@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:road_man_project/core/error/failure.dart';
+import 'package:road_man_project/core/tokens_manager/tokens_manager.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/change_password_model.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/update_profile_model.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/user_info_model.dart';
@@ -8,7 +9,6 @@ import 'package:road_man_project/features/_09_profile_view/data/repos/profile_re
 
 class ProfileReposImplementation extends ProfileRepos {
   final Dio dio = Dio();
-
   @override
   Future<Either<Failure, void>> updateProfile({
     required String name,
@@ -17,6 +17,12 @@ class ProfileReposImplementation extends ProfileRepos {
   }) async {
     final String updateProfilePath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/update-profile';
+    final userTokens = await SecureStorageHelper.getUserTokens();
+    String? userToken;
+    if (userTokens != null) {
+      userToken = userTokens.token;
+    }
+
     final updateProfileModel = UpdateProfileModel(
       photo: photo,
       name: name,
@@ -26,6 +32,7 @@ class ProfileReposImplementation extends ProfileRepos {
       final response = await dio.put(
         updateProfilePath,
         data: updateProfileModel.toJson(),
+        options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
       if (response.statusCode == 200) {
         return right(null);
@@ -50,6 +57,12 @@ class ProfileReposImplementation extends ProfileRepos {
     required String newPassword,
     required String confirmPassword,
   }) async {
+    final userTokens = await SecureStorageHelper.getUserTokens();
+    String? userToken;
+    if (userTokens != null) {
+      userToken = userTokens.token;
+    }
+
     final String changePasswordPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/change-password';
     final changePasswordModel = ChangePasswordModel(
@@ -61,6 +74,7 @@ class ProfileReposImplementation extends ProfileRepos {
       final response = await dio.post(
         changePasswordPath,
         data: changePasswordModel.toJson(),
+        options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
       if (response.statusCode == 200) {
         return right(null);
@@ -85,6 +99,7 @@ class ProfileReposImplementation extends ProfileRepos {
   }) async {
     final String userInfoPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/GetUserInfomation';
+
     try {
       final response = await dio.get(
         userInfoPath,
