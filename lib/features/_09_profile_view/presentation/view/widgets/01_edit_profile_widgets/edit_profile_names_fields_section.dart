@@ -8,8 +8,10 @@ class EditProfileNamesFieldsSection extends StatefulWidget {
   const EditProfileNamesFieldsSection({
     super.key,
     required this.nameEditingController,
+    required this.email,
   });
   final TextEditingController nameEditingController;
+  final String email;
   @override
   State<EditProfileNamesFieldsSection> createState() =>
       _EditProfileNamesFieldsSectionState();
@@ -46,7 +48,7 @@ class _EditProfileNamesFieldsSectionState
             return null;
           },
         ),
-        EditProfileEmailItem(hintText: 'hintText', email: 'basel@gmail.com'),
+        EditProfileEmailItem(hintText: 'hintText', email: widget.email),
       ],
     );
   }
