@@ -39,7 +39,7 @@ class _SplashView2BodyState extends State<SplashView2Body>
   void initState() {
     super.initState();
 
-    const duration = Duration(seconds: 5); // مدة كل أنيميشن 5 ثواني
+    const duration = Duration(seconds: 1); // مدة كل أنيميشن 5 ثواني
 
     // إنشاء الكنترولرز لكل حرف بنفس المدة والزمن vsync
     _rController = AnimationController(vsync: this, duration: duration);
