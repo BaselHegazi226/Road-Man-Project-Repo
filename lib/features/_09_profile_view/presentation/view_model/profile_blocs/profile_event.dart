@@ -17,3 +17,5 @@ class ChangePasswordEvent extends ProfileEvent {
     required this.confirmPassword,
   });
 }
+
+class LogOutEvent extends ProfileEvent {}

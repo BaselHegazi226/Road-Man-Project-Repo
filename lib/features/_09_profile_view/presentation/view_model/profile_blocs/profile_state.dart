@@ -25,3 +25,15 @@ class ChangePasswordFailureState extends ProfileStates {
 class ChangePasswordLoadingState extends ProfileStates {}
 
 class ChangePasswordSuccessState extends ProfileStates {}
+
+//Sign OUt States
+class LogOutInitial extends ProfileStates {}
+
+class LogOutFailure extends ProfileStates {
+  final String errorMessage;
+  LogOutFailure({required this.errorMessage});
+}
+
+class LogOutLoading extends ProfileStates {}
+
+class LogOutSuccess extends ProfileStates {}

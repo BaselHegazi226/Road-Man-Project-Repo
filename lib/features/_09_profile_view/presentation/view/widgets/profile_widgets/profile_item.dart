@@ -15,7 +15,7 @@ class ProfileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.sizeOf(context).width;
     return InkWell(
-      onTap: profileItemModel.routeName.isNotEmpty ? onTap : null,
+      onTap: profileItemModel.routeName!.isNotEmpty ? onTap : null,
       splashColor: kAppPrimaryBlueColor.withAlpha(15),
       borderRadius: BorderRadius.circular(screenWidth * .02),
       child: ListTile(

@@ -15,4 +15,5 @@ abstract class ProfileRepos {
   Future<Either<Failure, Map<String, dynamic>>> getUserInfo({
     required String userToken,
   });
+  Future<Either<Failure, void>> logOut();
 }

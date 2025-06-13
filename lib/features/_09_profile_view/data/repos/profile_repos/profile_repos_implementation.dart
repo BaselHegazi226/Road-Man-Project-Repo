@@ -123,4 +123,42 @@ class ProfileReposImplementation extends ProfileRepos {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    final String signOutPath =
+        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/sign-out';
+
+    try {
+      final userTokens = await SecureStorageHelper.getUserTokens();
+
+      if (userTokens == null || userTokens.token.isEmpty) {
+        return left(ServerFailure(errorMessage: 'Yor are not sign in!'));
+      }
+
+      final response = await dio.post(
+        signOutPath,
+        options: Options(
+          headers: {'Authorization': 'Bearer ${userTokens.token}'},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        // ✅ امسح التوكن بعد تسجيل الخروج الناجح
+        await SecureStorageHelper.clearTokens();
+        return right(null);
+      } else {
+        return left(
+          ServerFailure.fromResponse(
+            statusCode: response.statusCode!,
+            responseData: response.data,
+          ),
+        );
+      }
+    } on DioException catch (dioException) {
+      return left(ServerFailure.fromDioException(dioException));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
 }
