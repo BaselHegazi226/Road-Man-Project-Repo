@@ -30,9 +30,12 @@ import 'routes.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
-    initialLocation: Routes.questionnaireViewId,
+    initialLocation: Routes.splashView2Id,
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView2()),
+      GoRoute(
+        path: Routes.splashView2Id,
+        builder: (context, state) => const SplashView2(),
+      ),
       GoRoute(
         path: Routes.onBoardingPageViewId,
         builder: (context, state) => const OnboardingPageView(),

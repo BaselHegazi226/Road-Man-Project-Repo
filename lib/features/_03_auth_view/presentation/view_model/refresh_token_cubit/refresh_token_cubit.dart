@@ -5,37 +5,54 @@ import '../../../../../core/tokens_manager/tokens_manager.dart';
 import '../../../data/repos/auth_repo.dart';
 
 class RefreshTokenCubit extends Cubit<RefreshTokenStates> {
-  final AuthRepo authRepo; // إضافة المتغير الخاص بالـ AuthRepo
+  // تعريف متغير للـ AuthRepo لتنفيذ طلب تحديث التوكن
+  final AuthRepo authRepo;
 
-  // Constructor with dependency injection
+  // الكونستركتور مع تمرير الـ AuthRepo عن طريق الحقن (DI)
   RefreshTokenCubit({required this.authRepo}) : super(RefreshTokenInitial());
 
-  // الدالة التي تقوم بتحديث التوكن
+  // دالة مسؤولة عن تحديث التوكن في حال انتهت صلاحيته
   Future<void> refreshTokenCubitFun() async {
-    emit(RefreshTokenLoading()); // تغير الحالة إلى تحميل
+    // إطلاق حالة تحميل أثناء عملية التحقق أو التحديث
+    emit(RefreshTokenLoading());
 
+    // الحصول على التوكنات من التخزين الآمن (حتى لو كانت منتهية)
     final userTokens = await SecureStorageHelper.getUserTokens();
+
+    // إذا لم يتم العثور على توكنات، يتم إطلاق حالة فشل
     if (userTokens == null || userTokens.token.isEmpty) {
       emit(RefreshTokenFailure(errorMessage: 'No tokens found.'));
       return;
     }
 
-    final result = await authRepo.refreshToken(
-      accessToken: userTokens.token,
-      refreshToken: userTokens.refreshToken,
-    );
+    // الحصول على تاريخ انتهاء صلاحية التوكن من التخزين
+    final expirationDate = await SecureStorageHelper.getUserTokenExpiration();
 
-    await result.fold(
-      (failure) async {
-        emit(
-          RefreshTokenFailure(
-            errorMessage: failure.errorMessage ?? 'Bloc Error',
-          ),
-        ); // في حالة الفشل
-      },
-      (userToken) async {
-        emit(RefreshTokenSuccess(userToken: userToken)); // في حالة النجاح
-      },
-    );
+    // التحقق إذا كانت التوكن منتهية الصلاحية
+    if (DateTime.now().isAfter(expirationDate)) {
+      // إذا كانت منتهية، نقوم بمحاولة تحديثها عبر الريبو
+      final result = await authRepo.refreshToken(
+        accessToken: userTokens.token,
+        refreshToken: userTokens.refreshToken,
+      );
+
+      // معالجة نتيجة التحديث: إما فشل أو نجاح
+      await result.fold(
+        // في حال الفشل: إطلاق حالة فشل مع الرسالة
+        (failure) async {
+          emit(
+            RefreshTokenFailure(
+              errorMessage: failure.errorMessage ?? 'Bloc Error',
+            ),
+          );
+        },
+        // في حال النجاح: إطلاق حالة نجاح مع التوكن الجديد
+        (successUserToken) async {
+          emit(RefreshTokenSuccess(userToken: successUserToken));
+        },
+      );
+    } else {
+      emit(RefreshTokenSuccess(userToken: userTokens));
+    }
   }
 }

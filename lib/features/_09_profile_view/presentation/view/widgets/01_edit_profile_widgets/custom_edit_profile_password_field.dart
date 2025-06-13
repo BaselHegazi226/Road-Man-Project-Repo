@@ -24,7 +24,7 @@ class CustomEditProfilePasswordField extends StatelessWidget {
     super.key,
     required this.textEditingController,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false,
+    this.obscureText = true,
     this.onChanged,
     this.suffixIcon,
     this.prefixIcon = Icons.key_outlined,
@@ -75,6 +75,7 @@ class CustomEditProfilePasswordField extends StatelessWidget {
         textInputAction: TextInputAction.next,
         textAlign: TextAlign.start,
         obscuringCharacter: '●',
+        obscureText: obscureText,
         textAlignVertical: TextAlignVertical.center,
         style: ConstFunctions.editProfileTextStyle(
           context,

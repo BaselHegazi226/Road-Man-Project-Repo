@@ -8,6 +8,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
   ProfileBloc({required this.profileRepos}) : super(ProfileInitial()) {
     on<UpdateProfileEvent>(_onUpdateProfileEvent);
     on<ChangePasswordEvent>(_onChangePasswordEvent);
+    on<LogOutEvent>(_onLogOutEvent);
   }
 
   Future<void> _onUpdateProfileEvent(
@@ -54,6 +55,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
       },
       (success) async {
         return emit(ChangePasswordSuccessState());
+      },
+    );
+  }
+
+  Future<void> _onLogOutEvent(
+    LogOutEvent event,
+    Emitter<ProfileStates> emit,
+  ) async {
+    emit(LogOutLoading());
+    final result = await profileRepos.logOut();
+    await result.fold(
+      (error) async {
+        return emit(
+          LogOutFailure(errorMessage: error.errorMessage ?? 'UnKnown error'),
+        );
+      },
+      (success) async {
+        return emit(LogOutSuccess());
       },
     );
   }

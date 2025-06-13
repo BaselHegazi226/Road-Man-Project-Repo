@@ -92,7 +92,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserTokenModel>> signIn({
+  Future<Either<Failure, UserTokensModel>> signIn({
     required String email,
     required String password,
   }) async {
@@ -104,7 +104,7 @@ class AuthRepoImplement implements AuthRepo {
       if (response.statusCode == 200) {
         final data =
             response.data is String ? jsonDecode(response.data) : response.data;
-        final UserTokenModel userTokenModel = UserTokenModel.fromJson(data);
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
         await SecureStorageHelper.saveUserTokens(userTokenModel);
         return right(userTokenModel);
       } else {
@@ -245,7 +245,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signInWithGoogleToken({
+  Future<Either<Failure, UserTokensModel>> signInWithGoogleToken({
     required String token,
   }) async {
     final String signInWithGoogleTokenPath =
@@ -257,7 +257,10 @@ class AuthRepoImplement implements AuthRepo {
         data: signInWithGoogleTokenModel.toJson(),
       );
       if (response.statusCode == 200) {
-        return right(null);
+        final data = response.data;
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
+        await SecureStorageHelper.saveUserTokens(userTokenModel);
+        return right(userTokenModel);
       } else {
         return left(
           ServerFailure.fromResponse(
@@ -321,50 +324,13 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signOut() async {
-    final String signOutPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/sign-out';
-
-    try {
-      final userTokens = await SecureStorageHelper.getUserTokens();
-
-      if (userTokens == null || userTokens.token.isEmpty) {
-        return left(ServerFailure(errorMessage: 'Token not found.'));
-      }
-
-      final response = await dio.post(
-        signOutPath,
-        options: Options(
-          headers: {'Authorization': 'Bearer ${userTokens.token}'},
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        // ✅ امسح التوكن بعد تسجيل الخروج الناجح
-        await SecureStorageHelper.clearTokens();
-        return right(null);
-      } else {
-        return left(
-          ServerFailure.fromResponse(
-            statusCode: response.statusCode!,
-            responseData: response.data,
-          ),
-        );
-      }
-    } on DioException catch (dioException) {
-      return left(ServerFailure.fromDioException(dioException));
-    } catch (e) {
-      return left(ServerFailure(errorMessage: e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, UserTokenModel>> refreshToken({
+  Future<Either<Failure, UserTokensModel>> refreshToken({
     required String accessToken,
     required String refreshToken,
   }) async {
     final refreshTokenPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/refresh-token';
+
     final userTokens = await SecureStorageHelper.getUserTokens();
 
     try {
@@ -372,35 +338,42 @@ class AuthRepoImplement implements AuthRepo {
       if (userTokens == null || userTokens.token.isEmpty) {
         return left(ServerFailure(errorMessage: 'Token not found.'));
       }
-      // تحضير التوكنات القديمة لإرسالها إلى السيرفر
-      final refreshTokenModel = RefreshTokenModel(
-        accessToken: userTokens.token,
-        refreshToken: userTokens.refreshToken,
-      );
 
-      // إرسال طلب التحديث للسيرفر
-      final response = await dio.post(
-        refreshTokenPath,
-        data: refreshTokenModel.toJson(),
-      );
-
-      // التعامل مع الاستجابة
-      if (response.statusCode == 200) {
-        // استخراج التوكنات الجديدة من الاستجابة
-        final newTokenModel = UserTokenModel.fromJson(response.data);
-
-        // تخزين التوكنات الجديدة في SecureStorageHelper
-        await SecureStorageHelper.saveUserTokens(newTokenModel);
-
-        // إرجاع التوكنات الجديدة
-        return right(newTokenModel);
-      } else {
-        return left(
-          ServerFailure.fromResponse(
-            statusCode: response.statusCode,
-            responseData: response.data,
-          ),
+      // تحقق من صلاحية التوكن
+      final expirationDate = await SecureStorageHelper.getUserTokenExpiration();
+      if (DateTime.now().isAfter(expirationDate)) {
+        // التوكن انتهت صلاحيتها، نحتاج لتحديثها
+        final refreshTokenModel = RefreshTokenModel(
+          accessToken: userTokens.token,
+          refreshToken: userTokens.refreshToken,
         );
+
+        // إرسال طلب التحديث للسيرفر
+        final response = await dio.post(
+          refreshTokenPath,
+          data: refreshTokenModel.toJson(),
+        );
+
+        // التعامل مع الاستجابة
+        if (response.statusCode == 200) {
+          // استخراج التوكنات الجديدة من الاستجابة
+          final newTokenModel = UserTokensModel.fromJson(response.data);
+
+          // تخزين التوكنات الجديدة في SecureStorageHelper
+          await SecureStorageHelper.saveUserTokens(newTokenModel);
+
+          // إرجاع التوكنات الجديدة
+          return right(newTokenModel);
+        } else {
+          return left(
+            ServerFailure.fromResponse(
+              statusCode: response.statusCode,
+              responseData: response.data,
+            ),
+          );
+        }
+      } else {
+        return right(userTokens); // التوكن ما زالت صالحة
       }
     } on DioException catch (dioException) {
       return left(ServerFailure.fromDioException(dioException));

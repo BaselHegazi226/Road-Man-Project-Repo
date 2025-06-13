@@ -15,3 +15,10 @@ class GetUserInfoSuccessState extends ProfileStates {
   final UserInfoModel userInfoModel;
   GetUserInfoSuccessState({required this.userInfoModel});
 }
+
+//local states
+
+class GetUserInfoLocalSuccessState extends ProfileStates {
+  final UserInfoModel userInfoModel;
+  GetUserInfoLocalSuccessState({required this.userInfoModel});
+}

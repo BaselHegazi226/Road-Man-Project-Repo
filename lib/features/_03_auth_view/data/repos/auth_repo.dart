@@ -8,11 +8,11 @@ abstract class AuthRepo {
     required String email,
     required String password,
   });
-  Future<Either<Failure, UserTokenModel>> signIn({
+  Future<Either<Failure, UserTokensModel>> signIn({
     required String email,
     required String password,
   });
-  Future<Either<Failure, void>> signOut();
+
   Future<Either<Failure, void>> changePassword({
     required String oldPassword,
     required String newPassword,
@@ -38,8 +38,10 @@ abstract class AuthRepo {
     required String otp,
   });
   Future<Either<Failure, String>> signInWithGoogle();
-  Future<Either<Failure, void>> signInWithGoogleToken({required String token});
-  Future<Either<Failure, UserTokenModel>> refreshToken({
+  Future<Either<Failure, UserTokensModel>> signInWithGoogleToken({
+    required String token,
+  });
+  Future<Either<Failure, UserTokensModel>> refreshToken({
     required String accessToken,
     required String refreshToken,
   });

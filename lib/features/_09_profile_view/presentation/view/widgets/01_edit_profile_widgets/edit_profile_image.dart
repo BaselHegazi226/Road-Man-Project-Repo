@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // استيراد الحزمة
 import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/core/utilities/base_text_styles.dart';
+import 'package:road_man_project/core/utilities/show_snack_bar.dart';
 
 import '../../../../../../generated/assets.dart';
 
-class EditProfileImage extends StatelessWidget {
+class EditProfileImage extends StatefulWidget {
   const EditProfileImage({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
   });
+
   final double screenHeight;
   final double screenWidth;
 
-  // دالة لاختيار الصورة
-  Future<void> _pickImage(BuildContext context) async {
-    final ImagePicker picker = ImagePicker();
-    // اختيار الصورة من المعرض
+  @override
+  State<EditProfileImage> createState() => _EditProfileImageState();
+}
+
+class _EditProfileImageState extends State<EditProfileImage> {
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
+    if (!mounted) return; // ✅ تأكد إن الـ widget لسه موجود
+
     if (image == null) {
-      // هنا يمكنك التعامل مع الصورة التي تم اختيارها (مثل عرضها أو حفظها)
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Failed to upload image',
-            style: AfacadTextStyles.textStyle12W500Black(
-              context,
-            ).copyWith(color: Colors.red),
-          ),
-        ),
+      print('❌ Failed to upload image');
+      showSafeSnackBar(
+        context,
+        'Failed to upload Image',
+        kAppPrimaryWrongColor,
       );
     } else {
-      print('success upload image');
+      print('✅ Success upload image');
+      showSafeSnackBar(context, 'Success Upload Image', kAppPrimaryBlueColor);
     }
   }
 
@@ -45,23 +47,23 @@ class EditProfileImage extends StatelessWidget {
         Image.asset(
           Assets.profileProfileUserImage,
           fit: BoxFit.contain,
-          height: screenWidth * .4,
-          width: screenWidth * .4,
+          height: widget.screenWidth * .4,
+          width: widget.screenWidth * .4,
         ),
         Positioned(
           bottom: 0,
-          right: screenWidth * .01,
+          right: widget.screenWidth * .01,
           child: Container(
-            padding: EdgeInsets.all(screenWidth * .01),
+            padding: EdgeInsets.all(widget.screenWidth * .01),
             decoration: const BoxDecoration(
               color: kFilledTextFormFieldColor,
               shape: BoxShape.circle,
             ),
             child: GestureDetector(
-              onTap: () => _pickImage(context), // استدعاء الدالة لاختيار الصورة
+              onTap: () => _pickImage(),
               child: Icon(
                 Icons.camera_alt_outlined,
-                size: screenWidth * .05,
+                size: widget.screenWidth * .05,
                 color: kAppPrimaryBlackColor,
               ),
             ),

@@ -12,5 +12,8 @@ abstract class ProfileRepos {
     required String newPassword,
     required String confirmPassword,
   });
-  Future<Either<Failure, Map<String, dynamic>>> getUserInfo();
+  Future<Either<Failure, Map<String, dynamic>>> getUserInfo({
+    required String userToken,
+  });
+  Future<Either<Failure, void>> logOut();
 }
