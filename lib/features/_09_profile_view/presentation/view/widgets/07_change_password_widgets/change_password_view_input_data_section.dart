@@ -48,14 +48,18 @@ class _ChangePasswordViewInputDataSectionState
         BlocConsumer<ProfileBloc, ProfileStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
-              showSnackBar(
+              showSafeSnackBar(
                 context,
                 'Password Successfully Updated',
                 kAppPrimaryBlueColor,
               );
               clearFun();
             } else if (state is ChangePasswordFailureState) {
-              showSnackBar(context, state.errorMessage, kAppPrimaryBlueColor);
+              showSafeSnackBar(
+                context,
+                state.errorMessage,
+                kAppPrimaryBlueColor,
+              );
             }
             setState(() {
               buttonIsLoading = state is ChangePasswordLoadingState;

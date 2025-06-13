@@ -44,7 +44,11 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
       if (userTokenModel != null) {
         await cubit.getUserInfo(userToken: userTokenModel.token);
       } else {
-        showSnackBar(context, "Session is expired...", kAppPrimaryWrongColor);
+        showSafeSnackBar(
+          context,
+          "Session is expired...",
+          kAppPrimaryWrongColor,
+        );
       }
     }
   }
@@ -60,7 +64,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
           BlocConsumer<GetUserInfoCubit, ProfileStates>(
             listener: (context, state) {
               if (state is GetUserInfoFailureState) {
-                showSnackBar(
+                showSafeSnackBar(
                   context,
                   state.errorMessage,
                   kAppPrimaryWrongColor,

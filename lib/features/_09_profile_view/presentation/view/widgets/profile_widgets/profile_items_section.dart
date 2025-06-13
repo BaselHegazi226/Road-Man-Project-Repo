@@ -38,7 +38,7 @@ class _ProfileItemsSectionState extends State<ProfileItemsSection> {
               if (state is LogOutSuccess) {
                 GoRouter.of(context).go(Routes.signInViewId);
               } else if (state is LogOutFailure) {
-                showSnackBar(
+                showSafeSnackBar(
                   context,
                   state.errorMessage,
                   kAppPrimaryWrongColor,

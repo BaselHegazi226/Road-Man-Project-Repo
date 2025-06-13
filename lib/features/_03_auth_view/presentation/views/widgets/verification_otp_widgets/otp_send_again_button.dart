@@ -34,13 +34,13 @@ class OtpSendAgainButton extends StatelessWidget {
           setLoading(false);
 
           if (state is ForgetPasswordSuccess) {
-            showSnackBar(
+            showSafeSnackBar(
               context,
               'Please check your inbox',
               kAppPrimaryBlueColor.withAlpha(126),
             );
           } else if (state is ForgetPasswordFailure) {
-            showSnackBar(
+            showSafeSnackBar(
               context,
               'Send again error: ${state.errorMessage}',
               kAppPrimaryWrongColor.withAlpha(126),

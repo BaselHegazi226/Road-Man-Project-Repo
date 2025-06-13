@@ -28,14 +28,14 @@ class VerifyEmailSendAgainButton extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthStates>(
       listener: (context, state) {
         if (state is SendAgainVerificationSuccess) {
-          showSnackBar(
+          showSafeSnackBar(
             context,
             'Check your inbox!',
             kAppPrimaryBlueColor.withAlpha(125),
           );
         }
         if (state is SendAgainVerificationFailure) {
-          showSnackBar(
+          showSafeSnackBar(
             context,
             state.errorMessage,
             kAppPrimaryWrongColor.withAlpha(125),

@@ -118,7 +118,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   Future<UserInfoModel> _handleUpdateProfileSuccessState(
     BuildContext context,
   ) async {
-    showSnackBar(context, 'Update Profile Success', kAppPrimaryBlueColor);
+    showSafeSnackBar(context, 'Update Profile Success', kAppPrimaryBlueColor);
 
     final updatedUser = userInfoModel!.copyWith(
       name: nameEditingController.text.trim(),
@@ -136,7 +136,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     BuildContext context,
     UpdateProfileFailureState state,
   ) async {
-    showSnackBar(context, state.errorMessage, kAppPrimaryWrongColor);
+    showSafeSnackBar(context, state.errorMessage, kAppPrimaryWrongColor);
 
     if (userInfoModel != null) {
       await UserInfoStorageHelper.saveUserInfo(userInfoModel!);
