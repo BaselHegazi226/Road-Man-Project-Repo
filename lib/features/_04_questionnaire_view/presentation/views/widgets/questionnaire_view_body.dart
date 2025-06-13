@@ -434,6 +434,7 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
                 ),
               ),
 
+
               NavigationButtons(
                 currentPage: _currentPage,
                 totalPages: _pageOrder.length,
