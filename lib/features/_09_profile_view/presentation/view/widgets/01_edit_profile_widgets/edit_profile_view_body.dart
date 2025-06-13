@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/core/tokens_manager/tokens_manager.dart';
 import 'package:road_man_project/core/tokens_manager/user_info_manager.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
@@ -12,6 +11,7 @@ import 'package:road_man_project/features/_09_profile_view/data/models/update_pr
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_bloc.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_event.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_state.dart';
+import 'package:road_man_project/generated/assets.dart';
 
 import 'change_password_button.dart';
 import 'edit_profile_image.dart';
@@ -28,7 +28,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController nameEditingController = TextEditingController();
   bool buttonIsLoading = false;
   UserInfoModel? userInfoModel;
-  String? userToken;
 
   @override
   void initState() {
@@ -38,15 +37,12 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
 
   Future<void> _loadUserData() async {
     final userInfo = await UserInfoStorageHelper.getUserInfo();
-    final userTokens = await SecureStorageHelper.getUserTokens();
+
     if (userInfo != null) {
       setState(() {
         userInfoModel = userInfo;
         nameEditingController.text = userInfo.name ?? '';
       });
-    }
-    if (userTokens != null) {
-      userToken = userTokens.token;
     }
   }
 
@@ -63,26 +59,67 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
       child: Column(
         spacing: screenHeight * .03,
         children: [
+          /// ✅ صورة الملف الشخصي وتحديثها مباشرة على السيرفر + محلياً
           EditProfileImage(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
+            image: userInfoModel?.photo ?? Assets.profileProfileUserImage,
+            onImagePicked: (String imagePath) {
+              if (userInfoModel == null) return;
+
+              // تحديث على السيرفر
+              context.read<ProfileBloc>().add(
+                UpdateProfileEvent(
+                  photo: imagePath,
+                  name: userInfoModel!.name ?? '',
+                  dateOfBirth: userInfoModel!.dateOfBirth ?? '',
+                ),
+              );
+
+              // تحديث محلي
+              final updatedUser = userInfoModel!.copyWith(photo: imagePath);
+              UserInfoStorageHelper.saveUserInfo(updatedUser);
+              setState(() {
+                userInfoModel = updatedUser;
+              });
+            },
           ),
+
           if (userInfoModel != null)
             EditProfileNamesFieldsSection(
               nameEditingController: nameEditingController,
               email: userInfoModel!.email ?? '',
             ),
+
           ChangePasswordButton(
             onPressed: () {
               GoRouter.of(context).push(Routes.changePasswordViewId);
             },
           ),
+
+          /// ✅ زر حفظ التحديثات النصية
           BlocConsumer<ProfileBloc, ProfileStates>(
             listener: (context, state) async {
               if (state is UpdateProfileFailureState) {
-                await _handleUpdateProfileFailureState(context, state);
+                showSafeSnackBar(
+                  context,
+                  state.errorMessage,
+                  kAppPrimaryWrongColor,
+                );
               } else if (state is UpdateProfileSuccessState) {
-                await _handleUpdateProfileSuccessState(context);
+                final updatedUser = userInfoModel!.copyWith(
+                  name: nameEditingController.text.trim(),
+                );
+                await UserInfoStorageHelper.saveUserInfo(updatedUser);
+                showSafeSnackBar(
+                  context,
+                  'Update Profile Success',
+                  kAppPrimaryBlueColor,
+                );
+
+                setState(() {
+                  userInfoModel = updatedUser;
+                });
               }
 
               setState(() {
@@ -113,33 +150,5 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         ],
       ),
     );
-  }
-
-  Future<UserInfoModel> _handleUpdateProfileSuccessState(
-    BuildContext context,
-  ) async {
-    showSafeSnackBar(context, 'Update Profile Success', kAppPrimaryBlueColor);
-
-    final updatedUser = userInfoModel!.copyWith(
-      name: nameEditingController.text.trim(),
-    );
-
-    await UserInfoStorageHelper.saveUserInfo(updatedUser);
-
-    setState(() {
-      userInfoModel = updatedUser;
-    });
-    return userInfoModel!;
-  }
-
-  Future<void> _handleUpdateProfileFailureState(
-    BuildContext context,
-    UpdateProfileFailureState state,
-  ) async {
-    showSafeSnackBar(context, state.errorMessage, kAppPrimaryWrongColor);
-
-    if (userInfoModel != null) {
-      await UserInfoStorageHelper.saveUserInfo(userInfoModel!);
-    }
   }
 }

@@ -1,41 +1,61 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // استيراد الحزمة
+import 'package:image_picker/image_picker.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/show_snack_bar.dart';
-
-import '../../../../../../generated/assets.dart';
 
 class EditProfileImage extends StatefulWidget {
   const EditProfileImage({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
+    required this.image,
+    this.onImagePicked,
   });
 
   final double screenHeight;
   final double screenWidth;
+  final String image;
+
+  final void Function(String imagePath)? onImagePicked;
 
   @override
   State<EditProfileImage> createState() => _EditProfileImageState();
 }
 
 class _EditProfileImageState extends State<EditProfileImage> {
+  late String image;
+
+  @override
+  void initState() {
+    super.initState();
+    image = widget.image;
+  }
+
   Future<void> _pickImage() async {
     final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedImage = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
 
-    if (!mounted) return; // ✅ تأكد إن الـ widget لسه موجود
+    if (!mounted) return;
 
-    if (image == null) {
-      print('❌ Failed to upload image');
+    if (pickedImage == null) {
       showSafeSnackBar(
         context,
-        'Failed to upload Image',
+        '❌ Failed to upload Image',
         kAppPrimaryWrongColor,
       );
     } else {
-      print('✅ Success upload image');
-      showSafeSnackBar(context, 'Success Upload Image', kAppPrimaryBlueColor);
+      setState(() {
+        image = pickedImage.path;
+      });
+      print('image path : $image');
+      // ✅ نرجع الصورة للأب
+      widget.onImagePicked?.call(pickedImage.path);
+
+      showSafeSnackBar(context, '✅ Image Uploaded', kAppPrimaryBlueColor);
     }
   }
 
@@ -44,12 +64,19 @@ class _EditProfileImageState extends State<EditProfileImage> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Image.asset(
-          Assets.profileProfileUserImage,
-          fit: BoxFit.contain,
-          height: widget.screenWidth * .4,
-          width: widget.screenWidth * .4,
-        ),
+        image.startsWith('/data/')
+            ? Image.file(
+              File(image),
+              fit: BoxFit.contain,
+              height: widget.screenWidth * .4,
+              width: widget.screenWidth * .4,
+            )
+            : Image.asset(
+              image,
+              fit: BoxFit.contain,
+              height: widget.screenWidth * .4,
+              width: widget.screenWidth * .4,
+            ),
         Positioned(
           bottom: 0,
           right: widget.screenWidth * .01,
@@ -60,7 +87,7 @@ class _EditProfileImageState extends State<EditProfileImage> {
               shape: BoxShape.circle,
             ),
             child: GestureDetector(
-              onTap: () => _pickImage(),
+              onTap: _pickImage,
               child: Icon(
                 Icons.camera_alt_outlined,
                 size: widget.screenWidth * .05,
