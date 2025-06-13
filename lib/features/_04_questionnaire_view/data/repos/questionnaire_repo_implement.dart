@@ -71,13 +71,17 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
   }) async {
     final String path = '$baseUrl/Recommendation';
 
+
     try {
       final Map<String, dynamic> requestBody = {
         'userAnswers': responses.map((r) => r.toJson()).toList(),
       };
 
+      log('answwers ${requestBody.toString()}');
+
       final response = await dio.post(
         path,
+        options: Options(headers: {'Authorization': "Bearer $token"}),
         data: requestBody,
       );
 
@@ -90,7 +94,8 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
             errorMessage: 'Failed to submit questionnaire.'));
       }
     } on DioException catch (dioException) {
-      print('expppppp ${dioException.error.toString()}');
+      print('expppppp ${dioException.message}');
+      dioException.stackTrace;
       return left(ServerFailure(errorMessage: dioException.error.toString()));
     } catch (e, s) {
       print('errooorrr ${e.toString()}');

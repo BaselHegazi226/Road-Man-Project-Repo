@@ -3,7 +3,7 @@ import 'package:road_man_project/features/_09_profile_view/data/models/update_pr
 import 'package:road_man_project/features/_09_profile_view/data/repos/profile_repos/profile_repos.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_state.dart';
 
-import '../../../../../core/tokens_manager/user_info_manager.dart';
+import '../../../../../core/manager/user_info_manager.dart';
 import 'get_user_info_state.dart';
 
 class GetUserInfoCubit extends Cubit<ProfileStates> {

@@ -12,7 +12,7 @@ import 'package:road_man_project/features/_03_auth_view/data/model/user_token_mo
 import 'package:road_man_project/features/_03_auth_view/data/model/verification_otp_model.dart';
 import 'package:road_man_project/features/_03_auth_view/data/repos/auth_repo.dart';
 
-import '../../../../core/tokens_manager/tokens_manager.dart';
+import '../../../../core/manager/tokens_manager.dart';
 import '../model/refresh_token_model.dart';
 import '../model/reset_password_model.dart';
 import '../model/sign_up_model.dart';

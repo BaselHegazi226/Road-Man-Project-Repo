@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/view_model/refresh_token_cubit/refresh_token_state.dart';
 
-import '../../../../../core/tokens_manager/tokens_manager.dart';
+import '../../../../../core/manager/tokens_manager.dart';
 import '../../../data/repos/auth_repo.dart';
 
 class RefreshTokenCubit extends Cubit<RefreshTokenStates> {

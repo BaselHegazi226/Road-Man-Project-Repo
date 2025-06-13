@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
-import 'package:road_man_project/core/tokens_manager/user_info_manager.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
@@ -13,6 +12,7 @@ import 'package:road_man_project/features/_09_profile_view/presentation/view_mod
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_state.dart';
 import 'package:road_man_project/generated/assets.dart';
 
+import '../../../../../../core/manager/user_info_manager.dart';
 import 'change_password_button.dart';
 import 'edit_profile_image.dart';
 import 'edit_profile_names_fields_section.dart';

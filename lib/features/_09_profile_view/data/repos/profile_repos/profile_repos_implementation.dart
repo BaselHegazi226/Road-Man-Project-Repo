@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:road_man_project/core/error/failure.dart';
-import 'package:road_man_project/core/tokens_manager/tokens_manager.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/change_password_model.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/update_profile_model.dart';
 import 'package:road_man_project/features/_09_profile_view/data/models/update_profile_model/user_info_model.dart';
 import 'package:road_man_project/features/_09_profile_view/data/repos/profile_repos/profile_repos.dart';
+
+import '../../../../../core/manager/tokens_manager.dart';
 
 class ProfileReposImplementation extends ProfileRepos {
   final Dio dio = Dio();

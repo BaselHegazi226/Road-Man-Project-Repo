@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/data/repos/questionnaire_repo.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/view_model/questionnaire_cubit/questionnaire_state.dart';
 
+import '../../../../../core/manager/tokens_manager.dart';
 import '../../../data/model/questionnaire_response_model.dart';
 
 class QuestionnaireCubit extends Cubit<QuestionnaireState> {
@@ -61,16 +62,18 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
 
   Future<void> submitQuestionnaire() async {
     emit(SubmitQuestionnaireLoading());
-    final result = await questionnaireRepo.submitQuestionnaire(
-      responses: userResponses,
-      token: ''
-    );
-
-    result.fold(
-          (failure) => emit(SubmitQuestionnaireFailure(
-          errorMessage: failure.errorMessage ?? 'Failed to submit questionnaire')),
-          (_) => emit(SubmitQuestionnaireSuccess()),
-    );
+    final userTokens = await SecureStorageHelper.getUserTokens();
+    if(userTokens != null){
+      final result = await questionnaireRepo.submitQuestionnaire(
+          responses: userResponses,
+          token: userTokens.token
+      );
+      result.fold(
+            (failure) => emit(SubmitQuestionnaireFailure(
+            errorMessage: failure.errorMessage ?? 'Failed to submit questionnaire')),
+            (_) => emit(SubmitQuestionnaireSuccess()),
+      );
+    }
   }
 
   // Helper method to add multiple responses (for checkbox questions)
