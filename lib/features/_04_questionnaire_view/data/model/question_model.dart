@@ -6,6 +6,7 @@ class QuestionModel {
   final int sortOrder;
   final int pageNumber;
   final String questionForm;
+  final bool lastPage;
   final List<AnswerModel> answers;
 
   QuestionModel({
@@ -15,6 +16,7 @@ class QuestionModel {
     required this.pageNumber,
     required this.questionForm,
     required this.answers,
+    required this.lastPage
   });
 
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class QuestionModel {
       sortOrder: json['sortOrder'],
       pageNumber: json['pageNumber'],
       questionForm: json['questionForm'],
+      lastPage: json['lastPage'],
       answers: (json['answers'] as List)
           .map((answer) => AnswerModel.fromJson(answer))
           .toList(),
@@ -37,6 +40,7 @@ class QuestionModel {
       'sortOrder': sortOrder,
       'pageNumber': pageNumber,
       'questionForm': questionForm,
+      'lastPage': lastPage,
       'answers': answers.map((answer) => answer.toJson()).toList(),
     };
   }

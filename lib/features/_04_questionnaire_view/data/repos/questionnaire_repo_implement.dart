@@ -23,6 +23,8 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
 
+        log(data.toString());
+
         final questions = data
             .map((questionJson) => QuestionModel.fromJson(questionJson))
             .toList();
@@ -63,43 +65,23 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
   }
 
   @override
-  Future<Either<Failure, int>> submitAnswer({
-    required int questionId,
-    required int answerId,
-  }) async {
-    final String path = '$baseUrl/Questionnaire/submit-answer';
-
-    try {
-      final response = await dio.post(path, data: {
-        'questionId': questionId,
-        'answerId': answerId,
-      });
-
-      if (response.statusCode == 200) {
-        // Assuming the API returns the next page number
-        final int nextPageNumber = response.data['nextPageNumber'];
-        return right(nextPageNumber);
-      } else {
-        return left(ServerFailure(errorMessage: 'Failed to submit answer.'));
-      }
-    } on DioException catch (dioException) {
-      return left(ServerFailure(errorMessage: dioException.error.toString()));
-    } catch (e) {
-      return left(ServerFailure(errorMessage: e.toString()));
-    }
-  }
-
-  @override
   Future<Either<Failure, void>> submitQuestionnaire({
     required List<QuestionnaireResponseModel> responses,
+    required String token
   }) async {
-    final String path = '$baseUrl/Questionnaire/submit';
+    final String path = '$baseUrl/Recommendation';
 
     try {
+      final Map<String, dynamic> requestBody = {
+        'userAnswers': responses.map((r) => r.toJson()).toList(),
+      };
+
       final response = await dio.post(
         path,
-        data: responses.map((r) => r.toJson()).toList(),
+        data: requestBody,
       );
+
+      log("Response data: ${response.data}");
 
       if (response.statusCode == 200) {
         return right(null);
@@ -108,8 +90,11 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
             errorMessage: 'Failed to submit questionnaire.'));
       }
     } on DioException catch (dioException) {
+      print('expppppp ${dioException.error.toString()}');
       return left(ServerFailure(errorMessage: dioException.error.toString()));
-    } catch (e) {
+    } catch (e, s) {
+      print('errooorrr ${e.toString()}');
+      print(s);
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }

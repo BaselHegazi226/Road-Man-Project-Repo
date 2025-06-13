@@ -8,6 +8,7 @@ class NavigationButtons extends StatelessWidget {
   final int totalPages;
   final VoidCallback onPrevious;
   final VoidCallback onNext;
+  final bool isFinish;
 
   const NavigationButtons({
     super.key,
@@ -15,6 +16,7 @@ class NavigationButtons extends StatelessWidget {
     required this.totalPages,
     required this.onPrevious,
     required this.onNext,
+    this.isFinish = false
   });
 
   @override
@@ -53,7 +55,7 @@ class NavigationButtons extends StatelessWidget {
                 spacing: screenWidth * .01,
                 children: [
                   Text(
-                    'Next',
+                    !isFinish ? 'Next' : 'Finish',
                     style: AfacadTextStyles.textStyle16W600HBlue(context),
                   ),
                   const Icon(Icons.arrow_forward_ios, size: 16),

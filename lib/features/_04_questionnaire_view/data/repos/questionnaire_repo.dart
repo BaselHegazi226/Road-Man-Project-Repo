@@ -11,12 +11,8 @@ abstract class QuestionnaireRepo {
     required int pageNumber,
   });
 
-  Future<Either<Failure, int>> submitAnswer({
-    required int questionId,
-    required int answerId,
-  });
-
   Future<Either<Failure, void>> submitQuestionnaire({
     required List<QuestionnaireResponseModel> responses,
+    required String token
   });
 }

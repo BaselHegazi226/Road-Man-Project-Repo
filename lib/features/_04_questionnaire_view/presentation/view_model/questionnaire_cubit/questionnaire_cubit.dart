@@ -1,4 +1,3 @@
-// questionnaire_cubit.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/data/repos/questionnaire_repo.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/view_model/questionnaire_cubit/questionnaire_state.dart';
@@ -38,26 +37,11 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     );
   }
 
-  Future<void> submitAnswer({
+  Future<void> submitAnswers({
     required int questionId,
     required int answerId,
   }) async {
     emit(SubmitAnswerLoading());
-
-    // Save the response
-    _addResponse(questionId, answerId);
-
-    final result = await questionnaireRepo.submitAnswer(
-      questionId: questionId,
-      answerId: answerId,
-    );
-
-    result.fold(
-          (failure) => emit(SubmitAnswerFailure(
-          errorMessage: failure.errorMessage ?? 'Failed to submit answer')),
-          (nextPageNumber) => emit(SubmitAnswerSuccess(
-          nextPageNumber: nextPageNumber)),
-    );
   }
 
   // For checkbox questions, we need to handle multiple answers
@@ -67,24 +51,9 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
   }) async {
     emit(SubmitAnswerLoading());
 
-    // Save all responses
     _addMultipleResponses(questionId, answerIds);
 
-    // For simplicity, we'll just use the first answer ID to get the next page
-    // In a real implementation, you might need a different API endpoint for this
-    if (answerIds.isNotEmpty) {
-      final result = await questionnaireRepo.submitAnswer(
-        questionId: questionId,
-        answerId: answerIds.first,
-      );
-
-      result.fold(
-            (failure) => emit(SubmitAnswerFailure(
-            errorMessage: failure.errorMessage ?? 'Failed to submit answers')),
-            (nextPageNumber) => emit(SubmitAnswerSuccess(
-            nextPageNumber: nextPageNumber)),
-      );
-    } else {
+    if (!answerIds.isNotEmpty) {
       emit(SubmitAnswerFailure(
           errorMessage: 'No answers selected'));
     }
@@ -94,6 +63,7 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     emit(SubmitQuestionnaireLoading());
     final result = await questionnaireRepo.submitQuestionnaire(
       responses: userResponses,
+      token: ''
     );
 
     result.fold(
@@ -101,27 +71,6 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
           errorMessage: failure.errorMessage ?? 'Failed to submit questionnaire')),
           (_) => emit(SubmitQuestionnaireSuccess()),
     );
-  }
-
-  // Helper method to add a single response
-  void _addResponse(int questionId, int answerId) {
-    final existingResponseIndex = userResponses.indexWhere(
-          (response) => response.questionId == questionId,
-    );
-
-    if (existingResponseIndex != -1) {
-      // For radio buttons and flow questions - replace the existing answer
-      userResponses[existingResponseIndex] = QuestionnaireResponseModel(
-        questionId: questionId,
-        answerIds: [answerId],
-      );
-    } else {
-      // Add new response
-      userResponses.add(QuestionnaireResponseModel(
-        questionId: questionId,
-        answerIds: [answerId],
-      ));
-    }
   }
 
   // Helper method to add multiple responses (for checkbox questions)

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/data/model/question_model.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/question_page.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/radtion_button_question_page.dart';
 
 import '../../../../../core/utilities/base_text_styles.dart';
+import '../../../../../core/utilities/dialogState.dart';
+import '../../../data/model/answer_model.dart';
 import '../../view_model/questionnaire_cubit/questionnaire_cubit.dart';
 import '../../view_model/questionnaire_cubit/questionnaire_state.dart';
 import 'gradient_progress_bar.dart';
@@ -21,18 +22,25 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
   late PageController _pageController;
   int _currentPage = 0;
 
-  final List<String> _questionTexts = [];
+  final List<int> _navigationStack = [];
 
-  final List<List<String>> _options = [];
+  // Keep track of all questions organized by page
+  final Map<int, List<QuestionModel>> _pageQuestionsMap = {};
 
-  late List<String?> _selectedOptions;
-  final List<List<String>> _radioPages = [];
+  // Keep track of page order for navigation
+  final List<int> _pageOrder = [];
 
-  final List<List<List<String>>> _radioOptions = [];
+  // Keep track of navigation paths
+  final Map<int, Map<String, int>> _navigationPaths = {};
 
-  late List<List<String?>> _radioSelections;
+  // Track selected options for Flow questions
+  final Map<int, String?> _flowSelectedOptions = {};
 
-  late int _totalPages;
+  // Track selected options for Radio/CheckBox questions
+  final Map<int, Map<int, dynamic>> _pageSelections = {};
+
+  int _totalPages = 0;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -46,176 +54,491 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     super.dispose();
   }
 
-  void _goToNextQuestion() {
-    if (_currentPage < _totalPages - 1) {
-      _pageController.nextPage(
+  void _navigateToPage(int pageIndex) {
+    if (pageIndex >= 0 && pageIndex < _pageOrder.length) {
+      _pageController.animateToPage(
+        pageIndex,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-    } else {
-      _handleQuestionnaireComplete();
     }
   }
 
-  void _handleQuestionnaireComplete() {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-        title: const Text('Questionnaire Complete'),
-        content: const Text('Thank you for completing the questionnaire!'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Continue'),
-          ),
-        ],
-      ),
+  void _goToPreviousPage() {
+    if (_navigationStack.isNotEmpty) {
+      final previousPageIndex = _navigationStack.removeLast();
+      _navigateToPage(previousPageIndex);
+    } else if (_currentPage > 0) {
+      _navigateToPage(_currentPage - 1);
+    }
+  }
+
+  void _goToNextPage() {
+    final currentPageNumber = _pageOrder[_currentPage];
+    final pageQuestions = _pageQuestionsMap[currentPageNumber] ?? [];
+
+    _navigationStack.add(_currentPage);
+
+    // Check if this is a Flow page
+    if (pageQuestions.isNotEmpty &&
+        pageQuestions.first.questionForm == 'Flow') {
+      // For Flow pages, navigation depends on the selected answer
+      final questionId = pageQuestions.first.id;
+      final selectedOption = _flowSelectedOptions[questionId];
+
+      if (selectedOption != null) {
+        // Find the nextPageNumber for the selected option
+        final nextPageNumber = _findNextPageNumber(
+          pageQuestions.first,
+          selectedOption,
+        );
+        if (nextPageNumber > 0) {
+          // Find the index of the next page in our pageOrder list
+          final nextPageIndex = _pageOrder.indexOf(nextPageNumber);
+          if (nextPageIndex >= 0) {
+            _navigateToPage(nextPageIndex);
+            return;
+          }
+        }
+      }
+    }
+
+    // Default to next sequential page if not a Flow page or if no specific navigation
+
+    if (pageQuestions.last.lastPage || _currentPage >= _totalPages - 1) {
+      _handleQuestionnaireComplete();
+    } else {
+      _navigateToPage(_currentPage + 1);
+    }
+  }
+
+  int _findNextPageNumber(QuestionModel question, String selectedOptionText) {
+    final answer = question.answers.firstWhere(
+      (a) => a.text == selectedOptionText,
+      orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
     );
+
+    return answer.nextPageNumber;
   }
 
-  void _selectOption(int questionIndex, String option) {
-    setState(() {
-      _selectedOptions[questionIndex] = option;
+  void _handleQuestionnaireComplete() {
+    // Collect all answers
+    final questionnaireCubit = context.read<QuestionnaireCubit>();
+
+    // Process all flow questions
+    _flowSelectedOptions.forEach((questionId, selectedOption) {
+      final question = _findQuestionById(questionId);
+      if (question != null && selectedOption != null) {
+        final answer = question.answers.firstWhere(
+          (a) => a.text == selectedOption,
+          orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
+        );
+        if (answer.id > 0) {}
+      }
     });
-    Future.delayed(const Duration(milliseconds: 300), _goToNextQuestion);
+
+    // Process all radio/checkbox questions
+    _pageSelections.forEach((pageNumber, selections) {
+      selections.forEach((questionId, selected) {
+        final question = _findQuestionById(questionId);
+        if (question != null) {
+          if (question.questionForm == 'RadioButton' && selected != null) {
+            // For RadioButton, find the selected answer ID
+            final answer = question.answers.firstWhere(
+              (a) => a.text == selected,
+              orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
+            );
+            if (answer.id > 0) {
+              // questionnaireCubit.submitAnswer(
+              //   questionId: questionId,
+              //   answerId: answer.id,
+              // );
+            }
+          } else if (question.questionForm == 'CheckBox' &&
+              selected is List<String>) {
+            // For CheckBox, find all selected answer IDs
+            final selectedAnswerIds = <int>[];
+            for (final option in selected) {
+              final answer = question.answers.firstWhere(
+                (a) => a.text == option,
+                orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
+              );
+              if (answer.id > 0) {
+                selectedAnswerIds.add(answer.id);
+              }
+            }
+            if (selectedAnswerIds.isNotEmpty) {
+              questionnaireCubit.submitMultipleAnswers(
+                questionId: questionId,
+                answerIds: selectedAnswerIds,
+              );
+            }
+          }
+        }
+      });
+    });
+
+    // Submit the questionnaire
+    questionnaireCubit.submitQuestionnaire().then((_) {
+      customAwesomeDialog(
+        context: context,
+        isSuccess: true,
+        onPressed: () {},
+        title: 'Questionnaire Complete',
+        description: 'Thank you for completing the questionnaire!',
+      );
+    });
   }
 
-  void _selectRadioOption(int pageIndex, int questionIndex, String value) {
+  QuestionModel? _findQuestionById(int questionId) {
+    for (final pageQuestions in _pageQuestionsMap.values) {
+      for (final question in pageQuestions) {
+        if (question.id == questionId) {
+          return question;
+        }
+      }
+    }
+    return null;
+  }
+
+  void _selectFlowOption(int questionId, String option) {
     setState(() {
-      _radioSelections[pageIndex][questionIndex] = value;
+      _flowSelectedOptions[questionId] = option;
     });
+
+    // Submit the answer to update the backend
+    final question = _findQuestionById(questionId);
+    if (question != null) {
+      final answer = question.answers.firstWhere(
+        (a) => a.text == option,
+        orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
+      );
+
+      if (answer.id > 0) {
+
+        if (answer.nextPageNumber > 0) {
+          final nextPageIndex = _pageOrder.indexOf(answer.nextPageNumber);
+          if (nextPageIndex >= 0) {
+            _navigationStack.add(_currentPage);
+            Future.delayed(const Duration(milliseconds: 300), () {
+              _navigateToPage(nextPageIndex);
+            });
+            return;
+          }
+        }
+      }
+    }
+
+    Future.delayed(const Duration(milliseconds: 300), _goToNextPage);
+  }
+
+  void _selectRadioOption(int pageNumber, int questionId, String value) {
+    setState(() {
+      _pageSelections.putIfAbsent(pageNumber, () => {});
+      _pageSelections[pageNumber]![questionId] = value;
+    });
+  }
+
+  void _selectCheckboxOption(
+    int pageNumber,
+    int questionId,
+    String value,
+    bool isSelected,
+  ) {
+    setState(() {
+      _pageSelections.putIfAbsent(pageNumber, () => {});
+      _pageSelections[pageNumber]?.putIfAbsent(questionId, () => <String>[]);
+
+      final selectedOptions =
+          _pageSelections[pageNumber]![questionId] as List<String>? ?? [];
+
+      if (isSelected && !selectedOptions.contains(value)) {
+        selectedOptions.add(value);
+      } else if (!isSelected && selectedOptions.contains(value)) {
+        selectedOptions.remove(value);
+      }
+
+      _pageSelections[pageNumber]![questionId] = selectedOptions;
+    });
+  }
+
+  bool _canProceedFromPage(int pageNumber) {
+    // Get all questions for this page
+    final questions = _pageQuestionsMap[pageNumber] ?? [];
+
+    // If it's a Flow page, we need a selection
+    if (questions.isNotEmpty && questions.first.questionForm == 'Flow') {
+      return _flowSelectedOptions[questions.first.id] != null;
+    }
+
+    // For Radio/CheckBox pages, check that all questions have answers
+    final pageSelections = _pageSelections[pageNumber] ?? {};
+    for (final question in questions) {
+      final selection = pageSelections[question.id];
+
+      if (question.questionForm == 'RadioButton') {
+        // RadioButton should have one selected option
+        if (selection == null) {
+          return false;
+        }
+      } else if (question.questionForm == 'CheckBox') {
+        // CheckBox should have at least one selected option
+        if (selection == null || (selection is List && selection.isEmpty)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Fetch questions when the widget is first built
+    if (_isLoading) {
+      context.read<QuestionnaireCubit>().fetchAllQuestions();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
     return BlocConsumer<QuestionnaireCubit, QuestionnaireState>(
       listener: (context, state) {
-      if (state is FetchQuestionsSuccess) {
-        _addQuestions(state.questions);
-      }
-  },
-  builder: (context, state) {
-    if (state is FetchQuestionsSuccess) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: screenHeight * .02, //16
-          children: [
-            Text(
-              'Lets Start..',
-              style: AfacadTextStyles.textStyle24W700Black(context),
-            ),
+        if (state is FetchQuestionsSuccess) {
+          _processQuestions(state.questions);
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      },
+      builder: (context, state) {
+        if (_isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-            GradientProgressBar(
-              progress:
-              _currentPage == 0 ? 0.0 : _currentPage / (_totalPages - 1),
-            ),
+        final currentPageData = _pageQuestionsMap[_pageOrder[_currentPage]];
 
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (index) => setState(() => _currentPage = index),
-                itemCount: _totalPages,
-                itemBuilder: (context, index) {
-                  if (index < _questionTexts.length) {
-                    return QuestionPage(
-                      questionText: _questionTexts[index],
-                      options: _options[index],
-                      onOptionSelected: (option) => _selectOption(index, option),
-                    );
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Lets Start..',
+                style: AfacadTextStyles.textStyle24W700Black(context),
+              ),
+              const SizedBox(height: 16),
+
+              GradientProgressBar(
+                progress:
+                    _pageOrder.isEmpty
+                        ? 0.0
+                        : _currentPage / (_pageOrder.length - 1),
+              ),
+              const SizedBox(height: 16),
+
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) {
+                    setState(() => _currentPage = index);
+                  },
+                  itemCount: _pageOrder.length,
+                  itemBuilder: (context, index) {
+                    final pageNumber = _pageOrder[index];
+                    final questions = _pageQuestionsMap[pageNumber] ?? [];
+
+                    if (questions.isEmpty) {
+                      return const Center(
+                        child: Text('No questions for this page'),
+                      );
+                    }
+
+                    // Flow pages have a single question
+                    if (questions.first.questionForm == 'Flow') {
+                      final question = questions.first;
+                      final options =
+                          question.answers.map((a) => a.text).toList();
+
+                      return QuestionPage(
+                        questionText: question.text,
+                        options: options,
+                        onOptionSelected:
+                            (option) => _selectFlowOption(question.id, option),
+                      );
+                    } else {
+                      // Sort questions by sortOrder
+                      final sortedQuestions = List<QuestionModel>.from(
+                        questions,
+                      )..sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+
+                      // Build RadioButton/CheckBox page
+                      return SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Build each question
+                            ...sortedQuestions.map((question) {
+                              final questionId = question.id;
+                              final options =
+                                  question.answers.map((a) => a.text).toList();
+
+                              // Get the selected value(s) for this question
+                              final pageSelections =
+                                  _pageSelections[pageNumber] ?? {};
+                              final selected = pageSelections[questionId];
+
+                              if (question.questionForm == 'RadioButton') {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: _buildRadioButtonQuestion(
+                                    question.text,
+                                    options,
+                                    selected as String?,
+                                    (value) => _selectRadioOption(
+                                      pageNumber,
+                                      questionId,
+                                      value,
+                                    ),
+                                  ),
+                                );
+                              } else if (question.questionForm == 'CheckBox') {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: _buildCheckBoxQuestion(
+                                    question.text,
+                                    options,
+                                    selected as List<String>? ?? [],
+                                    (value, isSelected) =>
+                                        _selectCheckboxOption(
+                                          pageNumber,
+                                          questionId,
+                                          value,
+                                          isSelected,
+                                        ),
+                                  ),
+                                );
+                              } else {
+                                return const SizedBox.shrink();
+                              }
+                            }),
+                          ],
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+
+              NavigationButtons(
+                currentPage: _currentPage,
+                totalPages: _pageOrder.length,
+                isFinish: (currentPageData != null && currentPageData.last.lastPage),
+                onPrevious: _goToPreviousPage,
+                onNext: () {
+                  final currentPageNumber = _pageOrder[_currentPage];
+                  if (_canProceedFromPage(currentPageNumber)) {
+                    _goToNextPage();
                   } else {
-                    int radioPageIndex = index - _questionTexts.length;
-                    return RadioButtonQuestionPage(
-                      questions: _radioPages[radioPageIndex],
-                      options: _radioOptions[radioPageIndex],
-                      selections: _radioSelections[radioPageIndex],
-                      onOptionSelected: (qIndex, value) {
-                        _selectRadioOption(radioPageIndex, qIndex, value);
-                      },
+                    // Show a message that all questions must be answered
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Please answer all questions on this page',
+                        ),
+                      ),
                     );
                   }
                 },
               ),
-            ),
-
-            NavigationButtons(
-              currentPage: _currentPage,
-              totalPages: _totalPages,
-              onPrevious:
-                  () => _pageController.previousPage(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              ),
-              onNext: _goToNextQuestion,
-            ),
-          ],
-        ),
-      );
-    }
-    return Center(
-      child: CircularProgressIndicator(),
+            ],
+          ),
+        );
+      },
     );
-  },
-);
   }
 
-  void _addQuestions(List<QuestionModel> questions) {
-    // Temporary storage for non-Flow questions grouped by pageNumber
-    final Map<int, List<QuestionModel>> radioPagesMap = {};
+  Widget _buildRadioButtonQuestion(
+    String question,
+    List<String> options,
+    String? selectedValue,
+    Function(String) onSelected,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        ...options.map((option) {
+          return RadioListTile<String>(
+            title: Text(option),
+            value: option,
+            groupValue: selectedValue,
+            onChanged: (value) {
+              if (value != null) {
+                onSelected(value);
+              }
+            },
+          );
+        }).toList(),
+      ],
+    );
+  }
 
+  Widget _buildCheckBoxQuestion(
+    String question,
+    List<String> options,
+    List<String> selectedValues,
+    Function(String, bool) onSelected,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        ...options.map((option) {
+          return CheckboxListTile(
+            title: Text(option),
+            value: selectedValues.contains(option),
+            onChanged: (isChecked) {
+              if (isChecked != null) {
+                onSelected(option, isChecked);
+              }
+            },
+          );
+        }).toList(),
+      ],
+    );
+  }
+
+  void _processQuestions(List<QuestionModel> questions) {
+    // Reset state
+    _pageQuestionsMap.clear();
+    _pageOrder.clear();
+    _flowSelectedOptions.clear();
+    _pageSelections.clear();
+
+    // Group questions by pageNumber
     for (final question in questions) {
-      if (question.questionForm == 'Flow') {
-        // Add to Flow questions
-        _questionTexts.add(question.text);
-        _options.add(
-          question.answers.map((answer) => answer.text).toList(),
-        );
-      } else {
-        // Group non-Flow questions by pageNumber
-        radioPagesMap.putIfAbsent(question.pageNumber, () => []).add(question);
-      }
+      _pageQuestionsMap
+          .putIfAbsent(question.pageNumber, () => [])
+          .add(question);
     }
 
-    // Process non-Flow questions: sort each page's questions and populate radioPages & radioOptions
-    radioPagesMap.forEach((pageNumber, pageQuestions) {
-      // Sort questions by their sortOrder
-      pageQuestions.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+    // Create the initial page order (we'll start with page 1)
+    _pageOrder.addAll(_pageQuestionsMap.keys.toList()..sort());
 
-      // Extract question texts for the radio page
-      _radioPages.add(
-        pageQuestions.map((question) => question.text).toList(),
-      );
-
-      // Extract answer texts for each question in the radio page
-      _radioOptions.add(
-        pageQuestions
-            .map((question) => question.answers.map((a) => a.text).toList())
-            .toList(),
-      );
-    });
-
-    // Update total pages count
-    _totalPages = _questionTexts.length + _radioPages.length;
-
-    // Initialize selected options for Flow questions
-    _selectedOptions = List<String?>.filled(_questionTexts.length, null);
-
-    // Initialize radio selections for each radio page
-    _radioSelections = List.generate(
-      _radioPages.length,
-          (pageIndex) => List<String?>.filled(_radioPages[pageIndex].length, null),
-    );
-
-    // Trigger UI rebuild if needed
-    if (mounted) setState(() {});
+    // Set total pages
+    _totalPages = _pageOrder.length;
   }
 }
