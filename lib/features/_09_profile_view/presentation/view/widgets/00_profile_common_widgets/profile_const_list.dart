@@ -101,11 +101,5 @@ class ProfileConstList {
       title: 'FAQ',
       routeName: Routes.faqViewId,
     ),
-    ProfileItemModel(
-      prefixIcon: Icons.logout,
-      iconColor: Colors.red,
-      title: 'Logout',
-      textColor: Colors.red,
-    ),
   ];
 }
