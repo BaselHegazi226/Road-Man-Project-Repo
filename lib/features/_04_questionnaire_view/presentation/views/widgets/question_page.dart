@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_04_questionnaire_view/data/model/answer_model.dart';
 
 import '../../../../../core/utilities/base_text_styles.dart';
 import 'option_button.dart';
 
 class QuestionPage extends StatelessWidget {
   final String questionText;
-  final List<String> options;
-  final Function(String option) onOptionSelected;
+  final List<AnswerModel> options;
+  final Function(AnswerModel option) onOptionSelected;
 
   const QuestionPage({
     super.key,
@@ -37,7 +38,7 @@ class QuestionPage extends StatelessWidget {
           (option) => Padding(
             padding: EdgeInsets.only(bottom: screenHeight * .02),
             child: OptionButton(
-              text: option,
+              text: option.text,
               onPressed: () => onOptionSelected(option),
             ),
           ),

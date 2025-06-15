@@ -15,4 +15,6 @@ abstract class QuestionnaireRepo {
     required List<QuestionnaireResponseModel> responses,
     required String token
   });
+
+  Future<Either<Failure, void>> checkQuestionnaireAnswered({required String token});
 }

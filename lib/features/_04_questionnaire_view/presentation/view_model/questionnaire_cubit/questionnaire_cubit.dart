@@ -25,6 +25,20 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     );
   }
 
+  Future<void> checkQuestionnaireAnswered() async {
+    emit(FetchQuestionByPageLoading());
+    final userTokens = await SecureStorageHelper.getUserTokens();
+    if(userTokens != null){
+      final result = await questionnaireRepo.checkQuestionnaireAnswered(token: userTokens.token);
+
+      result.fold(
+            (failure) => emit(FetchQuestionByPageFailure(
+            errorMessage: failure.errorMessage ?? 'Failed to fetch question')),
+            (response) {},
+      );
+    }
+  }
+
   Future<void> fetchQuestionByPageNumber(int pageNumber) async {
     emit(FetchQuestionByPageLoading());
     final result = await questionnaireRepo.fetchQuestionByPageNumber(
@@ -38,11 +52,17 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     );
   }
 
-  Future<void> submitAnswers({
+  Future<void> submitAnswer({
     required int questionId,
     required int answerId,
   }) async {
     emit(SubmitAnswerLoading());
+
+    userResponses.add(QuestionnaireResponseModel(
+      questionId: questionId,
+      answerIds: [answerId],
+    ));
+
   }
 
   // For checkbox questions, we need to handle multiple answers

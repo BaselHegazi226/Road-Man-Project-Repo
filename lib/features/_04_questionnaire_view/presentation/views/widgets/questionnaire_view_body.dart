@@ -30,9 +30,6 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
   // Keep track of page order for navigation
   final List<int> _pageOrder = [];
 
-  // Keep track of navigation paths
-  final Map<int, Map<String, int>> _navigationPaths = {};
-
   // Track selected options for Flow questions
   final Map<int, String?> _flowSelectedOptions = {};
 
@@ -133,7 +130,12 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
           (a) => a.text == selectedOption,
           orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
         );
-        if (answer.id > 0) {}
+        if (answer.id > 0) {
+          questionnaireCubit.submitAnswer(
+            questionId: questionId,
+            answerId: answer.id,
+          );
+        }
       }
     });
 
@@ -142,6 +144,7 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
       selections.forEach((questionId, selected) {
         final question = _findQuestionById(questionId);
         if (question != null) {
+          final selectedAnswerIds = <int>[];
           if (question.questionForm == 'RadioButton' && selected != null) {
             // For RadioButton, find the selected answer ID
             final answer = question.answers.firstWhere(
@@ -149,15 +152,13 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
               orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
             );
             if (answer.id > 0) {
-              // questionnaireCubit.submitAnswer(
-              //   questionId: questionId,
-              //   answerId: answer.id,
-              // );
+              questionnaireCubit.submitAnswer(
+                questionId: questionId,
+                answerId: answer.id,
+              );
             }
           } else if (question.questionForm == 'CheckBox' &&
               selected is List<String>) {
-            // For CheckBox, find all selected answer IDs
-            final selectedAnswerIds = <int>[];
             for (final option in selected) {
               final answer = question.answers.firstWhere(
                 (a) => a.text == option,
@@ -201,16 +202,16 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
     return null;
   }
 
-  void _selectFlowOption(int questionId, String option) {
+  void _selectFlowOption(int questionId, AnswerModel option) {
     setState(() {
-      _flowSelectedOptions[questionId] = option;
+      _flowSelectedOptions[questionId] = option.text;
     });
 
     // Submit the answer to update the backend
     final question = _findQuestionById(questionId);
     if (question != null) {
       final answer = question.answers.firstWhere(
-        (a) => a.text == option,
+        (a) => a == option,
         orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
       );
 
@@ -362,7 +363,7 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
                     if (questions.first.questionForm == 'Flow') {
                       final question = questions.first;
                       final options =
-                          question.answers.map((a) => a.text).toList();
+                          question.answers;
 
                       return QuestionPage(
                         questionText: question.text,
@@ -434,10 +435,10 @@ class _QuestionnaireViewBodyState extends State<QuestionnaireViewBody> {
                 ),
               ),
 
-
               NavigationButtons(
                 currentPage: _currentPage,
                 totalPages: _pageOrder.length,
+                showNext: currentPageData?.first.questionForm != 'Flow',
                 isFinish: (currentPageData != null && currentPageData.last.lastPage),
                 onPrevious: _goToPreviousPage,
                 onNext: () {

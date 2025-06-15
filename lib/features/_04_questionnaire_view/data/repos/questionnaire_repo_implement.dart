@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:road_man_project/core/error/failure.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/data/repos/questionnaire_repo.dart';
 
@@ -77,15 +78,18 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
         'userAnswers': responses.map((r) => r.toJson()).toList(),
       };
 
-      log('answwers ${requestBody.toString()}');
-
+      if(kDebugMode){
+        log('answwers ${requestBody.toString()}');
+      }
       final response = await dio.post(
         path,
         options: Options(headers: {'Authorization': "Bearer $token"}),
         data: requestBody,
       );
 
-      log("Response data: ${response.data}");
+      if(kDebugMode){
+        log("Response data: ${response.data}");
+      }
 
       if (response.statusCode == 200) {
         return right(null);
@@ -94,12 +98,42 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
             errorMessage: 'Failed to submit questionnaire.'));
       }
     } on DioException catch (dioException) {
-      print('expppppp ${dioException.message}');
-      dioException.stackTrace;
       return left(ServerFailure(errorMessage: dioException.error.toString()));
     } catch (e, s) {
-      print('errooorrr ${e.toString()}');
-      print(s);
+      if (kDebugMode) {
+        print(s);
+      }
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> checkQuestionnaireAnswered({required String token}) async {
+    final String path = '$baseUrl/Accounts/check-questionnaire-answered';
+    try {
+      final response = await dio.get(
+        path,
+        options: Options(headers: {'Authorization': "Bearer $token"}),
+      );
+
+      if (kDebugMode) {
+        print('Response data: ${response.data}');
+      }
+
+      if (response.statusCode == 200) {
+        return right(null);
+      } else {
+        return left(ServerFailure(
+            errorMessage: 'Failed to check questionnaire answered'));
+      }
+    } on DioException catch (dioException) {
+      print('proooblem is ${dioException.message}');
+      return left(ServerFailure(errorMessage: dioException.error.toString()));
+    } catch (e, s) {
+      print('eeeeee ${e.toString()}');
+      if (kDebugMode) {
+        print(s);
+      }
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }

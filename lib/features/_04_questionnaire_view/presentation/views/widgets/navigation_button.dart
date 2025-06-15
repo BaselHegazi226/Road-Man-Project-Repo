@@ -9,6 +9,7 @@ class NavigationButtons extends StatelessWidget {
   final VoidCallback onPrevious;
   final VoidCallback onNext;
   final bool isFinish;
+  final bool showNext;
 
   const NavigationButtons({
     super.key,
@@ -16,6 +17,7 @@ class NavigationButtons extends StatelessWidget {
     required this.totalPages,
     required this.onPrevious,
     required this.onNext,
+    this.showNext = true,
     this.isFinish = false
   });
 
@@ -48,7 +50,7 @@ class NavigationButtons extends StatelessWidget {
                 ],
               ),
             ),
-          if (currentPage >= totalPages - 2)
+          if(showNext)
             TextButton(
               onPressed: onNext,
               child: Row(
@@ -61,7 +63,7 @@ class NavigationButtons extends StatelessWidget {
                   const Icon(Icons.arrow_forward_ios, size: 16),
                 ],
               ),
-            ),
+            )
         ],
       ),
     );

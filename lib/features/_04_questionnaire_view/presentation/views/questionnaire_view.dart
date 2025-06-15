@@ -14,7 +14,8 @@ class QuestionnaireView extends StatelessWidget {
     return BlocProvider(
       create: (context) => QuestionnaireCubit(
         questionnaireRepo: QuestionnaireRepoImplement(),
-      )..fetchAllQuestions(),
+      )..fetchAllQuestions()
+        ..checkQuestionnaireAnswered(),
       child: Scaffold(
         backgroundColor: kAppPrimaryWhiteColor,
         appBar: AppBar(backgroundColor: kAppPrimaryWhiteColor, elevation: 0),
