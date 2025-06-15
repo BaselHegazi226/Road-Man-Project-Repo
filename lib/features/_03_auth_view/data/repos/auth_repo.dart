@@ -3,7 +3,7 @@ import 'package:road_man_project/core/error/failure.dart';
 import 'package:road_man_project/features/_03_auth_view/data/model/user_token_model.dart';
 
 abstract class AuthRepo {
-  Future<Either<Failure, UserTokensModel>> signUp({
+  Future<Either<Failure, void>> signUp({
     required String name,
     required String email,
     required String password,
@@ -24,7 +24,7 @@ abstract class AuthRepo {
     required String email,
     required String otp,
   });
-  Future<Either<Failure, void>> verificationEmail({
+  Future<Either<Failure, UserTokensModel>> verificationEmail({
     required String email,
     required String otp,
   });
