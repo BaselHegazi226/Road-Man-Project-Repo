@@ -48,10 +48,10 @@ class VerifyEmailButton extends StatelessWidget {
             customAwesomeDialog(
               context: context,
               title: 'Verify Email Success',
-              description: 'Go To Sign In Please!',
+              description: 'Go To Your Questionnaire!',
               isSuccess: true,
               onPressed: () {
-                GoRouter.of(context).push(Routes.signInViewId);
+                GoRouter.of(context).push(Routes.questionnaireViewId);
               },
             );
           } else if (state is VerificationEmailFailure) {

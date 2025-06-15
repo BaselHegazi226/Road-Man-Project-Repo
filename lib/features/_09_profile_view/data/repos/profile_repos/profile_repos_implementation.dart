@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:road_man_project/core/error/failure.dart';
@@ -18,29 +21,49 @@ class ProfileReposImplementation extends ProfileRepos {
   }) async {
     final String updateProfilePath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/update-profile';
+
     final userTokens = await SecureStorageHelper.getUserTokens();
-    String? userToken;
-    if (userTokens != null) {
-      userToken = userTokens.token;
+    final String? userToken = userTokens?.token;
+
+    String? base64Photo;
+
+    // ✅ فقط لو الصورة موجودة نحاول تحويلها
+    if (photo.trim().isNotEmpty) {
+      if (photo.startsWith('/')) {
+        try {
+          final bytes = await File(photo).readAsBytes();
+          base64Photo = base64Encode(bytes);
+          print('length of photo from implem : ${base64Photo.length}');
+          print('base64photo : $base64Photo');
+        } catch (e) {
+          return left(ServerFailure(errorMessage: 'Error reading image file'));
+        }
+      } else {
+        base64Photo = photo; // مفترض أنها Base64 جاهزة
+        print('length of photo from implem : ${base64Photo.length}');
+        print('base64photo : $base64Photo');
+      }
     }
 
     final updateProfileModel = UpdateProfileModel(
-      photo: photo,
+      photo: base64Photo, // يمكن أن تكون null لو مفيش صورة جديدة
       name: name,
       dateOfBirth: dateOfBirth,
     );
+
     try {
       final response = await dio.put(
         updateProfilePath,
         data: updateProfileModel.toJson(),
         options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
+
       if (response.statusCode == 200) {
         return right(null);
       } else {
         return left(
           ServerFailure.fromResponse(
-            statusCode: response.statusCode,
+            statusCode: response.statusCode!,
             responseData: response.data,
           ),
         );

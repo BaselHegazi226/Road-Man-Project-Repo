@@ -56,7 +56,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signUp({
+  Future<Either<Failure, UserTokensModel>> signUp({
     required String name,
     required String email,
     required String password,
@@ -71,7 +71,11 @@ class AuthRepoImplement implements AuthRepo {
     try {
       final response = await dio.post(signUpPath, data: signUpModel.toJson());
       if (response.statusCode == 200) {
-        return right(null);
+        final data =
+            response.data is String ? jsonDecode(response.data) : response.data;
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
+        await SecureStorageHelper.saveUserTokens(userTokenModel);
+        return right(userTokenModel);
       } else {
         print(
           '${ServerFailure.fromResponse(statusCode: response.statusCode, responseData: response.data)}',
@@ -274,16 +278,6 @@ class AuthRepoImplement implements AuthRepo {
     } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }
-  }
-
-  @override
-  Future<Either<Failure, void>> changePassword({
-    required String oldPassword,
-    required String newPassword,
-    required String confirmPassword,
-  }) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
   }
 
   @override

@@ -1,8 +1,8 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/dialogState.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
 import 'package:road_man_project/core/utilities/show_snack_bar.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view/widgets/profile_widgets/profile_item.dart';
@@ -23,21 +23,16 @@ class ProfileItemsSection extends StatefulWidget {
 
 class _ProfileItemsSectionState extends State<ProfileItemsSection> {
   void _showLogoutDialog(BuildContext context) {
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      animType: AnimType.scale,
-      title: 'Confirm Logout',
-      desc: 'Are you sure you want to log out?',
-      btnCancelOnPress: () {},
-      btnOkOnPress: () {
+    warningAwesomeDialog(
+      context,
+      title: 'Log Out',
+      description: 'Are you sure you want to log out?',
+      buttonAcceptText: 'Log out',
+      buttonCancelText: 'No, Thanks',
+      onPressed: () {
         context.read<ProfileBloc>().add(LogOutEvent());
       },
-      btnOkText: 'OK',
-      btnCancelText: 'Cancel',
-      btnOkColor: kAppPrimaryWrongColor,
-      btnCancelColor: Color(0xffFEB800),
-    ).show();
+    );
   }
 
   @override

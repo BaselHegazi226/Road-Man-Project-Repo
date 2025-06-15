@@ -72,3 +72,26 @@ void customAwesomeDialog({
     ),
   ).show();
 }
+
+void warningAwesomeDialog(
+  BuildContext context, {
+  required String title,
+  required String description,
+  required String buttonAcceptText,
+  required String buttonCancelText,
+  required void Function()? onPressed,
+}) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    animType: AnimType.scale,
+    title: title,
+    desc: description,
+    btnCancelOnPress: () {},
+    btnOkOnPress: onPressed,
+    btnOkText: buttonAcceptText,
+    btnCancelText: buttonCancelText,
+    btnOkColor: kAppPrimaryWrongColor,
+    btnCancelColor: Color(0xffFEB800).withAlpha(200),
+  ).show();
+}

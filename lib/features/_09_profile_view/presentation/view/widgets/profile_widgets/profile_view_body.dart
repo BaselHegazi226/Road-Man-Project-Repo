@@ -58,7 +58,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     final double screenWidth = MediaQuery.sizeOf(context).width;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * .02),
       child: Column(
         children: [
           BlocConsumer<GetUserInfoCubit, ProfileStates>(
