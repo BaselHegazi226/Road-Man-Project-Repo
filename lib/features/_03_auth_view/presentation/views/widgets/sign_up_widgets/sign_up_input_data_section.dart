@@ -39,7 +39,6 @@ class _SignUpInputDataSectionState extends State<SignUpInputDataSection> {
             passwordController: passwordController,
           ),
         ),
-
         // BlocConsumer منفصل
         SignUpBlocConsumer(
           formKey: _formKey,

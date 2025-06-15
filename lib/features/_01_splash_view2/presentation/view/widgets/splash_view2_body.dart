@@ -109,7 +109,7 @@ class _SplashView2BodyState extends State<SplashView2Body>
       listener: (context, state) {
         // التعامل مع حالات الـ Bloc الخاصة بالتحديث التوكن
         if (state is RefreshTokenSuccess) {
-          print('From splash view user token = ${state.userToken}');
+          print('From splash view user token = ${state.userTokensModel.token}');
           GoRouter.of(
             context,
           ).go(Routes.mainViewId); // التنقل لواجهة الرئيسية بعد نجاح التوكن

@@ -41,6 +41,9 @@ class SignUpButton extends StatelessWidget {
                       password: passwordController.text.trim(),
                     ),
                   );
+                  print('name : ${nameController.text}');
+                  print('password : ${passwordController.text}');
+                  print('email : ${emailController.text}');
                 }
               },
       backgroundColor: kAppPrimaryBlueColor,

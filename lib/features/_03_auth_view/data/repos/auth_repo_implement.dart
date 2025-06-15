@@ -56,7 +56,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, UserTokensModel>> signUp({
+  Future<Either<Failure, void>> signUp({
     required String name,
     required String email,
     required String password,
@@ -71,14 +71,10 @@ class AuthRepoImplement implements AuthRepo {
     try {
       final response = await dio.post(signUpPath, data: signUpModel.toJson());
       if (response.statusCode == 200) {
-        final data =
-            response.data is String ? jsonDecode(response.data) : response.data;
-        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
-        await SecureStorageHelper.saveUserTokens(userTokenModel);
-        return right(userTokenModel);
+        return right(null);
       } else {
         print(
-          '${ServerFailure.fromResponse(statusCode: response.statusCode, responseData: response.data)}',
+          'error from ${ServerFailure.fromResponse(statusCode: response.statusCode, responseData: response.data)}',
         );
         return left(
           ServerFailure.fromResponse(
@@ -88,9 +84,10 @@ class AuthRepoImplement implements AuthRepo {
         );
       }
     } on DioException catch (dioException) {
-      print('${ServerFailure.fromDioException(dioException)}');
+      print('dio error : ${ServerFailure.fromDioException(dioException)}');
       return left(ServerFailure.fromDioException(dioException));
     } catch (e) {
+      print('unknown error : ${e.toString()}');
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
@@ -187,7 +184,7 @@ class AuthRepoImplement implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> verificationEmail({
+  Future<Either<Failure, UserTokensModel>> verificationEmail({
     required String email,
     required String otp,
   }) async {
@@ -203,7 +200,19 @@ class AuthRepoImplement implements AuthRepo {
         data: verificationEmailModel.toJson(),
       );
       if (response.statusCode == 200) {
-        return right(null);
+        print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+        final data =
+            response.data is String ? jsonDecode(response.data) : response.data;
+        print('data : $data');
+        final UserTokensModel userTokenModel = UserTokensModel.fromJson(data);
+        print('token:${userTokenModel.token}');
+        await SecureStorageHelper.saveUserTokens(userTokenModel);
+
+        print('Status Code: ${response.statusCode}');
+        print('Response Data: ${response.data}');
+        print('Response headers: ${response.headers}');
+
+        return right(userTokenModel);
       } else {
         return left(
           ServerFailure.fromResponse(

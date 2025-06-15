@@ -48,11 +48,11 @@ class RefreshTokenCubit extends Cubit<RefreshTokenStates> {
         },
         // في حال النجاح: إطلاق حالة نجاح مع التوكن الجديد
         (successUserToken) async {
-          emit(RefreshTokenSuccess(userToken: successUserToken));
+          emit(RefreshTokenSuccess(userTokensModel: successUserToken));
         },
       );
     } else {
-      emit(RefreshTokenSuccess(userToken: userTokens));
+      emit(RefreshTokenSuccess(userTokensModel: userTokens));
     }
   }
 }

@@ -55,6 +55,7 @@ class _SignUpBlocConsumerState extends State<SignUpBlocConsumer> {
         GoRouter.of(context).pop();
       },
     );
+    print('error message :$errorMessage');
   }
 
   @override

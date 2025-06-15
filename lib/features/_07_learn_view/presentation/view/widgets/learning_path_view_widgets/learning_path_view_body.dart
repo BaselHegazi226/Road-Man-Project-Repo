@@ -1,15 +1,51 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit.dart';
 import 'package:road_man_project/generated/assets.dart';
 
+import '../../../../../../core/helper/const_variables.dart';
+import '../../../../../../core/manager/tokens_manager.dart';
+import '../../../../../../core/utilities/show_snack_bar.dart';
+import 'build_specific_step.dart';
 import 'learning_path_step.dart';
 
-class LearningPathViewBody extends StatelessWidget {
+class LearningPathViewBody extends StatefulWidget {
   const LearningPathViewBody({super.key});
+
+  @override
+  State<LearningPathViewBody> createState() => _LearningPathViewBodyState();
+}
+
+class _LearningPathViewBodyState extends State<LearningPathViewBody> {
+  @override
+  void initState() {
+    super.initState();
+
+    // لضمان سلامة الـ context
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeUserInfo();
+    });
+  }
+
+  Future<void> _initializeUserInfo() async {
+    final cubit = BlocProvider.of<LearningPathCubit>(context);
+
+    final userTokenModel = await SecureStorageHelper.getUserTokens();
+
+    if (!mounted) return;
+
+    if (userTokenModel != null) {
+      final data = await cubit.getLearningPathFun(
+        userToken: userTokenModel.token,
+      );
+      print('Learning Path Data = $data');
+    } else {
+      showSafeSnackBar(context, "Session is expired...", kAppPrimaryWrongColor);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +76,12 @@ class LearningPathViewBody extends StatelessWidget {
 
                   final centerStep = Center(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 32),
+                      padding: EdgeInsets.symmetric(
+                        vertical: screenHeight * .03,
+                      ),
                       child: LearningPathStep(
                         onPressed: () {},
-                        iconData: CupertinoIcons.star_fill,
+                        image: Assets.learningPathFinishedStarImage,
                         iconColor: const Color(0xff69A123),
                         backgroundColor: const Color(0xff9EDA53),
                         shadowColor: const Color(0xff69A123),
@@ -57,60 +95,48 @@ class LearningPathViewBody extends StatelessWidget {
                   final sideSteps =
                       isEvenLevel
                           ? [
-                            _buildSpecificStep(
-                              context,
+                            BuildSpecificStep(
                               onPressed: () {
                                 GoRouter.of(context).push(Routes.lessonViewId);
                               },
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
                               alignment: Alignment.centerRight,
                               horizontalOffset: firstOffset,
-                              icon: FontAwesomeIcons.bookOpen,
+                              image: Assets.learningPathActiveLessonImage,
                               backgroundColor: const Color(0xff5385DA),
                               iconColor: Colors.white54,
                               shadowColor: const Color(0xff2961BE),
                             ),
-                            _buildSpecificStep(
-                              context,
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
+                            BuildSpecificStep(
                               onPressed: () {
                                 GoRouter.of(context).push(Routes.quizViewId);
                               },
                               alignment: Alignment.centerRight,
                               horizontalOffset: secondOffset,
-                              icon: Icons.assignment_turned_in,
+                              image: Assets.learningPathActiveLessonImage,
                               backgroundColor: const Color(0xffE5E5E5),
                               iconColor: const Color(0xffB7B7B7),
                               shadowColor: const Color(0xffB7B7B7),
                             ),
                           ]
                           : [
-                            _buildSpecificStep(
-                              context,
+                            BuildSpecificStep(
                               onPressed: () {
                                 GoRouter.of(context).push(Routes.lessonViewId);
                               },
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
                               alignment: Alignment.centerLeft,
                               horizontalOffset: firstOffset,
-                              icon: FontAwesomeIcons.bookOpen,
+                              image: Assets.learningPathActiveLessonImage,
                               backgroundColor: const Color(0xff5385DA),
                               iconColor: Colors.white54,
                               shadowColor: const Color(0xff2961BE),
                             ),
-                            _buildSpecificStep(
-                              context,
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
+                            BuildSpecificStep(
                               onPressed: () {
                                 GoRouter.of(context).push(Routes.quizViewId);
                               },
                               alignment: Alignment.centerLeft,
                               horizontalOffset: secondOffset,
-                              icon: Icons.assignment_turned_in,
+                              image: Assets.learningPathActiveLessonImage,
                               backgroundColor: const Color(0xffE5E5E5),
                               iconColor: const Color(0xffB7B7B7),
                               shadowColor: const Color(0xffB7B7B7),
@@ -127,68 +153,4 @@ class LearningPathViewBody extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildSpecificStep(
-    context, {
-    required double screenWidth,
-    required double screenHeight,
-    required VoidCallback onPressed,
-    required Alignment alignment,
-    required double horizontalOffset,
-    required IconData icon,
-    required Color backgroundColor,
-    required Color iconColor,
-    required Color shadowColor,
-  }) {
-    return Align(
-      alignment: alignment,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: screenHeight * .025,
-          bottom: screenHeight * .01,
-          left: alignment == Alignment.centerLeft ? horizontalOffset : 0,
-          right: alignment == Alignment.centerRight ? horizontalOffset : 0,
-        ),
-        child: LearningPathStep(
-          onPressed: onPressed,
-          iconData: icon,
-          iconColor: iconColor,
-          backgroundColor: backgroundColor,
-          shadowColor: shadowColor,
-        ),
-      ),
-    );
-  }
 }
-
-/*
-                _buildSpecificStep(
-                              context,
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
-                              onPressed: (){
-                                GoRouter.of(context).push(Routes.lessonViewId)
-                              },
-                              alignment: Alignment.centerRight,
-                              horizontalOffset: firstOffset,
-                              icon: FontAwesomeIcons.bookOpen,
-                              backgroundColor: const Color(0xff5385DA),
-                              iconColor: Colors.white54,
-                              shadowColor: const Color(0xff2961BE),
-                            ),
-                            _buildSpecificStep(
-                              context,
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
-                              onPressed: (){
-                                GoRouter.of(context).push(Routes.quizViewId)
-                              },
-                              alignment: Alignment.centerRight,
-                              horizontalOffset: secondOffset,
-                              icon: Icons.assignment_turned_in,
-                              backgroundColor: const Color(0xffE5E5E5),
-                              iconColor: const Color(0xffB7B7B7),
-                              shadowColor: const Color(0xffB7B7B7),
-                            ),
-
- */

@@ -19,8 +19,20 @@ class Assets {
       'assets/images/onboarding/onboarding2_image.svg';
   static const String onBoarding3Image =
       'assets/images/onboarding/onboarding3_image.svg';
+  static const String learningPathCardImage =
+      'assets/images/learning_path/start_card_image.svg';
   static const String learningPathBackgroundImage =
       'assets/images/learning_path/learning_path_background_image.svg';
+  static const String learningPathFinishedStarImage =
+      'assets/images/learning_path/star/finished_star.svg';
+  static const String learningPathActiveStarImage =
+      'assets/images/learning_path/star/active_star.svg';
+  static const String learningPathUnActiveStarImage =
+      'assets/images/learning_path/star/unActive_star.svg';
+  static const String learningPathActiveLessonImage =
+      'assets/images/learning_path/lesson/active_lesson.svg';
+  static const String learningPathUnActiveLessonImage =
+      'assets/images/learning_path/lesson/unActive_lesson.svg';
   static const String googleImage = 'assets/images/home/google.svg';
   static const String hourglassArrowDownImage =
       'assets/images/home/hourglass_arrow_down.svg';
