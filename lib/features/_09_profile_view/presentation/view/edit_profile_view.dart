@@ -8,15 +8,26 @@ import 'package:road_man_project/features/_09_profile_view/presentation/view_mod
 
 import '../../../../core/helper/const_variables.dart';
 import '../../../../core/utilities/custom_app_bar.dart';
+import '../view_model/get_user_info_cubit/get_user_info_cubit.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (context) => ProfileBloc(profileRepos: ProfileReposImplementation()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create:
+              (context) =>
+                  ProfileBloc(profileRepos: ProfileReposImplementation()),
+        ),
+        BlocProvider(
+          create:
+              (context) =>
+                  GetUserInfoCubit(profileRepos: ProfileReposImplementation()),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: kAppPrimaryWhiteColor,
         appBar: customAppBar(

@@ -98,7 +98,7 @@ class _ChangePasswordViewInputDataSectionState
             GoRouter.of(context).push(Routes.profileForgetPasswordViewId);
           },
           child: TextUnderLine(
-            text: 'Forget your password?',
+            text: 'Forget password?',
             textColor: kAppPrimaryWrongColor,
           ),
         ),

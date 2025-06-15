@@ -1,3 +1,4 @@
+// ✅ PROFILE BLOC مع تعديل إرسال الصورة كـ base64
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_09_profile_view/data/repos/profile_repos/profile_repos.dart';
 import 'package:road_man_project/features/_09_profile_view/presentation/view_model/profile_blocs/profile_event.dart';
@@ -16,21 +17,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
     Emitter<ProfileStates> emit,
   ) async {
     emit(UpdateProfileLoadingState());
+
+    // 📌 لو الصورة جايه من UI كـ base64، استخدمها مباشرة
     final result = await profileRepos.updateProfile(
       name: event.name,
       photo: event.photo,
       dateOfBirth: event.dateOfBirth,
     );
+
     await result.fold(
       (error) async {
-        return emit(
+        emit(
           UpdateProfileFailureState(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
       (success) async {
-        return emit(UpdateProfileSuccessState());
+        emit(UpdateProfileSuccessState());
       },
     );
   }
@@ -47,14 +51,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
     );
     await result.fold(
       (error) async {
-        return emit(
+        emit(
           ChangePasswordFailureState(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
       (success) async {
-        return emit(ChangePasswordSuccessState());
+        emit(ChangePasswordSuccessState());
       },
     );
   }
@@ -67,12 +71,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileStates> {
     final result = await profileRepos.logOut();
     await result.fold(
       (error) async {
-        return emit(
+        emit(
           LogOutFailure(errorMessage: error.errorMessage ?? 'UnKnown error'),
         );
       },
       (success) async {
-        return emit(LogOutSuccess());
+        emit(LogOutSuccess());
       },
     );
   }

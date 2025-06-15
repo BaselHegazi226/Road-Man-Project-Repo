@@ -1,5 +1,5 @@
 class UpdateProfileModel {
-  final String name, photo, dateOfBirth;
+  final String? name, photo, dateOfBirth;
   UpdateProfileModel({
     required this.photo,
     required this.name,

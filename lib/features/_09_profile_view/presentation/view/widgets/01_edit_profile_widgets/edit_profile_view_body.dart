@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
 import 'package:road_man_project/core/utilities/custom_title.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
@@ -13,6 +17,7 @@ import 'package:road_man_project/features/_09_profile_view/presentation/view_mod
 import 'package:road_man_project/generated/assets.dart';
 
 import '../../../../../../core/manager/user_info_manager.dart';
+import '../../../view_model/get_user_info_cubit/get_user_info_cubit.dart';
 import 'change_password_button.dart';
 import 'edit_profile_image.dart';
 import 'edit_profile_names_fields_section.dart';
@@ -28,6 +33,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController nameEditingController = TextEditingController();
   bool buttonIsLoading = false;
   UserInfoModel? userInfoModel;
+  String? newPickedImagePath;
 
   @override
   void initState() {
@@ -37,13 +43,18 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
 
   Future<void> _loadUserData() async {
     final userInfo = await UserInfoStorageHelper.getUserInfo();
-
+    if (!mounted) return;
     if (userInfo != null) {
       setState(() {
         userInfoModel = userInfo;
         nameEditingController.text = userInfo.name ?? '';
       });
     }
+  }
+
+  Future<String> _convertImageToBase64(String imagePath) async {
+    final bytes = await File(imagePath).readAsBytes();
+    return base64Encode(bytes);
   }
 
   @override
@@ -59,48 +70,34 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
       child: Column(
         spacing: screenHeight * .03,
         children: [
-          /// ✅ صورة الملف الشخصي وتحديثها مباشرة على السيرفر + محلياً
+          /// صورة الملف الشخصي وتحديثها مؤقتًا فقط
           EditProfileImage(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            image: userInfoModel?.photo ?? Assets.profileProfileUserImage,
+            image:
+                newPickedImagePath ??
+                userInfoModel?.photo ??
+                Assets.profileProfileUserImage,
             onImagePicked: (String imagePath) {
-              if (userInfoModel == null) return;
-
-              // تحديث على السيرفر
-              context.read<ProfileBloc>().add(
-                UpdateProfileEvent(
-                  photo: imagePath,
-                  name: userInfoModel!.name ?? '',
-                  dateOfBirth: userInfoModel!.dateOfBirth ?? '',
-                ),
-              );
-
-              // تحديث محلي
-              final updatedUser = userInfoModel!.copyWith(photo: imagePath);
-              UserInfoStorageHelper.saveUserInfo(updatedUser);
               setState(() {
-                userInfoModel = updatedUser;
+                newPickedImagePath = imagePath;
               });
             },
           ),
-
           if (userInfoModel != null)
             EditProfileNamesFieldsSection(
               nameEditingController: nameEditingController,
               email: userInfoModel!.email ?? '',
             ),
-
           ChangePasswordButton(
             onPressed: () {
               GoRouter.of(context).push(Routes.changePasswordViewId);
             },
           ),
-
-          /// ✅ زر حفظ التحديثات النصية
           BlocConsumer<ProfileBloc, ProfileStates>(
             listener: (context, state) async {
               if (state is UpdateProfileFailureState) {
+                if (!context.mounted) return;
                 showSafeSnackBar(
                   context,
                   state.errorMessage,
@@ -109,31 +106,46 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               } else if (state is UpdateProfileSuccessState) {
                 final updatedUser = userInfoModel!.copyWith(
                   name: nameEditingController.text.trim(),
+                  photo: newPickedImagePath ?? userInfoModel!.photo,
                 );
                 await UserInfoStorageHelper.saveUserInfo(updatedUser);
-                showSafeSnackBar(
-                  context,
-                  'Update Profile Success',
-                  kAppPrimaryBlueColor,
-                );
+
+                if (context.mounted) {
+                  context.read<GetUserInfoCubit>().localGetUserInfo();
+                  showSafeSnackBar(
+                    context,
+                    'Update Profile Success',
+                    kAppPrimaryBlueColor,
+                  );
+                }
 
                 setState(() {
                   userInfoModel = updatedUser;
+                  newPickedImagePath = null;
                 });
               }
-
               setState(() {
                 buttonIsLoading = state is UpdateProfileLoadingState;
               });
             },
             builder: (context, state) {
               return CustomTextButton(
-                onPressed: () {
+                onPressed: () async {
                   if (userInfoModel == null) return;
 
-                  BlocProvider.of<ProfileBloc>(context).add(
+                  String photoData = userInfoModel!.photo ?? '';
+                  if (newPickedImagePath != null &&
+                      newPickedImagePath!.startsWith('/data/')) {
+                    photoData = await _convertImageToBase64(
+                      newPickedImagePath!,
+                    );
+                  }
+                  print('photo data : $photoData');
+                  print('new picked image path : $newPickedImagePath');
+
+                  context.read<ProfileBloc>().add(
                     UpdateProfileEvent(
-                      photo: userInfoModel!.photo ?? '',
+                      photo: photoData,
                       name: nameEditingController.text.trim(),
                       dateOfBirth: userInfoModel!.dateOfBirth ?? '',
                     ),
@@ -146,6 +158,28 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                         : const CustomTitle(title: 'Update Profile'),
               );
             },
+          ),
+          CustomTextButton(
+            onPressed: () {},
+            backgroundColor: kAppPrimaryWhiteColor,
+            borderColor: kAppPrimaryBlackColor,
+            child: Center(
+              child: Row(
+                spacing: screenWidth * .02,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.lightbulb_circle_rounded,
+                    size: screenWidth * .06,
+                    color: kAppPrimaryBlackColor,
+                  ),
+                  Text(
+                    'Create New Recommendation',
+                    style: AfacadTextStyles.textStyle18W600Black(context),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
