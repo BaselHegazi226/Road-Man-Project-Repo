@@ -1,4 +1,4 @@
-import '../../../_04_questionnaire_view/data/model/answer_model.dart';
+import 'answer_model.dart';
 
 class QuestionModel {
   final int id;

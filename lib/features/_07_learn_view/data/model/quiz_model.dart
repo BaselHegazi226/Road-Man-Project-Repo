@@ -1,4 +1,4 @@
-import '../../../_04_questionnaire_view/data/model/question_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/question_model.dart';
 
 class QuizModel {
   final int id;
