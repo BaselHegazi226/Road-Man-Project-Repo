@@ -102,11 +102,11 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
         );
       }
     } on DioException catch (dioException) {
+      print('Dio Exep in submitQuestionnaire ${dioException.message}');
       return left(ServerFailure(errorMessage: dioException.error.toString()));
     } catch (e, s) {
-      if (kDebugMode) {
-        print(s);
-      }
+      print('Error in submitQuestionnaire: ${e.toString()}');
+      print(s);
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
@@ -134,10 +134,8 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
         );
       }
     } on DioException catch (dioException) {
-      print('proooblem is ${dioException.message}');
       return left(ServerFailure(errorMessage: dioException.error.toString()));
     } catch (e, s) {
-      print('eeeeee ${e.toString()}');
       if (kDebugMode) {
         print(s);
       }
