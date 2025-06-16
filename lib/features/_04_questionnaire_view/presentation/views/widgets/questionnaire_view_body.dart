@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/utilities/dialogState.dart';
+import 'package:road_man_project/core/utilities/routes.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/question_list_page.dart';
 
 import '../../../../../core/utilities/base_text_styles.dart';
@@ -18,13 +21,17 @@ class QuestionnaireViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is QuestionnairePageChanged) {
           context.read<QuestionnaireCubit>().updateProgress();
+        } else if (state is QuestionnaireSubmissionSuccess) {
+          _handleSuccess(context);
+        } else if(state is QuestionnaireSubmissionError) {
+          _handleFailure(context, state);
         }
       },
       builder: (context, state) {
         final cubit = context.read<QuestionnaireCubit>();
         final screenWidth = MediaQuery.sizeOf(context).width;
 
-        if (cubit.isLoading) {
+        if (state is QuestionnaireSubmissionLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -42,6 +49,30 @@ class QuestionnaireViewBody extends StatelessWidget {
             ],
           ),
         );
+      },
+    );
+  }
+
+  void _handleSuccess(BuildContext context) {
+    customAwesomeDialog(
+      context: context,
+      isSuccess: true,
+      title: 'Recommendation have been made successfully',
+      description: 'Your Recommendation have been made successfully, Go To Your Journey.',
+      onPressed: () {
+        GoRouter.of(context).push(Routes.mainViewId);
+      },
+    );
+  }
+
+  void _handleFailure(BuildContext context, QuestionnaireSubmissionError state) {
+    customAwesomeDialog(
+      context: context,
+      isSuccess: false,
+      title: 'Recommendation Failure',
+      description: state.message,
+      onPressed: () {
+        GoRouter.of(context).pop();
       },
     );
   }

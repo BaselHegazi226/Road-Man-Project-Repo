@@ -43,6 +43,10 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
       pageQuestionsMap[pageOrder[index]] ?? [];
 
   void updateProgress() {
+    final pageQuestions = pageQuestionsMap[pageOrder[currentPage]] ?? [];
+    if (pageQuestions.isNotEmpty && pageQuestions.last.lastPage) {
+      progress = 1;
+    }
     progress = totalPages > 1 ? currentPage / (totalPages - 1) : 0.0;
     emit(ProgressUpdated(progress));
   }
