@@ -1,6 +1,6 @@
-import 'package:road_man_project/features/_07_learn_view/data/model/quiz_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_model.dart';
 
-import 'lesson_model.dart';
+import 'learn_path_lesson_model.dart';
 
 class LearningPathModel {
   final int levelNumber;
@@ -13,8 +13,8 @@ class LearningPathModel {
   final String language;
   final String typeOfContent;
   final int estimatedDuration;
-  final List<LessonModel> lessons;
-  final QuizModel quiz;
+  final List<LearnPathLessonModel> lessons;
+  final LearnPathQuizModel quiz;
 
   const LearningPathModel({
     required this.levelNumber,
@@ -46,9 +46,9 @@ class LearningPathModel {
       estimatedDuration: json['estimatedDuration'],
       lessons:
           (json['lessons'] as List)
-              .map((e) => LessonModel.fromJson(e))
+              .map((e) => LearnPathLessonModel.fromJson(e))
               .toList(),
-      quiz: QuizModel.fromJson(json['quiz']),
+      quiz: LearnPathQuizModel.fromJson(json['quiz']),
     );
   }
 

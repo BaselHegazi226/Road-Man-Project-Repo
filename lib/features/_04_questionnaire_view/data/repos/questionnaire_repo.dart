@@ -13,8 +13,10 @@ abstract class QuestionnaireRepo {
 
   Future<Either<Failure, void>> submitQuestionnaire({
     required List<QuestionnaireResponseModel> responses,
-    required String token
+    required String token,
   });
 
-  Future<Either<Failure, void>> checkQuestionnaireAnswered({required String token});
+  Future<Either<Failure, void>> checkQuestionnaireAnswered({
+    required String token,
+  });
 }

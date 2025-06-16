@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,18 +20,23 @@ class RadioQuestionWidget extends StatelessWidget {
       children: [
         Text(question.text, style: _questionTextStyle),
         const SizedBox(height: 8),
-        ...options.map((option) => RadioListTile<String>(
-          title: Text(option),
-          value: option,
-          groupValue: selectedValue,
-          onChanged: (value) => cubit.selectRadioOption(question.pageNumber, question.id, value!),
-        )),
+        ...options.map(
+          (option) => RadioListTile<String>(
+            title: Text(option),
+            value: option,
+            groupValue: selectedValue,
+            onChanged:
+                (value) => cubit.selectRadioOption(
+                  question.pageNumber,
+                  question.id,
+                  value!,
+                ),
+          ),
+        ),
       ],
     );
   }
 
-  TextStyle get _questionTextStyle => const TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-  );
+  TextStyle get _questionTextStyle =>
+      const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
 }

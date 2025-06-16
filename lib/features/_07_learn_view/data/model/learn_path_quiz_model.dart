@@ -1,13 +1,15 @@
-import 'package:road_man_project/features/_07_learn_view/data/model/question_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learning_path_question_model.dart';
 
-class QuizModel {
+
+
+class LearnPathQuizModel {
   final int id;
   final String title;
   final DateTime createdAt;
   final bool isCompleted;
-  final List<QuestionModel> questions;
+  final List<LearningPathQuestionModel> questions;
 
-  QuizModel({
+  LearnPathQuizModel({
     required this.id,
     required this.title,
     required this.createdAt,
@@ -16,15 +18,15 @@ class QuizModel {
   });
 
   // Factory method to create a QuizModel from JSON
-  factory QuizModel.fromJson(Map<String, dynamic> json) {
-    return QuizModel(
+  factory LearnPathQuizModel.fromJson(Map<String, dynamic> json) {
+    return LearnPathQuizModel(
       id: json['id'],
       title: json['title'],
       createdAt: DateTime.parse(json['createdAt']),
       isCompleted: json['isCompleted'],
       questions:
           (json['questions'] as List)
-              .map((e) => QuestionModel.fromJson(e))
+              .map((e) => LearningPathQuestionModel.fromJson(e))
               .toList(),
     );
   }

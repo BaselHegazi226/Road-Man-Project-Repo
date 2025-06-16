@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../_07_learn_view/data/model/learning_path_question_model.dart';
 import '../../../data/model/question_model.dart';
 import '../../view_model/questionnaire_cubit/questionnaire_cubit.dart';
 

@@ -1,12 +1,14 @@
-class AnswerModel {
+
+
+class LearnPathAnswerModel {
   final int id;
   final String text;
   final bool isCorrect;
 
-  AnswerModel({required this.id, required this.text, required this.isCorrect});
+  LearnPathAnswerModel({required this.id, required this.text, required this.isCorrect});
 
-  factory AnswerModel.fromJson(Map<String, dynamic> json) {
-    return AnswerModel(
+  factory LearnPathAnswerModel.fromJson(Map<String, dynamic> json) {
+    return LearnPathAnswerModel(
       id: json['id'],
       text: json['text'],
       isCorrect: json['isCorrect'],

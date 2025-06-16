@@ -26,9 +26,10 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
 
         log(data.toString());
 
-        final questions = data
-            .map((questionJson) => QuestionModel.fromJson(questionJson))
-            .toList();
+        final questions =
+            data
+                .map((questionJson) => QuestionModel.fromJson(questionJson))
+                .toList();
         return right(questions);
       } else {
         return left(ServerFailure(errorMessage: 'Failed to fetch questions.'));
@@ -55,8 +56,11 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
         final question = QuestionModel.fromJson(questionJson);
         return right(question);
       } else {
-        return left(ServerFailure(
-            errorMessage: 'Failed to fetch question for page $pageNumber.'));
+        return left(
+          ServerFailure(
+            errorMessage: 'Failed to fetch question for page $pageNumber.',
+          ),
+        );
       }
     } on DioException catch (dioException) {
       return left(ServerFailure(errorMessage: dioException.error.toString()));
@@ -68,17 +72,16 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
   @override
   Future<Either<Failure, void>> submitQuestionnaire({
     required List<QuestionnaireResponseModel> responses,
-    required String token
+    required String token,
   }) async {
     final String path = '$baseUrl/Recommendation';
-
 
     try {
       final Map<String, dynamic> requestBody = {
         'userAnswers': responses.map((r) => r.toJson()).toList(),
       };
 
-      if(kDebugMode){
+      if (kDebugMode) {
         log('answwers ${requestBody.toString()}');
       }
       final response = await dio.post(
@@ -87,15 +90,16 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
         data: requestBody,
       );
 
-      if(kDebugMode){
+      if (kDebugMode) {
         log("Response data: ${response.data}");
       }
 
       if (response.statusCode == 200) {
         return right(null);
       } else {
-        return left(ServerFailure(
-            errorMessage: 'Failed to submit questionnaire.'));
+        return left(
+          ServerFailure(errorMessage: 'Failed to submit questionnaire.'),
+        );
       }
     } on DioException catch (dioException) {
       return left(ServerFailure(errorMessage: dioException.error.toString()));
@@ -108,7 +112,9 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
   }
 
   @override
-  Future<Either<Failure, void>> checkQuestionnaireAnswered({required String token}) async {
+  Future<Either<Failure, void>> checkQuestionnaireAnswered({
+    required String token,
+  }) async {
     final String path = '$baseUrl/Accounts/check-questionnaire-answered';
     try {
       final response = await dio.get(
@@ -123,8 +129,9 @@ class QuestionnaireRepoImplement implements QuestionnaireRepo {
       if (response.statusCode == 200) {
         return right(null);
       } else {
-        return left(ServerFailure(
-            errorMessage: 'Failed to check questionnaire answered'));
+        return left(
+          ServerFailure(errorMessage: 'Failed to check questionnaire answered'),
+        );
       }
     } on DioException catch (dioException) {
       print('proooblem is ${dioException.message}');

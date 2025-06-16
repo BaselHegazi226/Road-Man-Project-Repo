@@ -1,20 +1,22 @@
-import 'answer_model.dart';
+import 'learn_path_answer_model.dart';
 
-class QuestionModel {
+
+
+class LearningPathQuestionModel {
   final int id;
   final String text;
-  final List<AnswerModel> answers;
+  final List<LearnPathAnswerModel> answers;
 
-  QuestionModel({required this.id, required this.text, required this.answers});
+  LearningPathQuestionModel({required this.id, required this.text, required this.answers});
 
   // Factory method to create a QuestionModel from JSON
-  factory QuestionModel.fromJson(Map<String, dynamic> json) {
-    return QuestionModel(
+  factory LearningPathQuestionModel.fromJson(Map<String, dynamic> json) {
+    return LearningPathQuestionModel(
       id: json['id'],
       text: json['text'],
       answers:
           (json['answers'] as List)
-              .map((e) => AnswerModel.fromJson(e))
+              .map((e) => LearnPathAnswerModel.fromJson(e))
               .toList(),
     );
   }

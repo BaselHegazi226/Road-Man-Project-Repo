@@ -1,7 +1,9 @@
-class LessonViewCardModel {
+
+
+class LearnPathLessonViewCardModel {
   final String lesson, lessonTitle, lessonTime;
   final bool isAvailable;
-  const LessonViewCardModel({
+  const LearnPathLessonViewCardModel({
     required this.lesson,
     required this.lessonTitle,
     required this.lessonTime,

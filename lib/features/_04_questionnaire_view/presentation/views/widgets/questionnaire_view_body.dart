@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/question_list_page.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/widgets/question_page.dart';
 
 import '../../../../../core/utilities/base_text_styles.dart';
 import '../../view_model/questionnaire_cubit/questionnaire_cubit.dart';
 import '../../view_model/questionnaire_cubit/questionnaire_state.dart';
+import 'flow_question_widget.dart';
 import 'gradient_progress_bar.dart';
 import 'navigation_button.dart';
-import 'flow_question_widget.dart';
-import 'radio_question_widget.dart';
-import 'checkbox_question_widget.dart';
 
 class QuestionnaireViewBody extends StatelessWidget {
   const QuestionnaireViewBody({super.key});
@@ -84,12 +81,15 @@ class QuestionnaireViewBody extends StatelessWidget {
 
   Widget _buildNavigationButtons(QuestionnaireCubit cubit) {
     final currentPageData = cubit.currentPageData;
-    final isLastPage = currentPageData.isNotEmpty && currentPageData.last.lastPage;
+    final isLastPage =
+        currentPageData.isNotEmpty && currentPageData.last.lastPage;
 
     return NavigationButtons(
       currentPage: cubit.currentPage,
       totalPages: cubit.totalPages,
-      showNext: currentPageData.isEmpty || currentPageData.first.questionForm != 'Flow',
+      showNext:
+          currentPageData.isEmpty ||
+          currentPageData.first.questionForm != 'Flow',
       isFinish: isLastPage,
       onPrevious: cubit.goToPreviousPage,
       onNext: cubit.goToNextPage,

@@ -1,12 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/core/manager/tokens_manager.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/data/model/answer_model.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/data/model/question_model.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/data/model/questionnaire_response_model.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/data/repos/questionnaire_repo.dart';
 import 'package:road_man_project/features/_04_questionnaire_view/presentation/view_model/questionnaire_cubit/questionnaire_state.dart';
+
+import '../../../data/model/answer_model.dart';
+import '../../../data/model/question_model.dart';
+import '../../../data/model/questionnaire_response_model.dart';
+import '../../../data/repos/questionnaire_repo.dart';
 
 class QuestionnaireCubit extends Cubit<QuestionnaireState> {
   final QuestionnaireRepo questionnaireRepo;
@@ -22,7 +24,8 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
   double progress = 0.0;
   bool isLoading = true;
 
-  QuestionnaireCubit({required this.questionnaireRepo}) : super(QuestionnaireInitial()) {
+  QuestionnaireCubit({required this.questionnaireRepo})
+    : super(QuestionnaireInitial()) {
     pageController = PageController();
     _init();
   }
@@ -57,8 +60,10 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     final result = await questionnaireRepo.fetchAllQuestions();
 
     result.fold(
-          (failure) => emit(QuestionsError(failure.errorMessage ?? 'Failed to fetch questions')),
-          (questions) {
+      (failure) => emit(
+        QuestionsError(failure.errorMessage ?? 'Failed to fetch questions'),
+      ),
+      (questions) {
         _processQuestions(questions);
         isLoading = false;
         emit(QuestionsLoaded(questions));
@@ -75,9 +80,7 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     userResponses.clear();
 
     for (final question in questions) {
-      pageQuestionsMap
-          .putIfAbsent(question.pageNumber, () => [])
-          .add(question);
+      pageQuestionsMap.putIfAbsent(question.pageNumber, () => []).add(question);
     }
 
     pageOrder.addAll(pageQuestionsMap.keys.toList()..sort());
@@ -110,7 +113,8 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
 
     navigationStack.add(currentPage);
 
-    if (pageQuestions.isNotEmpty && pageQuestions.first.questionForm == 'Flow') {
+    if (pageQuestions.isNotEmpty &&
+        pageQuestions.first.questionForm == 'Flow') {
       _handleFlowNavigation(pageQuestions.first);
     } else {
       _handleRegularNavigation();
@@ -152,10 +156,12 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
   }
 
   int _findNextPageNumber(QuestionModel question, String selectedOptionText) {
-    return question.answers.firstWhere(
+    return question.answers
+        .firstWhere(
           (a) => a.text == selectedOptionText,
-      orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
-    ).nextPageNumber;
+          orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
+        )
+        .nextPageNumber;
   }
 
   void selectFlowOption(int questionId, AnswerModel option) {
@@ -168,7 +174,7 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     final question = _findQuestionById(questionId);
     if (question != null) {
       final answer = question.answers.firstWhere(
-            (a) => a == option,
+        (a) => a == option,
         orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
       );
 
@@ -201,15 +207,16 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
   }
 
   void selectCheckboxOption(
-      int pageNumber,
-      int questionId,
-      String value,
-      bool isSelected,
-      ) {
+    int pageNumber,
+    int questionId,
+    String value,
+    bool isSelected,
+  ) {
     pageSelections.putIfAbsent(pageNumber, () => {});
     pageSelections[pageNumber]!.putIfAbsent(questionId, () => <String>[]);
 
-    final selectedOptions = pageSelections[pageNumber]![questionId] as List<String>;
+    final selectedOptions =
+        pageSelections[pageNumber]![questionId] as List<String>;
 
     if (isSelected && !selectedOptions.contains(value)) {
       selectedOptions.add(value);
@@ -271,14 +278,11 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
       final question = _findQuestionById(questionId);
       if (question != null && selectedOption != null) {
         final answer = question.answers.firstWhere(
-              (a) => a.text == selectedOption,
+          (a) => a.text == selectedOption,
           orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
         );
         if (answer.id > 0) {
-          submitAnswer(
-            questionId: questionId,
-            answerId: answer.id,
-          );
+          submitAnswer(questionId: questionId, answerId: answer.id);
         }
       }
     });
@@ -291,7 +295,8 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
         if (question != null) {
           if (question.questionForm == 'RadioButton' && selected != null) {
             _submitRadioAnswer(question, selected);
-          } else if (question.questionForm == 'CheckBox' && selected is List<String>) {
+          } else if (question.questionForm == 'CheckBox' &&
+              selected is List<String>) {
             _submitCheckboxAnswers(question, selected);
           }
         }
@@ -301,28 +306,36 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
 
   void _submitRadioAnswer(QuestionModel question, dynamic selected) {
     final answer = question.answers.firstWhere(
-          (a) => a.text == selected,
+      (a) => a.text == selected,
       orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
     );
     if (answer.id > 0) {
-      submitAnswer(
-        questionId: question.id,
-        answerId: answer.id,
-      );
+      submitAnswer(questionId: question.id, answerId: answer.id);
     }
   }
 
   void _submitCheckboxAnswers(
-      QuestionModel question,
-      List<String> selectedOptions,
-      ) {
-    final selectedAnswerIds = selectedOptions
-        .map((option) => question.answers.firstWhere(
-          (a) => a.text == option,
-      orElse: () => AnswerModel(id: -1, text: '', nextPageNumber: 0),
-    ).id)
-        .where((id) => id > 0)
-        .toList();
+    QuestionModel question,
+    List<String> selectedOptions,
+  ) {
+    final selectedAnswerIds =
+        selectedOptions
+            .map(
+              (option) =>
+                  question.answers
+                      .firstWhere(
+                        (a) => a.text == option,
+                        orElse:
+                            () => AnswerModel(
+                              id: -1,
+                              text: '',
+                              nextPageNumber: 0,
+                            ),
+                      )
+                      .id,
+            )
+            .where((id) => id > 0)
+            .toList();
 
     if (selectedAnswerIds.isNotEmpty) {
       submitMultipleAnswers(
@@ -343,17 +356,13 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     return null;
   }
 
-  void submitAnswer({
-    required int questionId,
-    required int answerId,
-  }) {
+  void submitAnswer({required int questionId, required int answerId}) {
     // Remove existing answer if any
     userResponses.removeWhere((response) => response.questionId == questionId);
 
-    userResponses.add(QuestionnaireResponseModel(
-      questionId: questionId,
-      answerIds: [answerId],
-    ));
+    userResponses.add(
+      QuestionnaireResponseModel(questionId: questionId, answerIds: [answerId]),
+    );
 
     emit(AnswerSubmissionSuccess(questionId, answerId));
   }
@@ -365,10 +374,9 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
     // Remove existing answer if any
     userResponses.removeWhere((response) => response.questionId == questionId);
 
-    userResponses.add(QuestionnaireResponseModel(
-      questionId: questionId,
-      answerIds: answerIds,
-    ));
+    userResponses.add(
+      QuestionnaireResponseModel(questionId: questionId, answerIds: answerIds),
+    );
 
     emit(MultipleAnswersSubmissionSuccess(questionId, answerIds));
   }
@@ -388,8 +396,12 @@ class QuestionnaireCubit extends Cubit<QuestionnaireState> {
       );
 
       result.fold(
-            (failure) => emit(QuestionnaireSubmissionError(failure.errorMessage ?? 'Submission failed')),
-            (_) => emit(QuestionnaireSubmissionSuccess()),
+        (failure) => emit(
+          QuestionnaireSubmissionError(
+            failure.errorMessage ?? 'Submission failed',
+          ),
+        ),
+        (_) => emit(QuestionnaireSubmissionSuccess()),
       );
     } catch (e) {
       emit(QuestionnaireSubmissionError(e.toString()));

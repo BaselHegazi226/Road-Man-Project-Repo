@@ -1,11 +1,13 @@
-class LessonModel {
+
+
+class LearnPathLessonModel {
   final int lessonNumber;
   final int id;
   final String title;
   final String url;
   final int estimatedDuration;
 
-  LessonModel({
+  LearnPathLessonModel({
     required this.lessonNumber,
     required this.id,
     required this.title,
@@ -14,8 +16,8 @@ class LessonModel {
   });
 
   // Factory method to create a LessonModel from JSON
-  factory LessonModel.fromJson(Map<String, dynamic> json) {
-    return LessonModel(
+  factory LearnPathLessonModel.fromJson(Map<String, dynamic> json) {
+    return LearnPathLessonModel(
       lessonNumber: json['lessonNumber'],
       id: json['id'],
       title: json['title'],

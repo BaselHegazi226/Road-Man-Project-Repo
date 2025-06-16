@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/data/model/answer_model.dart';
 
 import '../../../../../core/utilities/base_text_styles.dart';
+import '../../../data/model/answer_model.dart';
 import 'option_button.dart';
 
 class QuestionPage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
-import '../../../../data/model/lesson_view_card_model.dart';
+import '../../../../data/model/learn_path_lesson_view_card_model.dart';
 import 'lesson_view_card_component_section.dart';
 
 class LessonViewCardBody extends StatelessWidget {
@@ -13,7 +13,7 @@ class LessonViewCardBody extends StatelessWidget {
   });
   final double screenHeight;
   final double screenWidth;
-  final LessonViewCardModel lessonViewCardModel;
+  final LearnPathLessonViewCardModel lessonViewCardModel;
   @override
   Widget build(BuildContext context) {
     return Row(

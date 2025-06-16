@@ -17,12 +17,13 @@ class QuestionListPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: sortedQuestions.map((question) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: _buildQuestionWidget(question),
-          );
-        }).toList(),
+        children:
+            sortedQuestions.map((question) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: _buildQuestionWidget(question),
+              );
+            }).toList(),
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:road_man_project/features/_01_splash_view2/splash_view2.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/forget_password_view.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/reset_password_view.dart';
 import 'package:road_man_project/features/_03_auth_view/presentation/views/verification_otp_view.dart';
-import 'package:road_man_project/features/_04_questionnaire_view/presentation/views/questionnaire_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/learning_path_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/lesson_view.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/quiz_view.dart';
@@ -18,6 +17,7 @@ import '../../features/_02_onboarding_view/presentation/view/onboarding_page_vie
 import '../../features/_03_auth_view/presentation/views/sign_in_view.dart';
 import '../../features/_03_auth_view/presentation/views/sign_up_view.dart';
 import '../../features/_03_auth_view/presentation/views/verification_email_view.dart';
+import '../../features/_04_questionnaire_view/presentation/views/questionnaire_view.dart';
 import '../../features/_05_main_view/presentation/view/main_view.dart';
 import '../../features/_09_profile_view/presentation/view/about_app_view.dart';
 import '../../features/_09_profile_view/presentation/view/edit_profile_view.dart';
@@ -30,7 +30,7 @@ import 'routes.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
-    initialLocation: Routes.questionnaireViewId,
+    initialLocation: Routes.splashView2Id,
     routes: [
       GoRoute(
         path: Routes.splashView2Id,

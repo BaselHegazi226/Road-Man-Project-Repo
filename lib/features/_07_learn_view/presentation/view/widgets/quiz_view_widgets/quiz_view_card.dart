@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_07_learn_view/data/model/quiz_view_card_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_view_card_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_question_answers.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
@@ -16,7 +16,7 @@ class QuizViewCard extends StatelessWidget {
   });
 
   final double screenHeight, screenWidth;
-  final QuizViewCardModel quizViewCardModel;
+  final LearnPathQuizViewCardModel quizViewCardModel;
   final String? selectedAnswer;
   final bool hasAnswered;
   final Function(String, bool) onAnswerSelected;

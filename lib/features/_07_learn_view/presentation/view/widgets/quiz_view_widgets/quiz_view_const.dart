@@ -1,8 +1,8 @@
-import 'package:road_man_project/features/_07_learn_view/data/model/quiz_view_card_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_view_card_model.dart';
 
 class QuizViewConst {
-  static const List<QuizViewCardModel> quizViewCardModelList = [
-    QuizViewCardModel(
+  static const List<LearnPathQuizViewCardModel> quizViewCardModelList = [
+    LearnPathQuizViewCardModel(
       questionId: 1,
       questionText: '1- What is the primary goal of UX design ?',
       answers: [
@@ -28,7 +28,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 2,
       questionText: '2- What is the importance of wireframes in UX design?',
       answers: [
@@ -54,7 +54,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 3,
       questionText: '3- What is the main focus of UX design?',
       answers: [
@@ -80,7 +80,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 4,
       questionText: '4- What is a usability test in UX design?',
       answers: [
@@ -106,7 +106,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 5,
       questionText: '5- What is a prototype in UX design?',
       answers: [
@@ -134,7 +134,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 6,
       questionText: '6- What does "user-centered design" mean?',
       answers: [
@@ -160,7 +160,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 7,
       questionText: '7- How important is testing in UX design?',
       answers: [
@@ -187,7 +187,7 @@ class QuizViewConst {
         ),
       ],
     ),
-    QuizViewCardModel(
+    LearnPathQuizViewCardModel(
       questionId: 8,
       questionText: '8- What is the difference between UI and UX?',
       answers: [

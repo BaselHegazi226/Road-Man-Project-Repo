@@ -12,9 +12,10 @@ class QuestionnaireView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => QuestionnaireCubit(
-        questionnaireRepo: QuestionnaireRepoImplement(),
-      )..fetchAllQuestions(),
+      create:
+          (context) => QuestionnaireCubit(
+            questionnaireRepo: QuestionnaireRepoImplement(),
+          )..fetchAllQuestions(),
       child: Scaffold(
         backgroundColor: kAppPrimaryWhiteColor,
         appBar: AppBar(backgroundColor: kAppPrimaryWhiteColor, elevation: 0),

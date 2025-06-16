@@ -5,9 +5,6 @@ class RecommendationAnswer {
   RecommendationAnswer({required this.questionId, required this.answerIds});
 
   Map<String, dynamic> toJson() {
-    return {
-      'questionId': questionId,
-      'answerIds': answerIds,
-    };
+    return {'questionId': questionId, 'answerIds': answerIds};
   }
 }

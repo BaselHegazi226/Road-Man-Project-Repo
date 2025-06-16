@@ -18,10 +18,6 @@ class AnswerModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'text': text,
-      'nextPageNumber': nextPageNumber,
-    };
+    return {'id': id, 'text': text, 'nextPageNumber': nextPageNumber};
   }
 }

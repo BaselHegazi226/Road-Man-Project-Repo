@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_07_learn_view/data/model/lesson_view_card_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_view_card_model.dart';
 
 import 'lesson_view_card_body.dart';
 
 class LessonViewCard extends StatelessWidget {
   const LessonViewCard({super.key, required this.lessonViewCardModel});
-  final LessonViewCardModel lessonViewCardModel;
+  final LearnPathLessonViewCardModel lessonViewCardModel;
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.sizeOf(context).width;

@@ -1,9 +1,11 @@
-class QuizViewCardModel {
+
+
+class LearnPathQuizViewCardModel {
   final int questionId;
   final String questionText;
   final List<QuizViewCardAnswer> answers;
 
-  const QuizViewCardModel({
+  const LearnPathQuizViewCardModel({
     required this.questionId,
     required this.questionText,
     required this.answers,
