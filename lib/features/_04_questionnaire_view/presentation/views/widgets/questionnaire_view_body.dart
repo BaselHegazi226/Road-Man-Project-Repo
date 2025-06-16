@@ -122,6 +122,8 @@ class QuestionnaireViewBody extends StatelessWidget {
     );
   }
 
+  //basel
+
   Widget _buildNavigationButtons(QuestionnaireCubit cubit) {
     final currentPageData = cubit.currentPageData;
     final isLastPage =
