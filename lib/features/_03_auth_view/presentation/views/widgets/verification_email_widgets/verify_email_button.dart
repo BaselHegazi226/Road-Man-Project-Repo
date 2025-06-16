@@ -51,7 +51,7 @@ class VerifyEmailButton extends StatelessWidget {
               description: 'Go To Your Questionnaire!',
               isSuccess: true,
               onPressed: () {
-                GoRouter.of(context).push(Routes.questionnaireViewId);
+                GoRouter.of(context).go(Routes.questionnaireViewId);
               },
             );
           } else if (state is VerificationEmailFailure) {
