@@ -1,7 +1,5 @@
 import 'package:road_man_project/features/_07_learn_view/data/model/learning_path_question_model.dart';
 
-
-
 class LearnPathQuizModel {
   final int id;
   final String title;
@@ -9,7 +7,7 @@ class LearnPathQuizModel {
   final bool isCompleted;
   final List<LearningPathQuestionModel> questions;
 
-  LearnPathQuizModel({
+  const LearnPathQuizModel({
     required this.id,
     required this.title,
     required this.createdAt,

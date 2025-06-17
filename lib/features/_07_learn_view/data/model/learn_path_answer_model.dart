@@ -1,11 +1,13 @@
-
-
 class LearnPathAnswerModel {
   final int id;
   final String text;
   final bool isCorrect;
 
-  LearnPathAnswerModel({required this.id, required this.text, required this.isCorrect});
+  const LearnPathAnswerModel({
+    required this.id,
+    required this.text,
+    required this.isCorrect,
+  });
 
   factory LearnPathAnswerModel.fromJson(Map<String, dynamic> json) {
     return LearnPathAnswerModel(

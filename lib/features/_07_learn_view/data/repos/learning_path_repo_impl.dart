@@ -17,6 +17,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
         learningPathPath,
         options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
+      print('Learning Path Data from impl = $response');
 
       if (response.statusCode == 200) {
         final learningPathResponse = LearningPathResponse.fromJson(

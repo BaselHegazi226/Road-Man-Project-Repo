@@ -1,5 +1,3 @@
-
-
 class LearnPathLessonModel {
   final int lessonNumber;
   final int id;
@@ -7,7 +5,7 @@ class LearnPathLessonModel {
   final String url;
   final int estimatedDuration;
 
-  LearnPathLessonModel({
+  const LearnPathLessonModel({
     required this.lessonNumber,
     required this.id,
     required this.title,

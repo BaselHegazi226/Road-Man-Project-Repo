@@ -21,9 +21,9 @@ class LessonViewCardBody extends StatelessWidget {
       children: [
         LessonViewCardComponentSection(
           screenHeight: screenHeight,
-          lesson: lessonViewCardModel.lesson,
-          lessonTitle: lessonViewCardModel.lessonTitle,
-          lessonTime: lessonViewCardModel.lessonTime,
+          lesson: lessonViewCardModel.lessonNumber,
+          lessonTitle: lessonViewCardModel.title,
+          lessonTime: lessonViewCardModel.estimatedDuration,
         ),
         Icon(
           lessonViewCardModel.isAvailable
