@@ -1,8 +1,18 @@
+import 'package:hive/hive.dart';
+
 import 'learn_path_answer_model.dart';
 
+part 'learning_path_question_model.g.dart';
+
+@HiveType(typeId: 6)
 class LearningPathQuestionModel {
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String text;
+
+  @HiveField(2)
   final List<LearnPathAnswerModel> answers;
 
   const LearningPathQuestionModel({
@@ -11,7 +21,6 @@ class LearningPathQuestionModel {
     required this.answers,
   });
 
-  // Factory method to create a QuestionModel from JSON
   factory LearningPathQuestionModel.fromJson(Map<String, dynamic> json) {
     return LearningPathQuestionModel(
       id: json['id'],
@@ -23,7 +32,6 @@ class LearningPathQuestionModel {
     );
   }
 
-  // Convert QuestionModel to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

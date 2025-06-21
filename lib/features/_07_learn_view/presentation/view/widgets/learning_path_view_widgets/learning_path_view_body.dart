@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:road_man_project/core/manager/tokens_manager.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
-import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit.dart';
+import 'package:road_man_project/core/utilities/show_snack_bar.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_model.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/learning_path_view_widgets/learning_path_step.dart';
 import 'package:road_man_project/generated/assets.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
-import '../../../../../../core/manager/tokens_manager.dart';
-import '../../../../../../core/utilities/show_snack_bar.dart';
+import '../../../../../../core/manager/user_learning_path_manager/user_learning_path_manager.dart';
+import '../../../view_model/learning_path_bloc/learning_path_cubit/learning_path_cubit.dart';
+import '../../../view_model/learning_path_bloc/learning_path_cubit/learning_path_states.dart';
 import 'build_specific_step.dart';
-import 'learning_path_step.dart';
 
 class LearningPathViewBody extends StatefulWidget {
   const LearningPathViewBody({super.key});
@@ -20,30 +25,33 @@ class LearningPathViewBody extends StatefulWidget {
 }
 
 class _LearningPathViewBodyState extends State<LearningPathViewBody> {
+  List<LearnPathModel> localLearningPaths = [];
+
   @override
   void initState() {
     super.initState();
-
-    // لضمان سلامة الـ context
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initializeUserInfo();
-    });
+    _loadLearningPaths();
   }
 
-  Future<void> _initializeUserInfo() async {
+  Future<void> _loadLearningPaths() async {
     final cubit = BlocProvider.of<LearningPathCubit>(context);
+    final existingPaths = UserLearningPathHelper.getAllLearningPaths();
 
-    final userTokenModel = await SecureStorageHelper.getUserTokens();
+    if (existingPaths.isEmpty) {
+      final userTokenModel = await SecureStorageHelper.getUserTokens();
+      if (!mounted) return;
 
-    if (!mounted) return;
-
-    if (userTokenModel != null) {
-      final data = await cubit.getLearningPathFun(
-        userToken: userTokenModel.token,
-      );
-      print('Learning Path Data = $data');
+      if (userTokenModel != null) {
+        await cubit.getLearningPathFun(userToken: userTokenModel.token);
+      } else {
+        showSafeSnackBar(
+          context,
+          "Session is expired...",
+          kAppPrimaryWrongColor,
+        );
+      }
     } else {
-      showSafeSnackBar(context, "Session is expired...", kAppPrimaryWrongColor);
+      setState(() => localLearningPaths = existingPaths);
     }
   }
 
@@ -52,105 +60,138 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Learning path background image
-          Positioned.fill(
-            child: SvgPicture.asset(
-              Assets.learningPathBackgroundImage,
-              fit: BoxFit.cover,
-            ),
-          ),
-          //learning path
-          CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(childCount: 5, (
-                  context,
-                  index,
-                ) {
-                  final level = index;
-                  final isEvenLevel = level % 2 == 0;
+    return BlocConsumer<LearningPathCubit, LearningPathStates>(
+      listener: (context, state) {
+        if (state is LearningPathSuccess) {
+          final fetchedPaths =
+              (state.learningPath['learningPath'] as List)
+                  .map(
+                    (e) => LearnPathModel.fromJson(e as Map<String, dynamic>),
+                  )
+                  .toList();
 
-                  final centerStep = Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: screenHeight * .03,
-                      ),
-                      child: LearningPathStep(
-                        onPressed: () {},
-                        image: Assets.learningPathFinishedStarImage,
-                        iconColor: const Color(0xff69A123),
-                        backgroundColor: const Color(0xff9EDA53),
-                        shadowColor: const Color(0xff69A123),
-                      ),
-                    ),
-                  );
+          final allLessons = <LearnPathLessonModel>[];
+          final allQuizzes = <LearnPathQuizModel>[];
 
-                  final firstOffset = screenWidth * 0.2;
-                  final secondOffset = screenWidth * 0.1;
+          for (final path in fetchedPaths) {
+            allLessons.addAll(path.lessons);
+            allQuizzes.add(path.quiz);
+          }
 
-                  final sideSteps =
-                      isEvenLevel
-                          ? [
-                            BuildSpecificStep(
-                              onPressed: () {
-                                GoRouter.of(context).push(Routes.lessonViewId);
-                              },
-                              alignment: Alignment.centerRight,
-                              horizontalOffset: firstOffset,
-                              image: Assets.learningPathActiveLessonImage,
-                              backgroundColor: const Color(0xff5385DA),
-                              iconColor: Colors.white54,
-                              shadowColor: const Color(0xff2961BE),
-                            ),
-                            BuildSpecificStep(
-                              onPressed: () {
-                                GoRouter.of(context).push(Routes.quizViewId);
-                              },
-                              alignment: Alignment.centerRight,
-                              horizontalOffset: secondOffset,
-                              image: Assets.learningPathActiveLessonImage,
-                              backgroundColor: const Color(0xffE5E5E5),
-                              iconColor: const Color(0xffB7B7B7),
-                              shadowColor: const Color(0xffB7B7B7),
-                            ),
-                          ]
-                          : [
-                            BuildSpecificStep(
-                              onPressed: () {
-                                GoRouter.of(context).push(Routes.lessonViewId);
-                              },
-                              alignment: Alignment.centerLeft,
-                              horizontalOffset: firstOffset,
-                              image: Assets.learningPathActiveLessonImage,
-                              backgroundColor: const Color(0xff5385DA),
-                              iconColor: Colors.white54,
-                              shadowColor: const Color(0xff2961BE),
-                            ),
-                            BuildSpecificStep(
-                              onPressed: () {
-                                GoRouter.of(context).push(Routes.quizViewId);
-                              },
-                              alignment: Alignment.centerLeft,
-                              horizontalOffset: secondOffset,
-                              image: Assets.learningPathActiveLessonImage,
-                              backgroundColor: const Color(0xffE5E5E5),
-                              iconColor: const Color(0xffB7B7B7),
-                              shadowColor: const Color(0xffB7B7B7),
-                            ),
-                          ];
+          UserLearningPathHelper.saveLearningPaths(fetchedPaths);
+          UserLearningPathHelper.saveLessons(allLessons);
+          UserLearningPathHelper.saveQuizzes(allQuizzes);
 
-                  return Column(children: [centerStep, ...sideSteps]);
-                }),
+          setState(() => localLearningPaths = fetchedPaths);
+        }
+      },
+      builder: (context, state) {
+        if (state is LearningPathLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final limitedLevels =
+            localLearningPaths.length >= 5
+                ? localLearningPaths.sublist(0, 5)
+                : localLearningPaths;
+
+        return Scaffold(
+          body: Stack(
+            children: [
+              Positioned.fill(
+                child: SvgPicture.asset(
+                  Assets.learningPathBackgroundImage,
+                  fit: BoxFit.cover,
+                ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: screenHeight * .0625)),
+              CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final levelIndex = index ~/ 3;
+                      if (levelIndex >= limitedLevels.length) return null;
+
+                      final level = limitedLevels[levelIndex];
+                      final isEven = levelIndex % 2 == 0;
+                      final lessonOffset = screenWidth * 0.2;
+                      final quizOffset = screenWidth * 0.1;
+                      final type = index % 3;
+
+                      switch (type) {
+                        case 0:
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * .02,
+                            ),
+                            child: Center(
+                              child: LevelStep(
+                                image: Assets.learningPathFinishedStarImage,
+                                backgroundColor: const Color(0xff9EDA53),
+                                shadowColor: const Color(0xff69A123),
+                                iconColor: const Color(0xff69A123),
+                                onPressed: () {},
+                              ),
+                            ),
+                          );
+                        case 1:
+                          if (level.lessons.isNotEmpty) {
+                            return LessonStep(
+                              onPressed: () {
+                                GoRouter.of(context).push(
+                                  Routes.lessonViewId,
+                                  extra: level.lessons,
+                                );
+                              },
+                              alignment:
+                                  isEven
+                                      ? Alignment.centerLeft
+                                      : Alignment.centerRight,
+                              horizontalOffset: lessonOffset,
+                              image: Assets.learningPathActiveLessonImage,
+                              backgroundColor: const Color(0xff5385DA),
+                              iconColor: Colors.white54,
+                              shadowColor: const Color(0xff2961BE),
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        case 2:
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * .015,
+                            ),
+                            child: QuizStep(
+                              onPressed: () {
+                                GoRouter.of(
+                                  context,
+                                ).push(Routes.quizViewId, extra: level.quiz);
+                              },
+                              alignment:
+                                  isEven
+                                      ? Alignment.centerLeft
+                                      : Alignment.centerRight,
+                              horizontalOffset: quizOffset,
+                              image: Assets.learningPathActiveQuizImage,
+                              backgroundColor: const Color(0xff5385DA),
+                              iconColor: Colors.white54,
+                              shadowColor: const Color(0xff2961BE),
+                            ),
+                          );
+                        default:
+                          return const SizedBox.shrink();
+                      }
+                    }, childCount: limitedLevels.length * 3),
+                  ),
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: screenHeight * 0.05),
+                  ),
+                ],
+              ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

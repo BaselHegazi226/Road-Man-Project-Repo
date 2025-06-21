@@ -1,22 +1,49 @@
-import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_model.dart';
+import 'package:hive/hive.dart';
 
 import 'learn_path_lesson_model.dart';
+import 'learn_path_quiz_model.dart';
 
-class LearningPathModel {
+part 'learn_path_model.g.dart'; // قم بإضافة هذا الجزء
+
+@HiveType(typeId: 3)
+class LearnPathModel {
+  @HiveField(0)
   final int levelNumber;
+
+  @HiveField(1)
   final int id;
+
+  @HiveField(2)
   final int progressStatus;
+
+  @HiveField(3)
   final int trackResourceId;
+
+  @HiveField(4)
   final String url;
+
+  @HiveField(5)
   final String title;
+
+  @HiveField(6)
   final String level;
+
+  @HiveField(7)
   final String language;
+
+  @HiveField(8)
   final String typeOfContent;
+
+  @HiveField(9)
   final int estimatedDuration;
+
+  @HiveField(10)
   final List<LearnPathLessonModel> lessons;
+
+  @HiveField(11)
   final LearnPathQuizModel quiz;
 
-  const LearningPathModel({
+  const LearnPathModel({
     required this.levelNumber,
     required this.id,
     required this.progressStatus,
@@ -31,9 +58,8 @@ class LearningPathModel {
     required this.quiz,
   });
 
-  // Factory method to create a LearningPathModel from JSON
-  factory LearningPathModel.fromJson(Map<String, dynamic> json) {
-    return LearningPathModel(
+  factory LearnPathModel.fromJson(Map<String, dynamic> json) {
+    return LearnPathModel(
       levelNumber: json['levelNumber'],
       id: json['id'],
       progressStatus: json['progressStatus'],
@@ -52,7 +78,6 @@ class LearningPathModel {
     );
   }
 
-  // Convert LearningPathModel to JSON
   Map<String, dynamic> toJson() {
     return {
       'levelNumber': levelNumber,

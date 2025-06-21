@@ -1,11 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_view_card_model.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:road_man_project/core/helper/const_variables.dart';
+import 'package:road_man_project/core/utilities/custom_flexible_widget.dart';
+import 'package:road_man_project/core/utilities/show_snack_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../data/model/learn_path_lesson_model.dart';
 import 'lesson_view_card_body.dart';
 
-class LessonViewCard extends StatelessWidget {
-  const LessonViewCard({super.key, required this.lessonViewCardModel});
-  final LearnPathLessonViewCardModel lessonViewCardModel;
+class LessonViewCard extends StatefulWidget {
+  const LessonViewCard({super.key, required this.learnPathLessonModel});
+  final LearnPathLessonModel learnPathLessonModel;
+
+  @override
+  State<LessonViewCard> createState() => _LessonViewCardState();
+}
+
+class _LessonViewCardState extends State<LessonViewCard> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.sizeOf(context).width;
@@ -22,10 +34,29 @@ class LessonViewCard extends StatelessWidget {
           topLeft: Radius.circular(screenWidth * .04),
         ),
       ),
-      child: LessonViewCardBody(
-        screenHeight: screenHeight,
-        screenWidth: screenWidth,
-        lessonViewCardModel: lessonViewCardModel,
+      child: CustomFlexibleWidget(
+        child: LessonViewCardBody(
+          screenHeight: screenHeight,
+          screenWidth: screenWidth,
+          learnPathLessonModel: widget.learnPathLessonModel,
+          onPressed: () async {
+            final Uri url = Uri.parse(widget.learnPathLessonModel.url);
+            if (await canLaunchUrl(url)) {
+              log('yes loading and will go to link source');
+              await launchUrl(url, mode: LaunchMode.externalApplication);
+            } else {
+              if (mounted) {
+                setState(() {
+                  showSafeSnackBar(
+                    context,
+                    'unable to open link try again!',
+                    kAppPrimaryWrongColor,
+                  );
+                });
+              }
+            }
+          },
+        ),
       ),
     );
   }

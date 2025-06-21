@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LearningPathStep extends StatelessWidget {
+class LevelStep extends StatelessWidget {
   final String image;
   final double iconSize;
   final Color iconColor, backgroundColor, shadowColor;
   final VoidCallback onPressed;
 
-  const LearningPathStep({
+  const LevelStep({
     super.key,
     required this.image,
     this.iconSize = 48,

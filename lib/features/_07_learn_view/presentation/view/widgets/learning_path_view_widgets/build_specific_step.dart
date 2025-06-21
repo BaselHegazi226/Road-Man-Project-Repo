@@ -3,8 +3,8 @@ import 'package:road_man_project/generated/assets.dart';
 
 import 'learning_path_step.dart';
 
-class BuildSpecificStep extends StatelessWidget {
-  const BuildSpecificStep({
+class LessonStep extends StatelessWidget {
+  const LessonStep({
     super.key,
     required this.alignment,
     required this.onPressed,
@@ -31,7 +31,7 @@ class BuildSpecificStep extends StatelessWidget {
           left: alignment == Alignment.centerLeft ? horizontalOffset : 0,
           right: alignment == Alignment.centerRight ? horizontalOffset : 0,
         ),
-        child: LearningPathStep(
+        child: LevelStep(
           onPressed: onPressed,
           image: image,
           iconColor: iconColor,
@@ -95,5 +95,45 @@ class BuildSpecificStep extends StatelessWidget {
         return backValue;
     }
     return backValue;
+  }
+}
+
+class QuizStep extends StatelessWidget {
+  const QuizStep({
+    super.key,
+    required this.alignment,
+    required this.onPressed,
+    required this.horizontalOffset,
+    required this.image,
+    required this.backgroundColor,
+    required this.iconColor,
+    required this.shadowColor,
+  });
+  final Alignment alignment;
+  final VoidCallback onPressed;
+  final double horizontalOffset;
+  final String image;
+  final Color backgroundColor, iconColor, shadowColor;
+  @override
+  Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.sizeOf(context);
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: screenSize.height * .025,
+          bottom: screenSize.height * .01,
+          left: alignment == Alignment.centerLeft ? horizontalOffset : 0,
+          right: alignment == Alignment.centerRight ? horizontalOffset : 0,
+        ),
+        child: LevelStep(
+          onPressed: onPressed,
+          image: image,
+          iconColor: iconColor,
+          backgroundColor: backgroundColor,
+          shadowColor: shadowColor,
+        ),
+      ),
+    );
   }
 }

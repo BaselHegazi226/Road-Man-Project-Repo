@@ -33,6 +33,11 @@ class Assets {
       'assets/images/learning_path/lesson/active_lesson.svg';
   static const String learningPathUnActiveLessonImage =
       'assets/images/learning_path/lesson/unActive_lesson.svg';
+  static const String learningPathActiveQuizImage =
+      'assets/images/learning_path/quiz/active_quiz.svg';
+  static const String learningPathUnActiveQuizImage =
+      'assets/images/learning_path/quiz/unActive_quiz.svg';
+
   static const String googleImage = 'assets/images/home/google.svg';
   static const String hourglassArrowDownImage =
       'assets/images/home/hourglass_arrow_down.svg';

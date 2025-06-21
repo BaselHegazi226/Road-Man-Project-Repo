@@ -1,3 +1,4 @@
+// JobCard.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,91 +19,70 @@ class JobCard extends StatelessWidget {
     return Container(
       width: screenSize.width * 0.565, // 55% of screen width
       height: screenSize.height * 0.22, // 22% of screen height
+      padding: EdgeInsets.all(screenSize.width * 0.02), // 2% of screen width
       decoration: BoxDecoration(
         color: kSecondlyLightWhiteColor,
-        borderRadius: BorderRadius.circular(
-          screenSize.width * 0.04,
-        ), // 4% of sc
-        border: Border.all(width: 1, color: Color(0xFF2352A1)),
+        borderRadius: BorderRadius.circular(screenSize.width * 0.04), // 4%
+        border: Border.all(width: 1, color: const Color(0xFF2352A1)),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(screenSize.width * 0.02), // 2% of screen width
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Company Logo
-                SvgPicture.asset(
-                  Assets.googleImage,
-                  width: screenSize.width * 0.08, // 6% of screen width
-                  height: screenSize.width * 0.08, // 6% of screen width
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.asset(
+                Assets.googleImage,
+                width: screenSize.width * 0.08, // 8% of screen width
+                height: screenSize.width * 0.08, // 8% of screen width
+              ),
+              Icon(
+                CupertinoIcons.heart,
+                size: screenSize.width * .06,
+                color: kAppPrimaryBlackColor,
+              ),
+            ],
+          ),
+          SizedBox(height: screenSize.height * 0.01), // 1% of screen height
+          Row(
+            children: [
+              Text(
+                'Google',
+                style: AfacadTextStyles.textStyle12W700Black(context),
+              ),
+              SizedBox(width: screenSize.width * 0.01),
+              Text(
+                '30 days ago',
+                style: InterTextStyles.textStyle12W400GreyHalfOpacity(
+                  context: context,
                 ),
-                // Bookmark icon
-                Icon(
-                  CupertinoIcons.heart,
-                  size: screenSize.width * .06,
-                  color: kAppPrimaryBlackColor,
-                ),
-              ],
-            ),
-
-            // Space between top row and company info
-            SizedBox(height: screenSize.height * 0.01), // 1% of screen height
-            // Company and time
-            Row(
-              spacing: screenSize.width * .01,
-              children: [
-                Text(
-                  'Google',
-                  style: AfacadTextStyles.textStyle12W700Black(context),
-                ),
-                Text(
-                  '30 days ago',
-                  style: InterTextStyles.textStyle12W400GreyHalfOpacity(
-                    context: context,
-                  ),
-                ),
-              ],
-            ),
-
-            // Job title
-            SizedBox(height: screenSize.height * 0.01), // 1% of screen height
-            JobDescription(description: 'Front end Development'),
-
-            // Job tags row
-            SizedBox(
-              height: screenSize.height * 0.015,
-            ), // 1.5% of screen height
-            Row(
-              spacing: screenSize.width * 0.02,
-              children: [
-                // Job type tag
-                JobTag(tag: 'Full-Time'),
-                // Level tag
-                JobTag(tag: 'Intermediate level'),
-              ],
-            ),
-            SizedBox(height: screenSize.height * .03),
-            // Divider
-            Divider(height: 1, color: Color(0xff8A8C90)),
-
-            // Bottom row - Location and Apply button
-            SizedBox(height: screenSize.height * 0.02), // 1.5% of screen height
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Location
-                Text(
-                  'Cairo | Egypt',
-                  style: AfacadTextStyles.textStyle14W400Grey(context),
-                ),
-                ApplyButton(onTap: () {}),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          SizedBox(height: screenSize.height * 0.01),
+          const JobDescription(description: 'Front end Development'),
+          SizedBox(height: screenSize.height * 0.015),
+          Row(
+            children: const [
+              JobTag(tag: 'Full-Time'),
+              SizedBox(width: 8), // Fixed spacing
+              JobTag(tag: 'Intermediate level'),
+            ],
+          ),
+          SizedBox(height: screenSize.height * 0.01),
+          const Divider(height: 1, color: Color(0xff8A8C90)),
+          SizedBox(height: screenSize.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Cairo | Egypt',
+                style: AfacadTextStyles.textStyle14W400Grey(context),
+              ),
+              ApplyButton(onTap: () {}),
+            ],
+          ),
+        ],
       ),
     );
   }

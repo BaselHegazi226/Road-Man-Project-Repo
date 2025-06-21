@@ -1,7 +1,7 @@
-import 'learning_path_model.dart';
+import 'learn_path_model.dart';
 
 class LearningPathResponse {
-  final List<LearningPathModel> learningPath;
+  final List<LearnPathModel> learningPath;
 
   const LearningPathResponse({required this.learningPath});
 
@@ -10,7 +10,7 @@ class LearningPathResponse {
     return LearningPathResponse(
       learningPath:
           (json['learningPath'] as List)
-              .map((e) => LearningPathModel.fromJson(e))
+              .map((e) => LearnPathModel.fromJson(e))
               .toList(),
     );
   }

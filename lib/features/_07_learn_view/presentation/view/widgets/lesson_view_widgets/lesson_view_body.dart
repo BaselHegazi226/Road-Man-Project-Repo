@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/lesson_view_widgets/lesson_view_card.dart';
-import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/lesson_view_widgets/lesson_view_const.dart';
 
 class LessonViewBody extends StatelessWidget {
-  const LessonViewBody({super.key});
-
+  const LessonViewBody({super.key, required this.learnLessonModelList});
+  final List<LearnPathLessonModel> learnLessonModelList;
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.sizeOf(context).width;
@@ -12,10 +12,10 @@ class LessonViewBody extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: screenWidth * .04),
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
-        itemCount: LessonViewConst.lessonViewCardModelList.length,
+        itemCount: learnLessonModelList.length,
         itemBuilder: (context, index) {
-          final list = LessonViewConst.lessonViewCardModelList;
-          return LessonViewCard(lessonViewCardModel: list[index]);
+          final list = learnLessonModelList;
+          return LessonViewCard(learnPathLessonModel: list[index]);
         },
       ),
     );
