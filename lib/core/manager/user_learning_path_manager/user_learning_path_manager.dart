@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:hive/hive.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_answer_model.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
@@ -27,7 +25,6 @@ abstract class UserLearningPathHelper {
   static Future<void> saveLearningPaths(List<LearnPathModel> list) async {
     final box = Hive.box<LearnPathModel>(_learningPathBox);
     for (var item in list) {
-      log('level : $item' as num);
       await box.put(item.id, item);
     }
   }

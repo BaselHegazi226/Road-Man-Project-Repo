@@ -43,7 +43,10 @@ class LessonCompletedFailure extends LearningPathStates {
 
 class LessonCompletedLoading extends LearningPathStates {}
 
-class LessonCompletedSuccess extends LearningPathStates {}
+class LessonCompletedSuccess extends LearningPathStates {
+  final int lessonId;
+  LessonCompletedSuccess({required this.lessonId});
+}
 
 // Save User Quiz Answer Local
 class SaveUserQuizAnswerFailure extends LearningPathStates {

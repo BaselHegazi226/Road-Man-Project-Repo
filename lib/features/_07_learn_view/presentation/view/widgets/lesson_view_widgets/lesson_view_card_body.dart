@@ -11,29 +11,47 @@ class LessonViewCardBody extends StatelessWidget {
     required this.screenWidth,
     required this.learnPathLessonModel,
     required this.onPressed,
+    required this.lessonIsCompleted,
+    required this.isUnlocked,
   });
+
   final double screenHeight;
   final double screenWidth;
   final LearnPathLessonModel learnPathLessonModel;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final bool lessonIsCompleted;
+  final bool isUnlocked;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        LessonViewCardComponentSection(
-          screenHeight: screenHeight,
-          screenWidth: screenWidth,
-          lessonNumber: learnPathLessonModel.lessonNumber,
-          lessonTitle: learnPathLessonModel.title,
-          lessonTime: learnPathLessonModel.estimatedDuration,
-        ),
-        Icon(
-          true ? Icons.play_circle_fill_outlined : Icons.lock_outline,
-          color: true ? kAppPrimaryBlueColor : kAppPrimaryBlackColor,
-          size: screenWidth * .06,
-        ),
-      ],
+    return InkWell(
+      onTap: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          LessonViewCardComponentSection(
+            screenHeight: screenHeight,
+            screenWidth: screenWidth,
+            lessonNumber: learnPathLessonModel.lessonNumber,
+            lessonTitle: learnPathLessonModel.title,
+            lessonTime: learnPathLessonModel.estimatedDuration,
+          ),
+          Icon(
+            lessonIsCompleted
+                ? Icons.check_circle_outline
+                : isUnlocked
+                ? Icons.play_circle_fill_outlined
+                : Icons.lock_outline,
+            color:
+                lessonIsCompleted
+                    ? kAppPrimaryBlueColor
+                    : isUnlocked
+                    ? kAppPrimaryBlueColor
+                    : kAppPrimaryBlackColor,
+            size: screenWidth * .06,
+          ),
+        ],
+      ),
     );
   }
 }

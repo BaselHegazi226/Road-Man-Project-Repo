@@ -29,7 +29,7 @@ class QuizViewAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         icon: Icon(
           Icons.arrow_back_ios_new_outlined,
-          size: screenWidth * 0.05,
+          size: 24,
           color: kAppPrimaryBlueColor,
         ),
       ),
@@ -50,10 +50,7 @@ class QuizViewAppBar extends StatelessWidget implements PreferredSizeWidget {
     double screenHeight,
   ) {
     return Padding(
-      padding: EdgeInsets.only(
-        right: screenWidth * .04,
-        bottom: screenHeight * .01,
-      ),
+      padding: EdgeInsets.only(right: screenWidth * .04, bottom: 8),
       child: Row(
         spacing: screenWidth * .04,
         mainAxisAlignment: MainAxisAlignment.center,

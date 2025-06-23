@@ -23,11 +23,13 @@ class _QuizViewState extends State<QuizView> {
   int correctCount = 0;
   int incorrectCount = 0;
 
-  late final LearnPathQuizModel _quizModel;
+  LearnPathQuizModel? _quizModel; // ✅ Nullable بدل late final
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    if (_quizModel != null) return; // ✅ منع إعادة التهيئة
+
     final extra = GoRouterState.of(context).extra;
     if (extra is LearnPathQuizModel) {
       _quizModel = extra;
@@ -65,7 +67,7 @@ class _QuizViewState extends State<QuizView> {
 
   @override
   Widget build(BuildContext context) {
-    if (_quizModel.questions.isEmpty) {
+    if (_quizModel == null || _quizModel!.questions.isEmpty) {
       return Scaffold(
         backgroundColor: kAppPrimaryWhiteColor,
         body: const Center(child: Text('Invalid quiz data. Please try again.')),
@@ -88,7 +90,7 @@ class _QuizViewState extends State<QuizView> {
               selectedAnswers: selectedAnswers,
               hasAnsweredMap: hasAnsweredMap,
               onAnswerSelected: _onAnswerSelected,
-              learnPathQuizModel: _quizModel,
+              learnPathQuizModel: _quizModel!,
               onFinish: _onFinishQuiz,
               onInitialCountCalculated: _onInitialCountCalculated,
             ),

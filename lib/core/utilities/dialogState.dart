@@ -35,11 +35,7 @@ void customAwesomeDialog({
   AwesomeDialog(
     context: context,
     dialogType: DialogType.noHeader,
-    customHeader: Icon(
-      Icons.check_circle,
-      color: iconColor,
-      size: MediaQuery.sizeOf(context).width * .24,
-    ),
+    customHeader: Icon(Icons.check_circle, color: iconColor, size: 65),
     dialogBackgroundColor: dialogBackgroundColor,
     width: double.infinity,
     buttonsBorderRadius: BorderRadius.circular(

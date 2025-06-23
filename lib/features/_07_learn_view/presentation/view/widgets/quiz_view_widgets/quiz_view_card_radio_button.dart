@@ -70,7 +70,7 @@ class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
             final isSelected = _selectedAnswer == answer.id;
 
             return GestureDetector(
-              onTap: () => _onSelectAnswer(answer.id, answer.isCorrect),
+              onTap: () => _onSelectAnswer(answer.id!, answer.isCorrect!),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: screenHeight * .005),
                 child: Row(
@@ -79,7 +79,7 @@ class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
                       isSelected: isSelected,
                       size: screenWidth * .06,
                       selectedColor: _getAnswerColor(
-                        answer.isCorrect,
+                        answer.isCorrect!,
                         isSelected,
                       ),
                       unselectedColor: Colors.black,
@@ -90,7 +90,7 @@ class _QuizViewCardRadioButtonState extends State<QuizViewCardRadioButton> {
                         answerText: answer.text!,
                         isSelected: isSelected,
                         selectedColor: _getAnswerColor(
-                          answer.isCorrect,
+                          answer.isCorrect!,
                           isSelected,
                         ),
                         unselectedColor: Colors.black,

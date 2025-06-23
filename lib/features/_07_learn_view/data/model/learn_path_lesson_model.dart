@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
+
 part 'learn_path_lesson_model.g.dart'; // قم بإضافة هذا الجزء
+
 @HiveType(typeId: 2)
 class LearnPathLessonModel {
   @HiveField(0)
@@ -31,7 +33,10 @@ class LearnPathLessonModel {
       id: json['id'],
       title: json['title'],
       url: json['url'],
-      estimatedDuration: json['estimatedDuration'],
+      estimatedDuration:
+          json['estimatedDuration'] is String
+              ? int.tryParse(json['estimatedDuration']) ?? 0
+              : (json['estimatedDuration'] as num).toInt(),
     );
   }
 

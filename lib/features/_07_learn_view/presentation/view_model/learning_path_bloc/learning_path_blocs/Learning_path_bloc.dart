@@ -55,7 +55,7 @@ class LearningPathBloc extends Bloc<LearningPathEvents, LearningPathStates> {
         );
       },
       (success) async {
-        return emit(LessonCompletedSuccess());
+        return emit(LessonCompletedSuccess(lessonId: event.lessonId));
       },
     );
   }

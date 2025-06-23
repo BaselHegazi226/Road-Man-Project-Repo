@@ -160,10 +160,10 @@ class _QuizViewBodyState extends State<QuizViewBody> {
                     final userAnswer = LearnPathUserAnswerModel(
                       quizId: widget.learnPathQuizModel.id,
                       questionId: question.id,
-                      answerId: selectedAnswer.id,
+                      answerId: selectedAnswer.id!,
                       userAnswerId:
                           '${widget.learnPathQuizModel.id}_${question.id}',
-                      isCorrect: selectedAnswer.isCorrect,
+                      isCorrect: selectedAnswer.isCorrect!,
                     );
 
                     UserLearningPathHelper.saveUserAnswer(userAnswer);

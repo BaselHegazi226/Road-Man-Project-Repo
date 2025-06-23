@@ -69,7 +69,10 @@ class LearnPathModel {
       level: json['level'],
       language: json['language'],
       typeOfContent: json['typeOfContent'],
-      estimatedDuration: json['estimatedDuration'],
+      estimatedDuration:
+          json['estimatedDuration'] is String
+              ? int.tryParse(json['estimatedDuration']) ?? 0
+              : (json['estimatedDuration'] as num).toInt(),
       lessons:
           (json['lessons'] as List)
               .map((e) => LearnPathLessonModel.fromJson(e))

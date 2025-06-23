@@ -82,7 +82,13 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
           UserLearningPathHelper.saveLessons(allLessons);
           UserLearningPathHelper.saveQuizzes(allQuizzes);
 
-          setState(() => localLearningPaths = fetchedPaths);
+          if (mounted) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) {
+                setState(() => localLearningPaths = fetchedPaths);
+              }
+            });
+          }
         }
       },
       builder: (context, state) {

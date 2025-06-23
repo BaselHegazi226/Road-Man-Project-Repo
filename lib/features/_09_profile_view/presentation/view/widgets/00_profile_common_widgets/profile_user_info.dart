@@ -21,37 +21,32 @@ class ProfileUserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.sizeOf(context).height;
     final double screenWidth = MediaQuery.sizeOf(context).width;
-    Widget imageWidget;
+
+    ImageProvider imageProvider;
 
     if (photo.startsWith('/data/')) {
       // 🟢 الصورة من الجهاز
-      imageWidget = CustomImageProfile(
-        imageSize: screenWidth * .15,
-        image: Image.file(File(photo), fit: BoxFit.cover),
-      );
+      imageProvider = FileImage(File(photo));
     } else if (photo.startsWith('http')) {
       // 🌐 الصورة من السيرفر
-      imageWidget = CustomImageProfile(
-        imageSize: screenWidth * .15,
-        image: Image.network(photo, fit: BoxFit.cover),
-      );
+      imageProvider = NetworkImage(photo);
     } else {
       // 🖼️ صورة افتراضية من الأصول
-      imageWidget = CustomImageProfile(
-        imageSize: screenWidth * .15,
-        image: Image.asset(photo, fit: BoxFit.cover),
-      );
+      imageProvider = AssetImage(photo);
     }
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screenHeight * .04),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: screenWidth * .03,
         children: [
-          imageWidget,
+          CustomImageProfile(
+            imageSize: screenWidth * .15,
+            image: imageProvider,
+          ),
+          SizedBox(width: screenWidth * .03), // المسافة بين الصورة والنص
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: screenHeight * .0025,
             children: [
               Text(name, style: AfacadTextStyles.textStyle16W500Black(context)),
               Text(

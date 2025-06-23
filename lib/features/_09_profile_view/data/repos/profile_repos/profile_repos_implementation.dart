@@ -13,6 +13,7 @@ import '../../../../../core/manager/tokens_manager.dart';
 
 class ProfileReposImplementation extends ProfileRepos {
   final Dio dio = Dio();
+
   @override
   Future<Either<Failure, void>> updateProfile({
     required String name,
@@ -27,26 +28,37 @@ class ProfileReposImplementation extends ProfileRepos {
 
     String? base64Photo;
 
-    // ✅ فقط لو الصورة موجودة نحاول تحويلها
     if (photo.trim().isNotEmpty) {
       if (photo.startsWith('/')) {
+        final file = File(photo);
+
+        // ✅ تحقق أن الملف موجود وغير فارغ
+        if (!await file.exists()) {
+          return left(ServerFailure(errorMessage: '⚠️ File does not exist.'));
+        }
+
+        final length = await file.length();
+        if (length == 0) {
+          return left(ServerFailure(errorMessage: '⚠️ Image file is empty.'));
+        }
+
         try {
-          final bytes = await File(photo).readAsBytes();
+          final bytes = await file.readAsBytes();
           base64Photo = base64Encode(bytes);
-          print('length of photo from implem : ${base64Photo.length}');
-          print('base64photo : $base64Photo');
+          print('✅ [updateProfile] Encoded file length: ${base64Photo.length}');
         } catch (e) {
-          return left(ServerFailure(errorMessage: 'Error reading image file'));
+          return left(
+            ServerFailure(errorMessage: '⚠️ Error reading image file.'),
+          );
         }
       } else {
-        base64Photo = photo; // مفترض أنها Base64 جاهزة
-        print('length of photo from implem : ${base64Photo.length}');
-        print('base64photo : $base64Photo');
+        base64Photo = photo;
+        print('ℹ️ [updateProfile] Using provided base64 directly');
       }
     }
 
     final updateProfileModel = UpdateProfileModel(
-      photo: base64Photo, // يمكن أن تكون null لو مفيش صورة جديدة
+      photo: base64Photo,
       name: name,
       dateOfBirth: dateOfBirth,
     );
@@ -82,10 +94,7 @@ class ProfileReposImplementation extends ProfileRepos {
     required String confirmPassword,
   }) async {
     final userTokens = await SecureStorageHelper.getUserTokens();
-    String? userToken;
-    if (userTokens != null) {
-      userToken = userTokens.token;
-    }
+    String? userToken = userTokens?.token;
 
     final String changePasswordPath =
         'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/change-password';
@@ -94,12 +103,14 @@ class ProfileReposImplementation extends ProfileRepos {
       newPassword: newPassword,
       confirmPassword: confirmPassword,
     );
+
     try {
       final response = await dio.post(
         changePasswordPath,
         data: changePasswordModel.toJson(),
         options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
+
       if (response.statusCode == 200) {
         return right(null);
       } else {
@@ -157,7 +168,7 @@ class ProfileReposImplementation extends ProfileRepos {
       final userTokens = await SecureStorageHelper.getUserTokens();
 
       if (userTokens == null || userTokens.token.isEmpty) {
-        return left(ServerFailure(errorMessage: 'Yor are not sign in!'));
+        return left(ServerFailure(errorMessage: 'You are not signed in!'));
       }
 
       final response = await dio.post(
@@ -168,7 +179,6 @@ class ProfileReposImplementation extends ProfileRepos {
       );
 
       if (response.statusCode == 200) {
-        // ✅ امسح التوكن بعد تسجيل الخروج الناجح
         await SecureStorageHelper.clearTokens();
         return right(null);
       } else {

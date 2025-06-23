@@ -16,7 +16,7 @@ class SuggestedJobsCardListView extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: screenHeight * 0.2, // ارتفاع متناسق مع الشاشة
+      height: screenHeight * 0.22, // ارتفاع متناسق مع الشاشة
       child: ListView.builder(
         itemCount: suggestedJobsItemModelList.length,
         scrollDirection: Axis.horizontal,
