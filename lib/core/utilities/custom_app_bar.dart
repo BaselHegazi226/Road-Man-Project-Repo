@@ -35,7 +35,7 @@ PreferredSizeWidget customAppBar(
     centerTitle: true,
     title: Text(
       text,
-      style: AfacadTextStyles.textStyle20W600Blue(
+      style: AfacadTextStyles.textStyle16W600HBlue(
         context,
       ).copyWith(color: generalColor),
     ),
