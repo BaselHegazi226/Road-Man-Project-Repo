@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_answer_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_completed_model.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_model.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_model.dart';
@@ -11,6 +12,9 @@ abstract class UserLearningPathHelper {
   static const String _quizzesBox = 'quizzesBox';
   static const String _answersBox = 'answersBox';
   static const String _userAnswersBox = 'userAnswersBox';
+  static const String _completedLessonsBox = 'completedLessonsBox'; // قديم
+  static const String _lessonCompletedModelsBox =
+      'lessonCompletedModelsBox'; // جديد
 
   // Initialization
   static Future<void> initHiveBoxes() async {
@@ -19,6 +23,10 @@ abstract class UserLearningPathHelper {
     await Hive.openBox<LearnPathQuizModel>(_quizzesBox);
     await Hive.openBox<LearnPathAnswerModel>(_answersBox);
     await Hive.openBox<LearnPathUserAnswerModel>(_userAnswersBox);
+    await Hive.openBox<List<int>>(_completedLessonsBox); // legacy
+    await Hive.openBox<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    );
   }
 
   // Save Learning Paths
@@ -45,7 +53,7 @@ abstract class UserLearningPathHelper {
     }
   }
 
-  // Save Available Answers
+  // Save Answers
   static Future<void> saveAnswers(List<LearnPathAnswerModel> answers) async {
     final box = Hive.box<LearnPathAnswerModel>(_answersBox);
     for (final answer in answers) {
@@ -59,7 +67,6 @@ abstract class UserLearningPathHelper {
     await box.put(answer.userAnswerId, answer);
   }
 
-  // Save Multiple User Answers
   static Future<void> saveUserAnswers(
     List<LearnPathUserAnswerModel> answers,
   ) async {
@@ -69,30 +76,72 @@ abstract class UserLearningPathHelper {
     }
   }
 
+  // Legacy: Save lessonId under levelId
+  static Future<void> saveCompletedLesson(int levelId, int lessonId) async {
+    final box = Hive.box<List<int>>(_completedLessonsBox);
+    List<int> existing = box.get(levelId, defaultValue: []) ?? [];
+    if (!existing.contains(lessonId)) {
+      existing.add(lessonId);
+      await box.put(levelId, existing);
+    }
+  }
+
+  // ✅ New: Save full lesson completed model
+  static Future<void> saveLessonCompletedLocally(
+    LearnPathLessonCompletedModel model,
+  ) async {
+    final box = Hive.box<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    );
+    await box.put(model.lessonId, model);
+  }
+
+  static bool isLessonCompleted(int lessonId) {
+    final box = Hive.box<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    );
+    final model = box.get(lessonId);
+    return model?.isCompleted ?? false;
+  }
+
+  static LearnPathLessonCompletedModel? getLessonCompletedModel(int lessonId) {
+    final box = Hive.box<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    );
+    return box.get(lessonId);
+  }
+
+  static List<LearnPathLessonCompletedModel> getAllCompletedLessons() {
+    final box = Hive.box<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    );
+    return box.values.where((e) => e.isCompleted == true).toList();
+  }
+
+  static List<int> getCompletedLessons(int levelId) {
+    final box = Hive.box<List<int>>(_completedLessonsBox);
+    return box.get(levelId, defaultValue: []) ?? [];
+  }
+
   // Getters
   static List<LearnPathModel> getAllLearningPaths() {
-    final box = Hive.box<LearnPathModel>(_learningPathBox);
-    return box.values.toList();
+    return Hive.box<LearnPathModel>(_learningPathBox).values.toList();
   }
 
   static List<LearnPathLessonModel> getAllLessons() {
-    final box = Hive.box<LearnPathLessonModel>(_lessonsBox);
-    return box.values.toList();
+    return Hive.box<LearnPathLessonModel>(_lessonsBox).values.toList();
   }
 
   static List<LearnPathQuizModel> getAllQuizzes() {
-    final box = Hive.box<LearnPathQuizModel>(_quizzesBox);
-    return box.values.toList();
+    return Hive.box<LearnPathQuizModel>(_quizzesBox).values.toList();
   }
 
   static List<LearnPathAnswerModel> getAllAnswers() {
-    final box = Hive.box<LearnPathAnswerModel>(_answersBox);
-    return box.values.toList();
+    return Hive.box<LearnPathAnswerModel>(_answersBox).values.toList();
   }
 
   static List<LearnPathUserAnswerModel> getAllUserAnswers() {
-    final box = Hive.box<LearnPathUserAnswerModel>(_userAnswersBox);
-    return box.values.toList();
+    return Hive.box<LearnPathUserAnswerModel>(_userAnswersBox).values.toList();
   }
 
   static LearnPathUserAnswerModel? getUserAnswerById(int answerId) {
@@ -100,12 +149,15 @@ abstract class UserLearningPathHelper {
     return box.get(answerId);
   }
 
-  // Clear all local data
   static Future<void> deleteAllData() async {
     await Hive.box<LearnPathModel>(_learningPathBox).clear();
     await Hive.box<LearnPathLessonModel>(_lessonsBox).clear();
     await Hive.box<LearnPathQuizModel>(_quizzesBox).clear();
     await Hive.box<LearnPathAnswerModel>(_answersBox).clear();
     await Hive.box<LearnPathUserAnswerModel>(_userAnswersBox).clear();
+    await Hive.box<List<int>>(_completedLessonsBox).clear();
+    await Hive.box<LearnPathLessonCompletedModel>(
+      _lessonCompletedModelsBox,
+    ).clear();
   }
 }

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:road_man_project/core/error/failure.dart';
 import 'package:road_man_project/core/manager/user_learning_path_manager/user_learning_path_manager.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_completed_model.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learning_path_response.dart';
 import 'package:road_man_project/features/_07_learn_view/data/repos/learning_path_repo.dart';
 
@@ -129,7 +130,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> lessonCompleted({
+  Future<Either<Failure, bool>> lessonCompletedPost({
     required String userToken,
     required int id,
   }) async {
@@ -158,6 +159,41 @@ class LearningPathRepoImpl implements LearningPathRepo {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> lessonCompletedGet({
+    required String userToken,
+    required int id,
+  }) async {
+    final String lessonCompletedPath =
+        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/lessons/$id/is-completed';
+    try {
+      final response = await dio.get(
+        lessonCompletedPath,
+        options: Options(headers: {'Authorization': "Bearer $userToken"}),
+      );
+      print('Lesson completed From impl = $response');
+
+      if (response.statusCode == 200) {
+        final learnPathLessonCompletedModel =
+            LearnPathLessonCompletedModel.fromJson(response.data);
+        return right(learnPathLessonCompletedModel.toJson());
+      } else {
+        return left(
+          ServerFailure.fromResponse(
+            statusCode: response.statusCode,
+            responseData: response.data,
+          ),
+        );
+      }
+    } on DioException catch (dioException) {
+      return left(ServerFailure.fromDioException(dioException));
+    } catch (e) {
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  //
 
   @override
   Future<Either<Failure, List<LearnPathUserAnswerModel>>>

@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'learn_path_lesson_model.g.dart'; // قم بإضافة هذا الجزء
+part 'learn_path_lesson_model.g.dart';
 
 @HiveType(typeId: 2)
 class LearnPathLessonModel {
@@ -48,5 +48,22 @@ class LearnPathLessonModel {
       'url': url,
       'estimatedDuration': estimatedDuration,
     };
+  }
+
+  LearnPathLessonModel copyWith({
+    int? lessonNumber,
+    int? id,
+    String? title,
+    String? url,
+    int? estimatedDuration,
+    bool? isCompleted,
+  }) {
+    return LearnPathLessonModel(
+      lessonNumber: lessonNumber ?? this.lessonNumber,
+      id: id ?? this.id,
+      title: title ?? this.title,
+      url: url ?? this.url,
+      estimatedDuration: estimatedDuration ?? this.estimatedDuration,
+    );
   }
 }

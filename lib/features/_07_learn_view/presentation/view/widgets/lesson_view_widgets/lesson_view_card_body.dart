@@ -1,3 +1,4 @@
+// ✅ LessonViewCardBody.dart
 import 'package:flutter/material.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 
@@ -11,19 +12,33 @@ class LessonViewCardBody extends StatelessWidget {
     required this.screenWidth,
     required this.learnPathLessonModel,
     required this.onPressed,
-    required this.lessonIsCompleted,
-    required this.isUnlocked,
+    required this.isCompleted,
+    required this.isCurrent,
   });
 
   final double screenHeight;
   final double screenWidth;
   final LearnPathLessonModel learnPathLessonModel;
   final VoidCallback? onPressed;
-  final bool lessonIsCompleted;
-  final bool isUnlocked;
+  final bool isCompleted;
+  final bool isCurrent;
 
   @override
   Widget build(BuildContext context) {
+    IconData icon;
+    Color iconColor;
+
+    if (isCompleted) {
+      icon = Icons.check_circle_outline;
+      iconColor = kAppPrimaryBlueColor;
+    } else if (isCurrent) {
+      icon = Icons.play_circle_fill_outlined;
+      iconColor = kAppPrimaryBlueColor;
+    } else {
+      icon = Icons.lock_outline;
+      iconColor = kAppPrimaryBlackColor;
+    }
+
     return InkWell(
       onTap: onPressed,
       child: Row(
@@ -36,20 +51,7 @@ class LessonViewCardBody extends StatelessWidget {
             lessonTitle: learnPathLessonModel.title,
             lessonTime: learnPathLessonModel.estimatedDuration,
           ),
-          Icon(
-            lessonIsCompleted
-                ? Icons.check_circle_outline
-                : isUnlocked
-                ? Icons.play_circle_fill_outlined
-                : Icons.lock_outline,
-            color:
-                lessonIsCompleted
-                    ? kAppPrimaryBlueColor
-                    : isUnlocked
-                    ? kAppPrimaryBlueColor
-                    : kAppPrimaryBlackColor,
-            size: screenWidth * .06,
-          ),
+          Icon(icon, color: iconColor, size: screenWidth * .06),
         ],
       ),
     );

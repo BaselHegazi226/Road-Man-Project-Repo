@@ -55,6 +55,89 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
     }
   }
 
+  void _handleLearningPathSuccess(LearningPathSuccess state) {
+    final fetchedPaths =
+        (state.learningPath['learningPath'] as List)
+            .map((e) => LearnPathModel.fromJson(e as Map<String, dynamic>))
+            .toList();
+
+    final allLessons = <LearnPathLessonModel>[];
+    final allQuizzes = <LearnPathQuizModel>[];
+
+    for (final path in fetchedPaths) {
+      allLessons.addAll(path.lessons);
+      allQuizzes.add(path.quiz);
+    }
+
+    UserLearningPathHelper.saveLearningPaths(fetchedPaths);
+    UserLearningPathHelper.saveLessons(allLessons);
+    UserLearningPathHelper.saveQuizzes(allQuizzes);
+
+    if (mounted) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() => localLearningPaths = fetchedPaths);
+      });
+    }
+  }
+
+  Widget _buildStep(int index, double screenWidth, double screenHeight) {
+    final levelIndex = index ~/ 3;
+    if (levelIndex >= localLearningPaths.length) return const SizedBox.shrink();
+
+    final level = localLearningPaths[levelIndex];
+    final isEven = levelIndex % 2 == 0;
+    final lessonOffset = screenWidth * 0.2;
+    final quizOffset = screenWidth * 0.1;
+    final type = index % 3;
+
+    switch (type) {
+      case 0:
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: screenHeight * .02),
+          child: Center(
+            child: LevelStep(
+              image: Assets.learningPathFinishedStarImage,
+              backgroundColor: const Color(0xff9EDA53),
+              shadowColor: const Color(0xff69A123),
+              iconColor: const Color(0xff69A123),
+              onPressed: () {},
+            ),
+          ),
+        );
+      case 1:
+        if (level.lessons.isEmpty) return const SizedBox.shrink();
+        return LessonStep(
+          onPressed:
+              () =>
+                  GoRouter.of(context).push(Routes.lessonViewId, extra: level),
+          alignment: isEven ? Alignment.centerLeft : Alignment.centerRight,
+          horizontalOffset: lessonOffset,
+          image: Assets.learningPathActiveLessonImage,
+          backgroundColor: const Color(0xff5385DA),
+          iconColor: Colors.white54,
+          shadowColor: const Color(0xff2961BE),
+        );
+      case 2:
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: screenHeight * .015),
+          child: QuizStep(
+            onPressed:
+                () => GoRouter.of(
+                  context,
+                ).push(Routes.quizViewId, extra: level.quiz),
+            alignment: isEven ? Alignment.centerLeft : Alignment.centerRight,
+            horizontalOffset: quizOffset,
+            image: Assets.learningPathActiveQuizImage,
+            backgroundColor: const Color(0xff5385DA),
+            iconColor: Colors.white54,
+            shadowColor: const Color(0xff2961BE),
+          ),
+        );
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -62,34 +145,7 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
 
     return BlocConsumer<LearningPathCubit, LearningPathStates>(
       listener: (context, state) {
-        if (state is LearningPathSuccess) {
-          final fetchedPaths =
-              (state.learningPath['learningPath'] as List)
-                  .map(
-                    (e) => LearnPathModel.fromJson(e as Map<String, dynamic>),
-                  )
-                  .toList();
-
-          final allLessons = <LearnPathLessonModel>[];
-          final allQuizzes = <LearnPathQuizModel>[];
-
-          for (final path in fetchedPaths) {
-            allLessons.addAll(path.lessons);
-            allQuizzes.add(path.quiz);
-          }
-
-          UserLearningPathHelper.saveLearningPaths(fetchedPaths);
-          UserLearningPathHelper.saveLessons(allLessons);
-          UserLearningPathHelper.saveQuizzes(allQuizzes);
-
-          if (mounted) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) {
-                setState(() => localLearningPaths = fetchedPaths);
-              }
-            });
-          }
-        }
+        if (state is LearningPathSuccess) _handleLearningPathSuccess(state);
       },
       builder: (context, state) {
         if (state is LearningPathLoading) {
@@ -114,80 +170,11 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
                 physics: const BouncingScrollPhysics(),
                 slivers: [
                   SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final levelIndex = index ~/ 3;
-                      if (levelIndex >= limitedLevels.length) return null;
-
-                      final level = limitedLevels[levelIndex];
-                      final isEven = levelIndex % 2 == 0;
-                      final lessonOffset = screenWidth * 0.2;
-                      final quizOffset = screenWidth * 0.1;
-                      final type = index % 3;
-
-                      switch (type) {
-                        case 0:
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * .02,
-                            ),
-                            child: Center(
-                              child: LevelStep(
-                                image: Assets.learningPathFinishedStarImage,
-                                backgroundColor: const Color(0xff9EDA53),
-                                shadowColor: const Color(0xff69A123),
-                                iconColor: const Color(0xff69A123),
-                                onPressed: () {},
-                              ),
-                            ),
-                          );
-                        case 1:
-                          if (level.lessons.isNotEmpty) {
-                            return LessonStep(
-                              onPressed: () {
-                                GoRouter.of(context).push(
-                                  Routes.lessonViewId,
-                                  extra: level.lessons,
-                                );
-                              },
-                              alignment:
-                                  isEven
-                                      ? Alignment.centerLeft
-                                      : Alignment.centerRight,
-                              horizontalOffset: lessonOffset,
-                              image: Assets.learningPathActiveLessonImage,
-                              backgroundColor: const Color(0xff5385DA),
-                              iconColor: Colors.white54,
-                              shadowColor: const Color(0xff2961BE),
-                            );
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        case 2:
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight * .015,
-                            ),
-                            child: QuizStep(
-                              onPressed: () {
-                                GoRouter.of(
-                                  context,
-                                ).push(Routes.quizViewId, extra: level.quiz);
-                              },
-                              alignment:
-                                  isEven
-                                      ? Alignment.centerLeft
-                                      : Alignment.centerRight,
-                              horizontalOffset: quizOffset,
-                              image: Assets.learningPathActiveQuizImage,
-                              backgroundColor: const Color(0xff5385DA),
-                              iconColor: Colors.white54,
-                              shadowColor: const Color(0xff2961BE),
-                            ),
-                          );
-                        default:
-                          return const SizedBox.shrink();
-                      }
-                    }, childCount: limitedLevels.length * 3),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          _buildStep(index, screenWidth, screenHeight),
+                      childCount: limitedLevels.length * 3,
+                    ),
                   ),
                   SliverToBoxAdapter(
                     child: SizedBox(height: screenHeight * 0.05),

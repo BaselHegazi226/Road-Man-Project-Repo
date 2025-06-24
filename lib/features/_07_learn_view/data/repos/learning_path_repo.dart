@@ -16,7 +16,11 @@ abstract class LearningPathRepo {
     required int id,
     required int questionsAnswered,
   });
-  Future<Either<Failure, bool>> lessonCompleted({
+  Future<Either<Failure, bool>> lessonCompletedPost({
+    required String userToken,
+    required int id,
+  });
+  Future<Either<Failure, Map<String, dynamic>>> lessonCompletedGet({
     required String userToken,
     required int id,
   });

@@ -18,11 +18,11 @@ class QuizCompletedEvent extends LearningPathEvents {
 }
 
 // Event to mark lesson as completed on server
-class LessonCompletedEvent extends LearningPathEvents {
+class LessonCompletedPostEvent extends LearningPathEvents {
   final String userToken;
   final int lessonId;
 
-  LessonCompletedEvent({required this.userToken, required this.lessonId});
+  LessonCompletedPostEvent({required this.userToken, required this.lessonId});
 }
 
 // Local: Save user's quiz answers locally

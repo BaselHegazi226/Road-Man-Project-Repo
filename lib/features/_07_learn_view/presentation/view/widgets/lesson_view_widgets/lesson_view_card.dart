@@ -1,3 +1,4 @@
+// ✅ LessonViewCard.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
@@ -8,6 +9,8 @@ import 'package:road_man_project/features/_07_learn_view/presentation/view_model
 import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit/learning_path_states.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../../core/manager/user_learning_path_manager/user_learning_path_manager.dart';
+import '../../../../data/model/learn_path_lesson_completed_model.dart';
 import '../../../../data/model/learn_path_lesson_model.dart';
 import '../../../view_model/learning_path_bloc/learning_path_blocs/Learning_path_events.dart';
 import 'lesson_view_card_body.dart';
@@ -18,21 +21,22 @@ class LessonViewCard extends StatelessWidget {
     required this.learnPathLessonModel,
     required this.userToken,
     required this.index,
-    required this.currentAllowedIndex,
+    required this.isCompleted,
+    required this.isCurrent,
     required this.onLessonCompleted,
   });
 
   final LearnPathLessonModel learnPathLessonModel;
   final String userToken;
   final int index;
-  final int currentAllowedIndex;
+  final bool isCompleted;
+  final bool isCurrent;
   final VoidCallback onLessonCompleted;
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.sizeOf(context).width;
     final double screenHeight = MediaQuery.sizeOf(context).height;
-    final bool isUnlocked = index <= currentAllowedIndex;
 
     return Container(
       width: screenWidth,
@@ -41,27 +45,29 @@ class LessonViewCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: screenHeight * .005),
       decoration: BoxDecoration(
         color: const Color(0xffE6E8EE),
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(screenWidth * .04),
-          topLeft: Radius.circular(screenWidth * .04),
-        ),
+        borderRadius: BorderRadius.circular(screenWidth * .04),
       ),
       child: CustomFlexibleWidget(
         child: BlocConsumer<LearningPathBloc, LearningPathStates>(
           listener: (context, state) {
-            if (state is LessonCompletedSuccess &&
+            if (state is LessonCompletedPostSuccess &&
                 state.lessonId == learnPathLessonModel.id) {
+              UserLearningPathHelper.saveLessonCompletedLocally(
+                LearnPathLessonCompletedModel(
+                  isCompleted: true,
+                  lessonId: learnPathLessonModel.id,
+                ),
+              );
               showSafeSnackBar(
                 context,
-                'Lesson 0${learnPathLessonModel.lessonNumber} is completed successfully. Go to home view to follow your progress.',
+                'Lesson 0${learnPathLessonModel.lessonNumber} completed successfully.',
                 kAppPrimaryBlueColor,
               );
               onLessonCompleted();
-            } else if (state is LessonCompletedFailure) {
+            } else if (state is LessonCompletedPostFailure) {
               customAwesomeDialog(
                 title: 'Failed',
-                description:
-                    'Can\'t open the source. Wait to solve your problem!',
+                description: 'Can\'t open the source. Please try again later.',
                 context: context,
                 isSuccess: false,
                 onPressed: () {},
@@ -74,10 +80,10 @@ class LessonViewCard extends StatelessWidget {
               screenWidth: screenWidth,
               learnPathLessonModel: learnPathLessonModel,
               onPressed:
-                  isUnlocked
+                  isCompleted || isCurrent
                       ? () async {
                         context.read<LearningPathBloc>().add(
-                          LessonCompletedEvent(
+                          LessonCompletedPostEvent(
                             userToken: userToken,
                             lessonId: learnPathLessonModel.id,
                           ),
@@ -85,8 +91,8 @@ class LessonViewCard extends StatelessWidget {
                         await openUrlFun(context);
                       }
                       : null,
-              lessonIsCompleted: index < currentAllowedIndex,
-              isUnlocked: isUnlocked,
+              isCompleted: isCompleted,
+              isCurrent: isCurrent,
             );
           },
         ),
@@ -104,11 +110,7 @@ class LessonViewCard extends StatelessWidget {
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     } else {
-      showSafeSnackBar(
-        context,
-        'Unable to open link. Please try again!',
-        kAppPrimaryWrongColor,
-      );
+      showSafeSnackBar(context, 'Unable to open link.', kAppPrimaryWrongColor);
     }
   }
 }

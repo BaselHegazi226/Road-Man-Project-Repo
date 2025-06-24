@@ -4,6 +4,7 @@ import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_u
 import 'package:road_man_project/features/_07_learn_view/data/repos/learning_path_repo.dart';
 
 import '../../../../../../core/manager/user_learning_path_manager/user_learning_path_manager.dart';
+import '../../../../data/model/learn_path_lesson_completed_model.dart';
 import 'learning_path_states.dart';
 
 class LearningPathCubit extends Cubit<LearningPathStates> {
@@ -11,7 +12,7 @@ class LearningPathCubit extends Cubit<LearningPathStates> {
 
   LearningPathCubit({required this.learningPathRepo})
     : super(LearningPathInitial());
-
+  //get learning path function
   Future<Map<String, dynamic>> getLearningPathFun({
     required String userToken,
   }) async {
@@ -37,6 +38,37 @@ class LearningPathCubit extends Cubit<LearningPathStates> {
     return data;
   }
 
+  //get lesson completed cubit
+  Future<void> getLessonCompleted({
+    required String userToken,
+    required int lessonId,
+  }) async {
+    emit(LessonCompletedGetLoading());
+
+    final result = await learningPathRepo.lessonCompletedGet(
+      userToken: userToken,
+      id: lessonId,
+    );
+
+    await result.fold(
+      (error) async {
+        emit(
+          LessonCompletedGetFailure(
+            errorMessage: error.errorMessage ?? 'Unknown error',
+          ),
+        );
+      },
+      (success) async {
+        emit(LessonCompletedGetSuccess(learnPathLessonCompletedModel: success));
+
+        // ✅ حفظ حالة الدرس في Hive بعد نجاح الجلب
+        final model = LearnPathLessonCompletedModel.fromJson(success);
+        await UserLearningPathHelper.saveLessonCompletedLocally(model);
+      },
+    );
+  }
+
+  //get learning path local function
   Future<List<LearnPathModel>> getLearningPathLocalFun({
     required List<LearnPathModel> paths,
   }) async {

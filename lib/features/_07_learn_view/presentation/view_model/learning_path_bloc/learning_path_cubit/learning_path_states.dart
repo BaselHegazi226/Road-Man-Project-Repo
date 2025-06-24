@@ -33,19 +33,34 @@ class QuizCompletedSuccess extends LearningPathStates {
   QuizCompletedSuccess({required this.finished});
 }
 
-// Lesson Completed States
-class LessonCompletedInitial extends LearningPathStates {}
+// Lesson Completed Post States
+class LessonCompletedPostInitial extends LearningPathStates {}
 
-class LessonCompletedFailure extends LearningPathStates {
+class LessonCompletedPostFailure extends LearningPathStates {
   final String errorMessage;
-  LessonCompletedFailure({required this.errorMessage});
+  LessonCompletedPostFailure({required this.errorMessage});
 }
 
-class LessonCompletedLoading extends LearningPathStates {}
+class LessonCompletedPostLoading extends LearningPathStates {}
 
-class LessonCompletedSuccess extends LearningPathStates {
+class LessonCompletedPostSuccess extends LearningPathStates {
   final int lessonId;
-  LessonCompletedSuccess({required this.lessonId});
+  LessonCompletedPostSuccess({required this.lessonId});
+}
+
+// Lesson Completed Get States
+class LessonCompletedGetInitial extends LearningPathStates {}
+
+class LessonCompletedGetFailure extends LearningPathStates {
+  final String errorMessage;
+  LessonCompletedGetFailure({required this.errorMessage});
+}
+
+class LessonCompletedGetLoading extends LearningPathStates {}
+
+class LessonCompletedGetSuccess extends LearningPathStates {
+  final Map<String, dynamic> learnPathLessonCompletedModel;
+  LessonCompletedGetSuccess({required this.learnPathLessonCompletedModel});
 }
 
 // Save User Quiz Answer Local

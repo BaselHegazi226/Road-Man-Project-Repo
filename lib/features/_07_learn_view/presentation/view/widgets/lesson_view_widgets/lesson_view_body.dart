@@ -1,8 +1,11 @@
-//using list view
+// ✅ LessonViewBody.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:road_man_project/core/manager/tokens_manager.dart';
+import 'package:road_man_project/core/manager/user_learning_path_manager/user_learning_path_manager.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/lesson_view_widgets/lesson_view_card.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit/learning_path_cubit.dart';
 
 class LessonViewBody extends StatefulWidget {
   const LessonViewBody({super.key, required this.learnLessonModelList});
@@ -14,7 +17,19 @@ class LessonViewBody extends StatefulWidget {
 
 class _LessonViewBodyState extends State<LessonViewBody> {
   late String userToken = '';
-  int currentAllowedIndex = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getAllCompletedLessonsStatus();
+  }
+
+  void _getAllCompletedLessonsStatus() {
+    final cubit = context.read<LearningPathCubit>();
+    for (final lesson in widget.learnLessonModelList) {
+      cubit.getLessonCompleted(userToken: userToken, lessonId: lesson.id);
+    }
+  }
 
   @override
   void initState() {
@@ -31,9 +46,7 @@ class _LessonViewBodyState extends State<LessonViewBody> {
   }
 
   void _onLessonCompleted() {
-    setState(() {
-      currentAllowedIndex++;
-    });
+    setState(() {}); // Rebuild based on updated Hive state
   }
 
   @override
@@ -45,11 +58,23 @@ class _LessonViewBodyState extends State<LessonViewBody> {
         physics: const BouncingScrollPhysics(),
         itemCount: widget.learnLessonModelList.length,
         itemBuilder: (context, index) {
+          final lesson = widget.learnLessonModelList[index];
+          final isCompleted = UserLearningPathHelper.isLessonCompleted(
+            lesson.id,
+          );
+          final isCurrent =
+              !isCompleted &&
+              (index == 0 ||
+                  UserLearningPathHelper.isLessonCompleted(
+                    widget.learnLessonModelList[index - 1].id,
+                  ));
+
           return LessonViewCard(
-            learnPathLessonModel: widget.learnLessonModelList[index],
+            learnPathLessonModel: lesson,
             userToken: userToken,
             index: index,
-            currentAllowedIndex: currentAllowedIndex,
+            isCompleted: isCompleted,
+            isCurrent: isCurrent,
             onLessonCompleted: _onLessonCompleted,
           );
         },

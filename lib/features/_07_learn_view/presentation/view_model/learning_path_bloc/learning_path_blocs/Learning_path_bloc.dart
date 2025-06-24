@@ -10,7 +10,7 @@ class LearningPathBloc extends Bloc<LearningPathEvents, LearningPathStates> {
   LearningPathBloc({required this.learningPathRepo})
     : super(LearningPathInitial()) {
     on<QuizCompletedEvent>(_onQuizCompletedEvent);
-    on<LessonCompletedEvent>(_onLessonCompletedEvent);
+    on<LessonCompletedPostEvent>(_onLessonCompletedEvent);
   }
 
   Future<void> _onQuizCompletedEvent(
@@ -38,24 +38,24 @@ class LearningPathBloc extends Bloc<LearningPathEvents, LearningPathStates> {
   }
 
   Future<void> _onLessonCompletedEvent(
-    LessonCompletedEvent event,
+    LessonCompletedPostEvent event,
     Emitter<LearningPathStates> emit,
   ) async {
-    emit(LessonCompletedLoading());
-    final result = await learningPathRepo.lessonCompleted(
+    emit(LessonCompletedPostLoading());
+    final result = await learningPathRepo.lessonCompletedPost(
       userToken: event.userToken,
       id: event.lessonId,
     );
     await result.fold(
       (error) async {
         return emit(
-          LessonCompletedFailure(
+          LessonCompletedPostFailure(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
       (success) async {
-        return emit(LessonCompletedSuccess(lessonId: event.lessonId));
+        return emit(LessonCompletedPostSuccess(lessonId: event.lessonId));
       },
     );
   }

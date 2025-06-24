@@ -6,6 +6,7 @@ import 'package:road_man_project/features/_07_learn_view/data/model/learning_pat
 
 import 'features/_00_road_man_app/road_man_app.dart';
 import 'features/_07_learn_view/data/model/learn_path_answer_model.dart';
+import 'features/_07_learn_view/data/model/learn_path_lesson_completed_model.dart'; // ⬅️ مهم!
 import 'features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 import 'features/_07_learn_view/data/model/learn_path_model.dart';
 import 'features/_07_learn_view/data/model/learn_path_quiz_model.dart';
@@ -23,6 +24,7 @@ void main() async {
   Hive.registerAdapter(LearningPathQuestionModelAdapter());
   Hive.registerAdapter(LearnPathAnswerModelAdapter());
   Hive.registerAdapter(LearnPathUserAnswerModelAdapter());
+  Hive.registerAdapter(LearnPathLessonCompletedModelAdapter()); // ✅ أضف هذا
 
   await UserLearningPathHelper.initHiveBoxes();
 
