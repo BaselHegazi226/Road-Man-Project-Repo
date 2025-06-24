@@ -68,6 +68,50 @@ class LearningPathCubit extends Cubit<LearningPathStates> {
     );
   }
 
+  Future<void> completeLessonAndRefreshLearningPath({
+    required String userToken,
+    required int lessonId,
+  }) async {
+    emit(LessonCompletedGetLoading());
+
+    final result = await learningPathRepo.lessonCompletedGet(
+      userToken: userToken,
+      id: lessonId,
+    );
+
+    await result.fold(
+      (error) async {
+        emit(
+          LessonCompletedGetFailure(
+            errorMessage: error.errorMessage ?? 'Unknown error',
+          ),
+        );
+      },
+      (success) async {
+        final model = LearnPathLessonCompletedModel.fromJson(success);
+        await UserLearningPathHelper.saveLessonCompletedLocally(model);
+
+        // ✅ نحدث Learning Path ونعمل emit
+        final pathResult = await learningPathRepo.getUserLearningPath(
+          userToken: userToken,
+        );
+
+        await pathResult.fold(
+          (error) async {
+            emit(
+              LearningPathFailure(
+                errorMessage: error.errorMessage ?? 'Unknown error',
+              ),
+            );
+          },
+          (data) async {
+            emit(LearningPathSuccess(learningPath: data));
+          },
+        );
+      },
+    );
+  }
+
   //get learning path local function
   Future<List<LearnPathModel>> getLearningPathLocalFun({
     required List<LearnPathModel> paths,

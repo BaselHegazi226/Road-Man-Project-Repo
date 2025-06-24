@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:road_man_project/core/manager/tokens_manager.dart';
+import 'package:road_man_project/core/utilities/dialogState.dart';
 import 'package:road_man_project/core/utilities/routes.dart';
 import 'package:road_man_project/core/utilities/show_snack_bar.dart';
 import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
@@ -122,9 +123,19 @@ class _LearningPathViewBodyState extends State<LearningPathViewBody> {
           padding: EdgeInsets.symmetric(vertical: screenHeight * .015),
           child: QuizStep(
             onPressed:
-                () => GoRouter.of(
-                  context,
-                ).push(Routes.quizViewId, extra: level.quiz),
+                () =>
+                    level.progressStatus == 100
+                        ? GoRouter.of(
+                          context,
+                        ).push(Routes.quizViewId, extra: level.quiz)
+                        : customAwesomeDialog(
+                          context: context,
+                          title: 'complete all lessons',
+                          description:
+                              'in the first complete your lessons then try to solve your exercise',
+                          isSuccess: false,
+                          onPressed: () {},
+                        ),
             alignment: isEven ? Alignment.centerLeft : Alignment.centerRight,
             horizontalOffset: quizOffset,
             image: Assets.learningPathActiveQuizImage,
