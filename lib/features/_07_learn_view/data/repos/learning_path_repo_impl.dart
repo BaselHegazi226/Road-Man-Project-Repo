@@ -15,13 +15,12 @@ import '../model/learn_path_user_answer_model.dart';
 
 class LearningPathRepoImpl implements LearningPathRepo {
   final Dio dio = Dio();
-
+  final String baseUrl = 'http://met2025-001-site1.anytempurl.com/api';
   @override
   Future<Either<Failure, Map<String, dynamic>>> getUserLearningPath({
     required String userToken,
   }) async {
-    final String learningPathPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/learning-path';
+    final String learningPathPath = '$baseUrl/Recommendation/learning-path';
     try {
       final response = await dio.get(
         learningPathPath,
@@ -97,7 +96,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
     required int questionsAnswered,
   }) async {
     final String quizCompletedPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/Quiz/$id/Complete?answeredCount=$questionsAnswered';
+        '$baseUrl/Recommendation/Quiz/$id/Complete?answeredCount=$questionsAnswered';
     try {
       final response = await dio.post(
         quizCompletedPath,
@@ -135,7 +134,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
     required int id,
   }) async {
     final String lessonCompletedPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/lessons/$id/complete';
+        '$baseUrl/Recommendation/lessons/$id/complete';
     try {
       final response = await dio.post(
         lessonCompletedPath,
@@ -166,7 +165,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
     required int id,
   }) async {
     final String lessonCompletedPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/lessons/$id/is-completed';
+        '$baseUrl/Recommendation/lessons/$id/is-completed';
     try {
       final response = await dio.get(
         lessonCompletedPath,

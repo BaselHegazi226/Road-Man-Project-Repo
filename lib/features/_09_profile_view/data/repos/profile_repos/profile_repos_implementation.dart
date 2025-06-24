@@ -13,15 +13,14 @@ import '../../../../../core/manager/tokens_manager.dart';
 
 class ProfileReposImplementation extends ProfileRepos {
   final Dio dio = Dio();
-
+  final String baseUrl = 'http://met2025-001-site1.anytempurl.com/api';
   @override
   Future<Either<Failure, void>> updateProfile({
     required String name,
     required String photo,
     required String dateOfBirth,
   }) async {
-    final String updateProfilePath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/update-profile';
+    final String updateProfilePath = '$baseUrl/Accounts/update-profile';
 
     final userTokens = await SecureStorageHelper.getUserTokens();
     final String? userToken = userTokens?.token;
@@ -96,8 +95,7 @@ class ProfileReposImplementation extends ProfileRepos {
     final userTokens = await SecureStorageHelper.getUserTokens();
     String? userToken = userTokens?.token;
 
-    final String changePasswordPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/change-password';
+    final String changePasswordPath = '$baseUrl/Accounts/change-password';
     final changePasswordModel = ChangePasswordModel(
       oldPassword: oldPassword,
       newPassword: newPassword,
@@ -132,8 +130,7 @@ class ProfileReposImplementation extends ProfileRepos {
   Future<Either<Failure, Map<String, dynamic>>> getUserInfo({
     required String userToken,
   }) async {
-    final String userInfoPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/GetUserInfomation';
+    final String userInfoPath = '$baseUrl/Accounts/GetUserInfomation';
 
     try {
       final response = await dio.get(
@@ -161,8 +158,7 @@ class ProfileReposImplementation extends ProfileRepos {
 
   @override
   Future<Either<Failure, void>> logOut() async {
-    final String signOutPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/sign-out';
+    final String signOutPath = '$baseUrl/Accounts/sign-out';
 
     try {
       final userTokens = await SecureStorageHelper.getUserTokens();
