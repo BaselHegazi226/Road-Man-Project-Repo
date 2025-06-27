@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LevelStep extends StatelessWidget {
   final String image;
   final double iconSize;
-  final Color iconColor, backgroundColor, shadowColor;
-  final VoidCallback onPressed;
+  final Color backgroundColor, shadowColor;
+  final VoidCallback? onPressed;
 
   const LevelStep({
     super.key,
@@ -13,7 +13,6 @@ class LevelStep extends StatelessWidget {
     this.iconSize = 48,
     required this.backgroundColor,
     required this.shadowColor,
-    required this.iconColor,
     required this.onPressed,
   });
 
@@ -25,7 +24,7 @@ class LevelStep extends StatelessWidget {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       icon: Container(
-        height: 90, // ارتفاع الحاوية
+        height: 80, // ارتفاع الحاوية
         width: 100, // عرض الحاوية
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -42,8 +41,8 @@ class LevelStep extends StatelessWidget {
           // لتوسيط الصورة داخل الحاوية
           child: SvgPicture.asset(
             image,
-            height: 50, // ارتفاع الصورة المصغرة
-            fit: BoxFit.contain, // الحفاظ على نسبة الأبعاد
+            //height: 50, // ارتفاع الصورة المصغرة
+            //fit: BoxFit.fill, // الحفاظ على نسبة الأبعاد
           ),
         ),
       ),

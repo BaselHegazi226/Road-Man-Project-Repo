@@ -12,6 +12,7 @@ import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_u
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_blocs/Learning_path_bloc.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_blocs/Learning_path_events.dart';
+import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit/learning_path_cubit.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view_model/learning_path_bloc/learning_path_cubit/learning_path_states.dart';
 
 import '../../../../../../core/manager/user_learning_path_manager/user_learning_path_manager.dart';
@@ -176,7 +177,7 @@ class _QuizViewBodyState extends State<QuizViewBody> {
               alignment: Alignment.centerRight,
               child: BlocConsumer<LearningPathBloc, LearningPathStates>(
                 listener: (context, state) {
-                  if (state is QuizCompletedSuccess) {
+                  if (state is QuizCompletedPostSuccess) {
                     widget.onFinish?.call();
                     isFinished = state.finished;
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -185,11 +186,12 @@ class _QuizViewBodyState extends State<QuizViewBody> {
                         content: Text("Quiz Answers Are Sent Successfully!"),
                       ),
                     );
-                  } else if (state is QuizCompletedFailure) {
+                    getQuizCompletedFun(context);
+                  } else if (state is QuizCompletedPostFailure) {
                     log('error :${state.errorMessage}');
                   }
                   setState(
-                    () => isLoadingButton = state is QuizCompletedLoading,
+                    () => isLoadingButton = state is QuizCompletedPostLoading,
                   );
                 },
                 builder: (context, state) {
@@ -226,6 +228,13 @@ class _QuizViewBodyState extends State<QuizViewBody> {
           }
         },
       ),
+    );
+  }
+
+  void getQuizCompletedFun(BuildContext context) {
+    context.read<LearningPathCubit>().getQuizCompleted(
+      quizId: widget.learnPathQuizModel.id,
+      userToken: userToken,
     );
   }
 }

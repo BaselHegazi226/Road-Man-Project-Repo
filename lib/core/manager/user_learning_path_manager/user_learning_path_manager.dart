@@ -15,6 +15,8 @@ abstract class UserLearningPathHelper {
   static const String _completedLessonsBox = 'completedLessonsBox'; // قديم
   static const String _lessonCompletedModelsBox =
       'lessonCompletedModelsBox'; // جديد
+  static const String _activeLevelBox = 'activeLevelIndexBox';
+  static const String _activeLevelKey = 'activeLevelIndex';
 
   // Initialization
   static Future<void> initHiveBoxes() async {
@@ -27,6 +29,12 @@ abstract class UserLearningPathHelper {
     await Hive.openBox<LearnPathLessonCompletedModel>(
       _lessonCompletedModelsBox,
     );
+    await Hive.openBox<int>(_activeLevelBox);
+  }
+
+  static Future<void> saveActiveLevelIndex(int index) async {
+    final box = Hive.box<int>(_activeLevelBox);
+    await box.put(_activeLevelKey, index);
   }
 
   // Save Learning Paths
@@ -109,6 +117,11 @@ abstract class UserLearningPathHelper {
       _lessonCompletedModelsBox,
     );
     return box.get(lessonId);
+  }
+
+  static int getActiveLevelIndex() {
+    final box = Hive.box<int>(_activeLevelBox);
+    return box.get(_activeLevelKey, defaultValue: 0) ?? 0;
   }
 
   static List<LearnPathLessonCompletedModel> getAllCompletedLessons() {

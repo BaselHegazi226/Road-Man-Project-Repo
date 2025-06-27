@@ -137,6 +137,29 @@ class LearningPathCubit extends Cubit<LearningPathStates> {
     return data;
   }
 
+  Future<void> getQuizCompleted({
+    required int quizId,
+    required String userToken,
+  }) async {
+    emit(QuizCompletedGetLoading());
+    final result = await learningPathRepo.quizCompletedGet(
+      userToken: userToken,
+      quizId: quizId,
+    );
+    await result.fold(
+      (error) async {
+        emit(
+          QuizCompletedGetFailure(
+            errorMessage: error.errorMessage ?? 'unknown',
+          ),
+        );
+      },
+      (success) async {
+        emit(QuizCompletedGetSuccess(finished: success));
+      },
+    );
+  }
+
   Future<void> loadLocalQuizAnswers({required int quizId}) async {
     final result = await learningPathRepo.getLocalUserQuizAnswers(quizId);
     await result.fold(

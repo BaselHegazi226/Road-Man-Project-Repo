@@ -19,18 +19,33 @@ class LearningPathSuccess extends LearningPathStates {
 }
 
 // Quiz Completed States
-class QuizCompletedInitial extends LearningPathStates {}
+class QuizCompletedPostInitial extends LearningPathStates {}
 
-class QuizCompletedFailure extends LearningPathStates {
+class QuizCompletedPostFailure extends LearningPathStates {
   final String errorMessage;
-  QuizCompletedFailure({required this.errorMessage});
+  QuizCompletedPostFailure({required this.errorMessage});
 }
 
-class QuizCompletedLoading extends LearningPathStates {}
+class QuizCompletedPostLoading extends LearningPathStates {}
 
-class QuizCompletedSuccess extends LearningPathStates {
+class QuizCompletedPostSuccess extends LearningPathStates {
   final bool finished;
-  QuizCompletedSuccess({required this.finished});
+  QuizCompletedPostSuccess({required this.finished});
+}
+
+// Quiz Completed States
+class QuizCompletedGetInitial extends LearningPathStates {}
+
+class QuizCompletedGetFailure extends LearningPathStates {
+  final String errorMessage;
+  QuizCompletedGetFailure({required this.errorMessage});
+}
+
+class QuizCompletedGetLoading extends LearningPathStates {}
+
+class QuizCompletedGetSuccess extends LearningPathStates {
+  final bool finished;
+  QuizCompletedGetSuccess({required this.finished});
 }
 
 // Lesson Completed Post States

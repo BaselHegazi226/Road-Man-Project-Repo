@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:road_man_project/generated/assets.dart';
 
+import '../../../../../../generated/Assets.dart';
 import 'learning_path_step.dart';
 
 class LessonStep extends StatelessWidget {
@@ -11,14 +11,14 @@ class LessonStep extends StatelessWidget {
     required this.horizontalOffset,
     required this.image,
     required this.backgroundColor,
-    required this.iconColor,
+
     required this.shadowColor,
   });
   final Alignment alignment;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double horizontalOffset;
   final String image;
-  final Color backgroundColor, iconColor, shadowColor;
+  final Color backgroundColor, shadowColor;
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
@@ -34,7 +34,7 @@ class LessonStep extends StatelessWidget {
         child: LevelStep(
           onPressed: onPressed,
           image: image,
-          iconColor: iconColor,
+
           backgroundColor: backgroundColor,
           shadowColor: shadowColor,
         ),
@@ -42,59 +42,72 @@ class LessonStep extends StatelessWidget {
     );
   }
 
-  Map<String, dynamic> allDataOfStep(Map<int, bool?> stateAndItem) {
-    Map<String, dynamic> backValue = {
-      'background_color': const Color(0xffE5E5E5),
-      'shadow_color': const Color(0xffB7B7B7),
-      'image': Assets.logoRImage,
-    };
-    switch (stateAndItem) {
-      case {0: null}:
-        backValue = {
-          'background_color': const Color(0xff9EDA53),
-          'shadow_color': const Color(0xff69A123),
-          'image': Assets.learningPathFinishedStarImage,
-        };
-      case {0: false}:
-        backValue = {
-          'background_color': const Color(0xffE5E5E5),
-          'shadow_color': const Color(0xffB7B7B7),
-          'image': Assets.learningPathFinishedStarImage,
-        };
-      case {0: true}:
-        backValue = {
-          'background_color': const Color(0xff5385DA),
-          'shadow_color': const Color(0xff2961BE),
-          'image': Assets.learningPathFinishedStarImage,
-        };
-      case {1: false}:
-        backValue = {
-          'background_color': const Color(0xffE5E5E5),
-          'shadow_color': const Color(0xffB7B7B7),
-          'image': Assets.learningPathUnActiveLessonImage,
-        };
-      case {1: true}:
-        backValue = {
-          'background_color': const Color(0xff5385DA),
-          'shadow_color': const Color(0xff2961BE),
-          'image': Assets.learningPathUnActiveLessonImage,
-        };
-      case {2: false}:
-        backValue = {
-          'background_color': const Color(0xffE5E5E5),
-          'shadow_color': const Color(0xffB7B7B7),
-          'image': Assets.logoRImage,
-        };
-      case {2: true}:
-        backValue = {
-          'background_color': const Color(0xff5385DA),
-          'shadow_color': const Color(0xff2961BE),
-          'image': Assets.logoRImage,
-        };
+  Map<String, dynamic> allDataOfStep({
+    required int stepType, // 0: Star, 1: Lesson, 2: Quiz
+    required int progressStatus,
+  }) {
+    switch (stepType) {
+      case 0: // ⭐ Star
+        if (progressStatus == 100) {
+          return {
+            'background_color': const Color(0xff9EDA53), // أخضر
+            'shadow_color': const Color(0xff69A123),
+            'icon_color': Colors.yellow,
+            'image': Assets.learningPathFinishedStarImage,
+          };
+        } else if (progressStatus > 0) {
+          return {
+            'background_color': const Color(0xff5385DA), // أزرق
+            'shadow_color': const Color(0xff2961BE),
+            'icon_color': Colors.white,
+            'image': Assets.learningPathFinishedStarImage,
+          };
+        } else {
+          return {
+            'background_color': const Color(0xffE5E5E5), // رمادي فاتح
+            'shadow_color': const Color(0xffB7B7B7),
+            'icon_color': Colors.grey,
+            'image': Assets.learningPathFinishedStarImage,
+          };
+        }
+
+      case 1: // 📘 Lesson
+        if (progressStatus > 0) {
+          return {
+            'background_color': const Color(0xff5385DA),
+            'shadow_color': const Color(0xff2961BE),
+            'icon_color': Colors.white,
+            'image': Assets.learningPathUnActiveLessonImage,
+          };
+        } else {
+          return {
+            'background_color': const Color(0xffE5E5E5),
+            'shadow_color': const Color(0xffB7B7B7),
+            'icon_color': Colors.white,
+            'image': Assets.learningPathUnActiveLessonImage,
+          };
+        }
+
+      case 2: // 🧪 Quiz
+        if (progressStatus == 100) {
+          return {
+            'background_color': const Color(0xff5385DA),
+            'shadow_color': const Color(0xff2961BE),
+            'icon_color': Colors.white,
+            'image': Assets.logoRImage,
+          };
+        } else {
+          return {
+            'background_color': const Color(0xffE5E5E5),
+            'shadow_color': const Color(0xffB7B7B7),
+            'icon_color': Colors.white,
+            'image': Assets.logoRImage,
+          };
+        }
+
       default:
-        return backValue;
+        return {};
     }
-    return backValue;
   }
 }
 
@@ -110,7 +123,7 @@ class QuizStep extends StatelessWidget {
     required this.shadowColor,
   });
   final Alignment alignment;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double horizontalOffset;
   final String image;
   final Color backgroundColor, iconColor, shadowColor;
@@ -129,7 +142,6 @@ class QuizStep extends StatelessWidget {
         child: LevelStep(
           onPressed: onPressed,
           image: image,
-          iconColor: iconColor,
           backgroundColor: backgroundColor,
           shadowColor: shadowColor,
         ),

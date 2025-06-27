@@ -17,8 +17,8 @@ class LearningPathBloc extends Bloc<LearningPathEvents, LearningPathStates> {
     QuizCompletedEvent event,
     Emitter<LearningPathStates> emit,
   ) async {
-    emit(QuizCompletedLoading());
-    final result = await learningPathRepo.quizCompleted(
+    emit(QuizCompletedPostLoading());
+    final result = await learningPathRepo.quizCompletedPost(
       userToken: event.userToken,
       id: event.quizId,
       questionsAnswered: event.questionsAnswered,
@@ -26,13 +26,13 @@ class LearningPathBloc extends Bloc<LearningPathEvents, LearningPathStates> {
     await result.fold(
       (error) async {
         return emit(
-          QuizCompletedFailure(
+          QuizCompletedPostFailure(
             errorMessage: error.errorMessage ?? 'UnKnown error',
           ),
         );
       },
       (success) async {
-        return emit(QuizCompletedSuccess(finished: true));
+        return emit(QuizCompletedPostSuccess(finished: true));
       },
     );
   }

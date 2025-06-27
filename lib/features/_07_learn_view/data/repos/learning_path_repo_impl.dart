@@ -90,16 +90,16 @@ class LearningPathRepoImpl implements LearningPathRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> quizCompleted({
+  Future<Either<Failure, bool>> quizCompletedPost({
     required String userToken,
     required int id,
     required int questionsAnswered,
   }) async {
-    final String quizCompletedPath =
+    final String quizCompletedPostPath =
         '$baseUrl/Recommendation/Quiz/$id/Complete?answeredCount=$questionsAnswered';
     try {
       final response = await dio.post(
-        quizCompletedPath,
+        quizCompletedPostPath,
         options: Options(headers: {'Authorization': "Bearer $userToken"}),
       );
       log('Response Data: ${response.data}');
@@ -124,6 +124,38 @@ class LearningPathRepoImpl implements LearningPathRepo {
       return left(ServerFailure.fromDioException(dioException));
     } catch (e) {
       print('errooooooooooooor : $e');
+      return left(ServerFailure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> quizCompletedGet({
+    required String userToken,
+    required int quizId,
+  }) async {
+    final String quizCompletedGetPath =
+        '$baseUrl/Recommendation/IsQuiz/$quizId/Completed';
+    try {
+      final response = await dio.get(
+        quizCompletedGetPath,
+        options: Options(headers: {'Authorization': "Bearer $userToken"}),
+      );
+      log('Response Data: ${response.data}');
+      log('Response Status Code: ${response.statusCode}');
+
+      if (response.statusCode == 200) {
+        return right(true);
+      } else {
+        return left(
+          ServerFailure.fromResponse(
+            statusCode: response.statusCode,
+            responseData: response.data,
+          ),
+        );
+      }
+    } on DioException catch (dioException) {
+      return left(ServerFailure.fromDioException(dioException));
+    } catch (e) {
       return left(ServerFailure(errorMessage: e.toString()));
     }
   }

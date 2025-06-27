@@ -11,10 +11,14 @@ abstract class LearningPathRepo {
   Future<Either<Failure, List<LearnPathModel>>> getUserLearningPathLocal({
     required List<LearnPathModel> paths,
   });
-  Future<Either<Failure, bool>> quizCompleted({
+  Future<Either<Failure, bool>> quizCompletedPost({
     required String userToken,
     required int id,
     required int questionsAnswered,
+  });
+  Future<Either<Failure, bool>> quizCompletedGet({
+    required String userToken,
+    required int quizId,
   });
   Future<Either<Failure, bool>> lessonCompletedPost({
     required String userToken,
