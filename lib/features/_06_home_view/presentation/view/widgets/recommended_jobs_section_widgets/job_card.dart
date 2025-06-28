@@ -5,41 +5,39 @@ import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/generated/assets.dart';
 
+import '../../../../data/model/job_model.dart';
 import 'apply_button.dart';
 import 'job_description.dart';
 import 'job_tag.dart';
 
 class JobCard extends StatelessWidget {
-  const JobCard({super.key});
+  final JobModel job;
+  const JobCard({super.key, required this.job});
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
     return Container(
-      width: screenSize.width * 0.565, // 55% of screen width
-      height: screenSize.height * 0.22, // 22% of screen height
+      width: screenSize.width * 0.565,
       decoration: BoxDecoration(
         color: kSecondlyLightWhiteColor,
-        borderRadius: BorderRadius.circular(
-          screenSize.width * 0.04,
-        ), // 4% of sc
-        border: Border.all(width: 1, color: Color(0xFF2352A1)),
+        borderRadius: BorderRadius.circular(screenSize.width * 0.04),
+        border: Border.all(width: 1, color: const Color(0xFF2352A1)),
       ),
       child: Padding(
-        padding: EdgeInsets.all(screenSize.width * 0.02), // 2% of screen width
+        padding: EdgeInsets.all(screenSize.width * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Company Logo
+                // Company Logo (يمكنك تعديلها لتحميل الصورة من job.url مثلاً)
                 SvgPicture.asset(
-                  Assets.googleImage,
-                  width: screenSize.width * 0.08, // 6% of screen width
-                  height: screenSize.width * 0.08, // 6% of screen width
+                  Assets.googleImage, // صورة افتراضية
+                  width: screenSize.width * 0.08,
+                  height: screenSize.width * 0.08,
                 ),
-                // Bookmark icon
                 Icon(
                   CupertinoIcons.heart,
                   size: screenSize.width * .06,
@@ -47,58 +45,47 @@ class JobCard extends StatelessWidget {
                 ),
               ],
             ),
-
-            // Space between top row and company info
-            SizedBox(height: screenSize.height * 0.01), // 1% of screen height
-            // Company and time
+            SizedBox(height: screenSize.height * 0.01),
             Row(
-              spacing: screenSize.width * .01,
               children: [
                 Text(
-                  'Google',
+                  job.company ?? 'N/A', // اسم الشركة
                   style: AfacadTextStyles.textStyle12W700Black(context),
                 ),
+                SizedBox(width: screenSize.width * .01), // مسافة فاصلة
                 Text(
-                  '30 days ago',
-                  style: InterTextStyles.textStyle12W400GreyHalfOpacity(
-                    context: context,
-                  ),
+                  '30 days ago', // يمكنك حسابها أو استخدام قيمة من ال API لو كانت متاحة
+                  style: InterTextStyles.textStyle12W400GreyHalfOpacity(context: context),
                 ),
               ],
             ),
-
-            // Job title
-            SizedBox(height: screenSize.height * 0.01), // 1% of screen height
-            JobDescription(description: 'Front end Development'),
-
-            // Job tags row
-            SizedBox(
-              height: screenSize.height * 0.015,
-            ), // 1.5% of screen height
-            Row(
+            SizedBox(height: screenSize.height * 0.01),
+            JobDescription(description: job.title ?? 'No Title'), // عنوان الوظيفة
+            SizedBox(height: screenSize.height * 0.015),
+            // استخدام Wrap لمرونة التاجات
+            Wrap(
               spacing: screenSize.width * 0.02,
+              runSpacing: screenSize.height * 0.01, // مسافة رأسية
               children: [
-                // Job type tag
-                JobTag(tag: 'Full-Time'),
-                // Level tag
-                JobTag(tag: 'Intermediate level'),
+                if (job.jobType != null) JobTag(tag: job.jobType!), // نوع الوظيفة
+                if (job.level != null) JobTag(tag: job.level!), // مستوى الوظيفة
               ],
             ),
-            SizedBox(height: screenSize.height * .03),
-            // Divider
-            Divider(height: 1, color: Color(0xff8A8C90)),
-
-            // Bottom row - Location and Apply button
-            SizedBox(height: screenSize.height * 0.02), // 1.5% of screen height
+            const Spacer(),
+            const Divider(height: 1, color: Color(0xff8A8C90)),
+            SizedBox(height: screenSize.height * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Location
-                Text(
-                  'Cairo | Egypt',
-                  style: AfacadTextStyles.textStyle14W400Grey(context),
+                SizedBox(
+                  width: screenSize.width * 0.3,
+                  child: Text(
+                    job.location ?? 'N/A',
+                    style: AfacadTextStyles.textStyle14W400Grey(context),
+                  ),
                 ),
-                ApplyButton(onTap: () {}),
+                ApplyButton(onTap: () {
+                }),
               ],
             ),
           ],

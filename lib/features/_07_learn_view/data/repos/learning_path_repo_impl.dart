@@ -11,7 +11,7 @@ class LearningPathRepoImpl implements LearningPathRepo {
     required String userToken,
   }) async {
     final String learningPathPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Recommendation/learning-path';
+        'http://met2025-001-site1.anytempurl.com/api/Recommendation/learning-path';
     try {
       final response = await dio.get(
         learningPathPath,

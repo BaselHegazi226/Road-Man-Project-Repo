@@ -20,7 +20,7 @@ class ProfileReposImplementation extends ProfileRepos {
     required String dateOfBirth,
   }) async {
     final String updateProfilePath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/update-profile';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/update-profile';
 
     final userTokens = await SecureStorageHelper.getUserTokens();
     final String? userToken = userTokens?.token;
@@ -88,7 +88,7 @@ class ProfileReposImplementation extends ProfileRepos {
     }
 
     final String changePasswordPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/change-password';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/change-password';
     final changePasswordModel = ChangePasswordModel(
       oldPassword: oldPassword,
       newPassword: newPassword,
@@ -122,7 +122,7 @@ class ProfileReposImplementation extends ProfileRepos {
     required String userToken,
   }) async {
     final String userInfoPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/GetUserInfomation';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/GetUserInfomation';
 
     try {
       final response = await dio.get(
@@ -151,7 +151,7 @@ class ProfileReposImplementation extends ProfileRepos {
   @override
   Future<Either<Failure, void>> logOut() async {
     final String signOutPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/sign-out';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/sign-out';
 
     try {
       final userTokens = await SecureStorageHelper.getUserTokens();

@@ -28,7 +28,7 @@ class AuthRepoImplement implements AuthRepo {
     required String otp,
   }) async {
     final String sendAgainVerifyEmail =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/verify-email';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-email';
     final sendAgainVerificationEmailModel = VerificationEmailModel(
       email: email,
       otp: otp,
@@ -62,7 +62,7 @@ class AuthRepoImplement implements AuthRepo {
     required String password,
   }) async {
     final signUpPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/register';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/register';
     final signUpModel = SignUpModel(
       name: name,
       email: email,
@@ -98,7 +98,7 @@ class AuthRepoImplement implements AuthRepo {
     required String password,
   }) async {
     final signInPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/login';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/login';
     final signInModel = SignInModel(email: email, password: password);
     try {
       final response = await dio.post(signInPath, data: signInModel.toJson());
@@ -126,7 +126,7 @@ class AuthRepoImplement implements AuthRepo {
   @override
   Future<Either<Failure, void>> forgetPassword({required String email}) async {
     final forgetPasswordPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/forgot-password';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/forgot-password';
     final forgetPasswordModel = ForgetPasswordModel(email: email);
     try {
       final response = await dio.post(
@@ -156,7 +156,7 @@ class AuthRepoImplement implements AuthRepo {
     required String otp,
   }) async {
     final String verifyOtp =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/verify-otp';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-otp';
     final verificationAfterForgetPasswordModel = VerificationCodeModel(
       email: email,
       otp: otp,
@@ -189,7 +189,7 @@ class AuthRepoImplement implements AuthRepo {
     required String otp,
   }) async {
     final String verifyEmail =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/verify-email';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-email';
     final verificationEmailModel = VerificationEmailModel(
       email: email,
       otp: otp,
@@ -262,7 +262,7 @@ class AuthRepoImplement implements AuthRepo {
     required String token,
   }) async {
     final String signInWithGoogleTokenPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/google-login';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/google-login';
     final signInWithGoogleTokenModel = SignInWithGoogleTokenModel(token: token);
     try {
       final response = await dio.post(
@@ -297,7 +297,7 @@ class AuthRepoImplement implements AuthRepo {
     required String confirmPassword,
   }) async {
     final String resetPasswordPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/reset-password';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/reset-password';
     final resetPasswordPathModel = ResetPasswordModel(
       email: email,
       otp: otp,
@@ -332,7 +332,7 @@ class AuthRepoImplement implements AuthRepo {
     required String refreshToken,
   }) async {
     final refreshTokenPath =
-        'http://hazemibrahim2319-001-site1.qtempurl.com/api/Accounts/refresh-token';
+        'http://met2025-001-site1.anytempurl.com/api/Accounts/refresh-token';
 
     final userTokens = await SecureStorageHelper.getUserTokens();
 
