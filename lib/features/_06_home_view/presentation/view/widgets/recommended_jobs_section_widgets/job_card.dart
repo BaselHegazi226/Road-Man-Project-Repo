@@ -77,9 +77,12 @@ class JobCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                job.location ?? 'N/A',
-                style: AfacadTextStyles.textStyle14W400Grey(context),
+              SizedBox(
+                width: screenSize.width * 0.3,
+                child: Text(
+                  job.location ?? 'N/A',
+                  style: AfacadTextStyles.textStyle14W400Grey(context),
+                ),
               ),
               ApplyButton(onTap: () {}),
             ],

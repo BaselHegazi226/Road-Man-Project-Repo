@@ -32,11 +32,8 @@ class _EditProfileImageState extends State<EditProfileImage> {
   String? _temporaryImagePath;
 
   Future<bool> _requestImagePermission() async {
-    // طلب الأذونات مع التحقق
-    final status = await Permission.storage.request();
-    final mediaStatus = await Permission.mediaLibrary.request();
-
-    return status.isGranted || mediaStatus.isGranted;
+    final status = await Permission.photos.request();
+    return status.isGranted;
   }
 
   Future<void> _pickImage() async {
@@ -45,10 +42,9 @@ class _EditProfileImageState extends State<EditProfileImage> {
       if (!mounted) return;
       showSafeSnackBar(
         context,
-        '❌ Permission denied to access media',
+        '❌ Permission denied to access photos.',
         kAppPrimaryWrongColor,
       );
-
       return;
     }
 
@@ -60,48 +56,46 @@ class _EditProfileImageState extends State<EditProfileImage> {
     if (!mounted) return;
 
     if (pickedImage == null) {
+      showSafeSnackBar(context, '⚠️ No image selected.', kAppPrimaryWrongColor);
+      return;
+    }
+
+    final file = File(pickedImage.path);
+    final fileLength = await file.length();
+
+    if (fileLength == 0) {
       showSafeSnackBar(
         context,
-        '❌ Failed to upload Image',
+        '❌ Selected image is empty or corrupt!',
         kAppPrimaryWrongColor,
       );
-    } else {
-      final file = File(pickedImage.path);
-      final fileLength = await file.length();
+      return;
+    }
 
-      if (fileLength == 0) {
-        showSafeSnackBar(
-          context,
-          '❌ Selected image is empty or corrupt!',
-          kAppPrimaryWrongColor,
-        );
-        return;
-      }
+    setState(() {
+      _temporaryImagePath = pickedImage.path;
+    });
 
-      setState(() {
-        _temporaryImagePath = pickedImage.path;
-      });
-
-      try {
-        widget.onImagePicked(pickedImage.path);
-        showSafeSnackBar(
-          context,
-          '✅ Image selected. Press "Update Profile" to save changes.',
-          kAppPrimaryBlueColor,
-        );
-      } catch (e) {
-        showSafeSnackBar(
-          context,
-          '❌ Error processing image: ${e.toString()}',
-          kAppPrimaryWrongColor,
-        );
-      }
+    try {
+      widget.onImagePicked(pickedImage.path);
+      showSafeSnackBar(
+        context,
+        '✅ Image selected. Tap "Update Profile" to apply changes.',
+        kAppPrimaryBlueColor,
+      );
+    } catch (e) {
+      showSafeSnackBar(
+        context,
+        '❌ Error while processing image: ${e.toString()}',
+        kAppPrimaryWrongColor,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.sizeOf(context).width;
+
     return Stack(
       alignment: Alignment.center,
       children: [

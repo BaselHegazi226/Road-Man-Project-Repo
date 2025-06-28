@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -34,7 +33,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController nameEditingController = TextEditingController();
   bool buttonIsLoading = false;
   UserInfoModel? userInfoModel;
-  String? newPickedImageBase64;
+  String? newPickedImagePath;
 
   @override
   void initState() {
@@ -69,32 +68,17 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     }
   }
 
-  Future<String> _convertImageToBase64(String imagePath) async {
-    try {
-      final bytes = await File(imagePath).readAsBytes();
-      return base64Encode(bytes);
-    } catch (e) {
-      debugPrint('❌ Error reading image file: $imagePath');
-      rethrow;
-    }
-  }
-
   ImageProvider getProfileImageProvider() {
-    if (newPickedImageBase64 != null && newPickedImageBase64!.isNotEmpty) {
-      try {
-        return MemoryImage(base64Decode(newPickedImageBase64!));
-      } catch (e) {
-        debugPrint('❌ Error decoding new picked base64 image');
-      }
+    if (newPickedImagePath != null && File(newPickedImagePath!).existsSync()) {
+      return FileImage(File(newPickedImagePath!));
     }
 
-    if (userInfoModel?.photo != null && userInfoModel!.photo!.isNotEmpty) {
-      try {
-        final decoded = base64Decode(userInfoModel!.photo!);
-        return MemoryImage(decoded);
-      } catch (e) {
-        debugPrint('❌ Error decoding saved base64 image');
-      }
+    final savedPhoto = userInfoModel?.photo ?? '';
+    if (savedPhoto.startsWith('http')) {
+      return NetworkImage(savedPhoto);
+    } else if (savedPhoto.startsWith('/data/') &&
+        File(savedPhoto).existsSync()) {
+      return FileImage(File(savedPhoto));
     }
 
     return const AssetImage(Assets.profileProfileUserImage);
@@ -118,15 +102,9 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
             screenHeight: screenHeight,
             image: getProfileImageProvider(),
             onImagePicked: (String imagePath) async {
-              try {
-                final base64Image = await _convertImageToBase64(imagePath);
-                setState(() {
-                  newPickedImageBase64 = base64Image;
-                });
-              } catch (e) {
-                if (!mounted) return;
-                showSafeSnackBar(context, e.toString(), kAppPrimaryWrongColor);
-              }
+              setState(() {
+                newPickedImagePath = imagePath;
+              });
             },
           ),
           if (userInfoModel != null)
@@ -151,13 +129,13 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               } else if (state is UpdateProfileSuccessState) {
                 final updatedUser = userInfoModel!.copyWith(
                   name: nameEditingController.text.trim(),
-                  photo: newPickedImageBase64 ?? userInfoModel!.photo,
+                  photo: newPickedImagePath ?? userInfoModel!.photo,
                 );
                 await UserInfoStorageHelper.saveUserInfo(updatedUser);
 
                 if (!mounted) return;
-
                 context.read<GetUserInfoCubit>().localGetUserInfo();
+
                 showSafeSnackBar(
                   context,
                   'Update Profile Success',
@@ -166,7 +144,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
 
                 setState(() {
                   userInfoModel = updatedUser;
-                  newPickedImageBase64 = null;
+                  newPickedImagePath = null;
                 });
               }
               setState(() {
@@ -178,15 +156,12 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 onPressed: () async {
                   if (userInfoModel == null) return;
 
-                  String photoData = userInfoModel!.photo ?? '';
-                  if (newPickedImageBase64 != null) {
-                    photoData = newPickedImageBase64!;
-                  }
-
+                  final photoPath =
+                      newPickedImagePath ?? userInfoModel!.photo ?? '';
                   if (!mounted) return;
                   context.read<ProfileBloc>().add(
                     UpdateProfileEvent(
-                      photo: photoData,
+                      photo: photoPath,
                       name: nameEditingController.text.trim(),
                       dateOfBirth: userInfoModel!.dateOfBirth ?? '',
                     ),
@@ -201,7 +176,9 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
             },
           ),
           CustomTextButton(
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).go(Routes.questionnaireViewId);
+            },
             backgroundColor: kAppPrimaryWhiteColor,
             borderColor: kAppPrimaryBlackColor,
             child: Center(

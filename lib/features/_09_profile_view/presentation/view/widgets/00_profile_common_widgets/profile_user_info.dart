@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
+import 'package:road_man_project/generated/assets.dart';
 
 import 'custom_image_profile.dart';
 
@@ -26,13 +27,18 @@ class ProfileUserInfo extends StatelessWidget {
 
     if (photo.startsWith('/data/')) {
       // 🟢 الصورة من الجهاز
-      imageProvider = FileImage(File(photo));
+      final file = File(photo);
+      if (file.existsSync()) {
+        imageProvider = FileImage(file);
+      } else {
+        imageProvider = const AssetImage(Assets.profileProfileUserImage);
+      }
     } else if (photo.startsWith('http')) {
       // 🌐 الصورة من السيرفر
       imageProvider = NetworkImage(photo);
     } else {
       // 🖼️ صورة افتراضية من الأصول
-      imageProvider = AssetImage(photo);
+      imageProvider = const AssetImage(Assets.profileProfileUserImage);
     }
 
     return Padding(
@@ -44,7 +50,7 @@ class ProfileUserInfo extends StatelessWidget {
             imageSize: screenWidth * .15,
             image: imageProvider,
           ),
-          SizedBox(width: screenWidth * .03), // المسافة بين الصورة والنص
+          SizedBox(width: screenWidth * .03),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

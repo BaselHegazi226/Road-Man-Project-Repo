@@ -19,21 +19,21 @@ class UserInfoModel {
     final allowedExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
 
     final bool hasAllowedExtension = allowedExtensions.any(
-      (ext) => rawPhoto.toLowerCase().endsWith(ext),
+          (ext) => rawPhoto.toLowerCase().endsWith(ext),
     );
 
     final String resolvedPhoto =
-        rawPhoto.isNotEmpty && hasAllowedExtension
-            ? rawPhoto
-            : Assets.profileProfileUserImage;
+    rawPhoto.isNotEmpty && hasAllowedExtension
+        ? rawPhoto
+        : Assets.profileProfileUserImage;
 
     return UserInfoModel(
       userID: json['userID'] ?? 0,
       email: json['email'] ?? 'user@gmail.com',
       photo: resolvedPhoto,
-      name: json['name'] ?? 'newUser',
-      dateOfBirth:
-          json['dateOfBirth']?.toString() ?? DateTime.now().toIso8601String(),
+      name: json['fullName'] ?? 'newUser', // ✅ خريطة من fullName إلى name
+      dateOfBirth: json['birthDate']?.toString() ??
+          DateTime.now().toIso8601String(), // ✅ birthDate → dateOfBirth
     );
   }
 
@@ -47,7 +47,6 @@ class UserInfoModel {
     };
   }
 
-  /// ✅ copyWith لتعديل أي قيمة داخل الموديل
   UserInfoModel copyWith({
     int? userID,
     String? email,
