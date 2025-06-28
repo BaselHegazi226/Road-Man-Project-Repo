@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
 import 'package:road_man_project/core/utilities/custom_text_button.dart';
@@ -33,12 +34,28 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController nameEditingController = TextEditingController();
   bool buttonIsLoading = false;
   UserInfoModel? userInfoModel;
-  String? newPickedImagePath;
+  String? newPickedImageBase64;
 
   @override
   void initState() {
     super.initState();
+    _deleteEmptyImages();
     _loadUserData();
+  }
+
+  Future<void> _deleteEmptyImages() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final files = dir.listSync();
+
+    for (var file in files) {
+      if (file is File && file.path.endsWith('.jpg')) {
+        final length = await file.length();
+        if (length == 0) {
+          await file.delete();
+          debugPrint("🧹 Deleted empty image: ${file.path}");
+        }
+      }
+    }
   }
 
   Future<void> _loadUserData() async {
@@ -53,8 +70,34 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   }
 
   Future<String> _convertImageToBase64(String imagePath) async {
-    final bytes = await File(imagePath).readAsBytes();
-    return base64Encode(bytes);
+    try {
+      final bytes = await File(imagePath).readAsBytes();
+      return base64Encode(bytes);
+    } catch (e) {
+      debugPrint('❌ Error reading image file: $imagePath');
+      rethrow;
+    }
+  }
+
+  ImageProvider getProfileImageProvider() {
+    if (newPickedImageBase64 != null && newPickedImageBase64!.isNotEmpty) {
+      try {
+        return MemoryImage(base64Decode(newPickedImageBase64!));
+      } catch (e) {
+        debugPrint('❌ Error decoding new picked base64 image');
+      }
+    }
+
+    if (userInfoModel?.photo != null && userInfoModel!.photo!.isNotEmpty) {
+      try {
+        final decoded = base64Decode(userInfoModel!.photo!);
+        return MemoryImage(decoded);
+      } catch (e) {
+        debugPrint('❌ Error decoding saved base64 image');
+      }
+    }
+
+    return const AssetImage(Assets.profileProfileUserImage);
   }
 
   @override
@@ -70,18 +113,20 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
       child: Column(
         spacing: screenHeight * .03,
         children: [
-          /// صورة الملف الشخصي وتحديثها مؤقتًا فقط
           EditProfileImage(
             screenWidth: screenWidth,
             screenHeight: screenHeight,
-            image:
-                newPickedImagePath ??
-                userInfoModel?.photo ??
-                Assets.profileProfileUserImage,
-            onImagePicked: (String imagePath) {
-              setState(() {
-                newPickedImagePath = imagePath;
-              });
+            image: getProfileImageProvider(),
+            onImagePicked: (String imagePath) async {
+              try {
+                final base64Image = await _convertImageToBase64(imagePath);
+                setState(() {
+                  newPickedImageBase64 = base64Image;
+                });
+              } catch (e) {
+                if (!mounted) return;
+                showSafeSnackBar(context, e.toString(), kAppPrimaryWrongColor);
+              }
             },
           ),
           if (userInfoModel != null)
@@ -106,22 +151,22 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               } else if (state is UpdateProfileSuccessState) {
                 final updatedUser = userInfoModel!.copyWith(
                   name: nameEditingController.text.trim(),
-                  photo: newPickedImagePath ?? userInfoModel!.photo,
+                  photo: newPickedImageBase64 ?? userInfoModel!.photo,
                 );
                 await UserInfoStorageHelper.saveUserInfo(updatedUser);
 
-                if (context.mounted) {
-                  context.read<GetUserInfoCubit>().localGetUserInfo();
-                  showSafeSnackBar(
-                    context,
-                    'Update Profile Success',
-                    kAppPrimaryBlueColor,
-                  );
-                }
+                if (!mounted) return;
+
+                context.read<GetUserInfoCubit>().localGetUserInfo();
+                showSafeSnackBar(
+                  context,
+                  'Update Profile Success',
+                  kAppPrimaryBlueColor,
+                );
 
                 setState(() {
                   userInfoModel = updatedUser;
-                  newPickedImagePath = null;
+                  newPickedImageBase64 = null;
                 });
               }
               setState(() {
@@ -134,15 +179,11 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                   if (userInfoModel == null) return;
 
                   String photoData = userInfoModel!.photo ?? '';
-                  if (newPickedImagePath != null &&
-                      newPickedImagePath!.startsWith('/data/')) {
-                    photoData = await _convertImageToBase64(
-                      newPickedImagePath!,
-                    );
+                  if (newPickedImageBase64 != null) {
+                    photoData = newPickedImageBase64!;
                   }
-                  print('photo data : $photoData');
-                  print('new picked image path : $newPickedImagePath');
 
+                  if (!mounted) return;
                   context.read<ProfileBloc>().add(
                     UpdateProfileEvent(
                       photo: photoData,

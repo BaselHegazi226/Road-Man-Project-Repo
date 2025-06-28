@@ -26,7 +26,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:road_man_project/core/utilities/base_text_styles.dart';
-import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_quiz_view_card_model.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_answer_model.dart';
 import 'package:road_man_project/features/_07_learn_view/presentation/view/widgets/quiz_view_widgets/quiz_view_card_radio_button.dart';
 
 class QuizViewCardQuestionAnswers extends StatelessWidget {
@@ -37,13 +37,14 @@ class QuizViewCardQuestionAnswers extends StatelessWidget {
     required this.selectedAnswer,
     required this.hasAnswered,
     required this.onAnswerSelected,
+    required this.isFinished,
   });
 
   final String question;
-  final List<QuizViewCardAnswer> answers;
-  final String? selectedAnswer;
-  final bool hasAnswered;
-  final Function(String, bool) onAnswerSelected;
+  final List<LearnPathAnswerModel> answers;
+  final int selectedAnswer;
+  final bool hasAnswered, isFinished;
+  final Function(int, bool) onAnswerSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,10 @@ class QuizViewCardQuestionAnswers extends StatelessWidget {
           ).copyWith(height: 1.5, letterSpacing: -0.304),
         ),
         QuizViewCardRadioButton(
+          isFinished: isFinished,
           answers: answers,
           selectedAnswer: selectedAnswer,
-          hasAnswered: hasAnswered,
+          //hasAnswered: hasAnswered,
           onAnswerSelected: onAnswerSelected,
         ),
       ],

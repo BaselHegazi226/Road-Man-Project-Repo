@@ -1,7 +1,8 @@
+// ✅ LessonViewCardBody.dart
 import 'package:flutter/material.dart';
+import 'package:road_man_project/features/_07_learn_view/data/model/learn_path_lesson_model.dart';
 
 import '../../../../../../core/helper/const_variables.dart';
-import '../../../../data/model/learn_path_lesson_view_card_model.dart';
 import 'lesson_view_card_component_section.dart';
 
 class LessonViewCardBody extends StatelessWidget {
@@ -9,33 +10,50 @@ class LessonViewCardBody extends StatelessWidget {
     super.key,
     required this.screenHeight,
     required this.screenWidth,
-    required this.lessonViewCardModel,
+    required this.learnPathLessonModel,
+    required this.onPressed,
+    required this.isCompleted,
+    required this.isCurrent,
   });
+
   final double screenHeight;
   final double screenWidth;
-  final LearnPathLessonViewCardModel lessonViewCardModel;
+  final LearnPathLessonModel learnPathLessonModel;
+  final VoidCallback? onPressed;
+  final bool isCompleted;
+  final bool isCurrent;
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        LessonViewCardComponentSection(
-          screenHeight: screenHeight,
-          lesson: lessonViewCardModel.lesson,
-          lessonTitle: lessonViewCardModel.lessonTitle,
-          lessonTime: lessonViewCardModel.lessonTime,
-        ),
-        Icon(
-          lessonViewCardModel.isAvailable
-              ? Icons.play_circle_fill_outlined
-              : Icons.lock_outline,
-          color:
-              lessonViewCardModel.isAvailable
-                  ? kAppPrimaryBlueColor
-                  : kAppPrimaryBlackColor,
-          size: screenWidth * .06,
-        ),
-      ],
+    IconData icon;
+    Color iconColor;
+
+    if (isCompleted) {
+      icon = Icons.check_circle_outline;
+      iconColor = kAppPrimaryBlueColor;
+    } else if (isCurrent) {
+      icon = Icons.play_circle_fill_outlined;
+      iconColor = kAppPrimaryBlueColor;
+    } else {
+      icon = Icons.lock_outline;
+      iconColor = kAppPrimaryBlackColor;
+    }
+
+    return InkWell(
+      onTap: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          LessonViewCardComponentSection(
+            screenHeight: screenHeight,
+            screenWidth: screenWidth,
+            lessonNumber: learnPathLessonModel.lessonNumber,
+            lessonTitle: learnPathLessonModel.title,
+            lessonTime: learnPathLessonModel.estimatedDuration,
+          ),
+          Icon(icon, color: iconColor, size: screenWidth * .06),
+        ],
+      ),
     );
   }
 }

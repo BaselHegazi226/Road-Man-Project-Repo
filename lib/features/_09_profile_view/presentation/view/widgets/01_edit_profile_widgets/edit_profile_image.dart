@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:road_man_project/core/helper/const_variables.dart';
 import 'package:road_man_project/core/utilities/show_snack_bar.dart';
 
@@ -18,7 +19,7 @@ class EditProfileImage extends StatefulWidget {
 
   final double screenHeight;
   final double screenWidth;
-  final String image;
+  final ImageProvider image;
 
   /// 🔁 سيتم استدعاؤها فقط عند اختيار صورة جديدة (path)
   final void Function(String imagePath) onImagePicked;
@@ -30,7 +31,27 @@ class EditProfileImage extends StatefulWidget {
 class _EditProfileImageState extends State<EditProfileImage> {
   String? _temporaryImagePath;
 
+  Future<bool> _requestImagePermission() async {
+    // طلب الأذونات مع التحقق
+    final status = await Permission.storage.request();
+    final mediaStatus = await Permission.mediaLibrary.request();
+
+    return status.isGranted || mediaStatus.isGranted;
+  }
+
   Future<void> _pickImage() async {
+    final hasPermission = await _requestImagePermission();
+    if (!hasPermission) {
+      if (!mounted) return;
+      showSafeSnackBar(
+        context,
+        '❌ Permission denied to access media',
+        kAppPrimaryWrongColor,
+      );
+
+      return;
+    }
+
     final picker = ImagePicker();
     final XFile? pickedImage = await picker.pickImage(
       source: ImageSource.gallery,
@@ -45,40 +66,52 @@ class _EditProfileImageState extends State<EditProfileImage> {
         kAppPrimaryWrongColor,
       );
     } else {
+      final file = File(pickedImage.path);
+      final fileLength = await file.length();
+
+      if (fileLength == 0) {
+        showSafeSnackBar(
+          context,
+          '❌ Selected image is empty or corrupt!',
+          kAppPrimaryWrongColor,
+        );
+        return;
+      }
+
       setState(() {
         _temporaryImagePath = pickedImage.path;
       });
-      widget.onImagePicked(pickedImage.path);
-      showSafeSnackBar(context, '✅ Image Selected', kAppPrimaryBlueColor);
+
+      try {
+        widget.onImagePicked(pickedImage.path);
+        showSafeSnackBar(
+          context,
+          '✅ Image selected. Press "Update Profile" to save changes.',
+          kAppPrimaryBlueColor,
+        );
+      } catch (e) {
+        showSafeSnackBar(
+          context,
+          '❌ Error processing image: ${e.toString()}',
+          kAppPrimaryWrongColor,
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final imageToShow = _temporaryImagePath ?? widget.image;
     final screenWidth = MediaQuery.sizeOf(context).width;
     return Stack(
       alignment: Alignment.center,
       children: [
-        imageToShow.startsWith('/data/')
-            ? CustomImageProfile(
-              imageSize: screenWidth * .42,
-              image: Image.file(
-                File(imageToShow),
-                fit: BoxFit.cover,
-                height: widget.screenWidth * .4,
-                width: widget.screenWidth * .4,
-              ),
-            )
-            : CustomImageProfile(
-              imageSize: screenWidth * .42,
-              image: Image.asset(
-                imageToShow,
-                fit: BoxFit.cover,
-                height: widget.screenWidth * .4,
-                width: widget.screenWidth * .4,
-              ),
-            ),
+        CustomImageProfile(
+          imageSize: screenWidth * .42,
+          image:
+              _temporaryImagePath != null
+                  ? FileImage(File(_temporaryImagePath!))
+                  : widget.image,
+        ),
         Positioned(
           bottom: 0,
           right: widget.screenWidth * .01,

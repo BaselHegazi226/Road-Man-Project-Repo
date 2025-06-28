@@ -6,16 +6,19 @@ class CustomImageProfile extends StatelessWidget {
     required this.image,
     required this.imageSize,
   });
-  final Widget image;
+
+  final ImageProvider image; // استخدام ImageProvider بدلاً من Widget
   final double imageSize;
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
     return Container(
       width: imageSize,
       height: imageSize,
-      decoration: BoxDecoration(shape: BoxShape.circle),
-      child: ClipOval(child: image),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(image: image, fit: BoxFit.cover),
+      ),
     );
   }
 }

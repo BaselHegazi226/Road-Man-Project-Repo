@@ -21,14 +21,14 @@ import '../model/verify_email_model.dart';
 class AuthRepoImplement implements AuthRepo {
   final Dio dio = Dio();
   final basicRequest = '';
+  final String baseUrl = 'http://met2025-001-site1.anytempurl.com/api';
 
   @override
   Future<Either<Failure, void>> sendAgainVerificationEmail({
     required String email,
     required String otp,
   }) async {
-    final String sendAgainVerifyEmail =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-email';
+    final String sendAgainVerifyEmail = '$baseUrl/Accounts/verify-email';
     final sendAgainVerificationEmailModel = VerificationEmailModel(
       email: email,
       otp: otp,
@@ -61,8 +61,7 @@ class AuthRepoImplement implements AuthRepo {
     required String email,
     required String password,
   }) async {
-    final signUpPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/register';
+    final signUpPath = '$baseUrl/Accounts/register';
     final signUpModel = SignUpModel(
       name: name,
       email: email,
@@ -97,8 +96,7 @@ class AuthRepoImplement implements AuthRepo {
     required String email,
     required String password,
   }) async {
-    final signInPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/login';
+    final signInPath = '$baseUrl/Accounts/login';
     final signInModel = SignInModel(email: email, password: password);
     try {
       final response = await dio.post(signInPath, data: signInModel.toJson());
@@ -125,8 +123,7 @@ class AuthRepoImplement implements AuthRepo {
 
   @override
   Future<Either<Failure, void>> forgetPassword({required String email}) async {
-    final forgetPasswordPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/forgot-password';
+    final forgetPasswordPath = '$baseUrl/Accounts/forgot-password';
     final forgetPasswordModel = ForgetPasswordModel(email: email);
     try {
       final response = await dio.post(
@@ -155,8 +152,7 @@ class AuthRepoImplement implements AuthRepo {
     required String email,
     required String otp,
   }) async {
-    final String verifyOtp =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-otp';
+    final String verifyOtp = '$baseUrl/Accounts/verify-otp';
     final verificationAfterForgetPasswordModel = VerificationCodeModel(
       email: email,
       otp: otp,
@@ -188,8 +184,7 @@ class AuthRepoImplement implements AuthRepo {
     required String email,
     required String otp,
   }) async {
-    final String verifyEmail =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/verify-email';
+    final String verifyEmail = '$baseUrl/Accounts/verify-email';
     final verificationEmailModel = VerificationEmailModel(
       email: email,
       otp: otp,
@@ -261,8 +256,7 @@ class AuthRepoImplement implements AuthRepo {
   Future<Either<Failure, UserTokensModel>> signInWithGoogleToken({
     required String token,
   }) async {
-    final String signInWithGoogleTokenPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/google-login';
+    final String signInWithGoogleTokenPath = '$baseUrl/Accounts/google-login';
     final signInWithGoogleTokenModel = SignInWithGoogleTokenModel(token: token);
     try {
       final response = await dio.post(
@@ -296,8 +290,7 @@ class AuthRepoImplement implements AuthRepo {
     required String newPassword,
     required String confirmPassword,
   }) async {
-    final String resetPasswordPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/reset-password';
+    final String resetPasswordPath = '$baseUrl/Accounts/reset-password';
     final resetPasswordPathModel = ResetPasswordModel(
       email: email,
       otp: otp,
@@ -331,8 +324,7 @@ class AuthRepoImplement implements AuthRepo {
     required String accessToken,
     required String refreshToken,
   }) async {
-    final refreshTokenPath =
-        'http://met2025-001-site1.anytempurl.com/api/Accounts/refresh-token';
+    final refreshTokenPath = '$baseUrl/Accounts/refresh-token';
 
     final userTokens = await SecureStorageHelper.getUserTokens();
 
