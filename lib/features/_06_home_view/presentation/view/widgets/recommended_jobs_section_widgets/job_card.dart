@@ -47,9 +47,12 @@ class JobCard extends StatelessWidget {
           SizedBox(height: screenSize.height * 0.01), // 1% of screen height
           Row(
             children: [
-              Text(
-          job.company ?? 'N/A',
-                style: AfacadTextStyles.textStyle12W700Black(context),
+              SizedBox(
+                width: screenSize.width * 0.3,
+                child: Text(
+                          job.company ?? 'N/A',
+                  style: AfacadTextStyles.textStyle12W700Black(context),
+                ),
               ),
               SizedBox(width: screenSize.width * 0.01),
               Text(
